@@ -7,9 +7,6 @@ stages:
 build_job:
   stage: build
   script:
-  - cd /ourbuilds/
-  - echo "a puxar o git outra vez"
-  - git clone http://melancias:loladaxisdee@146.148.40.203/melancias/portalDoUtente.git
   - ls
   - pwd
   - cd por*
@@ -28,25 +25,25 @@ deploy_job:
   stage: deploy
   script:
   - export PATH=$PATH:/usr/local/share/google/google-cloud-sdk/bin/
-  - gcloud config set account falcatrua@curious-helix-125414.iam.gserviceaccount.com
-  - gcloud auth activate-service-account falcatrua@curious-helix-125414.iam.gserviceaccount.com --key-file /opt/bitnami/key
-  - gcloud config set project curious-helix-125414
+  - gcloud config set account malandros@sapient-axle-129909.iam.gserviceaccount.com
+  - gcloud auth activate-service-account malandros@sapient-axle-129909.iam.gserviceaccount.com --key-file /opt/bitnami/key
+  - gcloud config set project sapient-axle-129909
   - gcloud config set compute/zone us-central1-b
   - gcloud info
   - gcloud container clusters get-credentials cluster-1
-  - docker tag portaldoutente gcr.io/curious-helix-125414/portaldoutente
-  - gcloud docker push gcr.io/curious-helix-125414/portaldoutente:latest
+  - docker tag portaldoutente gcr.io/sapient-axle-129909/portaldoutente
+  - gcloud docker push gcr.io/sapient-axle-129909/portaldoutente:latest
   #- kubectl stop services portal-utente
   #- kubectl stop replicationcontroller portal-utente
   #- kubectl run portal-utente --image=gcr.io/curious-helix-125414/portaldoutente:latest --port 8080
   #- kubectl expose rc portal-utente --type=LoadBalancer --port 80 --target-port 8080
-  - kubectl rolling-update portal-utente --image=gcr.io/curious-helix-125414/portaldoutente:latest
-ipbot_job:
-  stage: ipbot
-  script:
-  - echo "A ir buscar IP"
-  - cd /opt/bitnami/ip_bot/
-  - python ptrtest.py
+  - kubectl rolling-update portal-utente --image=gcr.io/sapient-axle-129909/portaldoutente:latest
+# ipbot_job:
+#   stage: ipbot
+#   script:
+#   - echo "A ir buscar IP"
+#   - cd /opt/bitnami/ip_bot/
+#   - python ptrtest.py
 cleanup_job:
   stage: cleanup
   script:
