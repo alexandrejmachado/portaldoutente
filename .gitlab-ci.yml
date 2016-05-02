@@ -9,7 +9,6 @@ build_job:
   script:
   - ls
   - pwd
-  - cd por*
   - cd Test*
   - mvn install
   - mv standalone-custom standalone-custom.xml
