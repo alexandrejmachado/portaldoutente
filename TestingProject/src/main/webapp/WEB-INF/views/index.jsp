@@ -103,7 +103,7 @@
     </script>
 
 	<script>
-	path=window.location.href;
+	path="http://" + window.location.host + "/";
 	warning=null;
 	function lolada(){
 		$.post(path + 'loginUtente', $("form").serialize()).done(function( data ) { 
