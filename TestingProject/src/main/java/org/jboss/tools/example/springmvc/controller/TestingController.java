@@ -328,7 +328,14 @@ public class TestingController {
 				String hashTest;
 				hashTest = HashTextTest.sha256(password);
 				String code = as.sendEmail(mail);
-				String codeSms = as.sendSms(telemovel);
+				String codeSms="";
+				try{
+				codeSms = as.sendSms(telemovel);
+				}
+				catch(Exception e)
+				{
+					System.out.println("erro no codigo");
+				}
 				Utente ut = utenteDao.newUtente(username, numUtente, cc, morada, mail, hashTest, telemovel, nif, code, codeSms);
 				finalmsg.add("true");
 				return finalmsg;

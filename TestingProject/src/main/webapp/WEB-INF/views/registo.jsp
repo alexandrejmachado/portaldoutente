@@ -13,7 +13,7 @@
     <link href= <c:url value="/resources/css/main.css" ></c:url> rel="stylesheet"/>
 
 </head>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <body background=<c:url value="/resources/gfx/Final2.png"/> />
 
 <div class= "container">    <!-- ROW -->
@@ -24,7 +24,7 @@
 
 <div class = "registo">
 
-	<form action="/registoUtente" method="post">
+	<form method="post">
   		Nome:*
   		<input id = "campo" type="text" name="nome" required><br>
   		Numero do Utente:*
@@ -44,11 +44,20 @@
   		Numero de Identificacao Fiscal:*
   		<input id = "campo" type="text" name="nif"><br>
   		<p id="legenda"> * (campos obrigatorios) </p>
-  		<input id = "botao_reg" type="submit"/>
 	</form> 
-	
+	<input id = "botao_reg" type="submit" onclick="registar()"/>
 </div>
 		
-			
+<script>
+function registar()
+{
+		path="http://localhost:8080/";
+		$('.registo').append($('<img>',{id:'theImg',src:'resources/gfx/loadingGif.gif',width: '50', height: '50'}));
+		$.post(path + 'registoUtente', $("form").serialize()).done(function( data ) {
+			if (data[0]=="true"){window.location.replace(path + "index");}
+			else {alert(data[0]);$("#theImg").remove();}}
+		);
 
+}
+</script>
 
