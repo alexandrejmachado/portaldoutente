@@ -1,13 +1,10 @@
 stages:
 - build
 - deploy
-- ipbot
-- cleanup
-- cleanup_build
 build_job:
   stage: build
   script:
-  - echo "$USER" 
+  - echo "$USER"
   - ls
   - pwd
   - cd Test*
@@ -35,7 +32,7 @@ deploy_job:
   - gcloud docker push gcr.io/sapient-axle-129909/portaldoutente:latest
   #- kubectl stop services portal-utente
   #- kubectl stop replicationcontroller portal-utente
-  #- kubectl run portal-utente --image=gcr.io/curious-helix-125414/portaldoutente:latest --port 8080
+  #- kubectl run portal-utente --image=gcr.io/sapient-axle-129909/portaldoutente:latest --port 8080
   #- kubectl expose rc portal-utente --type=LoadBalancer --port 80 --target-port 8080
   - kubectl rolling-update portal-utente --image=gcr.io/sapient-axle-129909/portaldoutente:latest
 # ipbot_job:
@@ -44,14 +41,3 @@ deploy_job:
 #   - echo "A ir buscar IP"
 #   - cd /opt/bitnami/ip_bot/
 #   - python ptrtest.py
-cleanup_job:
-  stage: cleanup
-  script:
-  - cd /ourbuilds
-  - rm -rf portal*
-cleanup_build_job:
-  stage: cleanup_build
-  script:
-  - cd /ourbuilds
-  - rm -rf portal*
-  when: on_failure
