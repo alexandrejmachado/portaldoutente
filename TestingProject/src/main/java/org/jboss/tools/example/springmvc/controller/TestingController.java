@@ -107,9 +107,9 @@ public class TestingController {
 		return mav;
 	}
 	
-	@RequestMapping("/.well-known/acme-challenge/NzBof_LTFIrKFSR4T1H8sTk9tED2ULjvTPZ_9N33bBE")
+	@RequestMapping(".well-known/acme-challenge/vFmnvitwRN0Lx-qrdcnGSOKwU0zyJXjyrz7-vPn7T6A")
 	public @ResponseBody String sslworkaround(){
-		return "NzBof_LTFIrKFSR4T1H8sTk9tED2ULjvTPZ_9N33bBE.FVbNZTjwYgWkPjpAcYZI8gLtMAcvjowF-NH5KFM68wA";
+		return "vFmnvitwRN0Lx-qrdcnGSOKwU0zyJXjyrz7-vPn7T6A.FVbNZTjwYgWkPjpAcYZI8gLtMAcvjowF-NH5KFM68wA";
 	}
 	
 	@RequestMapping(value = "/index")
