@@ -357,6 +357,11 @@ public class TestingController {
 		}
 	}
 	
+	
+	
+	
+	
+	
 	@RequestMapping(value = "/medicoes")
 	public ModelAndView medicoesController(HttpSession session){
 		ModelAndView mav = new ModelAndView();

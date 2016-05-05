@@ -66,7 +66,7 @@
 						<a href="#">Agregado Familiar</a>
 					</li>
 					<li>
-						<a href="#">Pedido de Isenção</a>
+						<a href="/isencao">Pedido de Isenção</a>
 					</li>
 				</ul>
 			</div>
