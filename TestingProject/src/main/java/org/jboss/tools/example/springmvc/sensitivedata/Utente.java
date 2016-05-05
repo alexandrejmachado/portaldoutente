@@ -66,6 +66,8 @@ public class Utente {
 	
 	private String email;
 	
+	private boolean isento = false;
+	
 	private String telemovel;
 	
 	@NotNull
@@ -181,6 +183,20 @@ public class Utente {
 	
 	public boolean isVerified() {
 		return verified;
+	}
+	
+	public boolean getIsencao() {
+		return isento;
+	}
+	
+	public boolean setIsencao() {
+		if (isento) {
+			isento = false;
+		}
+		else {
+			isento = true;
+		}
+		return true;
 	}
 	
 	public String encrypt(String msg) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException {

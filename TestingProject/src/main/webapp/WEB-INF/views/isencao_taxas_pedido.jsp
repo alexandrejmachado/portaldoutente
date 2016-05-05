@@ -83,8 +83,12 @@
 								<div class="row" id = "caixaReceita">
 									
 		
-										Introduza o seu número de Identificação de Segurança Social: <br><br><input id="codigo" type="text" name="segsoc"> <button id="botao_conf" type="submit"> Submeter</button></p>
-									
+										<p>Introduza o seu número de Identificação de Segurança Social:</p> <br><br>
+										
+										<form action="/verificarIsencao" method="post" >
+										<input id="codigo" type="text" name="segsoc">
+										<input id = "botao_conf" type="submit"/>
+										</form>
 										
 								
 							</div>

@@ -88,6 +88,13 @@ public class UtenteDao {
 		return ut.isVerified();
 	}
 	
+	public boolean mudarIsencao(String user) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+		Utente ut = findUtenteById(Integer.parseInt(user));
+		boolean cenas = ut.setIsencao();
+		return cenas;
+	}
+	
+	
 	public String encrypt(String msg) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException {
 		SecretKey key = getKey();
 		
