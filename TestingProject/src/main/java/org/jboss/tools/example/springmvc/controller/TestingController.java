@@ -371,10 +371,10 @@ public class TestingController {
 		String userID = (String) session.getAttribute("sessionID");
 		boolean isento = utenteDao.mudarIsencao(username);
 		if (isento) {
-			mav.setViewName("isencao_aceite.jsp");
+			mav.setViewName("isencao_aceite");
 		}
 		else {
-			mav.setViewName("isencao_rejeitada.jsp");
+			mav.setViewName("isencao_rejeitada");
 		}
 		return mav;
 	}
