@@ -30,7 +30,7 @@
 </head>
 
 
-<body background="Final2.png">
+<body background=<c:url value="/resources/gfx/Final2.png"/> />
 
 <div class= "container">   
         
