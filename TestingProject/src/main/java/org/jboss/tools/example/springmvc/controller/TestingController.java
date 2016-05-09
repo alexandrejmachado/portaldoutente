@@ -128,7 +128,7 @@ public class TestingController {
 	public ModelAndView activateController(HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		if(verifyLogin(session)){
-			mav.setViewName("requestCode");
+			mav.setViewName("confirmacao_pendente");
 		}
 		else{
 			mav.setViewName("index");

@@ -53,12 +53,12 @@
 				<div id="page-content-wrapper">
 					<div class="container-fluid">
 						
-							<div class="col-lg-12">
+							<form action= "verifyCode" method="post" class="col-lg-12">
 								<h1>Confirmação do Registo</h1>
 								<p class="newP">Receberá um e-mail do Portal do Utente com o código de autenticação.</p>
 								<p>  Insira o código: <input id="codigo" type="text" name="codigo"> <button id="botao_conf" type="submit"> Submeter</button></p>
 								
-							</div>
+							</form>
 					
 					</div>
 				</div>

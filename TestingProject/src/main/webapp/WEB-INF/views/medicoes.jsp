@@ -59,7 +59,7 @@ $("#medidas").change(function(){testing();});
   console.log(val);
    for(i=0;i<val.length;i++){
 	   ceas=val[i];
-    items.push( "<option value=" + ceas + ">" + ceas + "</option>" );
+    items.push( "<option id = 'opcao' value=" + ceas + ">" + ceas + "</option>" );
  	}
   $("#medidas").append(items);
   }) 
