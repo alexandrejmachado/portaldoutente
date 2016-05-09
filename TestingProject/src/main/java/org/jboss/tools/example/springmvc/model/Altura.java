@@ -32,14 +32,14 @@ public class Altura {
 	private double valor;
 	
 	@NotNull
-	private int numUtente;
+	private String numUtente;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
 	
 	public Altura(){}
 	
-	public Altura(double valor, int numUtente){
+	public Altura(double valor, String numUtente){
 		this.valor = valor;
 		this.data = new Date();
 		numUtente=numUtente;
@@ -53,7 +53,7 @@ public class Altura {
 		return valor;
 	}
 	
-	public int getNumeroUtente() {
+	public String getNumeroUtente() {
 		return numUtente;
 	}
 

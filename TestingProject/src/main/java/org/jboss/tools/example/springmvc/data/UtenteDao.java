@@ -21,6 +21,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import org.jboss.tools.example.springmvc.controller.Cifras;
 import org.jboss.tools.example.springmvc.sensitivedata.Utente;
 import org.omg.CORBA.portable.ApplicationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class UtenteDao {
 	
 	public Utente findUtenteById(int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		TypedQuery<Utente> query = em.createNamedQuery(Utente.FIND_BY_ID, Utente.class);
-		query.setParameter(Utente.ID, encrypt(Integer.toString(numUtente)));
+		query.setParameter(Utente.ID, Cifras.encrypt(Integer.toString(numUtente)));
 		try{
 			return query.getSingleResult();
 		}
@@ -92,50 +93,5 @@ public class UtenteDao {
 		Utente ut = findUtenteById(Integer.parseInt(user));
 		boolean cenas = ut.setIsencao();
 		return cenas;
-	}
-	
-	
-	public String encrypt(String msg) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException {
-		SecretKey key = getKey();
-		
-		Cipher c = Cipher.getInstance("AES");
-		c.init(Cipher.ENCRYPT_MODE, key);
-		byte[] encVal = c.doFinal(msg.getBytes());
-        String encrypted = new BASE64Encoder().encode(encVal);
-		return encrypted;
-	}
-	
-	public String decrypt(String encrypted) throws NoSuchAlgorithmException, IOException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
-		SecretKey key = getKey();
-		Cipher c = Cipher.getInstance("AES");
-		c.init(Cipher.DECRYPT_MODE, key);
-		byte[] dec = new BASE64Decoder().decodeBuffer(encrypted);
-		byte[] str = c.doFinal(dec);
-		return new String(str, "utf-8");
-	}
-	
-	public SecretKey getKey() throws IOException, NoSuchAlgorithmException {
-		System.out.println(Utente.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-		File f = new File("notakey.key");
-		if (!f.exists()) {
-			KeyGenerator kg = KeyGenerator.getInstance("AES");
-			kg.init(128);
-			SecretKey key3 = kg.generateKey();
-			FileOutputStream fos = new FileOutputStream("notakey.key");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			byte[] keyByte = key3.getEncoded();
-			oos.write(keyByte);
-			oos.flush();
-			fos.flush();
-			oos.close();
-			fos.close();
-		}
-		
-		FileInputStream fis = new FileInputStream("notakey.key");
-		ObjectInputStream ois = new ObjectInputStream(fis);
-		byte[] key = new byte[16];
-		ois.read(key);
-		SecretKey key2 = new SecretKeySpec(key, 0, key.length, "AES");
-		return key2;
 	}
 }

@@ -14,13 +14,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Consulta.FIND_ALL_BY_UTENTE, query="SELECT c FROM Consulta c WHERE c.numUtente = :" + Consulta.Utente +" ORDER BY c.data DESC")
+	@NamedQuery(name=Consulta.FIND_ALL_BY_UTENTE, query="SELECT c FROM Consulta c WHERE c.numUtente = :" + Consulta.UTENTE +" ORDER BY c.data DESC")
 })
 public class Consulta {
 
 	public static final String FIND_ALL_BY_UTENTE = "Consulta.findAllByUtente";
 	
-	public static final String Utente = "numUtente";
+	public static final String UTENTE = "numUtente";
 	
 	@JsonIgnore
 	@Id
@@ -48,6 +48,7 @@ public class Consulta {
 	
 	public Consulta(){
 		//TODO buscar os nomes do medico instituicao etc
+		// a merda dos dados de entrada sao o que?
 	}
 	
 }

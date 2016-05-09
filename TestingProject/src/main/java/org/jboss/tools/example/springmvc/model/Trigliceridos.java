@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 //test
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Trigliceridos.FIND_ALL_BY_UTENTE, query="SELECT t FROM Trigliceridos t WHERE t.numUtente = :" + Trigliceridos.Utente +" ORDER BY t.data DESC")
+	@NamedQuery(name=Trigliceridos.FIND_ALL_BY_UTENTE, query="SELECT t FROM Trigliceridos t WHERE t.numUtente = :" + Trigliceridos.UTENTE +" ORDER BY t.data DESC")
 })
 public class Trigliceridos {
 	
@@ -26,7 +26,7 @@ public class Trigliceridos {
 	@JsonIgnore
 	private int id;
 	
-	public static final String Utente = "numUtente";
+	public static final String UTENTE = "numUtente";
 	
 	public static final String FIND_ALL_BY_UTENTE = "Trigliceridos.findAllByUtente";
 	
@@ -35,16 +35,17 @@ public class Trigliceridos {
 	
 	@NotNull
 	@JsonIgnore
-	private int numUtente;
+	private String numUtente;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
 	
 	public Trigliceridos(){}
 	
-	public Trigliceridos(double valor){
+	public Trigliceridos(double valor, String numUtente){
 		this.valor = valor;
 		this.data = new Date();
+		this.numUtente = numUtente;
 	}
 
 	public int getId() {
@@ -55,7 +56,7 @@ public class Trigliceridos {
 		return valor;
 	}
 	
-	public int getNumeroUtente() {
+	public String getNumeroUtente() {
 		return numUtente;
 	}
 

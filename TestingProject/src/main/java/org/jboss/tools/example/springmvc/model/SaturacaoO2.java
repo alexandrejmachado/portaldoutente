@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 
 @NamedQueries({
-	@NamedQuery(name=SaturacaoO2.FIND_ALL_BY_UTENTE, query="SELECT s FROM SaturacaoO2 s WHERE s.numUtente = :" + SaturacaoO2.Utente +" ORDER BY s.data DESC")
+	@NamedQuery(name=SaturacaoO2.FIND_ALL_BY_UTENTE, query="SELECT s FROM SaturacaoO2 s WHERE s.numUtente = :" + SaturacaoO2.UTENTE +" ORDER BY s.data DESC")
 })
 public class SaturacaoO2 {
 	
@@ -27,7 +27,7 @@ public class SaturacaoO2 {
 	@JsonIgnore
 	private int id;
 	
-	public static final String Utente = "numUtente";
+	public static final String UTENTE = "numUtente";
 	
 	public static final String FIND_ALL_BY_UTENTE = "SaturacaoO2.findAllByUtente";
 	
@@ -36,14 +36,14 @@ public class SaturacaoO2 {
 	
 	@JsonIgnore
 	@NotNull
-	private int numUtente;
+	private String numUtente;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
 	
 	public SaturacaoO2(){}
 	
-	public SaturacaoO2(double valor, int numUtente){
+	public SaturacaoO2(double valor, String numUtente){
 		this.valor = valor;
 		this.data = new Date();
 		this.numUtente = numUtente;
@@ -57,7 +57,7 @@ public class SaturacaoO2 {
 		return valor;
 	}
 	
-	public int getNumeroUtente() {
+	public String getNumeroUtente() {
 		return numUtente;
 	}
 

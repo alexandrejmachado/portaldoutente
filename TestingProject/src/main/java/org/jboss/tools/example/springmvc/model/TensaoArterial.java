@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 
 @NamedQueries({
-	@NamedQuery(name=TensaoArterial.FIND_ALL_BY_UTENTE, query="SELECT t FROM TensaoArterial t WHERE t.numUtente = :" + TensaoArterial.Utente +" ORDER BY t.data DESC")
+	@NamedQuery(name=TensaoArterial.FIND_ALL_BY_UTENTE, query="SELECT t FROM TensaoArterial t WHERE t.numUtente = :" + TensaoArterial.UTENTE +" ORDER BY t.data DESC")
 })
 public class TensaoArterial {
 
@@ -27,7 +27,7 @@ public class TensaoArterial {
 		@GeneratedValue
 		private int id;
 		
-		public static final String Utente = "numUtente";
+		public static final String UTENTE = "numUtente";
 		
 		public static final String FIND_ALL_BY_UTENTE = "TensaoArterial.findAllByUtente";
 		
@@ -39,14 +39,14 @@ public class TensaoArterial {
 		
 		@JsonIgnore
 		@NotNull
-		private int numUtente;
+		private String numUtente;
 		
 		@NotNull
 		private int min;
 		
 		public TensaoArterial(){}
 		
-		public TensaoArterial(int max, int min, int numUtente){
+		public TensaoArterial(int max, int min, String numUtente){
 			this.max = max;
 			this.min = min;
 			this.data = new Date();
@@ -65,7 +65,7 @@ public class TensaoArterial {
 			return data;
 		}
 
-		public int getNumeroUtente() {
+		public String getNumeroUtente() {
 			return numUtente;
 		}
 
