@@ -30,8 +30,7 @@
 </head>
 
 
-<body background="Final2.png">
-
+<body background=<c:url value="/resources/gfx/Final2.png"/> />
 <div class= "container">   
         
             <div class="col-lg-12"> 
@@ -81,7 +80,7 @@
 							   <h1>Pedido de Isenção de Taxas Moderadoras</h1>
 																	
 		
-								<br>Pedido aceite! <img src="mini_check.png"  style="width:15px; padding-bottom:2px">  </p> 
+								<br>Pedido aceite! <img src=<c:url value="/resources/gfx/mini_check.png"/> />  style="width:15px; padding-bottom:2px">  </p> 
 								
 									
 								

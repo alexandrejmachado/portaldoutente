@@ -182,12 +182,7 @@ public class TestingController {
 	@RequestMapping(value = "/registo")
 	public ModelAndView registoController(HttpSession session){
 		ModelAndView mav = new ModelAndView();
-		if(verifyLogin(session)){
-			mav.setViewName("mainmenu");
-		}
-		else{
-			mav.setViewName("registo");
-		}
+		mav.setViewName("registo");
 		return mav;
 	}
 	
