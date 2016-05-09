@@ -10,11 +10,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 //test
 @Entity
 
 @NamedQueries({
-	@NamedQuery(name=INR.FIND_ALL_BY_UTENTE, query="SELECT i FROM INR i WHERE i.clientId = :" + INR.ID +" ORDER BY i.data DESC")
+	@NamedQuery(name=INR.FIND_ALL_BY_UTENTE, query="SELECT i FROM INR i WHERE i.numUtente = :" + INR.Utente +" ORDER BY i.data DESC")
 })
 public class INR {
 	
@@ -22,9 +24,10 @@ public class INR {
 	
 	@Id
 	@GeneratedValue
+	@JsonIgnore
 	private int id;
 	
-	public static final String ID = "numUtente";
+	public static final String Utente = "numUtente";
 	
 	public static final String FIND_ALL_BY_UTENTE = "INR.findAllByUtente";
 	
@@ -32,12 +35,13 @@ public class INR {
 	
 	private double max = 3.5;
 	
-	private boolean alarm;
+	private boolean alarm = false;
 	@NotNull
 	private double valor;
 	
+	@JsonIgnore
 	@NotNull
-	private int clientId;
+	private int numUtente;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
@@ -47,7 +51,7 @@ public class INR {
 	public INR(double valor, int numUtente){
 		this.valor = valor;
 		this.data = new Date();
-		this.clientId = numUtente;
+		this.numUtente = numUtente;
 		if (valor<2 || valor>3.5) {
 			alarm = true;
 		}
@@ -62,7 +66,11 @@ public class INR {
 	}
 	
 	public int getNumeroUtente() {
-		return clientId;
+		return numUtente;
+	}
+	
+	public boolean getAlarm(){
+		return alarm;
 	}
 
 	public Date getData() {

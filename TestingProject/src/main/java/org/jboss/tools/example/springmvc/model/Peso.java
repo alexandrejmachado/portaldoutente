@@ -11,36 +11,41 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Peso.FIND_ALL_BY_UTENTE, query="SELECT p FROM Peso p WHERE p.clientId = :" + Peso.ID +" ORDER BY p.data DESC")
+	@NamedQuery(name=Peso.FIND_ALL_BY_UTENTE, query="SELECT p FROM Peso p WHERE p.numUtente = :" + Peso.Utente +" ORDER BY p.data DESC")
 })
 public class Peso {
 
 	public static final String UNIDADE = "Kg";
 	
+	@JsonIgnore
 	@Id
 	@GeneratedValue
 	private int id;
 	
-	public static final String ID = "numUtente";
+	public static final String Utente = "numUtente";
 	
 	public static final String FIND_ALL_BY_UTENTE = "Peso.findAllByUtente";
 	
 	@NotNull
 	private double valor;
 	
+	@JsonIgnore
 	@NotNull
-	private int clientId;
+	private int numUtente;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
 
 	public Peso(){}
 	
-	public Peso(double valor){
+	public Peso(double valor, int numUtente){
 		this.valor = valor;
 		this.data = new Date();
+		this.numUtente = numUtente;
 	}
 	
 	public int getId() {
@@ -52,7 +57,7 @@ public class Peso {
 	}
 	
 	public int getNumeroUtente() {
-		return clientId;
+		return numUtente;
 	}
 
 

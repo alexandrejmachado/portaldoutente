@@ -11,20 +11,23 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 
 @NamedQueries({
-	@NamedQuery(name=TensaoArterial.FIND_ALL_BY_UTENTE, query="SELECT t FROM TensaoArterial t WHERE t.clientId = :" + TensaoArterial.ID +" ORDER BY t.data DESC")
+	@NamedQuery(name=TensaoArterial.FIND_ALL_BY_UTENTE, query="SELECT t FROM TensaoArterial t WHERE t.numUtente = :" + TensaoArterial.Utente +" ORDER BY t.data DESC")
 })
 public class TensaoArterial {
 
 		public static final String UNIDADE = "mmHg";
 		
+		@JsonIgnore
 		@Id
 		@GeneratedValue
 		private int id;
 		
-		public static final String ID = "numUtente";
+		public static final String Utente = "numUtente";
 		
 		public static final String FIND_ALL_BY_UTENTE = "TensaoArterial.findAllByUtente";
 		
@@ -34,8 +37,9 @@ public class TensaoArterial {
 		@NotNull
 		private int max;
 		
+		@JsonIgnore
 		@NotNull
-		private int clientId;
+		private int numUtente;
 		
 		@NotNull
 		private int min;
@@ -46,7 +50,7 @@ public class TensaoArterial {
 			this.max = max;
 			this.min = min;
 			this.data = new Date();
-			this.clientId = numUtente;
+			this.numUtente = numUtente;
 		}
 
 		public static String getUnidade() {
@@ -62,7 +66,7 @@ public class TensaoArterial {
 		}
 
 		public int getNumeroUtente() {
-			return clientId;
+			return numUtente;
 		}
 
 		

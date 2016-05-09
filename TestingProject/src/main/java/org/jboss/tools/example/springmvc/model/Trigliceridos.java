@@ -10,10 +10,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 //test
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Trigliceridos.FIND_ALL_BY_UTENTE, query="SELECT t FROM Trigliceridos t WHERE t.clientId = :" + Trigliceridos.ID +" ORDER BY t.data DESC")
+	@NamedQuery(name=Trigliceridos.FIND_ALL_BY_UTENTE, query="SELECT t FROM Trigliceridos t WHERE t.numUtente = :" + Trigliceridos.Utente +" ORDER BY t.data DESC")
 })
 public class Trigliceridos {
 	
@@ -21,9 +23,10 @@ public class Trigliceridos {
 	
 	@Id
 	@GeneratedValue
+	@JsonIgnore
 	private int id;
 	
-	public static final String ID = "numUtente";
+	public static final String Utente = "numUtente";
 	
 	public static final String FIND_ALL_BY_UTENTE = "Trigliceridos.findAllByUtente";
 	
@@ -31,7 +34,8 @@ public class Trigliceridos {
 	private double valor;
 	
 	@NotNull
-	private int clientId;
+	@JsonIgnore
+	private int numUtente;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
@@ -52,7 +56,7 @@ public class Trigliceridos {
 	}
 	
 	public int getNumeroUtente() {
-		return clientId;
+		return numUtente;
 	}
 
 

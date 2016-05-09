@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Glicemia.FIND_ALL_BY_UTENTE, query="SELECT g FROM Glicemia g WHERE g.numUtente = :" + Glicemia.ID +" ORDER BY g.data DESC")
+	@NamedQuery(name=Glicemia.FIND_ALL_BY_UTENTE, query="SELECT g FROM Glicemia g WHERE g.numUtente = :" + Glicemia.Utente +" ORDER BY g.data DESC")
 })
 public class Glicemia {
 
@@ -26,7 +26,7 @@ public class Glicemia {
 	@JsonIgnore
 	private int id;
 	
-	public static final String ID = "numUtente";
+	public static final String Utente = "numUtente";
 	
 	public static final String FIND_ALL_BY_UTENTE = "Glicemia.findAllByUtente";
 	
@@ -46,7 +46,7 @@ public class Glicemia {
 	public Glicemia(double valor, int numUtente){
 		this.valor = valor;
 		this.data = new Date();
-		numUtente = numUtente;
+		this.numUtente = numUtente;
 	}
 
 	public static String getUnidade() {

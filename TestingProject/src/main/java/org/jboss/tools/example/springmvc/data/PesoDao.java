@@ -14,8 +14,8 @@ public class PesoDao {
 	@Autowired
 	private EntityManager em;
 	
-	public Peso novoPeso(double valor){
-		Peso peso = new Peso(valor);
+	public Peso novoPeso(double valor, int numUtente){
+		Peso peso = new Peso(valor, numUtente);
 		em.persist(peso);
 		return peso;
 	}
