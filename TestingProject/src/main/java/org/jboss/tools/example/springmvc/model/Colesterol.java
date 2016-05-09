@@ -15,34 +15,37 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 //test
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Colesterol.FIND_ALL_BY_UTENTE, query="SELECT c FROM Colesterol c WHERE c.clientId = :" + Colesterol.ID +" ORDER BY c.data DESC")
+	@NamedQuery(name=Colesterol.FIND_ALL_BY_UTENTE, query="SELECT c FROM Colesterol c WHERE c.numUtente = :" + Colesterol.Utente +" ORDER BY c.data DESC")
 })
 public class Colesterol {
 	
 	public static final String UNIDADE = "cm";
 	
+	@JsonIgnore
 	@Id
 	@GeneratedValue
 	private int id;
 	
 	public static final String FIND_ALL_BY_UTENTE = "Colesterol.findAllByUtente";
 	
-	public static final String ID = "numUtente";
+	public static final String Utente = "numUtente";
 	
 	@NotNull
 	private double valor;
 	
+	@JsonIgnore
 	@NotNull
-	private int clientId;
+	private int numUtente;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
 	
 	public Colesterol(){}
 	
-	public Colesterol(double valor){
+	public Colesterol(double valor, int numUtente){
 		this.valor = valor;
 		this.data = new Date();
+		this.numUtente = numUtente;
 	}
 	
 	@JsonIgnore
@@ -56,7 +59,7 @@ public class Colesterol {
 	
 	@JsonIgnore
 	public int getNumeroUtente() {
-		return clientId;
+		return numUtente;
 	}
 
 

@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 
 @NamedQueries({
-	@NamedQuery(name=Altura.FIND_ALL_BY_UTENTE, query="SELECT a FROM Altura a WHERE a.clientId = :" + Altura.ID +" ORDER BY a.data DESC")
+	@NamedQuery(name=Altura.FIND_ALL_BY_UTENTE, query="SELECT a FROM Altura a WHERE a.numUtente = :" + Altura.UTENTE +" ORDER BY a.data DESC")
 })
 public class Altura {
 	
@@ -26,13 +26,13 @@ public class Altura {
 	
 	public static final String FIND_ALL_BY_UTENTE = "Altura.findAllByUtente";
 	
-	public static final String ID = "numUtente";
+	public static final String UTENTE = "numUtente";
 	
 	@NotNull
 	private double valor;
 	
 	@NotNull
-	private int clientId;
+	private int numUtente;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
@@ -42,7 +42,7 @@ public class Altura {
 	public Altura(double valor, int numUtente){
 		this.valor = valor;
 		this.data = new Date();
-		clientId=numUtente;
+		numUtente=numUtente;
 	}
 
 	public int getId() {
@@ -54,7 +54,7 @@ public class Altura {
 	}
 	
 	public int getNumeroUtente() {
-		return clientId;
+		return numUtente;
 	}
 
 
