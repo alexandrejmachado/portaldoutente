@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="pt">
 
@@ -14,7 +15,7 @@
 
     <title>Portal do Utente</title>
 
-    <!-- Bootstrap Core CSS -->
+   <!-- Bootstrap Core CSS -->
     <link href=<c:url value="/resources/css/bootstrap.min.css" ></c:url> rel="stylesheet">
 
     <!-- Custom CSS -->
@@ -31,10 +32,7 @@
 
 
 <body background=<c:url value="/resources/gfx/Final2.png"/> />
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'master' of http://130.211.146.91/melancias/portalDoUtente1.git
 <div class= "container">   
         
             <div class="col-lg-12"> 
@@ -47,32 +45,7 @@
 			
 	<div class="col-lg-12" id="caixaGig">  <!--  -->
 	
-		<div id="wrapper">
-
-			<!-- Sidebar -->
-			<div id="sidebar-wrapper">
-				<ul class="barra">
-						
-					<li>
-						<a href="#mar">Marcação de Consultas</a>
-					</li>
-					<li>
-						<a href="#">Marcações Confirmadas</a>
-					</li>
-					<li>
-						<a href="#">Renovar Receita</a>
-					</li>
-					<li>
-						<a href="#">Medições</a>
-					</li>
-					<li>
-						<a href="#">Agregado Familiar</a>
-					</li>
-					<li>
-						<a href="#">Pedido de Isenção</a>
-					</li>
-				</ul>
-			</div>
+	
 			<!-- /#sidebar-wrapper -->
 		
 		
@@ -81,15 +54,10 @@
 					<div class="container-fluid">
 						
 							<div class="col-lg-12">
-							   <h1>Pedido de Isenção de Taxas Moderadoras</h1>
-																	
-		
-								<br>Pedido aceite! <img src=<c:url value="/resources/gfx/mini_check.png"/> />  style="width:15px; padding-bottom:2px">  </p> 
+								<h1>Confirmação do Registo</h1>
+								<p class="newP">Receberá um e-mail do Portal do Utente com o código de autenticação.</p>
+								<p>  Insira o código: <input id="codigo" type="text" name="codigo"> <button id="botao_conf" type="submit"> Submeter</button></p>
 								
-									
-								
-							
-							
 							</div>
 					
 					</div>
@@ -97,7 +65,7 @@
 				<!-- /#page-content-wrapper -->
 
 				
-		</div>
+	
     </div>
     <!-- /#wrapper -->
 
