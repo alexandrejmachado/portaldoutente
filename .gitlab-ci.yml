@@ -39,6 +39,7 @@ deploy_job:
 ipbot_job:
   stage: ipbot
   script:
+  - pip install --upgrade apache-libcloud
   - echo "A ir buscar IP"
   - cd /opt/ip_bot/
   - python ptrtest.py
