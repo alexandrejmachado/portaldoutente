@@ -35,7 +35,7 @@ public class Consulta {
 	
 	@JsonIgnore
 	@NotNull
-	private int numUtente;
+	private String numUtente;
 	
 	@JsonIgnore
 	@NotNull
@@ -46,9 +46,14 @@ public class Consulta {
 	
 	private boolean feita = false;
 	
-	public Consulta(){
-		//TODO buscar os nomes do medico instituicao etc
-		// a merda dos dados de entrada sao o que?
+	public Consulta(){}
+	
+	public Consulta(int idMedico, String numUtente, int idInstituicao, String sala){
+		this.idMedico = idMedico;
+		this.numUtente = numUtente;
+		this.idInstituicao = idInstituicao;
+		this.data = null;
+		this.sala = sala;
 	}
 	
 }
