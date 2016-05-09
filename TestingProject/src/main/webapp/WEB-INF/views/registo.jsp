@@ -51,7 +51,7 @@
 <script>
 function registar()
 {
-		path="http://" + window.location.host + "/";
+		path="https://" + window.location.host + "/";
 		$('.registo').append($('<img>',{id:'theImg',src:'resources/gfx/loadingGif.gif',width: '50', height: '50'}));
 		$.post(path + 'registoUtente', $("form").serialize()).done(function( data ) {
 			if (data[0]=="true"){window.location.replace(path + "index");}

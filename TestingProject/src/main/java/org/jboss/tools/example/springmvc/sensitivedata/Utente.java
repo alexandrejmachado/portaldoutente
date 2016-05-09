@@ -28,6 +28,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.jboss.tools.example.springmvc.controller.Cifras;
+
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -97,14 +99,14 @@ public class Utente {
 //	}
 	
 	public Utente(String username, int numUtente, int cc, String morada, String mail, String password, int telemovel, int nif, String code, String codeSms) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		this.numUtente = encrypt(Integer.toString(numUtente));
+		this.numUtente = Cifras.encrypt(Integer.toString(numUtente));
 		this.password = password;
 		this.nome = username;
-		this.cc = encrypt(Integer.toString(cc));
+		this.cc = Cifras.encrypt(Integer.toString(cc));
 		this.morada = morada;
 		this.email = mail;
-		this.telemovel = encrypt(Integer.toString(telemovel));
-		this.nif = encrypt(Integer.toString(nif));;
+		this.telemovel = Cifras.encrypt(Integer.toString(telemovel));
+		this.nif = Cifras.encrypt(Integer.toString(nif));;
 		dataNascimento = new Date();
 		verificationCode = code;
 		verificationCodeSms = codeSms;
@@ -112,7 +114,7 @@ public class Utente {
 	}
 	
 	public int getNumUtente() throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
-		return Integer.parseInt(decrypt(numUtente));
+		return Integer.parseInt(Cifras.decrypt(numUtente));
 	}
 
 	public String getMorada() {
@@ -140,11 +142,11 @@ public class Utente {
 	}
 
 	public int getTelemovel() throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
-		return Integer.parseInt(decrypt(telemovel));
+		return Integer.parseInt(Cifras.decrypt(telemovel));
 	}
 
 	public void setTelemovel(int telemovel) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
-		this.telemovel = encrypt(Integer.toString(telemovel));
+		this.telemovel = Cifras.encrypt(Integer.toString(telemovel));
 	}
 
 	public String getNome() {
@@ -152,11 +154,11 @@ public class Utente {
 	}
 
 	public int getContactoEmergencia() throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
-		return Integer.parseInt(decrypt(Integer.toString(contactoEmergencia)));
+		return Integer.parseInt(Cifras.decrypt(Integer.toString(contactoEmergencia)));
 	}
 
 	public void setContactoEmergencia(int contactoEmergencia) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		this.contactoEmergencia = Integer.parseInt(encrypt(Integer.toString(contactoEmergencia)));
+		this.contactoEmergencia = Integer.parseInt(Cifras.encrypt(Integer.toString(contactoEmergencia)));
 	}
 
 	public Date getDataNascimento() {
@@ -164,7 +166,7 @@ public class Utente {
 	}
 
 	public int getNif() throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
-		return Integer.parseInt(decrypt(nif));
+		return Integer.parseInt(Cifras.decrypt(nif));
 	}
 	
 	public boolean verifyClient(String code) {
@@ -199,47 +201,5 @@ public class Utente {
 		return true;
 	}
 	
-	public String encrypt(String msg) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException {
-		SecretKey key = getKey();
-		
-		Cipher c = Cipher.getInstance("AES");
-		c.init(Cipher.ENCRYPT_MODE, key);
-		byte[] encVal = c.doFinal(msg.getBytes());
-        String encrypted = new BASE64Encoder().encode(encVal);
-		return encrypted;
-	}
 	
-	public SecretKey getKey() throws IOException, NoSuchAlgorithmException {
-		System.out.println(Utente.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-		File f = new File("notakey.key");
-		if (!f.exists()) {
-			KeyGenerator kg = KeyGenerator.getInstance("AES");
-			kg.init(128);
-			SecretKey key3 = kg.generateKey();
-			FileOutputStream fos = new FileOutputStream("notakey.key");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			byte[] keyByte = key3.getEncoded();
-			oos.write(keyByte);
-			oos.flush();
-			fos.flush();
-			oos.close();
-			fos.close();
-		}
-		
-		FileInputStream fis = new FileInputStream("notakey.key");
-		ObjectInputStream ois = new ObjectInputStream(fis);
-		byte[] key = new byte[16];
-		ois.read(key);
-		SecretKey key2 = new SecretKeySpec(key, 0, key.length, "AES");
-		return key2;
-	}
-	
-	public String decrypt(String encrypted) throws NoSuchAlgorithmException, IOException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
-		SecretKey key = getKey();
-		Cipher c = Cipher.getInstance("AES");
-		c.init(Cipher.DECRYPT_MODE, key);
-		byte[] dec = new BASE64Decoder().decodeBuffer(encrypted);
-		byte[] str = c.doFinal(dec);
-		return new String(str, "utf-8");
-	}
 }
