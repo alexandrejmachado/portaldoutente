@@ -57,11 +57,12 @@ public class SaturacaoO2 {
 		return valor;
 	}
 	
+	@JsonIgnore
 	public String getNumeroUtente() {
 		return numUtente;
 	}
 
-
+	@JsonIgnore
 	public Date getData() {
 		return data;
 	}

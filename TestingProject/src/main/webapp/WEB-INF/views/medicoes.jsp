@@ -29,30 +29,33 @@
   <select id="medidas" onclick="testing()">
 
  </select>
+
 	<form id="campos" method="post">
-  		
+
 	</form>
-	<input id = "botao_reg" type="submit">
+	<input id = "botao_reg" type="submit" onclick="aquivoueu()">
   	<button id = "botao_voltar">Voltar</button>
 </div>
-<script src='/resources/js/jquery.js'></script>
+
+<script src='resources/js/jquery.js'></script>
 
 <script>
 path=window.location.href;
+medida=""
 $("#medidas").change(function(){testing();});
 	function testing(){
 		var e = document.getElementById("medidas");
-		var medida=e.options[e.selectedIndex].value;
+		medida=e.options[e.selectedIndex].value;
 	$.getJSON( path + "/daoInputs/" + medida, function( data ) {
   var items = [];
   $("#campos").html("");
   $.each( data, function( key, val ) {
-    items.push( key + ":\n <input id='campo'" + " value=" + val + "><br>" );
+    items.push( key + ":\n <input class='campo' name='" + key + "'><br>" );
   });
   $("#campos").append(items);
   })
   }
-  
+
   function getthem(){
 	$.getJSON( path + "/avaliableMeasures", function( val ) {
   var items = [];
@@ -62,8 +65,26 @@ $("#medidas").change(function(){testing();});
     items.push( "<option id = 'opcao' value=" + ceas + ">" + ceas + "</option>" );
  	}
   $("#medidas").append(items);
-  }) 
+  })
   }
-  
   getthem();
+
+  function aquivoueu()
+  {
+    var response={};
+    response["medida"]=medida;
+    $("form").serializeArray().map(function(x){response[x.name] = x.value;});
+    $.ajax({
+    url:path + "/guardar",
+    type:"POST",
+    contentType: "application/json; charset=utf-8",
+    data: JSON.stringify(response), //Stringified Json Object
+    async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
+    cache: false,    //This will force requested pages not to be cached by the browser
+     processData:false, //To avoid making query String instead of JSON
+     success: function(resposeJsonObject){
+        alert(resposeJsonObject);
+    }
+    });
+  }
 </script>

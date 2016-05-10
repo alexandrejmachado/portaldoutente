@@ -56,11 +56,12 @@ public class Trigliceridos {
 		return valor;
 	}
 	
+	@JsonIgnore
 	public String getNumeroUtente() {
 		return numUtente;
 	}
 
-
+	@JsonIgnore
 	public Date getData() {
 		return data;
 	}

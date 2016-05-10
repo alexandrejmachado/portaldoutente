@@ -57,14 +57,17 @@ public class TensaoArterial {
 			return UNIDADE;
 		}
 
+		@JsonIgnore
 		public int getId() {
 			return id;
 		}
 
+		@JsonIgnore
 		public Date getData() {
 			return data;
 		}
 
+		@JsonIgnore
 		public String getNumeroUtente() {
 			return numUtente;
 		}

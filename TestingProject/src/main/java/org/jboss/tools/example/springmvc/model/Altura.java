@@ -10,6 +10,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 //test
 @Entity
 
@@ -20,6 +22,7 @@ public class Altura {
 	
 	public static final String UNIDADE = "cm";
 	
+	@JsonIgnore
 	@Id
 	@GeneratedValue
 	private int id;
@@ -31,9 +34,11 @@ public class Altura {
 	@NotNull
 	private double valor;
 	
+	@JsonIgnore
 	@NotNull
 	private String numUtente;
 	
+	@JsonIgnore
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
 	
@@ -53,11 +58,12 @@ public class Altura {
 		return valor;
 	}
 	
+	@JsonIgnore
 	public String getNumeroUtente() {
 		return numUtente;
 	}
 
-
+	@JsonIgnore
 	public Date getData() {
 		return data;
 	}

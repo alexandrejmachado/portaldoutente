@@ -65,14 +65,17 @@ public class INR {
 		return valor;
 	}
 	
+	@JsonIgnore
 	public String getNumeroUtente() {
 		return numUtente;
 	}
 	
+	@JsonIgnore
 	public boolean getAlarm(){
 		return alarm;
 	}
-
+	
+	@JsonIgnore
 	public Date getData() {
 		return data;
 	}

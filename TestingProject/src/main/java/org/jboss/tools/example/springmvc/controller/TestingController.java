@@ -40,6 +40,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.Cookie;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -107,10 +108,6 @@ public class TestingController {
 		return mav;
 	}
 	
-	@RequestMapping(".well-known/acme-challenge/vFmnvitwRN0Lx-qrdcnGSOKwU0zyJXjyrz7-vPn7T6A")
-	public @ResponseBody String sslworkaround(){
-		return "vFmnvitwRN0Lx-qrdcnGSOKwU0zyJXjyrz7-vPn7T6A.FVbNZTjwYgWkPjpAcYZI8gLtMAcvjowF-NH5KFM68wA";
-	}
 	
 	@RequestMapping(value = "/index")
 	public ModelAndView vistaController(HttpSession session){
@@ -261,7 +258,7 @@ public class TestingController {
 			//--------------mail----------------
 			
 			//-------------cc--------------------
-			resp = resp && (cc.length() == 9);
+			resp = resp && (cc.length() == 8);
 			campo = "cc";
 			if(!resp){
 				throw new BadRegistException("Número de cartão de cidadao demasiado pequeno", campo);
@@ -325,7 +322,7 @@ public class TestingController {
 				String code = as.sendEmail(mail);
 				String codeSms="";
 				try{
-				codeSms = as.sendSms(telemovel);
+				//codeSms = as.sendSms(telemovel);
 				}
 				catch(Exception e)
 				{
@@ -387,6 +384,15 @@ public class TestingController {
 		}
 		return mav;
 	}
+	
+	//Controlador para guardar as medidas
+	@RequestMapping(value = "/medicoes/guardar", method = RequestMethod.POST)
+	@ResponseBody
+	public String guardarMedicao(@RequestBody HashMap medicoes, HttpSession session){
+		System.out.println(medicoes);
+		return "Adicionado";
+	}
+	
 	
 	// TESTE DE SESSOES
 	//--------------------------------------------------

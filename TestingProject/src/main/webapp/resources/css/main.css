@@ -106,7 +106,7 @@ input[type="number"] {
    -moz-appearance: textfield;
 }
 
-.opcao {
+#opcao {
 	background-color:black;
 	color:black;
 }
@@ -213,7 +213,7 @@ html body div.container div#caixaGig.col-lg-12 div#wrapper div#sidebar-wrapper u
  width: 100%;
 }
 
-#campo{
+#campo,.campo{
  margin-bottom: 10px;
  color: black;
  font-size: 15px;
