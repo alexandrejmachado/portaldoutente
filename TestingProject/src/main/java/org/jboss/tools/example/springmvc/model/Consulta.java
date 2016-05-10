@@ -41,19 +41,16 @@ public class Consulta {
 	@NotNull
 	private int idInstituicao;
 	
-	// string??? ou int???
-	private String sala;
 	
 	private boolean feita = false;
 	
 	public Consulta(){}
 	
-	public Consulta(int idMedico, String numUtente, int idInstituicao, String sala){
+	public Consulta(int idMedico, String numUtente, int idInstituicao){
 		this.idMedico = idMedico;
 		this.numUtente = numUtente;
 		this.idInstituicao = idInstituicao;
 		this.data = null;
-		this.sala = sala;
 	}
 	
 }

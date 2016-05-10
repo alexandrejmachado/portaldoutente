@@ -36,6 +36,7 @@
         <class>org.jboss.tools.example.springmvc.model.Trigliceridos</class>
         <class>org.jboss.tools.example.springmvc.sensitivedata.Utente</class>
         <class>org.jboss.tools.example.springmvc.model.Consulta</class>
+        <class>org.jboss.tools.example.springmvc.model.Receita</class>
         <properties>
             <property name="jboss.entity.manager.factory.jndi.name" 
                       value="java:jboss/TestingProject/persistencebasic" />
