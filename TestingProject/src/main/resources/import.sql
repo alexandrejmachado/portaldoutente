@@ -19,6 +19,5 @@
 -- Use only for a proof of concept
 
 -- You can use this file to load seed data into the database using SQL statements
-INSERT INTO `portalDoUtente`.`Utente` (`numUtente`, `cc`, `contactoEmergencia`, `dataNascimento`, `email`, `morada`, `nif`, `nome`, `password`, `telemovel`) VALUES ('123456789', '123456789', '123456789', '2016-04-14 11:21:09.0', 'asdasd@asdasd.pt', 'sfsdfsdfsdf', '123456789', 'Conta de Testes', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', '123456789');
 
 
