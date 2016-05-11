@@ -47,7 +47,7 @@ public class Altura {
 	public Altura(double valor, String numUtente){
 		this.valor = valor;
 		this.data = new Date();
-		numUtente=numUtente;
+		this.numUtente=numUtente;
 	}
 
 	public int getId() {

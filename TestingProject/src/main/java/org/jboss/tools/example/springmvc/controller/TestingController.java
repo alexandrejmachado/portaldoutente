@@ -1,15 +1,19 @@
 package org.jboss.tools.example.springmvc.controller;
 
 import org.jboss.tools.example.springmvc.data.AlturaDao;
+import org.jboss.tools.example.springmvc.data.ColesterolDao;
 import org.jboss.tools.example.springmvc.data.GlicemiaDao;
 import org.jboss.tools.example.springmvc.data.INRDao;
 import org.jboss.tools.example.springmvc.data.PesoDao;
+import org.jboss.tools.example.springmvc.data.SaturacaoO2Dao;
 import org.jboss.tools.example.springmvc.data.TensaoArterialDao;
+import org.jboss.tools.example.springmvc.data.TrigliceridosDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
 import org.jboss.tools.example.springmvc.model.Altura;
 import org.jboss.tools.example.springmvc.model.Glicemia;
 import org.jboss.tools.example.springmvc.model.INR;
 import org.jboss.tools.example.springmvc.model.Peso;
+import org.jboss.tools.example.springmvc.model.SaturacaoO2;
 import org.jboss.tools.example.springmvc.model.TensaoArterial;
 import org.jboss.tools.example.springmvc.sensitivedata.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,10 +67,19 @@ public class TestingController {
 	private AlturaDao altDao;
 	
 	@Autowired
+	private ColesterolDao colDao;
+	
+	@Autowired
 	private GlicemiaDao glicDao;
 	
 	@Autowired
+	private SaturacaoO2Dao satDao;
+	
+	@Autowired
 	private TensaoArterialDao tenArtDao;
+	
+	@Autowired
+	private TrigliceridosDao trigDao;
 	
 	private List<String> avaliableMeasures;
 	
@@ -392,8 +405,29 @@ public class TestingController {
 		System.out.println(medicoes);
 		switch ((String)medicoes.get("medida")) {
 		case "Altura" :
-			altDao.novo((double)medicoes.get("valor"), (Integer) session.getAttribute("sessionID"));
-		
+			altDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getAttribute("sessionID")));
+			break;
+		case "Glicemia" :
+			glicDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getAttribute("sessionID")));
+			break;
+		case "Colesterol":
+			colDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getAttribute("sessionID")));
+			break;
+		case "INR":
+			inrDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getAttribute("sessionID")));
+			break;
+		case "Peso":
+			pesoDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getAttribute("sessionID")));
+			break;
+		case "SaturacaoO2":
+			satDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getAttribute("sessionID")));
+			break;
+		case "Trigliceridos":
+			trigDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getAttribute("sessionID")));
+			break;
+		case "TensaoArterialDao":
+			tenArtDao.novo(Integer.parseInt((String)medicoes.get("max")),(Integer)medicoes.get("min"), Integer.parseInt((String)session.getAttribute("sessionID")));
+			break;
 		}
 		return "Adicionado";
 	}
