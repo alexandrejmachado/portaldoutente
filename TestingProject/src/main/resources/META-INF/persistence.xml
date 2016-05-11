@@ -37,6 +37,12 @@
         <class>org.jboss.tools.example.springmvc.sensitivedata.Utente</class>
         <class>org.jboss.tools.example.springmvc.model.Consulta</class>
         <class>org.jboss.tools.example.springmvc.model.Receita</class>
+        <class>org.jboss.tools.example.springmvc.model.Boletim</class>
+        <class>org.jboss.tools.example.springmvc.model.Exame</class>
+        <class>org.jboss.tools.example.springmvc.model.Medicacao</class>
+        <class>org.jboss.tools.example.springmvc.model.Medicamento</class>
+        <class>org.jboss.tools.example.springmvc.model.Vacina</class>
+        <class>org.jboss.tools.example.springmvc.model.Cirurgia</class>
         <properties>
             <property name="jboss.entity.manager.factory.jndi.name" 
                       value="java:jboss/TestingProject/persistencebasic" />
