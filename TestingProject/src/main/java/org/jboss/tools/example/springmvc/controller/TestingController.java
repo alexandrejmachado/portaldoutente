@@ -206,7 +206,7 @@ public class TestingController {
 		HashMap<String, Object> inputfields;
 		inputfields = new HashMap<String,Object>();
 		inputfields.put("Glicemia",new Glicemia());
-		System.out.println(object);
+		System.out.println("object = " + object);
 		try {
 			Class c= Class.forName("org.jboss.tools.example.springmvc.model."+object);
 			return c.newInstance();
@@ -388,8 +388,13 @@ public class TestingController {
 	//Controlador para guardar as medidas
 	@RequestMapping(value = "/medicoes/guardar", method = RequestMethod.POST)
 	@ResponseBody
-	public String guardarMedicao(@RequestBody HashMap medicoes, HttpSession session){
+	public String guardarMedicao(@RequestBody HashMap medicoes, HttpSession session) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		System.out.println(medicoes);
+		switch ((String)medicoes.get("medida")) {
+		case "Altura" :
+			altDao.novo((double)medicoes.get("valor"), (Integer) session.getAttribute("sessionID"));
+		
+		}
 		return "Adicionado";
 	}
 	
