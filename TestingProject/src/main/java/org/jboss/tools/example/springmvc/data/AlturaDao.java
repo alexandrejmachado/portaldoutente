@@ -24,7 +24,7 @@ public class AlturaDao {
 	@Autowired
 	private EntityManager em;
 	
-	public Altura novaAltura(double valor, int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+	public Altura novo(double valor, int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		Altura altura = new Altura(valor, Cifras.encrypt(Integer.toString(numUtente)));
 		em.persist(altura);
 		return altura;

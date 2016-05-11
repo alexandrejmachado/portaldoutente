@@ -26,7 +26,7 @@ public class GlicemiaDao {
 	@Autowired
 	private EntityManager em;
 	
-	public Glicemia novaGlicemia(double valor, int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+	public Glicemia novo(double valor, int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		Glicemia glic = new Glicemia(valor, Cifras.encrypt(Integer.toString(numUtente)));
 		em.persist(glic);
 		return glic;

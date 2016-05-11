@@ -25,7 +25,7 @@ public class PesoDao {
 	@Autowired
 	private EntityManager em;
 	
-	public Peso novoPeso(double valor, int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+	public Peso novo(double valor, int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		Peso peso = new Peso(valor, Cifras.encrypt(Integer.toString(numUtente)));
 		em.persist(peso);
 		return peso;

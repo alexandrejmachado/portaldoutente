@@ -26,7 +26,7 @@ public class INRDao {
 	@Autowired
 	private EntityManager em;
 	
-	public INR novoINR(double valor, int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+	public INR novo(double valor, int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		INR inr = new INR(valor, Cifras.encrypt(Integer.toString(numUtente)));
 		em.persist(inr);
 		return inr;

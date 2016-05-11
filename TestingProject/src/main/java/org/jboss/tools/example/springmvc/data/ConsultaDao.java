@@ -24,7 +24,7 @@ public class ConsultaDao {
 	@Autowired
 	private EntityManager em;
 	
-	public Consulta novaConsulta(int idMedico, int numUtente, int idInstituicao, String sala) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+	public Consulta novo(int idMedico, int numUtente, int idInstituicao, String sala) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		Consulta Consulta = new Consulta(idMedico, Cifras.encrypt(Integer.toString(numUtente)), idInstituicao);
 		em.persist(Consulta);
 		return Consulta;

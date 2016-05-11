@@ -25,7 +25,7 @@ public class ColesterolDao {
 	@Autowired
 	private EntityManager em;
 	
-	public Colesterol newColesterol(double valor, int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+	public Colesterol novo(double valor, int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		Colesterol col = new Colesterol(valor, Cifras.encrypt(Integer.toString(numUtente)));
 		em.persist(col);
 		return col;

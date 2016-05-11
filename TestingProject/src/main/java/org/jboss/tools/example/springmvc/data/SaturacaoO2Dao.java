@@ -24,7 +24,7 @@ public class SaturacaoO2Dao {
 	@Autowired
 	private EntityManager em;
 	
-	public SaturacaoO2 novaAltura(double valor, int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+	public SaturacaoO2 novo(double valor, int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		SaturacaoO2 altura = new SaturacaoO2(valor, Cifras.encrypt(Integer.toString(numUtente)));
 		em.persist(altura);
 		return altura;

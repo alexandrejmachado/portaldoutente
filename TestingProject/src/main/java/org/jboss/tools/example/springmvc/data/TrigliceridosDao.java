@@ -24,7 +24,7 @@ public class TrigliceridosDao {
 	@Autowired
 	private EntityManager em;
 	
-	public Trigliceridos novaTrigliceridos(double valor, int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+	public Trigliceridos novo(double valor, int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		Trigliceridos Trigliceridos = new Trigliceridos(valor, Cifras.encrypt(Integer.toString(numUtente)));
 		em.persist(Trigliceridos);
 		return Trigliceridos;

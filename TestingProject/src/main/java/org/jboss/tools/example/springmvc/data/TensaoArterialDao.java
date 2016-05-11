@@ -24,7 +24,7 @@ public class TensaoArterialDao {
 	@Autowired
 	private EntityManager em;
 	
-	public TensaoArterial novaTensaoArterial(int max, int min, int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+	public TensaoArterial novo(int max, int min, int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		TensaoArterial tenArt = new TensaoArterial(max, min, Cifras.encrypt(Integer.toString(numUtente)));
 		em.persist(tenArt);
 		return tenArt;

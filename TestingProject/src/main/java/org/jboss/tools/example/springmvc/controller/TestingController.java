@@ -174,7 +174,7 @@ public class TestingController {
 
 		}
 		}
-	
+
 	// preciso de esclarecer umas situacoes
 	@RequestMapping(value = "/registo")
 	public ModelAndView registoController(HttpSession session){
