@@ -34,7 +34,7 @@
   		Morada:
   		<input id = "campo" type="text" name="morada"><br>
   		E-Mail:
-  		<input id = "campo" type="text" name="mail"><br>
+  		<input id = "campo" type="text" name="mail" required><br>
   		Password:*
   		<input id = "campo" type="password" name="pass" required><br>
   		Numero de Telemovel:*
