@@ -1,7 +1,7 @@
 stages:
 - build
 - deploy
-- ipbot
+#- ipbot
 build_job:
   stage: build
   script:
@@ -36,10 +36,10 @@ deploy_job:
   #- kubectl run portal-utente --image=gcr.io/sapient-axle-129909/portaldoutente:latest --port 8080
   #- kubectl expose rc portal-utente --type=LoadBalancer --port 80 --target-port 8080
   - kubectl rolling-update portal-utente --image=gcr.io/sapient-axle-129909/portaldoutente:latest
-ipbot_job:
-  stage: ipbot
-  script:
-  - pip install --upgrade apache-libcloud
-  - echo "A ir buscar IP"
-  - cd /opt/ip_bot/
-  - python ptrtest.py
+#ipbot_job:
+#  stage: ipbot
+#  script:
+#  - pip install --upgrade apache-libcloud
+#  - echo "A ir buscar IP"
+#  - cd /opt/ip_bot/
+#  - python ptrtest.py
