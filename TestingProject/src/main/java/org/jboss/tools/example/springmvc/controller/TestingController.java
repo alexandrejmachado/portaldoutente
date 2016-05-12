@@ -478,6 +478,7 @@ public class TestingController {
 		} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
 				| BadPaddingException | IOException e) {
 			e.printStackTrace();
+			
 		}
 		return consultaDao.findAllByUtente(123123123);
 	}
