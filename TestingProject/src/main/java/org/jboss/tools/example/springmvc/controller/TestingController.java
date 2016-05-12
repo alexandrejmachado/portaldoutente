@@ -442,7 +442,7 @@ public class TestingController {
 		case "Trigliceridos":
 			trigDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getAttribute("sessionID")));
 			break;
-		case "TensaoArterialDao":
+		case "TensaoArterial":
 			tenArtDao.novo(Integer.parseInt((String)medicoes.get("max")),(Integer)medicoes.get("min"), Integer.parseInt((String)session.getAttribute("sessionID")));
 			break;
 		}
@@ -494,6 +494,45 @@ public class TestingController {
 		return consultaDao.findAllByUtente(123123123);
 	}
 	
-	
+	@RequestMapping(value="/obterMedida")
+	@ResponseBody
+	public List<?> obterMedida(HttpSession session, String tipoMedida) {
+		List<?> lista = null;
+		try {
+		System.out.println(tipoMedida);
+		switch (tipoMedida) {
+		case "Altura":
+			lista = altDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			break;
+		case "Glicemia":
+			lista = glicDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			break;
+		case "Colesterol":
+			lista = colDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			break;
+		case "INR":
+			lista = inrDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			break;
+		case "Peso":
+			lista = pesoDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			break;
+		case "SaturacaoO2":
+			lista = satDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			break;
+		case "Trigliceridos":
+			lista = trigDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			break;
+		case "TensaoArterial":
+			lista = tenArtDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			break;
+		}
+		}
+		 catch (InvalidKeyException | NumberFormatException | NoSuchAlgorithmException | NoSuchPaddingException
+					| IllegalBlockSizeException | BadPaddingException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return lista;
+	}
 	
 }
