@@ -44,6 +44,7 @@ import java.util.regex.Pattern;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.mail.SendFailedException;
 import javax.servlet.http.Cookie;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -355,7 +356,7 @@ public class TestingController {
 				return finalmsg;
 			}
 			catch(Exception e){
-				if(e instanceof com.sun.mail.smtp.SMTPAddressFailedException){
+				if(e instanceof SendFailedException){
 					resp = false;
 					finalmsg.add("Por favor insira um email válido");
 					finalmsg.add("mail");
@@ -493,7 +494,6 @@ public class TestingController {
 		}
 		return consultaDao.findAllByUtente(123123123);
 	}
-	
 	
 	
 }
