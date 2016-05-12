@@ -29,6 +29,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -428,5 +429,13 @@ public class TestingController {
 		}
 		return "redirect:/";
 	}
+	
+	@RequestMapping(value="/testing")
+	@ResponseBody
+	public Calendar testing(HttpSession session)
+	{
+		return null;
+	}
+	
 	
 }
