@@ -275,7 +275,10 @@ public class TestingController {
 				throw new BadRegistException("Número de utente demasiado pequeno", campo);
 			}
 			//--------------mail----------------
-			
+			campo = "mail";
+			if(mail.length() <= 0){
+				throw new BadRegistException("Por favor insira um email", campo);
+			}
 			//-------------cc--------------------
 			resp = resp && (cc.length() == 8);
 			campo = "cc";
@@ -351,10 +354,18 @@ public class TestingController {
 				finalmsg.add("true");
 				return finalmsg;
 			}
-		catch(Exception e){
-			finalmsg.add("UNKNOWN");
-			System.out.println(e.getMessage());
-		}
+			catch(Exception e){
+				if(e instanceof javax.mail.SendFailedException){
+					resp = false;
+					finalmsg.add("Por favor insira um email válido");
+					finalmsg.add("mail");
+					System.out.println(e.getMessage());
+				}
+				else{
+					finalmsg.add("UNKNOWN");
+					System.out.println(e.getMessage());
+				}
+			}
 		return finalmsg;
 		}
 	
