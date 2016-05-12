@@ -44,6 +44,7 @@ import java.util.regex.Pattern;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.mail.SendFailedException;
 import javax.servlet.http.Cookie;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
