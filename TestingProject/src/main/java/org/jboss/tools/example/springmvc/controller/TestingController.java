@@ -2,6 +2,7 @@ package org.jboss.tools.example.springmvc.controller;
 
 import org.jboss.tools.example.springmvc.data.AlturaDao;
 import org.jboss.tools.example.springmvc.data.ColesterolDao;
+import org.jboss.tools.example.springmvc.data.ConsultaDao;
 import org.jboss.tools.example.springmvc.data.GlicemiaDao;
 import org.jboss.tools.example.springmvc.data.INRDao;
 import org.jboss.tools.example.springmvc.data.PesoDao;
@@ -34,6 +35,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -81,6 +83,9 @@ public class TestingController {
 	
 	@Autowired
 	private TrigliceridosDao trigDao;
+	
+	@Autowired
+	private ConsultaDao consultaDao;
 	
 	private List<String> avaliableMeasures;
 	
@@ -466,9 +471,15 @@ public class TestingController {
 	
 	@RequestMapping(value="/testing")
 	@ResponseBody
-	public Calendar testing(HttpSession session)
+	public List<?> testing(HttpSession session) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException
 	{
-		return null;
+		try {
+			consultaDao.novo(0, 123123123, 2, "Sala A4", new Date());
+		} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
+				| BadPaddingException | IOException e) {
+			e.printStackTrace();
+		}
+		return consultaDao.findAllByUtente(123123123);
 	}
 	
 	
