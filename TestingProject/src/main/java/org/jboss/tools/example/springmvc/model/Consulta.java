@@ -3,6 +3,7 @@ package org.jboss.tools.example.springmvc.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,6 +25,7 @@ public class Consulta {
 	
 	@JsonIgnore
 	@Id
+	@GeneratedValue
 	private int id;
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -57,8 +59,8 @@ public class Consulta {
 		return id;
 	}
 
-	public Date getData() {
-		return data;
+	public String getData() {
+		return data.toGMTString();
 	}
 
 	public int getIdMedico() {
