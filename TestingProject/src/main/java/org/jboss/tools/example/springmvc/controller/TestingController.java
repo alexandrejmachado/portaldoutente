@@ -355,7 +355,7 @@ public class TestingController {
 				return finalmsg;
 			}
 			catch(Exception e){
-				if(e instanceof javax.mail.SendFailedException){
+				if(e instanceof com.sun.mail.smtp.SMTPAddressFailedException){
 					resp = false;
 					finalmsg.add("Por favor insira um email válido");
 					finalmsg.add("mail");
