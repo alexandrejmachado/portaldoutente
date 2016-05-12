@@ -3,6 +3,7 @@ package org.jboss.tools.example.springmvc.data;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.List;
 
 import javax.crypto.BadPaddingException;
@@ -24,8 +25,8 @@ public class ConsultaDao {
 	@Autowired
 	private EntityManager em;
 	
-	public Consulta novo(int idMedico, int numUtente, int idInstituicao, String sala) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		Consulta Consulta = new Consulta(idMedico, Cifras.encrypt(Integer.toString(numUtente)), idInstituicao);
+	public Consulta novo(int idMedico, int numUtente, int idInstituicao, String sala, Date data) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		Consulta Consulta = new Consulta(idMedico, Cifras.encrypt(Integer.toString(numUtente)), idInstituicao, data);
 		em.persist(Consulta);
 		return Consulta;
 	}

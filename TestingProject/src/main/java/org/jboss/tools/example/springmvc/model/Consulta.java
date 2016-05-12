@@ -46,11 +46,35 @@ public class Consulta {
 	
 	public Consulta(){}
 	
-	public Consulta(int idMedico, String numUtente, int idInstituicao){
+	public Consulta(int idMedico, String numUtente, int idInstituicao, Date data){
 		this.idMedico = idMedico;
 		this.numUtente = numUtente;
 		this.idInstituicao = idInstituicao;
-		this.data = null;
+		this.data = data;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public int getIdMedico() {
+		return idMedico;
+	}
+
+	public String getNumUtente() {
+		return numUtente;
+	}
+
+	public int getIdInstituicao() {
+		return idInstituicao;
+	}
+
+	public boolean isFeita() {
+		return feita;
 	}
 	
 }
