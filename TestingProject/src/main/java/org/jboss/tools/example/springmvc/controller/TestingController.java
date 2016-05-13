@@ -273,7 +273,7 @@ public class TestingController {
 			resp = resp && (numUtente.length() == 9);
 			campo = "num_utente";
 			if(!resp){
-				throw new BadRegistException("Número de utente demasiado pequeno", campo);
+				throw new BadRegistException("Formato de número de Utente incorrecto, deverá ter 9 digitos (Ex: 123456789)", campo);
 			}
 			//--------------mail----------------
 			campo = "mail";
@@ -284,7 +284,7 @@ public class TestingController {
 			resp = resp && (cc.length() == 8);
 			campo = "cc";
 			if(!resp){
-				throw new BadRegistException("Número de cartão de cidadao demasiado pequeno", campo);
+				throw new BadRegistException("Formato de número de cartão de Cidadao incorrecto, deverá ter 8 digitos (Ex: 12345678 )", campo);
 			}
 			//------------telemovel-----------------
 			resp = resp && (telemovel.length() == 9);
