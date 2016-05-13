@@ -280,6 +280,9 @@ public class TestingController {
 			if(mail.length() <= 0){
 				throw new BadRegistException("Por favor insira um email", campo);
 			}
+			if(!as.verifyEmail(mail)){
+				throw new BadRegistException("Por favor insira um email válido", campo);
+			}
 			//-------------cc--------------------
 			resp = resp && (cc.length() == 8);
 			campo = "cc";
@@ -356,16 +359,8 @@ public class TestingController {
 				return finalmsg;
 			}
 			catch(Exception e){
-				if(e instanceof javax.mail.SendFailedException){
-					resp = false;
-					finalmsg.add("Por favor insira um email válido");
-					finalmsg.add("mail");
-					System.out.println(e.getMessage());
-				}
-				else{
-					finalmsg.add("UNKNOWN");
-					System.out.println(e.getMessage());
-				}
+				finalmsg.add("UNKNOWN");
+				System.out.println(e.getMessage());
 			}
 		return finalmsg;
 		}
