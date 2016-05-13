@@ -11,6 +11,7 @@ import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -90,5 +91,16 @@ public class AuthController {
 		System.out.println(message.getSid());
 		
 		return code;
+	}
+	
+	public boolean verifyEmail(String email){
+		boolean res = true;
+		   try {
+		      InternetAddress emailAddr = new InternetAddress(email);
+		      emailAddr.validate();
+		   } catch (AddressException ex) {
+		      res = false;
+		   }
+		   return res;
 	}
 }

@@ -273,38 +273,41 @@ public class TestingController {
 			resp = resp && (numUtente.length() == 9);
 			campo = "num_utente";
 			if(!resp){
-				throw new BadRegistException("Número de utente demasiado pequeno", campo);
+				throw new BadRegistException("Formato de número de Utente incorrecto, deverá ter 9 digitos (Ex: 123456789)", campo);
 			}
 			//--------------mail----------------
 			campo = "mail";
 			if(mail.length() <= 0){
 				throw new BadRegistException("Por favor insira um email", campo);
 			}
+			if(!as.verifyEmail(mail)){
+				throw new BadRegistException("Por favor insira um email válido", campo);
+			}
 			//-------------cc--------------------
 			resp = resp && (cc.length() == 8);
 			campo = "cc";
 			if(!resp){
-				throw new BadRegistException("Número de cartão de cidadao demasiado pequeno", campo);
+				throw new BadRegistException("Formato de número de cartão de Cidadao incorrecto, deverá ter 8 digitos (Ex: 12345678)", campo);
 			}
 			//------------telemovel-----------------
 			resp = resp && (telemovel.length() == 9);
 			campo = "telemovel";
 			if(!resp){
-				throw new BadRegistException("Número de telemóvel demasiado pequeno", campo);
+				throw new BadRegistException("Formato de número de telemóvel incorrecto, deverá ter 9 digitos (Ex: 123456789)", campo);
 			}
 			//------------emergencia-----------------
 			if(emergencia.length() > 0){
 				resp = resp && (emergencia.length() == 9);
 				campo = "emergencia";
 				if(!resp){
-					throw new BadRegistException("Número de telemóvel de emergência demasiado pequeno", campo);
+					throw new BadRegistException("Formato número de telemóvel de emergência incorrecto, deverá ter 9 digitos (Ex: 123456789)", campo);
 				}
 			}
 			//-----------nif------------------
 			resp = resp && (nif.length() == 9);
 			campo = "nif";
 			if(!resp){
-				throw new BadRegistException("Nif demasiado pequeno", campo);
+				throw new BadRegistException("Formato de Nif incorrecto, deverá ter 9 digitos (Ex: 123456789)", campo);
 			}
 			//-------------verificar numeros---------------
 			try{
@@ -356,16 +359,8 @@ public class TestingController {
 				return finalmsg;
 			}
 			catch(Exception e){
-				if(e instanceof javax.mail.SendFailedException){
-					resp = false;
-					finalmsg.add("Por favor insira um email válido");
-					finalmsg.add("mail");
-					System.out.println(e.getMessage());
-				}
-				else{
-					finalmsg.add("UNKNOWN");
-					System.out.println(e.getMessage());
-				}
+				finalmsg.add("UNKNOWN");
+				System.out.println(e.getMessage());
 			}
 		return finalmsg;
 		}
