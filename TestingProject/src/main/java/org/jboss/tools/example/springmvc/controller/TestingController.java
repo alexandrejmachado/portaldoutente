@@ -473,13 +473,18 @@ public class TestingController {
 	//--------------------------------------------------
 	
 	@RequestMapping(value="/verifyCode", method = RequestMethod.POST, params={"codigo"})
+	@ResponseBody
 	public String verifyCode(@RequestParam(value="codigo") String codigo, HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		boolean ok = utenteDao.verifyUser((String) session.getAttribute("sessionID"), codigo);
 		if (ok) {
-			return "redirect:/index";
+			return "true";
+			//return "redirect:/index";
 		}
-		return "redirect:/";
+		//return "redirect:/";
+		return "false";
 	}
+	
+	
 	
 	@RequestMapping(value="/testing")
 	@ResponseBody
