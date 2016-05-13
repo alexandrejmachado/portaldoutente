@@ -26,7 +26,7 @@
 
 <div class="registo">
 	Escolha a Medição:<br>
-  <select id="medidas" onclick="testing()">
+  <select id="medidas" onclick="testing()" style="color:black;">
 
  </select>
 
