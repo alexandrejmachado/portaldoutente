@@ -284,27 +284,27 @@ public class TestingController {
 			resp = resp && (cc.length() == 8);
 			campo = "cc";
 			if(!resp){
-				throw new BadRegistException("Formato de número de cartão de Cidadao incorrecto, deverá ter 8 digitos (Ex: 12345678 )", campo);
+				throw new BadRegistException("Formato de número de cartão de Cidadao incorrecto, deverá ter 8 digitos (Ex: 12345678)", campo);
 			}
 			//------------telemovel-----------------
 			resp = resp && (telemovel.length() == 9);
 			campo = "telemovel";
 			if(!resp){
-				throw new BadRegistException("Número de telemóvel demasiado pequeno", campo);
+				throw new BadRegistException("Formato de número de telemóvel incorrecto, deverá ter 9 digitos (Ex: 123456789)", campo);
 			}
 			//------------emergencia-----------------
 			if(emergencia.length() > 0){
 				resp = resp && (emergencia.length() == 9);
 				campo = "emergencia";
 				if(!resp){
-					throw new BadRegistException("Número de telemóvel de emergência demasiado pequeno", campo);
+					throw new BadRegistException("Formato número de telemóvel de emergência incorrecto, deverá ter 9 digitos (Ex: 123456789)", campo);
 				}
 			}
 			//-----------nif------------------
 			resp = resp && (nif.length() == 9);
 			campo = "nif";
 			if(!resp){
-				throw new BadRegistException("Nif demasiado pequeno", campo);
+				throw new BadRegistException("Formato de Nif incorrecto, deverá ter 9 digitos (Ex: 123456789)", campo);
 			}
 			//-------------verificar numeros---------------
 			try{
