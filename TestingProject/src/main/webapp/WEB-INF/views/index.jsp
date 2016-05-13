@@ -37,6 +37,7 @@
 <body background=<c:url value="/resources/gfx/Final2.png"/> />
 
 <div class= "container">    <!-- ROW -->
+	<div id="divlogout"></div>
         <div class= "rowMajor">
             <div class="col-md-11">Portal do Utente</div>
 		</div>
@@ -105,6 +106,11 @@
 	<script>
 	path="https://" + window.location.host + "/";
 	warning=null;
+	pathWindow = window.location.href;
+	lastThing = pathWindow.split("/")[3];
+	if (lastThing=="logout") {
+		$("#divlogout").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 10%;">Logout efectuado</div>');
+	}
 	function lolada(){
 		$.post(path + 'loginUtente', $("form").serialize()).done(function( data ) { 
 			if (data=="true"){window.location.replace(path + "index");}

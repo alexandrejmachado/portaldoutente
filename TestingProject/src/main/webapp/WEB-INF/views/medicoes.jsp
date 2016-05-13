@@ -20,6 +20,7 @@
 <div class= "container">    <!-- ROW -->
         <div class= "rowMajor">
             <div class="col-md-11">Portal do Utente</div>
+            <form action="logout"><button id="logout" type="submit">Logout</button></form>
 </div>
 </div>
  <p id = "frase">Preencha aqui os dados que pretende inserir no Sistema</p>
