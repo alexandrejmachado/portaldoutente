@@ -402,6 +402,13 @@ public class TestingController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/logout")
+	public ModelAndView logout(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		session.removeAttribute("sessionID");
+		mav.setViewName("index");
+		return mav;
+	}
 	
 	
 	@RequestMapping(value = "/medicoes")
