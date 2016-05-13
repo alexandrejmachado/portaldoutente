@@ -85,10 +85,12 @@
 		
 										<p>Introduza o seu número de Identificação de Segurança Social:</p> <br><br>
 										
-										<form action="/verificarIsencao" method="post" >
+										<form method="post" >
 										<input id="codigo" type="text" name="segsoc">
-										<input id = "botao_conf" type="submit"/>
 										</form>
+										<input id = "botao_conf" type="submit" onclick="lolada()"/>
+									<div id="erro">
+									</div>
 										
 								
 							</div>
@@ -114,10 +116,12 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+   <!-- <script src="js/jquery.js">  </script> -->
+    <script src='<c:url value="/resources/js/jquery.js"></c:url>'></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <!-- <script src="js/bootstrap.min.js"></script> -->
+    <script src='<c:url value="/resources/js/bootstrap.min.js"></c:url>'></script>
 
     <!-- Menu Toggle Script -->
     <script>
@@ -125,6 +129,17 @@
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
+    
+    path="https://" + window.location.host + "/";
+	warning=null;
+	function lolada(){
+		$.post(path + 'verificarIsencao', $("form").serialize()).done(function( data ) { 
+			if (data=="true"){window.location.replace(path + "index");}
+			else if(warning==null){ $("#erro").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 3%;">NIF incorrecto</div>');
+			warning=true;}
+			
+			});
+		}
     </script>
 
 </body>

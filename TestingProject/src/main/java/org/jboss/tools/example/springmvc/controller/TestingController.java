@@ -384,17 +384,25 @@ public class TestingController {
 	}
 	
 	@RequestMapping(value= "/verificarIsencao")
-	public ModelAndView verificarIsencao(HttpSession session, @RequestParam(value = "segsoc") String username) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
-		ModelAndView mav = new ModelAndView();
+	@ResponseBody
+	public String verificarIsencao(HttpSession session, @RequestParam(value = "segsoc") int username) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		String userID = (String) session.getAttribute("sessionID");
-		boolean isento = utenteDao.mudarIsencao(username);
-		if (isento) {
-			mav.setViewName("isencao_aceite");
+		Utente u;
+		if (true){
+			u = utenteDao.findUtenteByNIF(username);
+		}
+		//catch(Exception e){
+		//	u = null;
+		//}
+		System.out.println(u);
+		if (u != null) {
+			utenteDao.mudarIsencao(username);
+			return "true";
 		}
 		else {
-			mav.setViewName("isencao_rejeitada");
+			return "false";
 		}
-		return mav;
+		
 	}
 	
 	

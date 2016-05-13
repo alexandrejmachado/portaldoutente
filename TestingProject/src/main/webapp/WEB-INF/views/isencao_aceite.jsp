@@ -31,10 +31,6 @@
 
 
 <body background=<c:url value="/resources/gfx/Final2.png"/> />
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of http://130.211.146.91/melancias/portalDoUtente1.git
 <div class= "container">   
         
             <div class="col-lg-12"> 
