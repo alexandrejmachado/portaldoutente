@@ -290,10 +290,12 @@ public class TestingController {
 				throw new BadRegistException("Formato de número de cartão de Cidadao incorrecto, deverá ter 8 digitos (Ex: 12345678)", campo);
 			}
 			//------------telemovel-----------------
-			resp = resp && (telemovel.length() == 9);
-			campo = "telemovel";
-			if(!resp){
-				throw new BadRegistException("Formato de número de telemóvel incorrecto, deverá ter 9 digitos (Ex: 123456789)", campo);
+			if(telemovel.length() > 0){
+				resp = resp && (telemovel.length() == 9);
+				campo = "telemovel";
+				if(!resp){
+					throw new BadRegistException("Formato de número de telemóvel incorrecto, deverá ter 9 digitos (Ex: 123456789)", campo);
+				}
 			}
 			//------------emergencia-----------------
 			if(emergencia.length() > 0){

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+.<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -37,8 +37,8 @@
   		<input id = "campo" type="text" name="mail" required><br>
   		Password:*
   		<input id = "campo" type="password" name="pass" required><br>
-  		Numero de Telemovel:*
-  		<input id = "campo" type="text" name="telemovel" required><br>
+  		Numero de Telemovel:
+  		<input id = "campo" type="text" name="telemovel"><br>
   		Contacto de Emergencia:
   		<input id = "campo" type="text" name="emergencia"><br>
   		Numero de Identificacao Fiscal:*
