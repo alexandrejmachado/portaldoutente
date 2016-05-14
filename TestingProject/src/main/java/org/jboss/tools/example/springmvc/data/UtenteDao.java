@@ -61,9 +61,10 @@ public class UtenteDao {
 		}
 	}
 	
-	public Utente findUtenteByNIF(int nif){
+	public Utente findUtenteByNIF(int nif) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		TypedQuery<Utente> query = em.createNamedQuery(Utente.FIND_BY_NIF, Utente.class);
-		query.setParameter(Utente.NIF, nif);
+		String nif_cifrado = Cifras.encrypt(Integer.toString(nif));
+		query.setParameter(Utente.NIF, nif_cifrado);
 		try{
 			return query.getSingleResult();
 		}

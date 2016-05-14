@@ -390,12 +390,14 @@ public class TestingController {
 	public String verificarIsencao(HttpSession session, @RequestParam(value = "segsoc") int username) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		String userID = (String) session.getAttribute("sessionID");
 		Utente u;
-		if (true){
-			u = utenteDao.findUtenteByNIF(username);
+		try{
+			if (true){
+				u = utenteDao.findUtenteByNIF(username);
+			}	
 		}
-		//catch(Exception e){
-		//	u = null;
-		//}
+		catch(Exception e){
+			u = null;
+		}
 		System.out.println(u);
 		if (u != null) {
 			utenteDao.mudarIsencao(username);
@@ -405,6 +407,14 @@ public class TestingController {
 			return "false";
 		}
 		
+	}
+	
+	@RequestMapping(value="/isento")
+	public ModelAndView isento(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("isento");
+		mav.setViewName("mainmenu");
+		return mav;
 	}
 	
 	@RequestMapping(value="/logout")

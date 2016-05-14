@@ -89,7 +89,7 @@
 										<input id="codigo" type="text" name="segsoc">
 										</form>
 										<input id = "botao_conf" type="submit" onclick="lolada()"/>
-									<div id="erro">
+									<div id="erro"></div>
 									</div>
 										
 								
@@ -134,7 +134,7 @@
 	warning=null;
 	function lolada(){
 		$.post(path + 'verificarIsencao', $("form").serialize()).done(function( data ) { 
-			if (data=="true"){window.location.replace(path + "index");}
+			if (data=="true"){window.location.replace(path + "isento");}
 			else if(warning==null){ $("#erro").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 3%;">NIF incorrecto</div>');
 			warning=true;}
 			
