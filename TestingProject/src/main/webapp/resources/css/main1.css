@@ -1,0 +1,410 @@
+/*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Toggle Styles */
+@font-face {
+    font-family: 'LANENAR_';
+    src: url('/resources/fonts/LANENAR_.ttf');
+}
+@font-face {
+    font-family: 'DengXian';
+    src: url('/resources/fonts/DengXian.ttf');
+}
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    position: absolute;
+    width: 0;
+    left: 0px;
+	padding-right: 0px;
+   /*atencao para responsive*/
+    overflow-y: auto;
+    background: none; /*background da barra*/
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+
+#caixaGig{
+ background: none; 
+}
+
+.row{
+background: rgb(249, 249, 249);
+
+
+}
+.container-fluid{
+    background: rgb(249, 249, 249);
+    padding: 0px;
+    margin: 0px;
+	marigin-bottom: 10px;
+    min-height: 316px;
+    text-align: center;
+    font-family:'LANENAR_', sans-serif; 
+    font-size: 1.7em;
+	
+}
+
+.newP {
+  padding-top:100px;
+  padding-bottom: 10px;
+}
+
+/*------Receitas--------------*/
+
+#caixaReceita  {
+	margin-top: 20px;
+	margin-left: 15px;
+	margin-right: 15px;
+	padding: 6px;
+	text-align: center;
+    border-bottom-style: solid;
+	border-color: #E0E0E0;
+	
+	font-size: 18px;
+	
+}
+
+
+/*------Receitas fim --------------*/
+
+#page-content-wrapper {
+
+    margin-left: 0px;
+    padding-left: 0px;
+
+	
+}
+.rowMajor{
+    text-align: left;
+    color: white;
+    font-size: 30px;
+    text-transform: uppercase;
+        /* border: 3px solid black; fOR DEBUG!!!!!!!*/
+    border-bottom: 2px solid white;
+    height: 150px;
+    border-radius: 1px;
+        
+    padding-top: 100px;
+    position: relative;
+    background: none; /*background da barra*/
+    font-family:'DengXian', sans-serif; 
+}
+#entrar{
+    font-size: 20px;
+   /* border: 3px solid black;*/
+    padding-top: 5px;
+    font-family:'DengXian', sans-serif; 
+}
+
+
+
+#texto1{
+    padding-top: 100px;
+    font-size: 25px;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    font-family:'DengXian',sans-serif;  
+}
+#texto2{
+ 
+    font-size: 25px;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    font-family:'DengXian',sans-serif; 
+}
+
+
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+
+.barra{
+  list-style-type: none;
+  width: 250px;
+
+}
+
+.barra li {
+ /*border: 1px solid black; */
+  padding-bottom: 10px; 
+  padding-top: 10px;
+  background: rgb(249,249,249);
+  text-align: center;
+  font-family: "LANENAR_", sans-serif;
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: rbg(31,78,121);
+}
+
+.barra li:first-child{
+  margin-top: 20px;
+}
+
+/* apagar */
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+	height: 500px;
+    width: 250px; /*L*/
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+
+/*letras da nav bar*/
+.barra li a {
+    display: block;
+    text-decoration: none;
+    color: #262626;
+}
+
+
+
+html body div.container div#caixaGig.col-lg-12 div#wrapper div#sidebar-wrapper ul.barra li:active,
+ html body div.container div#caixaGig.col-lg-12 div#wrapper div#sidebar-wrapper ul.barra li:focus,
+ html body div.container div#caixaGig.col-lg-12 div#wrapper div#sidebar-wrapper ul.barra li:hover{
+    text-decoration: none;
+    background: #1f4e79;
+	color: white;
+}
+/*----REGISTO------ */
+
+.registo{
+ margin-top: 4.5%;
+ text-align: right;
+ margin-right: 1%;
+ font-family:'LANENAR_', Arial, sans-serif;
+ font-size: 20px;
+ color: white;
+}
+.registo table{
+	border-color:green;
+}
+
+.warning{
+ color: red;
+ background-color: rgb(242, 225, 225); 
+ border-color: red;
+ text-align: center;
+ margin-left: 5%;
+}
+
+#caixa2{
+ text-align: left;
+ padding-top: 26px;
+ font-family:  'LANENAR_', Arial, sans-serif;
+ font-size: 20px;
+ color: white;
+}
+
+#caixa2 div{
+color: red;
+padding-bottom: 11px;
+}
+/*----REGISTO ends------ */
+
+#campo{
+ margin-bottom: 10px;
+ color: black;
+ font-size: 15px;
+}
+
+#botao_reg{
+ background: transparent;
+ margin-right: 4.5%;
+ border: 0.3px solid;
+ margin-top: 7px;
+ margin-bottom: 5px;
+}
+#legenda{
+ color: #355DC1;
+}
+nav ul {
+ margin-right: 8.5%;
+ padding: 0;
+ list-style: none;
+ position: relative;
+ float: right;
+ background: transparent;
+ border-bottom: 1px solid #fff;
+ border-radius: 3px;
+
+}nav li {
+ float: left;          
+}
+
+nav #login-trigger,
+nav #signup a {
+ display: inline-block;
+ *display: inline;
+ *zoom: 1;
+ height: 25px;
+ line-height: 25px;
+ font-weight: bold;
+ font-size: 15px;
+ padding: 0 8px;
+ text-decoration: none;
+ text-transform: uppercase;
+ color: white;
+}
+
+nav #signup a {
+ border-radius: 0 3px 3px 0;
+}
+
+nav #login-trigger {
+ border-radius: 3px 0 0 3px;
+}
+
+nav #login-trigger:hover,
+nav #login .active,
+nav #signup a:hover {
+ background: transparent;
+}
+
+nav #login-content {
+ display: none;
+ position: absolute;
+ top: 24px;
+
+ z-index: 999;    
+ background: white;
+   
+ padding: 15px;
+ box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
+ border-radius: 3px 0 3px 3px;
+}
+
+nav li #login-content {
+ right: 0;
+ width: 275px;  
+}
+
+/*--------------------*/
+#inputs
+input {
+ background: #f1f1f1;
+ padding: 6px 5px;
+ margin-left: auto;
+ margin-right: auto;
+ margin: 0 0 5px 0;
+ width: 238px;
+ border: 1px solid #ccc;
+ border-radius: 3px;
+ box-shadow: 0 1px 1px #ccc inset;
+}
+
+#inputs input:focus {
+ background-color: #fff;
+ border-color: #e8c291;
+ outline: none;
+ box-shadow: 0 0 0 1px #e8c291 inset;
+}
+
+/*--------------------*/
+#login #actions {
+ margin: 10px 0 0 0;
+}
+
+#login #submit {    
+ background-color: #d14545;
+ background-image: linear-gradient(top, #e97171, #d14545);
+ -moz-border-radius: 3px;
+ -webkit-border-radius: 3px;
+ border-radius: 3px;
+ text-shadow: 0 1px 0 rgba(0,0,0,.5);
+ box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;    
+ border: 1px solid #7e1515;
+ float: left;
+ height: 30px;
+ padding: 0;
+ width: 100px;
+ cursor: pointer;
+ font: bold 14px Arial, Helvetica;
+ color: #fff;
+ margin-right: 10px;
+}
+#login #submit:hover,
+#login #submit:focus {    
+ background-color: #e97171;
+ background-image: linear-gradient(top, #d14545, #e97171);
+} 
+
+#login #submit:active {  
+ outline: none;
+ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;  
+}
+#login #submit::-moz-focus-inner {
+ border: none;
+}#login label {
+ float: left;
+ line-height: 30px;
+}#login label input {
+ position: relative;}
+ 
+ 
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+	
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+		margin-top: 20px;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+
+/*--------Medicoes------------*/
+
+
