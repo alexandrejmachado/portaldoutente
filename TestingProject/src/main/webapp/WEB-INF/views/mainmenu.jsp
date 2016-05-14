@@ -36,6 +36,7 @@
         
             <div class="col-lg-12"> 
                 <div class= "rowMajor">
+                	<div id="divisento"></div>
 					<div class="col-md-11">Portal do Utente</div>
 					<div class="col-md-1" id="entrar">${username}</div>
 				</div>
@@ -104,6 +105,14 @@
 
     <!-- Menu Toggle Script -->
     <script>
+    
+    path="https://" + window.location.host + "/";
+	warning=null;
+	pathWindow = window.location.href;
+	lastThing = pathWindow.split("/")[3];
+	if (lastThing=="isento") {
+		$("#divisento").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 3%;">Isencao aceite!</div>');
+	}
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");

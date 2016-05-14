@@ -111,6 +111,8 @@
 	if (lastThing=="logout") {
 		$("#divlogout").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 10%;">Logout efectuado</div>');
 	}
+	
+	
 	function lolada(){
 		$.post(path + 'loginUtente', $("form").serialize()).done(function( data ) { 
 			if (data=="true"){window.location.replace(path + "index");}
