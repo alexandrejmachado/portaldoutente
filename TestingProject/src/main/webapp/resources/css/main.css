@@ -80,22 +80,27 @@
 	font-size: 18px;
 	
 }
-
 #codigo{
+    margin-right:15px;
+	align: center;
+	text-align: center;
+}
+
+#codigo1{
 	text-align: left;
     clear: both;
     float: left;
     margin-right:15px;
 	align: center;
-	    text-align: center;
+	text-align: center;
 }
 
-#botao_conf{
+#botao_conf1{
 	float:right;
 }
 
 #smallBox{
-	    display: inline-block;
+	display: inline-block;
     vertical-align: middle;
     float: none;
 }

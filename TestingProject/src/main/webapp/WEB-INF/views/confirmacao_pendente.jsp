@@ -33,71 +33,71 @@
 
 <body background=<c:url value="/resources/gfx/Final2.png"/> />
 
-<div class= "container">   
-        
-            <div class="col-lg-12"> 
-                <div class= "rowMajor">
-					<div class="col-md-11">Portal do Utente</div>
-					<div class="col-md-1" id="entrar">Entrar</div>
-				</div>
-            
-            </div>
-			
-	<div class="col-lg-12" id="caixaGig">  <!--  -->
-	
-	
-			<!-- /#sidebar-wrapper -->
-		
-		
-				<!-- Page Content -->
-				<div id="page-content-wrapper">
-					<div class="container-fluid">
-						
-							<form method="post" class="col-lg-12">
-								<h1>Confirmação do Registo</h1>
-								<p class="newP">Receberá um e-mail do Portal do Utente com o código de autenticação.</p>
-								<p>  Insira o código: <input id="codigo" type="text" name="codigo"> </p>
-								<div id="erro"></div>
-								
-							</form>
-							<button id="botao_conf" type="submit" onclick="lolada()"> Submeter</button>
-					
+	<div class= "container">   
+	        
+	            <div class="col-lg-12"> 
+	                <div class= "rowMajor">
+						<div class="col-md-11">Portal do Utente</div>
+						<div class="col-md-1" id="entrar">Entrar</div>
 					</div>
-				</div>
-				<!-- /#page-content-wrapper -->
-
+	            
+	            </div>
 				
-	
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-   <!-- <script src="js/jquery.js">  </script> -->
-    <script src='<c:url value="/resources/js/jquery.js"></c:url>'></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <!-- <script src="js/bootstrap.min.js"></script> -->
-    <script src='<c:url value="/resources/js/bootstrap.min.js"></c:url>'></script>
-    
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    
-    path="https://" + window.location.host + "/";
-	warning=null;
-	function lolada(){
-		$.post(path + 'verifyCode', $("form").serialize()).done(function( data ) { 
-			if (data=="true"){window.location.replace(path + "index");}
-			else if(warning==null){ $("#erro").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 3%;">Código Incorrecto</div>');
-			warning=true;}
+		<div class="col-lg-12" id="caixaGig">  <!--  -->
+		
+		
+				<!-- /#sidebar-wrapper -->
 			
-			});
-		}
-    </script>
-
+			
+					<!-- Page Content -->
+					<div id="page-content-wrapper">
+						<div class="container-fluid">
+							
+								<form method="post" class="col-lg-12">
+									<h1>Confirmação do Registo</h1>
+									<p class="newP">Receberá um e-mail do Portal do Utente com o código de autenticação.</p>
+									<p>  Insira o código: <input id="codigo1" type="text" name="codigo"> </p>
+									<div id="erro"></div>
+									
+								</form>
+								<button id="botao_conf1" type="submit" onclick="lolada()"> Submeter</button>
+						
+						</div>
+					</div>
+					<!-- /#page-content-wrapper -->
+	
+					
+		
+	    </div>
+	    <!-- /#wrapper -->
+	
+	    <!-- jQuery -->
+	   <!-- <script src="js/jquery.js">  </script> -->
+	    <script src='<c:url value="/resources/js/jquery.js"></c:url>'></script>
+	
+	    <!-- Bootstrap Core JavaScript -->
+	    <!-- <script src="js/bootstrap.min.js"></script> -->
+	    <script src='<c:url value="/resources/js/bootstrap.min.js"></c:url>'></script>
+	    
+	    <!-- Menu Toggle Script -->
+	    <script>
+	    $("#menu-toggle").click(function(e) {
+	        e.preventDefault();
+	        $("#wrapper").toggleClass("toggled");
+	    });
+	    
+	    path="https://" + window.location.host + "/";
+		warning=null;
+		function lolada(){
+			$.post(path + 'verifyCode', $("form").serialize()).done(function( data ) { 
+				if (data=="true"){window.location.replace(path + "index");}
+				else if(warning==null){ $("#erro").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 3%;">Código Incorrecto</div>');
+				warning=true;}
+				
+				});
+			}
+	    </script>
+	</div>
 </body>
 
 
