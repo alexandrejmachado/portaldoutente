@@ -83,17 +83,17 @@
 								<div class="row" id = "caixaReceita">
 									
 		
-										<p>Introduza o seu número de Identificação de Segurança Social:</p> <br><br>
+										<p>Introduza o seu número de Identificação de Segurança Social:</p>
 										
-										<form method="post" >
-										<input id="codigo" type="text" name="segsoc">
-										</form>
-										<input id = "botao_conf" type="submit" onclick="lolada()"/>
+										<div  class="col-md-6" id="smallBox"><form method="post"><input id="codigo" type="text" name="segsoc">	
+											<input id = "botao_conf" type="submit" onclick="lolada()"/>
+										</div>
+										
 									<div id="erro">
 									</div>
 										
 								
-							</div>
+								</div>
 								<!-- Link: https://servicos.min-saude.pt/utente/Info/Portal/Features
 								Consulte a legislação em vigor:
 								

@@ -2,6 +2,8 @@
  * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * Detalhes que podem precisar de atencao: usar tag ATTENTION
  */
 
 /* Toggle Styles */
@@ -27,6 +29,7 @@
 }
 
 #sidebar-wrapper {
+	display:inline-block;
     position: absolute;
     width: 0;
     left: 0px;
@@ -42,28 +45,69 @@
 
 
 #caixaGig{
- background: none; 
+	background: none; 
 }
 
 .row{
-background: rgb(249, 249, 249);
-
-
+	background: rgb(249, 249, 249);
 }
 .container-fluid{
-background: rgb(249, 249, 249);
-padding: 0px;
-margin: 0px;
-font-family:'DengXian', sans-serif;
-
+    background: rgb(249, 249, 249);
+    padding: 0px;
+    margin: 0px;
+	marigin-bottom: 10px;
+    min-height: 316px;
+    text-align: center;
+    font-family:'LANENAR_', sans-serif; /*ATTENTION*/
+    font-size: 1.7em;
 }
+
+.newP{
+  padding-top:100px;
+  padding-bottom: 10px;
+}
+
+/*------Receitas--------------*/
+
+#caixaReceita  {
+	margin-top: 20px;
+	margin-left: 15px;
+	margin-right: 15px;
+	padding: 6px;
+	text-align: center;
+    border-bottom-style: solid;
+	border-color: #E0E0E0;
+	font-size: 18px;
+	
+}
+
+#codigo{
+	text-align: left;
+    clear: both;
+    float: left;
+    margin-right:15px;
+	align: center;
+	    text-align: center;
+}
+
+#botao_conf{
+	float:right;
+}
+
+#smallBox{
+	    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+/*------Receitas fim --------------*/
+
 #page-content-wrapper {
-
-margin-left: 0px;
+	margin-left: 0px;
     padding-left: 0px;
-font-family:'LANENAR_', sans-serif;
-
+	font-family:'LANENAR_', sans-serif;
 }
+
 .rowMajor{
     text-align: left;
     color: white;
@@ -79,6 +123,7 @@ font-family:'LANENAR_', sans-serif;
     background: none; /*background da barra*/
     font-family:'DengXian', sans-serif; 
 }
+
 #entrar{
     font-size: 20px;
    /* border: 3px solid black;*/
@@ -158,21 +203,25 @@ input[type="number"] {
 
 .barra li {
  /*border: 1px solid black; */
-  padding-bottom: 10px; 
-  padding-top: 10px;
-  background: rgb(249,249,249);
-  text-align: center;
-  font-family: "LANENAR_", sans-serif;
-  font-size: 18px;
-  margin-bottom: 8px;
-  color: rbg(31,78,121);
+ 
+	background: rgb(249,249,249);
+	text-align: center;
+	font-family: "LANENAR_", sans-serif;
+	font-size: 18px;
+	margin-bottom: 8px;
+	color: rbg(31,78,121);
+}
+
+#sidebar-wrapper a {
+	padding-bottom: 10px; 
+	padding-top: 10px;
 }
 
 .barra li:first-child{
-  margin-top: 20px;
+	margin-top: 20px;
 }
 
-/* apagar */
+/* apagar? */
 .sidebar-nav {
     position: absolute;
     top: 0;
