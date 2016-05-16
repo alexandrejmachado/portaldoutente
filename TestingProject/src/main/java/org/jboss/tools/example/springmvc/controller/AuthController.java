@@ -45,11 +45,11 @@ public class AuthController {
 	public String sendEmail(String to) {
 
 		String code = nextSessionId();
-		String msg =  "Insira este CÃ³digo de seguranÃ§a no site: " + code;
+		String msg =  "Insira este Código de segurança no site: " + code;
 		Session session = Session.getDefaultInstance(props,
 			new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication("robalogordinho","loladaxisdee");
+					return new PasswordAuthentication("portaldoutente.ml","loladaxisdee");
 				}
 			});
 

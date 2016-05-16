@@ -194,6 +194,23 @@ public class TestingController {
 
 		}
 		}
+	
+	
+	@RequestMapping(value = "/mudarPassword")
+	public String mudarPassword(HttpSession session, @RequestParam(value = "password") String password) throws NoSuchAlgorithmException {
+		ModelAndView mav = new ModelAndView();
+		String hashLogin = HashTextTest.sha256(password);
+		boolean thing = utenteDao.changePassword((Integer) session.getAttribute("sessionID"), hashLogin);
+		if (thing) {
+			return "true";
+		}
+		else {
+			return "false";
+		}
+		
+	}
+	
+	
 
 	// preciso de esclarecer umas situacoes
 	@RequestMapping(value = "/registo")
