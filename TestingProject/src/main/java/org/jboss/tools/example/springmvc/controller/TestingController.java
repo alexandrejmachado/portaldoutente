@@ -3,12 +3,15 @@ package org.jboss.tools.example.springmvc.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
+import java.nio.channels.WritableByteChannel;
 import java.nio.file.Files;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -42,7 +45,11 @@ import org.jboss.tools.example.springmvc.sensitivedata.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.type.filter.RegexPatternTypeFilter;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,8 +61,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.cloud.AuthCredentials;
+import com.google.cloud.ReadChannel;
 import com.google.cloud.WriteChannel;
 import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Bucket;
 import com.google.cloud.storage.Storage;
@@ -100,6 +109,8 @@ public class TestingController {
 	private List<String> avaliableMeasures;
 	
 	private AuthController as=new AuthController();
+	
+	private Storage storage;
 	
 	private static final int BUFFER_SIZE = 2 * 1024 * 1024;
 	
@@ -591,7 +602,9 @@ public class TestingController {
 	}
 	 //Controlador Novo de upload
 	@RequestMapping(value = "/upload")
-	public ModelAndView uploadTemp(){
+	public ModelAndView uploadTemp() throws FileNotFoundException, IOException{
+		String rootPath = System.getProperty("jboss.server.config.dir"); 
+		this.storage = StorageOptions.builder().authCredentials(AuthCredentials.createForJson(new FileInputStream(rootPath+ File.separator+ "bucketkey.json"))).build().service();
 		ModelAndView mav = new ModelAndView();
 			mav.setViewName("uploadtest");
 		return mav;
@@ -615,7 +628,6 @@ public class TestingController {
                 if (!dir.exists())
                     dir.mkdirs();
                 
-                Storage storage = StorageOptions.builder().authCredentials(AuthCredentials.createForJson(new FileInputStream(rootPath+ File.separator+ "bucketkey.json"))).build().service();
                 Bucket bucket = storage.get("userdata-exames");
                 String where=bucket.location();
                 System.out.println(where);
@@ -654,19 +666,56 @@ public class TestingController {
         }
     }
     
-    private void copy(InputStream input, OutputStream output) throws IOException {
-        try {
-          byte[] buffer = new byte[BUFFER_SIZE];
-          int bytesRead = input.read(buffer);
-          while (bytesRead != -1) {
-            output.write(buffer, 0, bytesRead);
-            bytesRead = input.read(buffer);
+    @RequestMapping(value = "/getFile", method = RequestMethod.POST)
+    public @ResponseBody
+   Object downloadFileHandler(@RequestParam("name") String name) throws IOException {
+    	HttpHeaders respHeaders = new HttpHeaders();
+        //Tipo de Return:ResponseEntity<InputStreamResource>
+    	Blob blob = storage.get(BlobId.of("userdata-exames", name));
+    	PrintStream writeTo = System.out;
+    	File temp=File.createTempFile("tempfile", ".temp");
+    	writeTo = new PrintStream(new FileOutputStream(temp));
+    	if(blob==null){return "Ficheiro não existe"; }
+        if (blob.size() < 1_000_000) {
+            // Blob is small read all its content in one request
+            byte[] content = blob.content();
+            writeTo.write(content);
+          } else {
+            // When Blob size is big or unknown use the blob's channel reader.
+            try (ReadChannel reader = blob.reader()) {
+              WritableByteChannel channel = Channels.newChannel(writeTo);
+              ByteBuffer bytes = ByteBuffer.allocate(64 * 1024);
+              while (reader.read(bytes) > 0) {
+                bytes.flip();
+                channel.write(bytes);
+                bytes.clear();
+              }
+            }
           }
-        } finally {
-          input.close();
-          output.close();
-        }
-      }
+        writeTo.close();
+        respHeaders.setContentDispositionFormData("attachment", blob.name());
+        respHeaders.setContentLength(temp.length());
+    	InputStreamResource isr = new InputStreamResource(new FileInputStream(temp));
+    	return new ResponseEntity<InputStreamResource>(isr, respHeaders, HttpStatus.OK);
     }
+
+    @RequestMapping(value="/ListFiles")
+	@ResponseBody
+	public List<String> listBucket()
+    {
+    	Bucket bucket = storage.get("userdata-exames");
+    	ArrayList<String> filespresent= new ArrayList<String>();
+        Iterator<Blob> blobIterator = bucket.list().iterateAll();
+        while (blobIterator.hasNext()) {
+          filespresent.add(blobIterator.next().name());
+        }
+        return filespresent;
+    }
+    
+
+
+}
+    
+   
 	
 
