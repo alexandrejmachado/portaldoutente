@@ -14,6 +14,7 @@ build_job:
   - cp standalone-custom.xml target
   - cp Dockerfile target
   - cp putente.jks target
+  - cp bucketkey.json target
   - cd target
   - cp -rf /opt/bitnami/mysqldrivers/ main/
   - touch TestingProject.war.dodeploy

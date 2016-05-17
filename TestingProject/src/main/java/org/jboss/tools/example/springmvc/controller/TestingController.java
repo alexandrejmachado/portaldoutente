@@ -1,5 +1,32 @@
 package org.jboss.tools.example.springmvc.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.ByteBuffer;
+import java.nio.channels.Channels;
+import java.nio.file.Files;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Properties;
+import java.util.Set;
+import java.util.regex.Pattern;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.servlet.http.HttpSession;
+import javax.swing.RowFilter.Entry;
+
 import org.jboss.tools.example.springmvc.data.AlturaDao;
 import org.jboss.tools.example.springmvc.data.ColesterolDao;
 import org.jboss.tools.example.springmvc.data.ConsultaDao;
@@ -10,49 +37,31 @@ import org.jboss.tools.example.springmvc.data.SaturacaoO2Dao;
 import org.jboss.tools.example.springmvc.data.TensaoArterialDao;
 import org.jboss.tools.example.springmvc.data.TrigliceridosDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
-import org.jboss.tools.example.springmvc.model.Altura;
 import org.jboss.tools.example.springmvc.model.Glicemia;
-import org.jboss.tools.example.springmvc.model.INR;
-import org.jboss.tools.example.springmvc.model.Peso;
-import org.jboss.tools.example.springmvc.model.SaturacaoO2;
-import org.jboss.tools.example.springmvc.model.TensaoArterial;
 import org.jboss.tools.example.springmvc.sensitivedata.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.core.type.filter.RegexPatternTypeFilter;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 
-import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
-import java.util.regex.Pattern;
+import com.google.cloud.AuthCredentials;
+import com.google.cloud.WriteChannel;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Bucket;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.mail.SendFailedException;
-import javax.servlet.http.Cookie;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.jboss.tools.example.springmvc.controller.HashTextTest;
 
 @Controller
 @RequestMapping(value = "/")
@@ -92,6 +101,7 @@ public class TestingController {
 	
 	private AuthController as=new AuthController();
 	
+	private static final int BUFFER_SIZE = 2 * 1024 * 1024;
 	
 //	@RequestMapping(value = "/testing", method = RequestMethod.POST, params={"username", "password"})
 //	public ModelAndView testeController(HttpServletResponse response, @RequestParam(value = "username") String username,
@@ -562,5 +572,84 @@ public class TestingController {
 			}
 		return lista;
 	}
+	 //Controlador Novo de upload
+	@RequestMapping(value = "/upload")
+	public ModelAndView uploadTemp(){
+		ModelAndView mav = new ModelAndView();
+			mav.setViewName("uploadtest");
+		return mav;
+	}
 	
-}
+	//O Puxa carrocas de isto tudo
+    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+    public @ResponseBody
+    ArrayList<String> uploadFileHandler(@RequestParam("name") String name,
+            @RequestParam("file") MultipartFile file) {
+    	
+    	if(name.isEmpty()){name="temporario";}
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+ 
+                // Creating the directory to store file
+                String rootPath = System.getProperty("jboss.server.config.dir"); 
+                System.out.println(rootPath + File.separator + "tmpFiles");
+                File dir = new File(rootPath + File.separator + "tmpFiles");
+                if (!dir.exists())
+                    dir.mkdirs();
+                
+                Storage storage = StorageOptions.builder().authCredentials(AuthCredentials.createForJson(new FileInputStream(rootPath+ File.separator+ "bucketkey.json"))).build().service();
+                Bucket bucket = storage.get("userdata-exames");
+                String where=bucket.location();
+                System.out.println(where);
+                String contentType = file.getContentType();
+                try (WriteChannel writer = storage.writer(BlobInfo.builder("userdata-exames",file.getOriginalFilename()).contentType(contentType).build())) {
+                    byte[] buffer = new byte[1024];
+                    try (InputStream input = file.getInputStream()) {
+                      int limit;
+                      while ((limit = input.read(buffer)) >= 0) {
+                        try {
+                          writer.write(ByteBuffer.wrap(buffer, 0, limit));
+                        } catch (Exception ex) {
+                          ex.printStackTrace();
+                        }
+                      }
+                    }
+                  };
+                // Create the file on server
+                File serverFile = new File(dir.getAbsolutePath()
+                        + File.separator + name);
+                BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(serverFile));
+                stream.write(bytes);
+                stream.close();
+                ArrayList<String> filespresent= new ArrayList<String>();
+                Iterator<Blob> blobIterator = bucket.list().iterateAll();
+                while (blobIterator.hasNext()) {
+                  filespresent.add(blobIterator.next().toString());
+                }
+                return filespresent;
+            } catch (Exception e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+    
+    private void copy(InputStream input, OutputStream output) throws IOException {
+        try {
+          byte[] buffer = new byte[BUFFER_SIZE];
+          int bytesRead = input.read(buffer);
+          while (bytesRead != -1) {
+            output.write(buffer, 0, bytesRead);
+            bytesRead = input.read(buffer);
+          }
+        } finally {
+          input.close();
+          output.close();
+        }
+      }
+    }
+	
+
