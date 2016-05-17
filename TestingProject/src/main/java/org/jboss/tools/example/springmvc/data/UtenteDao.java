@@ -83,6 +83,26 @@ public class UtenteDao {
 		}
 	}
 	
+	public boolean changePassword(int user, String password) {
+		
+		TypedQuery<Utente> query = em.createNamedQuery(Utente.FIND_BY_ID, Utente.class);
+		try {
+			query.setParameter(Utente.ID, Cifras.encrypt(Integer.toString(user)));
+		
+		Utente utente = query.getSingleResult();
+		utente.setPassword(password);
+		return true;
+		}
+		catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
+				| BadPaddingException | IOException e) {
+			// TODO Auto-generated catch block
+			return false;
+		}
+		
+		
+		
+	}
+	
 	public boolean verifyUser(String user, String code) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		Utente ut = findUtenteById(Integer.parseInt(user));
 		System.out.println(ut.verifyClient(code));
