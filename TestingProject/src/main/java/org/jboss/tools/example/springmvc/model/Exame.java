@@ -41,6 +41,8 @@ public class Exame {
 	@JsonIgnore
 	private int idInstituicao;
 	
+	private String metalink;
+	
 	public Exame(){}
 	
 }
