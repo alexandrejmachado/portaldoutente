@@ -14,6 +14,8 @@
     </form>
     
     <input type="submit" value="Get File List" onclick="wow()">
+    <br>
+    <br>
     <div id="files"></div>
     <form method="POST" action="getFile">
         Nome: <input type="text" name="name"><br /> <br /> 

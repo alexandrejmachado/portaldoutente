@@ -113,7 +113,7 @@ public class TestingController {
 	private Storage storage;
 	
 	private static final int BUFFER_SIZE = 2 * 1024 * 1024;
-	
+
 //	@RequestMapping(value = "/testing", method = RequestMethod.POST, params={"username", "password"})
 //	public ModelAndView testeController(HttpServletResponse response, @RequestParam(value = "username") String username,
 //											@RequestParam(value = "password") String password) throws NoSuchAlgorithmException, NumberFormatException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
@@ -614,7 +614,7 @@ public class TestingController {
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public @ResponseBody
     ArrayList<String> uploadFileHandler(@RequestParam("name") String name,
-            @RequestParam("file") MultipartFile file) {
+            @RequestParam("file") MultipartFile file, HttpSession session) {
     	
     	if(name.isEmpty()){name="temporario";}
         if (!file.isEmpty()) {
@@ -627,12 +627,13 @@ public class TestingController {
                 File dir = new File(rootPath + File.separator + "tmpFiles");
                 if (!dir.exists())
                     dir.mkdirs();
-                
+
                 Bucket bucket = storage.get("userdata-exames");
                 String where=bucket.location();
                 System.out.println(where);
-                String contentType = file.getContentType();
-                try (WriteChannel writer = storage.writer(BlobInfo.builder("userdata-exames",file.getOriginalFilename()).contentType(contentType).build())) {
+				System.out.println((String) session.getAttribute("sessionId"));
+				String contentType = file.getContentType();
+                try (WriteChannel writer = storage.writer(BlobInfo.builder("userdata-exames", (String) session.getAttribute("sessionID") + "/" + file.getOriginalFilename() ).contentType(contentType).build())) {
                     byte[] buffer = new byte[1024];
                     try (InputStream input = file.getInputStream()) {
                       int limit;
@@ -665,7 +666,7 @@ public class TestingController {
             return null;
         }
     }
-    
+
     @RequestMapping(value = "/getFile", method = RequestMethod.POST)
     public @ResponseBody
    Object downloadFileHandler(@RequestParam("name") String name) throws IOException {
