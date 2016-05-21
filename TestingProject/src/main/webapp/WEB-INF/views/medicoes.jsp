@@ -35,7 +35,7 @@
 
 	</form>
 	<input id = "botao_reg" type="submit" onclick="aquivoueu()">
-  	<button id = "botao_voltar">Voltar</button>
+  	<button id = "botao_voltar" onclick= "location.href='../index';">Voltar</button>
 </div>
 
 <script src='resources/js/jquery.js'></script>
