@@ -15,11 +15,13 @@ public class EventController {
 	@ResponseBody
 	public ArrayList<Object> getEventos(){
 		ArrayList<Object> lista= new ArrayList<Object>();
-		HashMap<String,String> mapa = new HashMap<String,String>();
-		mapa.put("id", "0");
-		mapa.put("title", "titulo");
-		mapa.put("start", "2016-05-01");
-		lista.add(mapa);
+		for(int i = 0; i<2; i++){
+			HashMap<String,String> mapa = new HashMap<String,String>();
+			mapa.put("id", Integer.toString(i));
+			mapa.put("title", "titulo");
+			mapa.put("start", "2016-05-01T16:00:00-18:00");
+			lista.add(mapa);
+		}
 		return lista;
 		
 		
