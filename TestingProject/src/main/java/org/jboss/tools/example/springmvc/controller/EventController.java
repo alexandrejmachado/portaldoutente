@@ -18,7 +18,7 @@ public class EventController {
 		HashMap<String,String> mapa = new HashMap<String,String>();
 		mapa.put("id", "0");
 		mapa.put("title", "titulo");
-		mapa.put("start", "2015-05-24");
+		mapa.put("start", "2016-05-01");
 		lista.add(mapa);
 		return lista;
 		
