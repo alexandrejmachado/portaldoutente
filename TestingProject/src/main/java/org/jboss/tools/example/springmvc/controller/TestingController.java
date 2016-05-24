@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -335,6 +336,9 @@ public class TestingController {
 					throw new BadRegistException("Formato de número de telemóvel incorrecto, deverá ter 9 digitos (Ex: 123456789)", campo);
 				}
 			}
+			else{
+				telemovel = "0000";
+			}
 			//------------emergencia-----------------
 			if(emergencia.length() > 0){
 				resp = resp && (emergencia.length() == 9);
@@ -356,8 +360,10 @@ public class TestingController {
 				System.out.print("numero: ");
 				campo = "cc";
 				Integer.parseInt(cc);
-				campo = "telemovel";
-				Integer.parseInt(telemovel);
+				if(telemovel.length() > 0){
+					campo = "telemovel";
+					Integer.parseInt(telemovel);
+				}
 				if(emergencia.length() > 0){
 					campo = "emergencia";
 					Integer.parseInt(emergencia);
@@ -400,6 +406,7 @@ public class TestingController {
 			}
 			catch(Exception e){
 				finalmsg.add("UNKNOWN");
+				System.out.println(e);
 				System.out.println(e.getMessage());
 			}
 		return finalmsg;
@@ -419,7 +426,12 @@ public class TestingController {
 	@RequestMapping(value = "/isencao")
 	public ModelAndView pedirIsencao(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("isencao_taxas_pedido");
+		if(verifyLogin(session)){
+			mav.setViewName("isencao_taxas_pedido");
+		}
+		else{
+			mav.setViewName("redirect:/index");
+		}
 		return mav;
 	}
 	
@@ -713,7 +725,21 @@ public class TestingController {
         return filespresent;
     }
     
-
+    @RequestMapping(value="/perfil")
+    public ModelAndView goToPerfil(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+    	//String username = (String) session.getAttribute("sessionID");
+		//Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
+		
+    	ModelAndView mav = new ModelAndView();
+    	mav.setViewName("perfil");
+    	Calendar c = Calendar.getInstance();
+    	c.set(2016, 8, 25);
+    	mav.addObject("username","cenas");
+    	//mav.addObject("username", currentUser.getNome());
+    	//mav.addObject("username", "Tiago");
+    	return mav;
+    }
+    
 
 }
     
