@@ -233,7 +233,33 @@ color: red;
 padding-bottom: 11px;
 }
 /*----REGISTO ends------ */
+/*----- modificacao Perfil-------*/
 
+#campoM{
+ margin-bottom: 10px;
+ color: DarkBlue;
+ font-size: 15px;
+}
+.modificacao{
+text-align: left;
+font-size: 15x;
+padding-right: 10%;
+padding-left: 10%;
+padding-bottom: 5%;
+padding-top: 3%;
+ 
+}
+.modificacao #fixosMod{
+  text-align: left;
+padding-right: 5%;
+  font-size: 14px;
+}
+
+table #td{
+  text-align: left;
+  font-size: 14px;
+}
+/*----- modificacao Perfil ends -------*/
 #campo{
  margin-bottom: 10px;
  color: black;

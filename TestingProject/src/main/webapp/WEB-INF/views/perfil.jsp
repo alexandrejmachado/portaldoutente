@@ -14,17 +14,17 @@
         
         <link href= <c:url value="/resources/css/bootstrap.min.css" ></c:url> rel="stylesheet"/>
     
-        <link href= <c:url value="/resources/css/main.css" ></c:url> rel="stylesheet"/>
+        <link href= <c:url value="/resources/css/main1.css" ></c:url> rel="stylesheet"/>
         
         <title>Portal do Utente</title>
     </head>
     
     <body background=<c:url value="/resources/gfx/Final2.png"/>>
-        <div class="container">
+    <div class="container">
             
             <div class="col-lg-12"> 
                 <div class= "rowMajor">
-                	<div id="divisento"></div>
+                	
 					<div class="col-md-11">Portal do Utente</div>
 					<div class="col-md-1" id="entrar">${username}</div>
 				</div>
@@ -37,15 +37,15 @@
                 Opções <span>▼</span>
               </a>
               <div id="login-content">
-                <a button href= "/perfil" id = "aaa">Ver Perfil</button></a><br>
-                <a button href= "/logout" id ="aaa">Logout</button></a>
+                <a href= "/perfil" id = "aaa">Ver Perfil</a><br>
+                <a href= "/logout" id ="aaa">Logout</a>
               </div>                     
             </li>
           </ul>
         </nav>
         
         
-    </div>
+    
     
         <div id="wrapper">
 
@@ -76,22 +76,77 @@
 			<!-- /#sidebar-wrapper -->
 		
 		
-				<!-- Page Content -->
+								<!-- Page Content -->
 				<div id="page-content-wrapper">
 					<div class="container-fluid">
 						
-							<div class="col-lg-12">
-								<h1>Aqui pode alterar os seus dados</h1>
+						<div class="col-lg-12">
 						
-							</div>
-					
-					</div>
+							   <h1>Modificação de Dados</h1>
+																	
+		
+								
+									<div class = "modificacao">
+
+											<form method="post">
+											<table>
+												<tr>
+													<td>Nome</td> 
+													
+													<td id="fixosMod">${username}</td>
+													
+												</tr>
+												<tr>
+													<td>Número do Utente 
+													
+													<td id="fixosMod">${utente} </td>
+													
+												</tr>
+												<tr>
+													<td>Número do CC</td>
+													
+													<td id="fixosMod">${cc} </td>
+												</tr>
+												<tr>
+													<td>Morada </td>
+													
+													<td><input id = "campoM" type="text" name="morada"> </td>
+												</tr>
+												<tr>
+													<td>E-Mail </td>
+													
+													<td> <input id = "campoM" type="text" name="mail"></td>
+												</tr>
+												<tr>
+													<td>Password </td>
+													
+													<td><input id = "campoM" type="password" name="pass" required> </td>
+												</tr>
+												<tr>
+													<td>Número de Telemóvel </td>
+													
+													<td> <input id = "campoM" type="text" name="telemovel" required></td>
+												</tr>
+												<tr>
+													<td style="width:70%" >Contacto de Emergência </td>
+													
+													<td> <input id = "campoM" type="text" name="emergencia"></td>
+													
+												</tr>	
+
+											</table>	
+											</form>
+											
+									</div>	
+								<button  id = "botao_mudancas" type="submit"> Submeter mudanças</button>
+							
+						</div>
+						</div>
 				</div>
-				<!-- /#page-content-wrapper -->
 
 				
 		</div>
-    
+    </div> <!-- /container -->
     </body>
     
     <!-- jQuery -->
@@ -101,13 +156,6 @@
     <!-- Bootstrap Core JavaScript -->
     <!-- <script src="js/bootstrap.min.js"></script> -->
     <script src='<c:url value="/resources/js/bootstrap.min.js"></c:url>'></script>
-    
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
      <script>
     $(document).ready(function(){
   $('#login-trigger').click(function(){
