@@ -41,6 +41,7 @@ public class Cirurgia {
 	@JsonIgnore
 	private int numUtente;
 	
+	@JsonIgnore
 	public Cirurgia(){}
 	
 	

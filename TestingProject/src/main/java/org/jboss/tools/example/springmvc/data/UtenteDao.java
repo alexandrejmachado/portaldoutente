@@ -115,4 +115,12 @@ public class UtenteDao {
 		boolean cenas = ut.setIsencao();
 		return cenas;
 	}
+	
+	public boolean checkIsencao(int username) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+		Utente ut = findUtenteById(username);
+		boolean cenas = ut.getIsencao();
+		System.out.println(cenas);
+		return cenas;
+		
+	}
 }

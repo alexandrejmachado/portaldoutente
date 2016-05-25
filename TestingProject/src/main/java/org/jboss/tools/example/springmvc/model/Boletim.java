@@ -9,10 +9,13 @@ import javax.persistence.NamedQuery;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
+
 @Entity
 @NamedQueries({
 	@NamedQuery(name=Boletim.FIND_ALL_BY_UTENTE, query="SELECT b FROM Boletim b WHERE b.numUtente = :" + Boletim.UTENTE)
 })
+
 public class Boletim {
 
 	public static final String FIND_ALL_BY_UTENTE = "Boletim.findAllByUtente";
@@ -28,5 +31,6 @@ public class Boletim {
 	@JsonIgnore
 	private int numUtente;
 	
+	@JsonIgnore
 	public Boletim(){}
 }

@@ -26,7 +26,6 @@
                 <div class= "rowMajor">
                 	<div id="divisento"></div>
 					<div class="col-md-11">Portal do Utente</div>
-					<!--  <div class="col-md-1" id="entrar">${username}</div>-->
 					<div class="col-md-1" id="entrar">${username}</div>
 				</div>
             

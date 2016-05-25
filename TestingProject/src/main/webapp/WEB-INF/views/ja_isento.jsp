@@ -33,31 +33,15 @@
 
 <body background=<c:url value="/resources/gfx/Final2.png"/> />
 
-	 <div class="container">
-            
-            <div class="col-lg-12"> 
-                <div class= "rowMajor">
-                	<div id="divisento"></div>
-					<div class="col-md-11">Portal do Utente</div>
-					<div class="col-md-1" id="entrar">${username}</div>
-				</div>
-            
-            </div>
-        <nav>
-          <ul>
-            <li id="login">
-              <a id="login-trigger" href="#">
-                Opções <span>▼</span>
-              </a>
-              <div id="login-content">
-                <a button href= "/perfil" id = "aaa">Ver Perfil</button></a><br>
-                <a button href= "/logout" id ="aaa">Logout</button></a>
-              </div>                     
-            </li>
-          </ul>
-        </nav>
-        
-        
+	<div class= "container">   
+	        
+	            <div class="col-lg-12"> 
+	                <div class= "rowMajor">
+						<div class="col-md-11">Portal do Utente</div>
+						<div class="col-md-1" id="entrar">Entrar</div>
+					</div>
+	            
+	            </div>
 				
 		<div class="col-lg-12" id="caixaGig">  <!--  -->
 		
@@ -77,13 +61,13 @@
 							<a href="#">Renovar Receita</a>
 						</li>
 						<li>
-							<a href="/medicoes">Medições</a>
+							<a href="#">Medições</a>
 						</li>
 						<li>
 							<a href="#">Agregado Familiar</a>
 						</li>
 						<li>
-							<a href="/isencao">Pedido de Isenção</a>
+							<a href="#">Pedido de Isenção</a>
 						</li>
 					</ul>
 				</div>
@@ -99,15 +83,8 @@
 									<div class="row" id = "caixaReceita">
 										
 			
-											<p>Introduza o seu número de Identificação de Segurança Social:</p>
+											<p>Já se encontra Isento</p>
 											
-	
-											<div  class="col-md-6" id="smallBox"><form method="post"><input id="codigo" type="text" name="segsoc">	</form>
-												<input id = "botao_conf" type="submit" onclick="lolada()"/>
-											</div>
-											
-											<div id="erro">
-											</div>
 											
 									
 									</div>

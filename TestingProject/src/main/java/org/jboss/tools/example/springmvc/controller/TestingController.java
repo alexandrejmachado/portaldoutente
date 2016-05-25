@@ -198,6 +198,7 @@ public class TestingController {
 			String loginPassword=currentUser.getPassword();
 			if(hashLogin.equals(loginPassword) && currentUser!=null){
 				session.setAttribute("sessionID", username);
+				session.setAttribute("sessionName", currentUser.getNome());
 				mav.addObject("username", currentUser.getNome());
 				if (currentUser.isVerified()) {
 					return "true";
@@ -424,10 +425,17 @@ public class TestingController {
 	
 	
 	@RequestMapping(value = "/isencao")
-	public ModelAndView pedirIsencao(HttpSession session) {
+	public ModelAndView pedirIsencao(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		ModelAndView mav = new ModelAndView();
 		if(verifyLogin(session)){
-			mav.setViewName("isencao_taxas_pedido");
+			System.out.println(utenteDao.checkIsencao(Integer.parseInt((String) session.getAttribute("sessionID"))));
+			if (!(utenteDao.checkIsencao(Integer.parseInt((String) session.getAttribute("sessionID"))))) {
+				mav.addObject("username", session.getAttribute("sessionName"));
+				mav.setViewName("isencao_taxas_pedido");
+			}
+			else {
+				mav.setViewName("ja_isento");
+			}
 		}
 		else{
 			mav.setViewName("redirect:/index");
@@ -480,6 +488,7 @@ public class TestingController {
 	public ModelAndView medicoesController(HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		if(verifyLogin(session)){
+			mav.addObject("username", session.getAttribute("sessionName"));
 			mav.setViewName("medicoes");
 		}
 		else{
@@ -734,7 +743,7 @@ public class TestingController {
     	mav.setViewName("perfil");
     	Calendar c = Calendar.getInstance();
     	c.set(2016, 8, 25);
-    	mav.addObject("username","cenas");
+    	mav.addObject("username",session.getAttribute("sessionName"));
     	//mav.addObject("username", currentUser.getNome());
     	//mav.addObject("username", "Tiago");
     	return mav;

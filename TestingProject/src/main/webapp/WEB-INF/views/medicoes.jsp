@@ -17,12 +17,32 @@
 
 <body background="resources/gfx/Final2.png">
 
-<div class= "container">    <!-- ROW -->
-        <div class= "rowMajor">
-            <div class="col-md-11">Portal do Utente</div>
-            <form action="logout"><button id="logout" type="submit">Logout</button></form>
-</div>
-</div>
+ <div class="container">
+            
+            <div class="col-lg-12"> 
+                <div class= "rowMajor">
+                	<div id="divisento"></div>
+					<div class="col-md-11">Portal do Utente</div>
+					<div class="col-md-1" id="entrar">${username}</div>
+				</div>
+            
+            </div>
+        <nav>
+          <ul>
+            <li id="login">
+              <a id="login-trigger" href="#">
+                Opções <span>▼</span>
+              </a>
+              <div id="login-content">
+                <a button href= "/perfil" id = "aaa">Ver Perfil</button></a><br>
+                <a button href= "/logout" id ="aaa">Logout</button></a>
+              </div>                     
+            </li>
+          </ul>
+        </nav>
+        
+        
+    </div>
  <p id = "frase">Preencha aqui os dados que pretende inserir no Sistema</p>
 
 <div class="registo">
