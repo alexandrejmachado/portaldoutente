@@ -123,4 +123,14 @@ public class UtenteDao {
 		return cenas;
 		
 	}
+	
+	public boolean checkId(int username) {
+		try {
+			Utente ut = findUtenteById(username);
+			return true;
+		} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
+				| BadPaddingException | IOException e) {
+			return false;
+		}
+	}
 }

@@ -66,6 +66,8 @@ public class Utente {
 	@NotNull
 	private String password;
 	
+	private String passwordGuardiao = "null";
+	
 	private String email;
 	
 	private boolean isento = false;
@@ -189,6 +191,15 @@ public class Utente {
 	
 	public boolean getIsencao() {
 		return isento;
+	}
+	
+	public String getPasswordGuardiao() {
+		return passwordGuardiao;
+		
+	}
+	
+	public void setPasswordGuardiao(String pass) {
+		passwordGuardiao = pass;
 	}
 	
 	public boolean setIsencao() {

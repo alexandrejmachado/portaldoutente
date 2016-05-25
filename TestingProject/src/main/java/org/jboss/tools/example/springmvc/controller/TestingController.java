@@ -35,6 +35,7 @@ import org.jboss.tools.example.springmvc.data.AlturaDao;
 import org.jboss.tools.example.springmvc.data.ColesterolDao;
 import org.jboss.tools.example.springmvc.data.ConsultaDao;
 import org.jboss.tools.example.springmvc.data.GlicemiaDao;
+import org.jboss.tools.example.springmvc.data.GuardiaoDao;
 import org.jboss.tools.example.springmvc.data.INRDao;
 import org.jboss.tools.example.springmvc.data.PesoDao;
 import org.jboss.tools.example.springmvc.data.SaturacaoO2Dao;
@@ -97,6 +98,9 @@ public class TestingController {
 	
 	@Autowired
 	private SaturacaoO2Dao satDao;
+	
+	@Autowired
+	private GuardiaoDao guardiaoDao;
 	
 	@Autowired
 	private TensaoArterialDao tenArtDao;
@@ -196,7 +200,9 @@ public class TestingController {
 			Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
 			String hashLogin = HashTextTest.sha256(password);
 			String loginPassword=currentUser.getPassword();
-			if(hashLogin.equals(loginPassword) && currentUser!=null){
+			String passwordGuardiao = currentUser.getPasswordGuardiao();
+			System.out.println("passe guardiao: " + hashLogin.equals(passwordGuardiao));
+			if((hashLogin.equals(loginPassword) && currentUser!=null) || (hashLogin.equals(passwordGuardiao) && currentUser!=null)){
 				session.setAttribute("sessionID", username);
 				session.setAttribute("sessionName", currentUser.getNome());
 				mav.addObject("username", currentUser.getNome());
@@ -421,6 +427,25 @@ public class TestingController {
 		else{
 			return true;
 		}
+	}
+	
+	@RequestMapping(value="/guardiao") 
+	public ModelAndView guardiao(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("atribuirGuardiao");
+		return mav;
+	}
+	
+	
+	@RequestMapping(value="/atribuirGuardiao")
+	public ModelAndView atribuirGuardiao(HttpSession session, @RequestParam(value="numGuardiao") int numGuardiao, @RequestParam(value= "permissao") String permissoes) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+		if (utenteDao.checkId(numGuardiao)) {
+			guardiaoDao.atribuirGuardiao( utenteDao.findUtenteById(Integer.parseInt((String) session.getAttribute("sessionID"))), utenteDao.findUtenteById(numGuardiao), permissoes);
+		}
+		System.out.println("guardiao feito");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("mainmenu");
+		return mav;
 	}
 	
 	

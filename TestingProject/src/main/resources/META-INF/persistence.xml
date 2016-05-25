@@ -43,6 +43,7 @@
         <class>org.jboss.tools.example.springmvc.model.Medicamento</class>
         <class>org.jboss.tools.example.springmvc.model.Vacina</class>
         <class>org.jboss.tools.example.springmvc.model.Cirurgia</class>
+        <class>org.jboss.tools.example.springmvc.sensitivedata.Guardiao</class>
         <properties>
             <property name="jboss.entity.manager.factory.jndi.name" 
                       value="java:jboss/TestingProject/persistencebasic" />
