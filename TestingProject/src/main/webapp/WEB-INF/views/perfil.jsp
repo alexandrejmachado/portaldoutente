@@ -14,17 +14,17 @@
         
         <link href= <c:url value="/resources/css/bootstrap.min.css" ></c:url> rel="stylesheet"/>
     
-        <link href= <c:url value="/resources/css/main.css" ></c:url> rel="stylesheet"/>
+        <link href= <c:url value="/resources/css/main1.css" ></c:url> rel="stylesheet"/>
         
         <title>Portal do Utente</title>
     </head>
     
     <body background=<c:url value="/resources/gfx/Final2.png"/>>
-        <div class="container">
+    <div class="container">
             
             <div class="col-lg-12"> 
                 <div class= "rowMajor">
-                	<div id="divisento"></div>
+                	
 					<div class="col-md-11">Portal do Utente</div>
 					<div class="col-md-1" id="entrar">${username}</div>
 				</div>
@@ -37,15 +37,15 @@
                 Opções <span>▼</span>
               </a>
               <div id="login-content">
-                <a button href= "/perfil" id = "aaa">Ver Perfil</button></a><br>
-                <a button href= "/logout" id ="aaa">Logout</button></a>
+                <a href= "/perfil" id = "aaa">Ver Perfil</a><br>
+                <a href= "/logout" id ="aaa">Logout</a>
               </div>                     
             </li>
           </ul>
         </nav>
         
         
-    </div>
+    
     
         <div id="wrapper">
 
@@ -81,6 +81,7 @@
 					<div class="container-fluid">
 						
 							<div class="col-lg-12">
+							
 								<h1>Aqui pode alterar os seus dados</h1>
 						
 							</div>
@@ -91,7 +92,7 @@
 
 				
 		</div>
-    
+    </div> <!-- /container -->
     </body>
     
     <!-- jQuery -->
@@ -101,13 +102,6 @@
     <!-- Bootstrap Core JavaScript -->
     <!-- <script src="js/bootstrap.min.js"></script> -->
     <script src='<c:url value="/resources/js/bootstrap.min.js"></c:url>'></script>
-    
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
      <script>
     $(document).ready(function(){
   $('#login-trigger').click(function(){
