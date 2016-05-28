@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,8 +32,18 @@ public class EventController {
 	
 	@RequestMapping(value="/view")
 	public ModelAndView calendarView(){
+		//TODO meter o lock de sessao
 		ModelAndView mav = new ModelAndView();
-			mav.setViewName("calendarView");
+		mav.setViewName("calendarView");
+		return mav;
+	}
+	
+	@RequestMapping(value="/marcarConsultaView", method = RequestMethod.POST, params={"data"})
+	public ModelAndView marcarConsultaView(@RequestParam(value = "data") String data){
+		//TODO meter o lock de sessao
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("consulta_rompt");
+		mav.addObject("data", data);
 		return mav;
 	}
 	
