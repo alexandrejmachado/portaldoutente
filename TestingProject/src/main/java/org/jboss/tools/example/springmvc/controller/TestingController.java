@@ -354,6 +354,9 @@ public class TestingController {
 					throw new BadRegistException("Formato número de telemóvel de emergência incorrecto, deverá ter 9 digitos (Ex: 123456789)", campo);
 				}
 			}
+			else{
+				emergencia = "0000";
+			}
 			//-----------nif------------------
 			resp = resp && (nif.length() == 9);
 			campo = "nif";
@@ -407,7 +410,7 @@ public class TestingController {
 				{
 					System.out.println("erro no codigo");
 				}
-				Utente ut = utenteDao.newUtente(username, numUtente, cc, morada, mail, hashTest, telemovel, nif, code, codeSms);
+				Utente ut = utenteDao.newUtente(username, numUtente, cc, morada, mail, hashTest, telemovel, nif, code, codeSms, emergencia);
 				finalmsg.add("true");
 				return finalmsg;
 			}
@@ -761,29 +764,40 @@ public class TestingController {
     
     @RequestMapping(value="/perfil")
     public ModelAndView goToPerfil(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-    	String username = (String) session.getAttribute("sessionID");
-		Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
-		
     	ModelAndView mav = new ModelAndView();
-    	mav.setViewName("perfil");
-    	Calendar c = Calendar.getInstance();
-    	c.set(2016, 8, 25);
-    	//mav.addObject("username",session.getAttribute("sessionName"));
-    	mav.addObject("username", currentUser.getNome());
-    	mav.addObject("utente", currentUser.getNumUtente());
-    	mav.addObject("cc", currentUser.getCc());
-    	mav.addObject("mail", currentUser.getEmail());
-    	//System.out.println(currentUser.getContactoEmergencia());
     	
-    	/*
-    	mav.addObject("username", "Tiago");
-    	mav.addObject("utente", 123123123);
-    	mav.addObject("cc", 12345678);
-    	mav.addObject("morada", "moradaBueMa");
-    	mav.addObject("mail", "mailBueMau");
-    	mav.addObject("password", "passSuperBad");
-    	mav.addObject("telemovel", 987654321);
-    	mav.addObject("emergencia", 971237421);
+    	//if(verifyLogin(session)){
+    	if(true){
+    	
+    		mav.setViewName("perfil");
+    		
+    		/*
+	    	String username = (String) session.getAttribute("sessionID");
+			Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
+	    	
+	    	mav.addObject("username", currentUser.getNome());
+	    	mav.addObject("utente", currentUser.getNumUtente());
+	    	mav.addObject("cc", currentUser.getCc());
+	    	mav.addObject("mail", currentUser.getEmail());
+	    	int telemovel = currentUser.getTelemovel();
+	    	int emergencia = currentUser.getContactoEmergencia();
+	    	mav.addObject("telemovel", ((telemovel == 0) ?  "000000000" : telemovel));
+	    	mav.addObject("emergencia", ((emergencia == 0) ? "000000000" : emergencia ));
+	    	*/
+	    	
+	    	mav.addObject("username", "Tiago");
+	    	mav.addObject("utente", 123123123);
+	    	mav.addObject("cc", 12345678);
+	    	mav.addObject("morada", "moradaBueMa");
+	    	mav.addObject("mail", "mailBueMau");
+	    	mav.addObject("password", "passSuperBad");
+	    	mav.addObject("telemovel", 987654321);
+	    	mav.addObject("emergencia", 971237421);
+	    	
+    	}
+    	/*else{
+    		mav.setViewName("redirect:/index");
+    	}
     	*/
     	
     	return mav;
