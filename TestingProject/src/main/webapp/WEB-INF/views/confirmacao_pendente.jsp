@@ -45,8 +45,8 @@
 				
 		<div class="col-lg-12" id="caixaGig">  <!--  -->
 		
-		
-				<!-- /#sidebar-wrapper -->
+			<div id="wrapper">
+				
 			
 			
 					<!-- Page Content -->

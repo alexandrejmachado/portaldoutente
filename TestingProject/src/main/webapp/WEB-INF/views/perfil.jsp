@@ -12,23 +12,20 @@
         <meta name="author" content="">
         <meta charset="utf-8">
         
-        <link href= <c:url value="/resources/css/bootstrap.min.css" ></c:url> rel="stylesheet"/>
+        <link href= <c:url value="/resources/css/bootstrap.min.css"></c:url> rel="stylesheet"/>
     
-        <link href= <c:url value="/resources/css/main1.css" ></c:url> rel="stylesheet"/>
+        <link href= <c:url value="/resources/css/main1.css"></c:url> rel="stylesheet"/>
         
         <title>Portal do Utente</title>
     </head>
     
     <body background=<c:url value="/resources/gfx/Final2.png"/>>
     <div class="container">
-            
             <div class="col-lg-12"> 
                 <div class= "rowMajor">
-                	
 					<div class="col-md-11">Portal do Utente</div>
 					<div class="col-md-1" id="entrar">${username}</div>
-				</div>
-            
+				</div>    
             </div>
         <nav>
           <ul>
@@ -45,7 +42,7 @@
         </nav>
         
         
-    
+    <div class="col-lg-12" id="caixaGig">
     
         <div id="wrapper">
 
@@ -145,8 +142,9 @@
 				</div>
 
 				
-		</div>
-    </div> <!-- /container -->
+		</div> <!-- /wrapper -->
+    </div> <!-- /caixaGig -->
+    </div>  <!-- /container-->
     </body>
     
     <!-- jQuery -->

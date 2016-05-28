@@ -96,6 +96,7 @@
 		</div>
     </div>
     <!-- /#wrapper -->
+</div> <!-- /#container -->
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
