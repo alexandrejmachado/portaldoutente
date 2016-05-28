@@ -126,9 +126,30 @@
 													
 													<td> <input id = "campoM" type="text" value="${emergencia}" name="emergencia"></td>
 													
-												</tr>	
-
+												</tr>
+												
 											</table>	
+											</form>
+											
+											<form method="post">
+											<table style = "margin-top: 32px;">
+												<tr>
+													<td style="width:70%" " >Password antiga:</td>
+													
+													<td><input id = "campoM" type="password" name="pass" required> </td>
+												</tr>
+										
+												<tr>
+													<td>Nova password:</td>
+													
+													<td><input id = "campoM" type="password" name="pass" required> </td>
+												</tr>
+												<tr>
+													<td>Confirmar nova password:</td>
+													
+													<td><input id = "campoM" type="password" name="pass" required> </td>
+												</tr>
+											</table>
 											</form>
 											
 									</div>
