@@ -146,9 +146,10 @@
 				</div>
 
 				
-		</div> <!-- /wrapper -->
+		</div> 
+    </div> <!-- /wrapper -->
     </div> <!-- /caixaGig -->
-    </div>  <!-- /container-->
+    </div><!-- /container-->
     </body>
     
     <!-- jQuery -->
