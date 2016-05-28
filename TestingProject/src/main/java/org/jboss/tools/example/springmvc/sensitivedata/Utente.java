@@ -62,7 +62,7 @@ public class Utente {
 	private String verificationCodeSms;
 	
 	private String cc;
-	
+
 	@NotNull
 	private String password;
 	
@@ -212,6 +212,10 @@ public class Utente {
 		return true;
 	}
 	
+	public String getCc() {
+		return cc;
+	}
+
 	
 	
 }

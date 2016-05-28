@@ -110,27 +110,27 @@
 												<tr>
 													<td>Morada </td>
 													
-													<td><input id = "campoM" type="text" name="morada"> </td>
+													<td><input id = "campoM" type="text" value=${morada} name="morada"> </td>
 												</tr>
 												<tr>
 													<td>E-Mail </td>
 													
-													<td> <input id = "campoM" type="text" name="mail"></td>
+													<td> <input id = "campoM" type="text" value=${mail} name="mail"></td>
 												</tr>
 												<tr>
 													<td>Password </td>
 													
-													<td><input id = "campoM" type="password" name="pass" required> </td>
+													<td><input id = "campoM" type="password" name="pass" value=${password} required> </td>
 												</tr>
 												<tr>
 													<td>Número de Telemóvel </td>
 													
-													<td> <input id = "campoM" type="text" name="telemovel" required></td>
+													<td> <input id = "campoM" type="text" value=${telemovel} name="telemovel" ></td>
 												</tr>
 												<tr>
 													<td style="width:70%" >Contacto de Emergência </td>
 													
-													<td> <input id = "campoM" type="text" name="emergencia"></td>
+													<td> <input id = "campoM" type="text" value=${emergencia} name="emergencia"></td>
 													
 												</tr>	
 
