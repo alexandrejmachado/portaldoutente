@@ -16,6 +16,7 @@
     
         <link href= <c:url value="/resources/css/main1.css"></c:url> rel="stylesheet"/>
         
+        <link href= <c:url value="/resources/css/button.css"></c:url> rel="stylesheet"/>
         <title>Portal do Utente</title>
     </head>
     
@@ -134,8 +135,11 @@
 											</table>	
 											</form>
 											
-									</div>	
-								<button  id = "botao_mudancas" type="submit"> Submeter mudanças</button>
+									</div>
+											<div class='buttons'>
+											  <div class='set blue'>
+											    <a class='btn pri' type="submit" >Submeter</a>
+											  </div>	
 							
 						</div>
 						</div>
