@@ -77,7 +77,7 @@ public class Utente {
 	@NotNull
 	private String nome;
 	
-	private int contactoEmergencia;
+	private String contactoEmergencia;
 	
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
@@ -100,7 +100,7 @@ public class Utente {
 //		
 //	}
 	
-	public Utente(String username, int numUtente, int cc, String morada, String mail, String password, int telemovel, int nif, String code, String codeSms) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+	public Utente(String username, int numUtente, int cc, String morada, String mail, String password, int telemovel, int nif, String code, String codeSms, int emergencia) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		this.numUtente = Cifras.encrypt(Integer.toString(numUtente));
 		this.password = password;
 		this.nome = username;
@@ -108,7 +108,8 @@ public class Utente {
 		this.morada = morada;
 		this.email = mail;
 		this.telemovel = Cifras.encrypt(Integer.toString(telemovel));
-		this.nif = Cifras.encrypt(Integer.toString(nif));;
+		this.nif = Cifras.encrypt(Integer.toString(nif));
+		this.contactoEmergencia = Cifras.encrypt(Integer.toString(emergencia));
 		dataNascimento = new Date();
 		verificationCode = code;
 		verificationCodeSms = codeSms;
@@ -156,11 +157,11 @@ public class Utente {
 	}
 
 	public int getContactoEmergencia() throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
-		return Integer.parseInt(Cifras.decrypt(Integer.toString(contactoEmergencia)));
+		return Integer.parseInt(Cifras.decrypt(contactoEmergencia));
 	}
 
 	public void setContactoEmergencia(int contactoEmergencia) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		this.contactoEmergencia = Integer.parseInt(Cifras.encrypt(Integer.toString(contactoEmergencia)));
+		this.contactoEmergencia = Cifras.encrypt(Integer.toString(contactoEmergencia));
 	}
 
 	public Date getDataNascimento() {
@@ -212,8 +213,8 @@ public class Utente {
 		return true;
 	}
 	
-	public String getCc() {
-		return cc;
+	public int getCc() throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+		return Integer.parseInt(Cifras.decrypt(cc));
 	}
 
 	
