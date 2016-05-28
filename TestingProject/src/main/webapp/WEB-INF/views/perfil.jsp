@@ -115,11 +115,7 @@
 													
 													<td> <input id = "campoM" type="text" value="${mail}" name="mail"></td>
 												</tr>
-												<tr>
-													<td>Password </td>
-													
-													<td><input id = "campoM" type="password" name="pass" value="${password}" required> </td>
-												</tr>
+												
 												<tr>
 													<td>Número de Telemóvel </td>
 													
