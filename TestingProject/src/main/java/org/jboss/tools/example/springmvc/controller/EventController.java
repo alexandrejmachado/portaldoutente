@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value="/testCalendar")
@@ -20,11 +21,18 @@ public class EventController {
 			mapa.put("id", Integer.toString(i));
 			mapa.put("title", "titulo");
 			mapa.put("start", "2016-05-01T16:00:00-18:00");
+			//mapa.put("draggable", "false");
 			lista.add(mapa);
 		}
 		return lista;
 		
-		
+	}
+	
+	@RequestMapping(value="/view")
+	public ModelAndView calendarView(){
+		ModelAndView mav = new ModelAndView();
+			mav.setViewName("calendarView");
+		return mav;
 	}
 	
 }
