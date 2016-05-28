@@ -761,16 +761,31 @@ public class TestingController {
     
     @RequestMapping(value="/perfil")
     public ModelAndView goToPerfil(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-    	//String username = (String) session.getAttribute("sessionID");
-		//Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
+    	String username = (String) session.getAttribute("sessionID");
+		Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
 		
     	ModelAndView mav = new ModelAndView();
     	mav.setViewName("perfil");
     	Calendar c = Calendar.getInstance();
     	c.set(2016, 8, 25);
-    	mav.addObject("username",session.getAttribute("sessionName"));
-    	//mav.addObject("username", currentUser.getNome());
-    	//mav.addObject("username", "Tiago");
+    	//mav.addObject("username",session.getAttribute("sessionName"));
+    	mav.addObject("username", currentUser.getNome());
+    	mav.addObject("utente", currentUser.getNumUtente());
+    	mav.addObject("cc", currentUser.getCc());
+    	mav.addObject("mail", currentUser.getEmail());
+    	//System.out.println(currentUser.getContactoEmergencia());
+    	
+    	/*
+    	mav.addObject("username", "Tiago");
+    	mav.addObject("utente", 123123123);
+    	mav.addObject("cc", 12345678);
+    	mav.addObject("morada", "moradaBueMa");
+    	mav.addObject("mail", "mailBueMau");
+    	mav.addObject("password", "passSuperBad");
+    	mav.addObject("telemovel", 987654321);
+    	mav.addObject("emergencia", 971237421);
+    	*/
+    	
     	return mav;
     }
     
