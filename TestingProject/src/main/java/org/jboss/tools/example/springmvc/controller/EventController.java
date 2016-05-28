@@ -1,6 +1,8 @@
 package org.jboss.tools.example.springmvc.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.springframework.stereotype.Controller;
@@ -38,12 +40,12 @@ public class EventController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/marcarConsultaView", method = RequestMethod.POST, params={"data"})
-	public ModelAndView marcarConsultaView(@RequestParam(value = "data") String data){
+	@RequestMapping(value="/marcarConsultaView", method = RequestMethod.GET, params={"data"})
+	public ModelAndView marcarConsultaView(@RequestParam(value = "data") String date){
 		//TODO meter o lock de sessao
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("consulta_rompt");
-		mav.addObject("data", data);
+		mav.setViewName("consulta_prompt");
+		mav.addObject("data", date);
 		return mav;
 	}
 	

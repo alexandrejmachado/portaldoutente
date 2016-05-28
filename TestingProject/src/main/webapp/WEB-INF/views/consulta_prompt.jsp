@@ -29,7 +29,7 @@
     </select>
     
     <textarea rows="4" cols="50">Observações</textarea>
-    <p>Confirmar marcação da consulta para: %dia</p>
+    <p>Confirmar marcação da consulta para: ${data}</p>
     <button>
         Sim
     </button>

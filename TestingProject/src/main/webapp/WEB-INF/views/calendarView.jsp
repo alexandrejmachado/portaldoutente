@@ -30,12 +30,23 @@ $(document).ready(function() {
 					selectable: true,
 					selectHelper: true,
 					select: function(start, end) {
-						$.fancybox.open({
-							title :  "Marque uma Consulta pls",
-							href : 'https://' + window.location.host,
-							type : 'iframe',
-							padding : 5
-									});
+						today= new Date
+					    if(new Date(start) < new Date())
+					    {
+					        alert("Não pode marcar consultas para datas passadas");
+					    }
+					    else
+					    {
+					    	$.fancybox.open({
+								title :  "Marque uma Consulta pls",
+								href : 'https://' + window.location.host + "/testCalendar/marcarConsultaView?data="+new Date(start).toISOString().slice(0,10),
+								type : 'iframe',
+								width: '60%',
+								height: '60%',
+								padding : 5
+										});
+					    }
+						
 						$('#calendar').fullCalendar('unselect');
 					},
 			});
