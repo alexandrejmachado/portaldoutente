@@ -20,7 +20,7 @@
         <title>Portal do Utente</title>
     </head>
     
-    <body background=<c:url value="/resources/gfx/Final2.png"/>>
+    <body background=<c:url value="/resources/gfx/Final2.png"/> />
     <div class="container">
             <div class="col-lg-12"> 
                 <div class= "rowMajor">

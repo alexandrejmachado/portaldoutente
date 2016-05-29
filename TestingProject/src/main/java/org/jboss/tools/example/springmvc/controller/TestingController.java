@@ -766,12 +766,12 @@ public class TestingController {
     public ModelAndView goToPerfil(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
     	ModelAndView mav = new ModelAndView();
     	
-    	if(verifyLogin(session)){
-    	//if(true){
+    	//if(verifyLogin(session)){
+    	if(true){
     	
     		mav.setViewName("perfil");
     	
-    		
+    		/*
 	    	String username = (String) session.getAttribute("sessionID");
 			Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
 	    	
@@ -783,9 +783,9 @@ public class TestingController {
 	    	int emergencia = currentUser.getContactoEmergencia();
 	    	mav.addObject("telemovel", ((telemovel == 0) ?  "000000000" : telemovel));
 	    	mav.addObject("emergencia", ((emergencia == 0) ? "000000000" : emergencia ));
+	    	*/
 	    	
-	    	
-    		/*
+    		
 	    	mav.addObject("username", "Tiago");
 	    	mav.addObject("utente", 123123123);
 	    	mav.addObject("cc", 12345678);
@@ -794,13 +794,14 @@ public class TestingController {
 	    	mav.addObject("password", "passSuperBad");
 	    	mav.addObject("telemovel", 987654321);
 	    	mav.addObject("emergencia", 971237421);
-	    	*/
+	    	
 	    	
     	}
+    	/*
     	else{
     		mav.setViewName("redirect:/index");
     	}
-    	
+    	*/
     	
     	return mav;
     }
