@@ -257,7 +257,7 @@ public class TestingController {
 	@RequestMapping(value = "/registo")
 	public ModelAndView registoController(HttpSession session){
 	ModelAndView mav = new ModelAndView();
-	if(verifyLogin(session)){
+	if(!verifyLogin(session)){
 		mav.addObject("username", session.getAttribute("sessionName"));
 		mav.setViewName("registo");
 	}
