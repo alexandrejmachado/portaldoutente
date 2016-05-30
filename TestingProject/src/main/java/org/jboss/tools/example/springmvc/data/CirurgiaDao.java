@@ -24,8 +24,8 @@ public class CirurgiaDao {
 	@Autowired
 	private EntityManager em;
 	
-	public Cirurgia novaCirurgia() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		Cirurgia Cirurgia = new Cirurgia();
+	public Cirurgia novaCirurgia(String numUtente, String idMedico, String tipo) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		Cirurgia Cirurgia = new Cirurgia(Cifras.encrypt(numUtente), idMedico, tipo);
 		em.persist(Cirurgia);
 		return Cirurgia;
 	}
@@ -36,7 +36,14 @@ public class CirurgiaDao {
 		return query.getResultList();
 	}
 	
-	public boolean confirmarCirurgia (Cirurgia cirurgia) {
+	public Cirurgia findById(int id) {
+		TypedQuery<Cirurgia> query = em.createNamedQuery(Cirurgia.FIND_BY_ID, Cirurgia.class);
+		query.setParameter(Cirurgia.ID, id);
+		return query.getSingleResult();
+	}
+	
+	public boolean confirmarCirurgia (int id) {
+		Cirurgia cirurgia = findById(id);
 		return cirurgia.confirmar();
 		
 	}

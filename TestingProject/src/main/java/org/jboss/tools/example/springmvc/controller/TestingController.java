@@ -32,6 +32,7 @@ import javax.servlet.http.HttpSession;
 import javax.swing.RowFilter.Entry;
 
 import org.jboss.tools.example.springmvc.data.AlturaDao;
+import org.jboss.tools.example.springmvc.data.CirurgiaDao;
 import org.jboss.tools.example.springmvc.data.ColesterolDao;
 import org.jboss.tools.example.springmvc.data.ConsultaDao;
 import org.jboss.tools.example.springmvc.data.ExameDao;
@@ -43,6 +44,7 @@ import org.jboss.tools.example.springmvc.data.SaturacaoO2Dao;
 import org.jboss.tools.example.springmvc.data.TensaoArterialDao;
 import org.jboss.tools.example.springmvc.data.TrigliceridosDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
+import org.jboss.tools.example.springmvc.model.Cirurgia;
 import org.jboss.tools.example.springmvc.model.Exame;
 import org.jboss.tools.example.springmvc.model.Glicemia;
 import org.jboss.tools.example.springmvc.sensitivedata.Utente;
@@ -94,6 +96,9 @@ public class TestingController {
 	
 	@Autowired
 	private ColesterolDao colDao;
+	
+	@Autowired
+	private CirurgiaDao cirurgiaDao;
 	
 	@Autowired
 	private GlicemiaDao glicDao;
@@ -165,6 +170,9 @@ public class TestingController {
 		ModelAndView mav = new ModelAndView();
 		if(verifyLogin(session)){
 			mav.addObject("username", session.getAttribute("sessionName"));
+			if (session.getAttribute("sessionMode").equals("guardiao")) {
+				mav.addObject("sessionMode", "guardian");
+			}
 			mav.setViewName("mainmenu");
 		}
 		else{
@@ -208,7 +216,8 @@ public class TestingController {
 			String loginPassword=currentUser.getPassword();
 			String passwordGuardiao = currentUser.getPasswordGuardiao();
 			System.out.println("passe guardiao: " + hashLogin.equals(passwordGuardiao));
-			if((hashLogin.equals(loginPassword) && currentUser!=null) || (hashLogin.equals(passwordGuardiao) && currentUser!=null)){
+			if((hashLogin.equals(loginPassword) && currentUser!=null)){
+				session.setAttribute("sessionMode", "user");
 				session.setAttribute("sessionID", username);
 				session.setAttribute("sessionName", currentUser.getNome());
 				mav.addObject("username", currentUser.getNome());
@@ -219,6 +228,18 @@ public class TestingController {
 					return "activate";
 				}
 				}
+			else if ((hashLogin.equals(passwordGuardiao) && currentUser!=null)) {
+				session.setAttribute("sessionMode", "guardiao");
+				session.setAttribute("sessionID", username);
+				session.setAttribute("sessionName", currentUser.getNome());
+				mav.addObject("username", currentUser.getNome());
+				if (currentUser.isVerified()) {
+					return "true";
+				}
+				else{
+					return "activate";
+				}
+			}
 			else
 			{
 				return "false";
@@ -519,9 +540,14 @@ public class TestingController {
 	
 	
 	@RequestMapping(value = "/cirurgia")
-	public ModelAndView Cirurgia(HttpSession session) {
+	public ModelAndView Cirurgia(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		ModelAndView mav = new ModelAndView();
 		if(verifyLogin(session)){
+			cirurgiaDao.novaCirurgia((String) session.getAttribute("sessionID"), "Dr. Jorge Jesus", "Cirurgia ao Fígado");
+			System.out.println("cirurgia: " + session.getAttribute("sessionID"));
+			List<Cirurgia> lista = cirurgiaDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			session.setAttribute("lista", lista);
+			mav.addObject("lista", lista);
 			mav.addObject("username", session.getAttribute("sessionName"));
 			mav.setViewName("cirurgia");
 		}
@@ -533,7 +559,9 @@ public class TestingController {
 	
 	
 	@RequestMapping(value = "/confirmarCirurgia")
-	public ModelAndView confirmarCirurgia(HttpSession session){return null;}
+	public boolean confirmarCirurgia(HttpSession session, @RequestParam(value = "id") Object id){
+		return cirurgiaDao.confirmarCirurgia(Integer.parseInt((String) id));
+	}
 	
 	
 	@RequestMapping(value = "/medicoes")

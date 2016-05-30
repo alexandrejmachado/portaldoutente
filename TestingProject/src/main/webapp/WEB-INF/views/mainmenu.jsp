@@ -32,6 +32,10 @@
 
 <body background=<c:url value="/resources/gfx/Final2.png"/> />
 
+<div id = "guardiao">
+	<input id="guardian" value="guardian" type="text" ></input>
+</div>
+
 <div class= "container">   
         
             <div class="col-lg-12"> 
@@ -125,6 +129,14 @@
 	if (lastThing=="isento") {
 		$("#divisento").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 3%;">Isencao aceite!</div>');
 	}
+	
+	paramOne =  <%=(String) request.getAttribute("sessionMode")%>;
+	console.log(paramOne.value);
+	if ( paramOne.value == "guardian") {
+		$("#guardiao").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 3%;">Modo Guardiao!</div>');
+		
+	}
+	
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
