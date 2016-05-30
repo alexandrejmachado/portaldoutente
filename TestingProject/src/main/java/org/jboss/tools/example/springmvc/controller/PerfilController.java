@@ -34,8 +34,8 @@ public class PerfilController {
     public ModelAndView goToPerfil(HttpSession session, @PathVariable("object") String object) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
     	ModelAndView mav = new ModelAndView();
     	
-    	//if(verifyLogin(session)){
-    	if(true){
+    	if(verifyLogin(session)){
+    	//if(true){
     		if(object.equals("actualizar")){
     			mav.setViewName("alterarPerfil");
     		}
@@ -43,7 +43,7 @@ public class PerfilController {
     			mav.setViewName("perfil");
     		}
     		
-    		/*
+    		
 	    	String username = (String) session.getAttribute("sessionID");
 			Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
 	    	
@@ -56,10 +56,10 @@ public class PerfilController {
 	    	int emergencia = currentUser.getContactoEmergencia();
 	    	mav.addObject("telemovel", ((telemovel == 0) ?  "000000000" : telemovel));
 	    	mav.addObject("emergencia", ((emergencia == 0) ? "000000000" : emergencia ));
-	    	*/
 	    	
 	    	
-    		
+	    	
+    		/*
 	    	mav.addObject("username", "Tiago");
 	    	mav.addObject("utente", 123123123);
 	    	mav.addObject("cc", 12345678);
@@ -69,13 +69,13 @@ public class PerfilController {
 	    	mav.addObject("password", "passSuperBad");
 	    	mav.addObject("telemovel", 987654321);
 	    	mav.addObject("emergencia", 971237421);
-	    	
+	    	*/
 	    	
     	}
     	
-    	//else{
-    	//	mav.setViewName("redirect:/index");
-    	//}
+    	else{
+    		mav.setViewName("redirect:/index");
+    	}
     	
     	return mav;
     }

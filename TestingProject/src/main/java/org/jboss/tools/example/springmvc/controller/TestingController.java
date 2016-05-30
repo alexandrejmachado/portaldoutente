@@ -303,11 +303,11 @@ public class TestingController {
 	
 	
 	
-	@RequestMapping(value = "/registoUtente", method = RequestMethod.POST, params={"nome","num_utente","cc", "morada", "mail", "pass", "telemovel", "emergencia"})
+	@RequestMapping(value = "/registoUtente", method = RequestMethod.POST, params={"nome","num_utente","cc", "morada", "mail", "pass", "passConfirm","telemovel", "emergencia"})
 	@ResponseBody
 	public List<String> registoUtente(@RequestParam(value = "nome") String username, @RequestParam(value="num_utente") String numUtente,
 										@RequestParam(value = "cc") String cc, @RequestParam(value="morada") String morada,
-											@RequestParam(value="mail") String mail, @RequestParam(value = "pass") String password,
+											@RequestParam(value="mail") String mail, @RequestParam(value = "pass") String password,@RequestParam(value = "passConfirm") String passwordConfirm,
 												@RequestParam(value = "telemovel") String telemovel, @RequestParam(value = "emergencia") String emergencia, @RequestParam(value="nif") String nif,HttpSession session) throws NoSuchAlgorithmException, NumberFormatException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		//verificacao de parametros
 		boolean resp = true;
@@ -315,6 +315,12 @@ public class TestingController {
 		String msg=null;
 		List<String> finalmsg= new ArrayList<String>();
 		try{
+			//------------passwords-------------
+			campo = "pass";
+			if(!password.equals(passwordConfirm)){
+				throw new BadRegistException("Por favor confirme a sua password", campo);
+			}
+			
 			//----------------nome--------------
 			resp = resp && (username.length() > 2);
 			campo = "nome";

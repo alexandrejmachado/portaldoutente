@@ -37,6 +37,8 @@
   		<input id = "campo" type="text" name="mail" required><br>
   		Password:*
   		<input id = "campo" type="password" name="pass" required><br>
+  		Comfirmar Password:*
+  		<input id = "campo" type="password" name="passConfirm" required><br>
   		Numero de Telemovel:
   		<input id = "campo" type="text" name="telemovel"><br>
   		Contacto de Emergencia:
