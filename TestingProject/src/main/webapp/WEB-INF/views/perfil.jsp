@@ -106,11 +106,6 @@
 													<td id="fixosMod">${cc} </td>
 												</tr>
 												<tr>
-													<td>Número de Identificação Fiscal</td>
-													
-													<td id="fixosMod">${nif} </td>
-												</tr>
-												<tr>
 													<td>Morada </td>
 													
 													<td><input id = "campoM" type="text" name="morada" value="${morada}" > </td>
@@ -141,18 +136,18 @@
 												<tr>
 													<td style="width:70%" " >Password antiga:</td>
 													
-													<td><input id = "campoM" type="password" name="oldPass" required> </td>
+													<td><input id = "campoM" type="password" name="pass" required> </td>
 												</tr>
 										
 												<tr>
 													<td>Nova password:</td>
 													
-													<td><input id = "campoM" type="password" name="newPass" required> </td>
+													<td><input id = "campoM" type="password" name="pass" required> </td>
 												</tr>
 												<tr>
 													<td>Confirmar nova password:</td>
 													
-													<td><input id = "campoM" type="password" name="confirmNewPass" required> </td>
+													<td><input id = "campoM" type="password" name="pass" required> </td>
 												</tr>
 											</table>
 											</form>
@@ -160,7 +155,7 @@
 									</div>
 											<div class='buttons'>
 											  <div class='set blue'>
-											    <a class='btn pri' type="submit" onClick="registar()" >Submeter</a>
+											    <a class='btn pri' type="submit" >Submeter</a>
 											  </div>	
 							
 						</div>
@@ -173,20 +168,6 @@
     </div> <!-- /caixaGig -->
     </div><!-- /container-->
     </body>
-    <!-- Script pra agarrar o form -->
-<script>
-	function registar()
-	{
-			path="https://" + window.location.host + "/";
-			$('.registo').append($('<img>',{id:'theImg',src:'resources/gfx/loadingGif.gif',width: '50', height: '50'}));
-			$.post(path + 'perfil/atualizarPerfil', $("form").serialize()).done(function( data ) {
-				if (data[0]=="true"){window.location.replace(path + "index");}
-				else {alert(data[0]);$("#theImg").remove();}}
-			);
-	
-	}
-</script>
-    <!-- FIM DO SCRIPT -->
     
     <!-- jQuery -->
    <!-- <script src="js/jquery.js">  </script> -->
