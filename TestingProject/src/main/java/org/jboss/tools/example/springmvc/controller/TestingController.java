@@ -561,7 +561,7 @@ public class TestingController {
 	public ModelAndView Cirurgia(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		ModelAndView mav = new ModelAndView();
 		if(verifyLogin(session)){
-			cirurgiaDao.novaCirurgia((String) session.getAttribute("sessionID"), "Dr. Jorge Jesus", "Cirurgia ao Fígado");
+			cirurgiaDao.novaCirurgia((String) session.getAttribute("sessionID"), "Dr. Jorge Jesus", "Cirurgia ao Figado");
 			System.out.println("cirurgia: " + session.getAttribute("sessionID"));
 			List<Cirurgia> lista = cirurgiaDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
 			session.setAttribute("lista", lista);
