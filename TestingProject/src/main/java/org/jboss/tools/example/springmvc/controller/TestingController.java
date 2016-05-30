@@ -671,7 +671,7 @@ public class TestingController {
             @RequestParam("file") MultipartFile file, HttpSession session) {
     	
     	if(name.isEmpty()){name="temporario";}
-        if (!file.isEmpty()) {
+        if (!file.isEmpty() & session.getAttribute("sessionID")==null ) {
             try {
                 byte[] bytes = file.getBytes();
  
@@ -700,7 +700,7 @@ public class TestingController {
                       }
                     }
                   };
-                exameDao.novoExame((int) session.getAttribute("sessionID"), new Date(), (String) session.getAttribute("sessionID") + "/" + file.getOriginalFilename() );
+                  exameDao.novoExame(Integer.parseInt((String) session.getAttribute("sessionID")), new Date(), (String) session.getAttribute("sessionID") + "/" + file.getOriginalFilename() );
             } catch (Exception e) {
             	System.out.println(e.toString());
                 return false;
@@ -757,9 +757,9 @@ public class TestingController {
         return filespresent;
     }
     
-    @RequestMapping(value="/ListFilesViaNIF", method = RequestMethod.POST)
+    @RequestMapping(value="/ListFilesViaNutente", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Exame> listBucketViaNIF(@RequestParam("nif") int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException
+	public List<?> listBucketViaNIF(@RequestParam("nutente") int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException
     {
     	return exameDao.findAllByUtente(numUtente);
     }

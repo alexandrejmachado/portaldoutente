@@ -58,4 +58,8 @@ public class Exame {
 		this.metalink=metalink;
 	}
 	
+	public String getNumUtente(){return numUtente;}
+	
+	public String getMetalink(){return metalink;}
+	
 }
