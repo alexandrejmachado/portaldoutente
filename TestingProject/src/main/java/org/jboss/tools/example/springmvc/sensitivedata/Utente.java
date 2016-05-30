@@ -57,8 +57,6 @@ public class Utente {
 
 	private String morada;
 	
-	private boolean teste = true;
-	
 	private String verificationCode;
 	
 	private String verificationCodeSms;
