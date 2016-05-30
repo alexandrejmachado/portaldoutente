@@ -159,6 +159,7 @@ public class TestingController {
 	public ModelAndView vistaController(HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		if(verifyLogin(session)){
+			mav.addObject("username", session.getAttribute("sessionName"));
 			mav.setViewName("mainmenu");
 		}
 		else{
@@ -510,6 +511,24 @@ public class TestingController {
 		mav.setViewName("index");
 		return mav;
 	}
+	
+	
+	@RequestMapping(value = "/cirurgia")
+	public ModelAndView Cirurgia(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		if(verifyLogin(session)){
+			mav.addObject("username", session.getAttribute("sessionName"));
+			mav.setViewName("cirurgia");
+		}
+		else {
+			mav.setViewName("redirect:/index");
+		}
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/confirmarCirurgia")
+	public ModelAndView confirmarCirurgia(HttpSession session){return null;}
 	
 	
 	@RequestMapping(value = "/medicoes")

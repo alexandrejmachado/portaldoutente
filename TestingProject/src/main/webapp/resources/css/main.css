@@ -281,6 +281,16 @@ html body div.container div#caixaGig.col-lg-12 div#wrapper div#sidebar-wrapper u
  border: 0.3px solid;
  margin-top: 7px;
  margin-bottom: 5px;
+ 
+}
+
+.butao_reg {
+	color: white; 
+}
+
+#tabela_ciru{
+  width: 100%;
+  margin-left: 18.5%;
 }
 
 #legenda{
