@@ -3,11 +3,13 @@ package org.jboss.tools.example.springmvc.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,7 +21,9 @@ public class Exame {
 
 	@Id
 	@JsonIgnore
+	@GeneratedValue
 	private int id;
+	
 	
 	public static final String FIND_ALL_BY_UTENTE = "Exame.findAllByUtente";
 	
@@ -28,7 +32,8 @@ public class Exame {
 	private boolean feito = false;
 	
 	@JsonIgnore
-	private int numUtente;
+	@NotNull
+	private String numUtente;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
@@ -41,8 +46,16 @@ public class Exame {
 	@JsonIgnore
 	private int idInstituicao;
 	
+	@NotNull
 	private String metalink;
 	
 	public Exame(){}
+	
+	public Exame(String numUtente,Date date,String metalink)
+	{
+		this.numUtente=numUtente;
+		this.data=date;
+		this.metalink=metalink;
+	}
 	
 }
