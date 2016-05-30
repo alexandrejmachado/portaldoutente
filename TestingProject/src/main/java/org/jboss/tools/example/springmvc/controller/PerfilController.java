@@ -26,8 +26,7 @@ public class PerfilController {
 	@Autowired
 	private UtenteDao utenteDao;
 	
-	@Autowired
-	private AuthController as;
+	private AuthController as= new AuthController();
 	
 	@Autowired
 	private EntityManager em;
