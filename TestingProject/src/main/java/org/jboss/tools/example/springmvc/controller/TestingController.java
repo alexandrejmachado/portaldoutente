@@ -782,51 +782,7 @@ public class TestingController {
     {
     	return exameDao.findAllByUtente(numUtente);
     }
-    
-    @RequestMapping(value="/perfil")
-    public ModelAndView goToPerfil(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-    	ModelAndView mav = new ModelAndView();
-    	
-    	//if(verifyLogin(session)){
-    	if(true){
-    	
-    		mav.setViewName("perfil");
-    	
-    		/*
-	    	String username = (String) session.getAttribute("sessionID");
-			Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
-	    	
-	    	mav.addObject("username", currentUser.getNome());
-	    	mav.addObject("utente", currentUser.getNumUtente());
-	    	mav.addObject("cc", currentUser.getCc());
-	    	mav.addObject("mail", currentUser.getEmail());
-	    	int telemovel = currentUser.getTelemovel();
-	    	int emergencia = currentUser.getContactoEmergencia();
-	    	mav.addObject("telemovel", ((telemovel == 0) ?  "000000000" : telemovel));
-	    	mav.addObject("emergencia", ((emergencia == 0) ? "000000000" : emergencia ));
-	    	*/
-	    	
-    		
-	    	mav.addObject("username", "Tiago");
-	    	mav.addObject("utente", 123123123);
-	    	mav.addObject("cc", 12345678);
-	    	mav.addObject("morada", "moradaBueMa");
-	    	mav.addObject("mail", "mailBueMau");
-	    	mav.addObject("password", "passSuperBad");
-	    	mav.addObject("telemovel", 987654321);
-	    	mav.addObject("emergencia", 971237421);
-	    	
-	    	
-    	}
-    	/*
-    	else{
-    		mav.setViewName("redirect:/index");
-    	}
-    	*/
-    	
-    	return mav;
-    }
-    
+       
 
 }
     
