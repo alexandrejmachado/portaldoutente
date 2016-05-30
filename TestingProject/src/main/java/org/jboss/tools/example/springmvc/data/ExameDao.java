@@ -3,6 +3,7 @@ package org.jboss.tools.example.springmvc.data;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.List;
 
 import javax.crypto.BadPaddingException;
@@ -24,8 +25,8 @@ public class ExameDao {
 	@Autowired
 	private EntityManager em;
 	
-	public Exame novoExame(){
-		Exame Exame = new Exame();
+	public Exame novoExame(int numUtente,Date data,String metalink) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		Exame Exame = new Exame(Cifras.encrypt(Integer.toString(numUtente)),data,metalink);
 		em.persist(Exame);
 		return Exame;
 	}

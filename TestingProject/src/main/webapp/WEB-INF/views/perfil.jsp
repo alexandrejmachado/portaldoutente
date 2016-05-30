@@ -16,10 +16,11 @@
     
         <link href= <c:url value="/resources/css/main1.css"></c:url> rel="stylesheet"/>
         
+        <link href= <c:url value="/resources/css/button.css"></c:url> rel="stylesheet"/>
         <title>Portal do Utente</title>
     </head>
     
-    <body background=<c:url value="/resources/gfx/Final2.png"/>>
+    <body background=<c:url value="/resources/gfx/Final2.png"/> />
     <div class="container">
             <div class="col-lg-12"> 
                 <div class= "rowMajor">
@@ -114,11 +115,7 @@
 													
 													<td> <input id = "campoM" type="text" value="${mail}" name="mail"></td>
 												</tr>
-												<tr>
-													<td>Password </td>
-													
-													<td><input id = "campoM" type="password" name="pass" value="${password}" required> </td>
-												</tr>
+												
 												<tr>
 													<td>Número de Telemóvel </td>
 													
@@ -129,22 +126,47 @@
 													
 													<td> <input id = "campoM" type="text" value="${emergencia}" name="emergencia"></td>
 													
-												</tr>	
-
+												</tr>
+												
 											</table>	
 											</form>
 											
-									</div>	
-								<button  id = "botao_mudancas" type="submit"> Submeter mudanças</button>
+											<form method="post">
+											<table style = "margin-top: 32px;">
+												<tr>
+													<td style="width:70%" " >Password antiga:</td>
+													
+													<td><input id = "campoM" type="password" name="pass" required> </td>
+												</tr>
+										
+												<tr>
+													<td>Nova password:</td>
+													
+													<td><input id = "campoM" type="password" name="pass" required> </td>
+												</tr>
+												<tr>
+													<td>Confirmar nova password:</td>
+													
+													<td><input id = "campoM" type="password" name="pass" required> </td>
+												</tr>
+											</table>
+											</form>
+											
+									</div>
+											<div class='buttons'>
+											  <div class='set blue'>
+											    <a class='btn pri' type="submit" >Submeter</a>
+											  </div>	
 							
 						</div>
 						</div>
 				</div>
 
 				
-		</div> <!-- /wrapper -->
+		</div> 
+    </div> <!-- /wrapper -->
     </div> <!-- /caixaGig -->
-    </div>  <!-- /container-->
+    </div><!-- /container-->
     </body>
     
     <!-- jQuery -->

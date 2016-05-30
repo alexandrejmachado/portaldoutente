@@ -34,6 +34,7 @@ import javax.swing.RowFilter.Entry;
 import org.jboss.tools.example.springmvc.data.AlturaDao;
 import org.jboss.tools.example.springmvc.data.ColesterolDao;
 import org.jboss.tools.example.springmvc.data.ConsultaDao;
+import org.jboss.tools.example.springmvc.data.ExameDao;
 import org.jboss.tools.example.springmvc.data.GlicemiaDao;
 import org.jboss.tools.example.springmvc.data.GuardiaoDao;
 import org.jboss.tools.example.springmvc.data.INRDao;
@@ -42,6 +43,7 @@ import org.jboss.tools.example.springmvc.data.SaturacaoO2Dao;
 import org.jboss.tools.example.springmvc.data.TensaoArterialDao;
 import org.jboss.tools.example.springmvc.data.TrigliceridosDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
+import org.jboss.tools.example.springmvc.model.Exame;
 import org.jboss.tools.example.springmvc.model.Glicemia;
 import org.jboss.tools.example.springmvc.sensitivedata.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,6 +112,9 @@ public class TestingController {
 	
 	@Autowired
 	private ConsultaDao consultaDao;
+	
+	@Autowired
+	private ExameDao exameDao;
 	
 	private List<String> avaliableMeasures;
 	
@@ -681,11 +686,11 @@ public class TestingController {
 	//O Puxa carrocas de isto tudo
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public @ResponseBody
-    ArrayList<String> uploadFileHandler(@RequestParam("name") String name,
+    Boolean uploadFileHandler(@RequestParam("name") String name,
             @RequestParam("file") MultipartFile file, HttpSession session) {
     	
     	if(name.isEmpty()){name="temporario";}
-        if (!file.isEmpty()) {
+        if (!file.isEmpty() & session.getAttribute("sessionID")==null ) {
             try {
                 byte[] bytes = file.getBytes();
  
@@ -714,25 +719,15 @@ public class TestingController {
                       }
                     }
                   };
-                // Create the file on server
-                File serverFile = new File(dir.getAbsolutePath()
-                        + File.separator + name);
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
-                ArrayList<String> filespresent= new ArrayList<String>();
-                Iterator<Blob> blobIterator = bucket.list().iterateAll();
-                while (blobIterator.hasNext()) {
-                  filespresent.add(blobIterator.next().toString());
-                }
-                return filespresent;
+                  exameDao.novoExame(Integer.parseInt((String) session.getAttribute("sessionID")), new Date(), (String) session.getAttribute("sessionID") + "/" + file.getOriginalFilename() );
             } catch (Exception e) {
-                return null;
+            	System.out.println(e.toString());
+                return false;
             }
         } else {
-            return null;
+            return false;
         }
+		return true;
     }
 
     @RequestMapping(value = "/getFile", method = RequestMethod.POST)
@@ -781,6 +776,13 @@ public class TestingController {
         return filespresent;
     }
     
+    @RequestMapping(value="/ListFilesViaNutente", method = RequestMethod.POST)
+	@ResponseBody
+	public List<?> listBucketViaNIF(@RequestParam("nutente") int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException
+    {
+    	return exameDao.findAllByUtente(numUtente);
+    }
+    
     @RequestMapping(value="/perfil")
     public ModelAndView goToPerfil(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
     	ModelAndView mav = new ModelAndView();
@@ -789,7 +791,7 @@ public class TestingController {
     	if(true){
     	
     		mav.setViewName("perfil");
-    		
+    	
     		/*
 	    	String username = (String) session.getAttribute("sessionID");
 			Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
@@ -804,6 +806,7 @@ public class TestingController {
 	    	mav.addObject("emergencia", ((emergencia == 0) ? "000000000" : emergencia ));
 	    	*/
 	    	
+    		
 	    	mav.addObject("username", "Tiago");
 	    	mav.addObject("utente", 123123123);
 	    	mav.addObject("cc", 12345678);
@@ -813,8 +816,10 @@ public class TestingController {
 	    	mav.addObject("telemovel", 987654321);
 	    	mav.addObject("emergencia", 971237421);
 	    	
+	    	
     	}
-    	/*else{
+    	/*
+    	else{
     		mav.setViewName("redirect:/index");
     	}
     	*/
