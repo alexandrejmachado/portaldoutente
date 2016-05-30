@@ -28,19 +28,17 @@ public class PerfilController {
 	
 	private AuthController as= new AuthController();
 	
-	@Autowired
-	private EntityManager em;
 
 	@RequestMapping(value="")
     public ModelAndView goToPerfil(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
     	ModelAndView mav = new ModelAndView();
     	
-    	//if(verifyLogin(session)){
-    	if(true){
+    	if(verifyLogin(session)){
+    	//if(true){
     	
     		mav.setViewName("perfil");
     	
-    		/*
+    		
 	    	String username = (String) session.getAttribute("sessionID");
 			Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
 	    	
@@ -53,7 +51,8 @@ public class PerfilController {
 	    	int emergencia = currentUser.getContactoEmergencia();
 	    	mav.addObject("telemovel", ((telemovel == 0) ?  "000000000" : telemovel));
 	    	mav.addObject("emergencia", ((emergencia == 0) ? "000000000" : emergencia ));
-	    	*/
+	    	
+	    	/*
 	    	
     		
 	    	mav.addObject("username", "Tiago");
@@ -65,14 +64,13 @@ public class PerfilController {
 	    	mav.addObject("password", "passSuperBad");
 	    	mav.addObject("telemovel", 987654321);
 	    	mav.addObject("emergencia", 971237421);
-	    	
+	    	*/
 	    	
     	}
-    	/*
+    	
     	else{
     		mav.setViewName("redirect:/index");
     	}
-    	*/
     	
     	return mav;
     }
@@ -84,71 +82,88 @@ public class PerfilController {
 													@RequestParam(value="oldPass") String oldPass, @RequestParam(value="newPass") String newPass,
 														@RequestParam(value="confirmNewPass") String confirmNewPass, HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		
-		//if(verifyLogin(session)){
-		String username = (String) session.getAttribute("sessionID");
-		Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
-		try{
-			//----------MORADA------------
-			System.out.println(morada);
-			if(currentUser.getMorada() != morada){
-				currentUser.setMorada(morada);
-			}
-			System.out.println(currentUser.getMorada());
-			
-			//----------EMAIL-------------
-			System.out.println(mail);
-			if(mail.length() <= 0){
-				throw new BadRegistException("Por favor insira um email", "mail");
-			}
-			if(!as.verifyEmail(mail)){
-				throw new BadRegistException("Por favor insira um email válido", "mail");
-			}
-			else{
-				if(currentUser.getEmail() != mail){
-					currentUser.setEmail(mail);
+		if(verifyLogin(session)){
+			String username = (String) session.getAttribute("sessionID");
+			Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
+			try{
+				//----------MORADA------------
+				System.out.println(morada);
+				if(currentUser.getMorada() != morada){
+					currentUser.setMorada(morada);
+				}
+				System.out.println(currentUser.getMorada());
+				
+				//----------EMAIL-------------
+				System.out.println(mail);
+				if(mail.length() <= 0){
+					throw new BadRegistException("Por favor insira um email", "mail");
+				}
+				if(!as.verifyEmail(mail)){
+					throw new BadRegistException("Por favor insira um email válido", "mail");
+				}
+				else{
+					if(currentUser.getEmail() != mail){
+						currentUser.setEmail(mail);
+					}
+				}
+				System.out.println(currentUser.getEmail());
+				//-------TELEMOVEL-----------
+				System.out.println(telemovel);
+				int telemovelInt = Integer.parseInt(telemovel);
+				if(currentUser.getTelemovel() != telemovelInt){
+					currentUser.setTelemovel(telemovelInt);
+				}
+				System.out.println(currentUser.getTelemovel());
+				
+				//-------EMERGENCIA----------
+				System.out.println(emergencia);
+				int emergenciaInt = Integer.parseInt(emergencia);
+				if(currentUser.getContactoEmergencia() != emergenciaInt){
+					currentUser.setContactoEmergencia(emergenciaInt);
+				}
+				System.out.println(currentUser.getContactoEmergencia());
+				//-------PASSWORDS-----------
+				System.out.println(oldPass);
+				System.out.println(newPass);
+				System.out.println(confirmNewPass);
+				
+				String hashOld = HashTextTest.sha256(oldPass);
+				String hashNew = HashTextTest.sha256(newPass);
+				String hashConfirm = HashTextTest.sha256(confirmNewPass);
+				if(currentUser.getPassword().equals(hashOld)){
+					if(hashNew.equals(hashConfirm)){
+						currentUser.setPassword(hashNew);
+					}
+				}
+				
+				utenteDao.updateUtente(currentUser);
+				System.out.println("COMECA AQUI");
+				System.out.println(currentUser.getMorada());
+				System.out.println(currentUser.getContactoEmergencia());
+				System.out.println(currentUser.getEmail());
+				System.out.println(currentUser.getPassword());
+				System.out.println(currentUser.getTelemovel());
+				System.out.println("ACABA AQUI");
+		    }
+			catch(Exception e){ 
+				System.out.println(e);
 				}
 			}
-			System.out.println(currentUser.getEmail());
-			//-------TELEMOVEL-----------
-			System.out.println(telemovel);
-			int telemovelInt = Integer.parseInt(telemovel);
-			if(currentUser.getTelemovel() != telemovelInt){
-				currentUser.setTelemovel(telemovelInt);
-			}
-			System.out.println(currentUser.getTelemovel());
-			
-			//-------EMERGENCIA----------
-			System.out.println(emergencia);
-			int emergenciaInt = Integer.parseInt(emergencia);
-			if(currentUser.getTelemovel() != emergenciaInt){
-				currentUser.setTelemovel(emergenciaInt);
-			}
-			System.out.println(currentUser.getContactoEmergencia());
-			//-------PASSWORDS-----------
-			System.out.println(oldPass);
-			System.out.println(newPass);
-			System.out.println(confirmNewPass);
-			
-			String hashOld = HashTextTest.sha256(oldPass);
-			String hashNew = HashTextTest.sha256(newPass);
-			String hashConfirm = HashTextTest.sha256(confirmNewPass);
-			if(currentUser.equals(hashOld)){
-				if(hashNew.equals(hashConfirm)){
-					currentUser.setPassword(hashNew);
-				}
-			}
-		}
-		catch(Exception e){
+		else{
 			return null;
 		}
 		
-		//}
-		/*
-    	else{
-    		mav.setViewName("redirect:/index");
-    	}
-    	*/
+		
 		return null;
+	}
+	
+	public static boolean verifyLogin(HttpSession session){
+		if(session.getAttribute("sessionID") == null){
+			return false;
+		}
+		else{
+			return true;
+		}
 	}
 }
 

@@ -429,7 +429,7 @@ public class TestingController {
 		}
 	
 	
-	private boolean verifyLogin(HttpSession session){
+	public static boolean verifyLogin(HttpSession session){
 		if(session.getAttribute("sessionID") == null){
 			return false;
 		}
