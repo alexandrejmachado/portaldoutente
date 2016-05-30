@@ -133,4 +133,9 @@ public class UtenteDao {
 			return false;
 		}
 	}
+	
+	public boolean updateUtente(Utente u){
+		em.merge(u);
+		return true;
+	}
 }

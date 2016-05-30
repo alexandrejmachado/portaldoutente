@@ -113,35 +113,54 @@
 												<tr>
 													<td>Morada </td>
 													
-													<td id = "fixosMod" >${morada}  </td>
+													<td><input id = "campoM" type="text" name="morada" value="${morada}" > </td>
 												</tr>
 												<tr>
 													<td>E-Mail </td>
 													
-													<td id = "fixosMod" >${mail}  </td>
+													<td> <input id = "campoM" type="text" value="${mail}" name="mail"></td>
 												</tr>
 												
 												<tr>
 													<td>Número de Telemóvel </td>
 													
-													<td id = "fixosMod" >${telemovel}  </td>
+													<td> <input id = "campoM" type="text" value="${telemovel}" name="telemovel" ></td>
 												</tr>
 												<tr>
 													<td style="width:70%" >Contacto de Emergência </td>
 													
-													<td id = "fixosMod" >${emergencia}  </td>
+													<td> <input id = "campoM" type="text" value="${emergencia}" name="emergencia"></td>
 													
 												</tr>
 												
 											</table>	
 											</form>
 											
-											
+											<form method="post">
+											<table style = "margin-top: 32px;">
+												<tr>
+													<td style="width:70%" " >Password antiga:</td>
+													
+													<td><input id = "campoM" type="password" name="oldPass" required> </td>
+												</tr>
+										
+												<tr>
+													<td>Nova password:</td>
+													
+													<td><input id = "campoM" type="password" name="newPass" required> </td>
+												</tr>
+												<tr>
+													<td>Confirmar nova password:</td>
+													
+													<td><input id = "campoM" type="password" name="confirmNewPass" required> </td>
+												</tr>
+											</table>
+											</form>
 											
 									</div>
 											<div class='buttons'>
 											  <div class='set blue'>
-											    <a class='btn pri' type="submit" onClick="registar()" >Alterar Dados</a>
+											    <a class='btn pri' type="submit" onClick="registar()" >Submeter</a>
 											  </div>	
 							
 						</div>
@@ -158,8 +177,12 @@
 <script>
 	function registar()
 	{
-			path="https://" + window.location.host + "/perfil/actualizar";
-			window.location.assign(path);
+			path="https://" + window.location.host + "/";
+			$('.registo').append($('<img>',{id:'theImg',src:'resources/gfx/loadingGif.gif',width: '50', height: '50'}));
+			$.post(path + 'perfil/atualizarPerfil', $("form").serialize()).done(function( data ) {
+				if (data[0]=="true"){window.location.replace(path + "index");}
+				else {alert(data[0]);$("#theImg").remove();}}
+			);
 	
 	}
 </script>
