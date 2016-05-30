@@ -153,9 +153,15 @@ public class TestingController {
 //	}
 		
 	@RequestMapping(value = "/")
-	public ModelAndView workaround(){
+	public ModelAndView workaround(HttpSession session){
 		ModelAndView mav = new ModelAndView();
+		if(verifyLogin(session)){
+			mav.addObject("username", session.getAttribute("sessionName"));
+			mav.setViewName("mainmenu");
+		}
+		else{
 			mav.setViewName("index");
+		}
 		return mav;
 	}
 	
@@ -250,10 +256,16 @@ public class TestingController {
 	// preciso de esclarecer umas situacoes
 	@RequestMapping(value = "/registo")
 	public ModelAndView registoController(HttpSession session){
-		ModelAndView mav = new ModelAndView();
+	ModelAndView mav = new ModelAndView();
+	if(verifyLogin(session)){
+		mav.addObject("username", session.getAttribute("sessionName"));
 		mav.setViewName("registo");
-		return mav;
 	}
+	else{
+		mav.setViewName("index");
+	}
+	return mav;
+}
 	
   //Devolve lista de todos os objectos a ser persistidos 
   //Remover da lista Objectos que não são medidas
