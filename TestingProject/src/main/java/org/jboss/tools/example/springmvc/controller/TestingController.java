@@ -252,6 +252,7 @@ public class TestingController {
 			}
 		}
 		catch (Exception e){
+			System.out.println(e.toString());
 			return "false";
 
 		}

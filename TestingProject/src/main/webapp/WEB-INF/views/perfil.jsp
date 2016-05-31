@@ -80,7 +80,7 @@
 						
 						<div class="col-lg-12">
 						
-							   <h1>Modificação de Dados</h1>
+							   <h1>Perfil</h1>
 																	
 		
 								
