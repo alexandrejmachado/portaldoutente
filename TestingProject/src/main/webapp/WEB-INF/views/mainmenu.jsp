@@ -32,10 +32,6 @@
 
 <body background=<c:url value="/resources/gfx/Final2.png"/> />
 
-<div id = "guardiao">
-	<input id="guardian" value="guardian" type="text" ></input>
-</div>
-
 <div class= "container">   
         
             <div class="col-lg-12"> 
