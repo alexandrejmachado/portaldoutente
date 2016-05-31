@@ -32,6 +32,7 @@
 
 <body background=<c:url value="/resources/gfx/Final2.png"/> />
 
+<div id="guardiao"></div>
 <div class= "container">   
         
             <div class="col-lg-12"> 
@@ -137,9 +138,9 @@
 		$("#divisento").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 3%;">Isencao aceite!</div>');
 	}
 	
-	paramOne =  <%=(String) request.getAttribute("sessionMode")%>;
-	console.log(paramOne.value);
-	if ( paramOne.value == "guardian") {
+	paramOne =  '<%=(String) request.getAttribute("sessionMode")%>';
+	console.log(paramOne);
+	if ( paramOne == "guardian") {
 		$("#guardiao").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 3%;">Modo Guardiao!</div>');
 		
 	}
