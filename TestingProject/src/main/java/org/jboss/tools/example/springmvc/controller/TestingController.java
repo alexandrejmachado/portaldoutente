@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -325,10 +326,14 @@ public class TestingController {
 	@RequestMapping(value="/medicoes/avaliableMeasures",method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody List<String> listAllMeasures() throws ClassNotFoundException {
 		List<String> finalnames = new ArrayList<String>();
+		List<String> ignoreList = new ArrayList<String>(Arrays.asList(new String[]{"Exame","Boletim", "Cirurgia", "Consulta", "Medicacao", "Medicamento", "Receita", "Vacina"}));
 		for(String s : checkMeasures())
 		{
 			String[] temp=s.split("\\.");
-			finalnames.add(temp[temp.length-1]);
+			String finalname=temp[temp.length-1];
+			if(!ignoreList.contains(finalname)){
+				finalnames.add(finalname);
+			}
 		}
 			
 		return finalnames; 
