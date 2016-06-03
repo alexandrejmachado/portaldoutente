@@ -306,17 +306,22 @@ public class TestingController {
 		}
 	  return names;
 	}
+	
 	//Metodo Experimental para devolver informação/parametros das medições
 	@RequestMapping(value = "/medicoes/daoInputs/{object}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public Object typeTest(@PathVariable("object") String object)  {
-		HashMap<String, Object> inputfields;
-		inputfields = new HashMap<String,Object>();
-		inputfields.put("Glicemia",new Glicemia());
-		System.out.println("object = " + object);
 		try {
-			Class c= Class.forName("org.jboss.tools.example.springmvc.model."+object);
-			return c.newInstance();
+			List<String> ignoreList = new ArrayList<String>(Arrays.asList(new String[]{"Exame","Boletim", "Cirurgia", "Consulta", "Medicacao", "Medicamento", "Receita", "Vacina"}));
+			String[] temp=object.split("\\.");
+			String finalname=temp[temp.length-1];
+			if(!ignoreList.contains(finalname))
+			{
+				Class c= Class.forName("org.jboss.tools.example.springmvc.model."+object);
+				return c.newInstance();
+			}
+			else{return null;}
+			
 		} catch (Exception e) {
 			return null;
 		}
@@ -685,9 +690,9 @@ public class TestingController {
 		return consultaDao.findAllByUtente(123123123);
 	}
 	
-	@RequestMapping(value="/obterMedida")
+	@RequestMapping(value="/obterMedida/{tipoMedida}",method = RequestMethod.GET)
 	@ResponseBody
-	public List<?> obterMedida(HttpSession session, String tipoMedida) {
+	public List<?> obterMedida(HttpSession session, @PathVariable("tipoMedida") String tipoMedida) {
 		List<?> lista = null;
 		try {
 		System.out.println(tipoMedida);
