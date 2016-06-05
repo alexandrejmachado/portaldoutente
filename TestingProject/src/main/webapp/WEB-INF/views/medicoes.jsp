@@ -71,7 +71,7 @@ $("#medidas").change(function(){testing();});
   var items = [];
   $("#campos").html("");
   $.each( data, function( key, val ) {
-    items.push( key + ":\n <input class='campo' name='" + key + "'><br>" );
+    if(key!="data"){items.push( key + ":\n <input class='campo' name='" + key + "'><br>" );}
   });
   $("#campos").append(items);
   })

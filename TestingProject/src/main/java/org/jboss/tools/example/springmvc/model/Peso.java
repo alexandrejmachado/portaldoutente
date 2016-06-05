@@ -11,11 +11,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Peso.FIND_ALL_BY_UTENTE, query="SELECT p FROM Peso p WHERE p.numUtente = :" + Peso.UTENTE +" ORDER BY p.data DESC")
+	@NamedQuery(name=Peso.FIND_ALL_BY_UTENTE, query="SELECT p FROM Peso p WHERE p.numUtente = :" + Peso.UTENTE +" ORDER BY p.data ASC")
 })
 public class Peso {
 
@@ -38,6 +39,7 @@ public class Peso {
 	private String numUtente;
 	
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date data;
 
 	public Peso(){}
@@ -61,7 +63,7 @@ public class Peso {
 		return numUtente;
 	}
 
-	@JsonIgnore
+	@JsonFormat(pattern="dd-MM-yyyy hh:mm:ss")
 	public Date getData() {
 		return data;
 	}
