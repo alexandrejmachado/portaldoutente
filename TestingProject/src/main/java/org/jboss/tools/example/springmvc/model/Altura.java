@@ -11,12 +11,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 //test
 @Entity
 
 @NamedQueries({
-	@NamedQuery(name=Altura.FIND_ALL_BY_UTENTE, query="SELECT a FROM Altura a WHERE a.numUtente = :" + Altura.UTENTE +" ORDER BY a.data DESC")
+	@NamedQuery(name=Altura.FIND_ALL_BY_UTENTE, query="SELECT a FROM Altura a WHERE a.numUtente = :" + Altura.UTENTE +" ORDER BY a.data ASC")
 })
 public class Altura {
 	
@@ -38,7 +39,6 @@ public class Altura {
 	@NotNull
 	private String numUtente;
 	
-	@JsonIgnore
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
 	
@@ -63,7 +63,7 @@ public class Altura {
 		return numUtente;
 	}
 
-	@JsonIgnore
+	@JsonFormat(pattern="dd-MM-yyyy hh:mm:ss")
 	public Date getData() {
 		return data;
 	}

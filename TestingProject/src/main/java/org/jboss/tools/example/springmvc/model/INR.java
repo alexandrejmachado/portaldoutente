@@ -11,12 +11,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 //test
 @Entity
 
 @NamedQueries({
-	@NamedQuery(name=INR.FIND_ALL_BY_UTENTE, query="SELECT i FROM INR i WHERE i.numUtente = :" + INR.UTENTE +" ORDER BY i.data DESC")
+	@NamedQuery(name=INR.FIND_ALL_BY_UTENTE, query="SELECT i FROM INR i WHERE i.numUtente = :" + INR.UTENTE +" ORDER BY i.data ASC")
 })
 public class INR {
 	
@@ -75,7 +76,7 @@ public class INR {
 		return alarm;
 	}
 	
-	@JsonIgnore
+	@JsonFormat(pattern="dd-MM-yyyy hh:mm:ss")
 	public Date getData() {
 		return data;
 	}

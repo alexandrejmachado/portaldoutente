@@ -109,10 +109,10 @@ function drawGraph(data1) {
 	    .text("Frequency");
 
 };
-alert("running")
 var data1;
 var medida =  '<%=(String) request.getAttribute("medida")%>';
-temp=$.getJSON("https://localhost:8443/obterMedida/" + medida ,function(data){data1=data;}).done(function (){next()});
+path=window.location.host;
+temp=$.getJSON("https://"+path+"/obterMedida/" + medida ,function(data){data1=data;}).done(function (){next()});
 function next()
 {
 	temp=JSON.stringify(data1);
