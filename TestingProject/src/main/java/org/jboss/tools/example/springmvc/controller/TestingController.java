@@ -253,7 +253,8 @@ public class TestingController {
 			}
 		}
 		catch (Exception e){
-			System.out.println(e.toString());
+			e.printStackTrace();
+			//System.out.println(e);
 			return "false";
 
 		}
