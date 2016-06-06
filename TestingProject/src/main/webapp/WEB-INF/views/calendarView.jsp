@@ -21,8 +21,9 @@ $(document).ready(function() {
 			var2 = data[0]["start"];
 			console.log(var1);
 			console.log(var2);
+			var d = new Date();
 			$('#calendar').fullCalendar({
-					defaultDate: '2016-05-12',
+					defaultDate: d,
 					editable: false,
 					disableDragging:true,
 					eventLimit: true, // allow "more" link when too many events
