@@ -36,7 +36,7 @@ public class Medicacao {
 	@JsonIgnore
 	private int idMedicamento;
 	
-	private boolean estado = false; //esta a true se o medico ja confirmou que esta medicação existe, caso nao tenha confirmado manter-se-a a falso
+	private boolean estado = false; //esta a true se o medico ja confirmou que esta medicacao existe, caso nao tenha confirmado manter-se-a a falso
 
 	private EstadoRenovacao renovacao;
 	
