@@ -50,7 +50,7 @@
 				<ul class="barra">
 						
 					<li>
-						<a href="#mar">Marcação de Consultas</a>
+						<a href="/calendario">Marcação de Consultas</a>
 					</li>
 					<li>
 						<a href="#">Marcações Confirmadas</a>
@@ -59,13 +59,13 @@
 						<a href="#">Renovar Receita</a>
 					</li>
 					<li>
-						<a href="#">Medições</a>
+						<a href="/medicoes">Medições</a>
 					</li>
 					<li>
 						<a href="#">Agregado Familiar</a>
 					</li>
 					<li>
-						<a href="#">Pedido de Isenção</a>
+						<a href="/isencao">Pedido de Isenção</a>
 					</li>
 				</ul>
 			</div>
