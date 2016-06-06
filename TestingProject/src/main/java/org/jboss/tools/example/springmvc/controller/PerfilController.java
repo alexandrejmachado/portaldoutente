@@ -212,13 +212,43 @@ public class PerfilController {
 		return finalmsg;
 	}
 	
-	public static boolean verifyLogin(HttpSession session){
+	public boolean verifyLogin(HttpSession session) {
 		if(session.getAttribute("sessionID") == null){
 			return false;
 		}
 		else{
-			return true;
+			try {
+				if(utenteDao.verifyActivatedUser((String)session.getAttribute("sessionID")))
+				return true;
+				else{
+					session.removeAttribute("sessionID");
+				return false;
+				}
+			} catch (InvalidKeyException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NoSuchPaddingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalBlockSizeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (BadPaddingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		return false;
+		
 	}
 }
 
