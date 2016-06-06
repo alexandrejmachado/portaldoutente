@@ -109,6 +109,7 @@ function drawGraph(data1) {
 	    .text("Frequency");
 
 };
+
 var data1;
 var medida =  '<%=(String) request.getAttribute("medida")%>';
 path=window.location.host;

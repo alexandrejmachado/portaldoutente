@@ -114,6 +114,11 @@ public class UtenteDao {
 		return ut.isVerified();
 	}
 	
+	public boolean verifyActivatedUser(String user) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+		Utente ut = findUtenteById(Integer.parseInt(user));
+		return ut.isVerified();
+	}
+	
 	public boolean mudarIsencao(int username) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		Utente ut = findUtenteById(username);
 		boolean cenas = ut.setIsencao();
