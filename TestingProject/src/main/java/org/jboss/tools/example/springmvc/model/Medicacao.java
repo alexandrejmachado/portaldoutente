@@ -40,6 +40,8 @@ public class Medicacao {
 
 	private EstadoRenovacao renovacao;
 	
+	private Calendar validade;
+	
 	private double dose;
 	
 	private String indicacoes;
@@ -55,6 +57,9 @@ public class Medicacao {
 		this.indicacoes = indicacoes;
 		setRenovacao(renovacao);
 		this.comprimidosPorCaixa = comprimidosPorCaixa;
+		
+		validade= Calendar.getInstance();
+		validade.add(Calendar.MONTH, 6);
 		
 		cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, getDiasParaRenovacao() - 5);
@@ -83,6 +88,14 @@ public class Medicacao {
 
 	public void setCal(Calendar cal) {
 		this.cal = cal;
+	}
+	
+	public Date getValidade() {
+		return validade.getTime();
+	}
+	
+	public void setValidade(int meses) {
+		validade.add(Calendar.MONTH, meses);
 	}
 	
 	public String getRenovacao() {
@@ -147,5 +160,29 @@ public class Medicacao {
 		return (int) (comprimidosPorCaixa/dose);
 	}
 	
+	public boolean renovarMedicacao() {
+		Calendar cenas = Calendar.getInstance();
+		if (cenas.before(validade) && cenas.after(cal) && estado && renovacao==EstadoRenovacao.CADUCADO) {
+			renovacao=EstadoRenovacao.ACEITE;
+			return true;
+		}
+		else if (renovacao == EstadoRenovacao.PENDENTE) {
+			return true;
+		}
+		return false;
+	}
 	
+	public boolean checkMedicacao() {
+		Calendar cenas = Calendar.getInstance();
+		if (cenas.after(validade)) {
+			renovacao = EstadoRenovacao.REJEITADO;
+			return false;
+		}
+		else if (renovacao == EstadoRenovacao.CADUCADO) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 }
