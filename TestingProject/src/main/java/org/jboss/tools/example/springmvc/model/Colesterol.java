@@ -11,11 +11,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 //test
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Colesterol.FIND_ALL_BY_UTENTE, query="SELECT c FROM Colesterol c WHERE c.numUtente = :" + Colesterol.UTENTE +" ORDER BY c.data DESC")
+	@NamedQuery(name=Colesterol.FIND_ALL_BY_UTENTE, query="SELECT c FROM Colesterol c WHERE c.numUtente = :" + Colesterol.UTENTE +" ORDER BY c.data ASC")
 })
 public class Colesterol {
 	
@@ -63,7 +64,7 @@ public class Colesterol {
 	}
 
 
-	@JsonIgnore
+	@JsonFormat(pattern="dd-MM-yyyy hh:mm:ss")
 	public Date getData() {
 		return data;
 	}

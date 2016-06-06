@@ -55,9 +55,9 @@
 
 	</form>
 	<input id = "botao_reg" type="submit" onclick="aquivoueu()">
-  	<button id = "botao_voltar" onclick= "location.href='../index';">Voltar</button>
+  	<button id = "botao_voltar" onclick= "verMedida()" >Historico</button>
 </div>
-
+<div id="graph"></div>
 <script src='resources/js/jquery.js'></script>
 
 <script>
@@ -71,7 +71,7 @@ $("#medidas").change(function(){testing();});
   var items = [];
   $("#campos").html("");
   $.each( data, function( key, val ) {
-    items.push( key + ":\n <input class='campo' name='" + key + "'><br>" );
+    if(key!="data"){items.push( key + ":\n <input class='campo' name='" + key + "'><br>" );}
   });
   $("#campos").append(items);
   })
@@ -117,4 +117,8 @@ $("#medidas").change(function(){testing();});
 	      else $(this).find('span').html('&#x25BC;')
 	    })
 	});
+  function verMedida()
+  {
+	  $("#graph").load("https://"+path+"/visualizar/"+ medida);
+  }
 </script>

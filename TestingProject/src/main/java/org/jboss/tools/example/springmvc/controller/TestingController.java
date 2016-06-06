@@ -640,6 +640,15 @@ public class TestingController {
 		return "Adicionado";
 	}
 	
+	@RequestMapping(value="/visualizar/{tipoMedida}", method = RequestMethod.GET)
+	public ModelAndView showMedidas(HttpSession session,@PathVariable("tipoMedida") String tipoMedida)
+	{
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("medida", tipoMedida);
+		mav.setViewName("graficos");
+		return mav;
+	}
+	
 	
 	// TESTE DE SESSOES
 	//--------------------------------------------------
@@ -696,6 +705,7 @@ public class TestingController {
 		List<?> lista = null;
 		try {
 		System.out.println(tipoMedida);
+		System.out.println(session.getAttribute("sessionID"));
 		switch (tipoMedida) {
 		case "Altura":
 			lista = altDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));

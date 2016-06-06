@@ -11,11 +11,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Glicemia.FIND_ALL_BY_UTENTE, query="SELECT g FROM Glicemia g WHERE g.numUtente = :" + Glicemia.UTENTE +" ORDER BY g.data DESC")
+	@NamedQuery(name=Glicemia.FIND_ALL_BY_UTENTE, query="SELECT g FROM Glicemia g WHERE g.numUtente = :" + Glicemia.UTENTE +" ORDER BY g.data ASC")
 })
 public class Glicemia {
 
@@ -37,7 +38,6 @@ public class Glicemia {
 	@JsonIgnore
 	private String numUtente;
 	
-	@JsonIgnore
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
 	
@@ -67,8 +67,8 @@ public class Glicemia {
 		return numUtente;
 	}
 
-	@JsonIgnore
-	public Date getData_() {
+	@JsonFormat(pattern="dd-MM-yyyy hh:mm:ss")
+	public Date getData() {
 		return data;
 	}
 	

@@ -11,11 +11,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 //test
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Trigliceridos.FIND_ALL_BY_UTENTE, query="SELECT t FROM Trigliceridos t WHERE t.numUtente = :" + Trigliceridos.UTENTE +" ORDER BY t.data DESC")
+	@NamedQuery(name=Trigliceridos.FIND_ALL_BY_UTENTE, query="SELECT t FROM Trigliceridos t WHERE t.numUtente = :" + Trigliceridos.UTENTE +" ORDER BY t.data ASC")
 })
 public class Trigliceridos {
 	
@@ -61,7 +62,7 @@ public class Trigliceridos {
 		return numUtente;
 	}
 
-	@JsonIgnore
+	@JsonFormat(pattern="dd-MM-yyyy hh:mm:ss")
 	public Date getData() {
 		return data;
 	}

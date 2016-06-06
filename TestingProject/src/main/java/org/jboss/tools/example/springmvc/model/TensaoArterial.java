@@ -11,12 +11,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 
 @NamedQueries({
-	@NamedQuery(name=TensaoArterial.FIND_ALL_BY_UTENTE, query="SELECT t FROM TensaoArterial t WHERE t.numUtente = :" + TensaoArterial.UTENTE +" ORDER BY t.data DESC")
+	@NamedQuery(name=TensaoArterial.FIND_ALL_BY_UTENTE, query="SELECT t FROM TensaoArterial t WHERE t.numUtente = :" + TensaoArterial.UTENTE +" ORDER BY t.data ASC")
 })
 public class TensaoArterial {
 
@@ -62,7 +63,7 @@ public class TensaoArterial {
 			return id;
 		}
 
-		@JsonIgnore
+		@JsonFormat(pattern="dd-MM-yyyy hh:mm:ss")
 		public Date getData() {
 			return data;
 		}
