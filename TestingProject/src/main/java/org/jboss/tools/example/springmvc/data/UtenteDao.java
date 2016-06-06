@@ -52,11 +52,15 @@ public class UtenteDao {
 	
 	public Utente findUtenteById(int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		TypedQuery<Utente> query = em.createNamedQuery(Utente.FIND_BY_ID, Utente.class);
+		System.out.println("CIFRADO:"+Cifras.encrypt(Integer.toString(numUtente)));
 		query.setParameter(Utente.ID, Cifras.encrypt(Integer.toString(numUtente)));
 		try{
 			return query.getSingleResult();
 		}
 		catch(PersistenceException e){
+			System.out.println("AQUI VAI O DO DAO");
+			e.printStackTrace();
+			System.out.println("AQUI ACABOU O DO DAO");
 			return null;
 		}
 	}

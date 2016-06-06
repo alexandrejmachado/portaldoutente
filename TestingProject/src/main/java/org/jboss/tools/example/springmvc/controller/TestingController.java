@@ -219,7 +219,10 @@ public class TestingController {
 		ModelAndView mav = new ModelAndView();
 		try{
 			Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
+			System.out.println(currentUser);
+			System.out.println(currentUser.getPassword());
 			String hashLogin = HashTextTest.sha256(password);
+			System.out.println(hashLogin);
 			String loginPassword=currentUser.getPassword();
 			String passwordGuardiao = currentUser.getPasswordGuardiao();
 			System.out.println("passe guardiao: " + hashLogin.equals(passwordGuardiao));
