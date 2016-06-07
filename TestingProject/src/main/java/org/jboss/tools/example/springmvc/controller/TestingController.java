@@ -726,22 +726,7 @@ public class TestingController {
 		return "false";
 	}
 	
-	
-	
-	@RequestMapping(value="/testing")
-	@ResponseBody
-	public List<?> testing(HttpSession session) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException
-	{
-		try {
-			consultaDao.novo(0, 123123123, 2, "Sala A4", new Date());
-		} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
-				| BadPaddingException | IOException e) {
-			e.printStackTrace();
-			
-		}
-		return consultaDao.findAllByUtente(123123123);
-	}
-	
+		
 	@RequestMapping(value="/obterMedida/{tipoMedida}",method = RequestMethod.GET)
 	@ResponseBody
 	public List<?> obterMedida(HttpSession session, @PathVariable("tipoMedida") String tipoMedida) {

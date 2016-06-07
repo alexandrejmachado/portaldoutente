@@ -51,20 +51,27 @@ public class Consulta {
 	@NotNull
 	private String sala;
 	
+	private String observacoes;
+	
 	
 
 	private boolean feita = false;
 	
 	public Consulta(){}
 	
-	public Consulta(int idMedico, String numUtente, int idInstituicao, String sala, Date data){
+	public Consulta(int idMedico, String numUtente, int idInstituicao, String sala, Date data, String observacoes){
 		this.idMedico = idMedico;
 		this.numUtente = numUtente;
 		this.idInstituicao = idInstituicao;
 		this.data = data;
 		this.sala = sala;
+		this.observacoes = observacoes;
 	}
 
+	public String getObservacoes(){
+		return observacoes;
+	}
+	
 	public int getId() {
 		return id;
 	}

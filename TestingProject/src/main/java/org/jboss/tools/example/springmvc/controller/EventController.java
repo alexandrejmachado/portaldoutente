@@ -12,6 +12,7 @@ import java.util.List;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.servlet.http.HttpSession;
 
 import org.jboss.tools.example.springmvc.data.ConsultaDao;
 import org.jboss.tools.example.springmvc.model.Consulta;
@@ -36,7 +37,7 @@ public class EventController {
 	@ResponseBody
 	public ArrayList<Object> getEventos() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		//----------------------------------
-		//consultaDao.novo(25, 123123123, 123, "1", new Date());
+		//consultaDao.novo(25, 123123123, 123, "1", new Date(), "");
 		List<Consulta> all = consultaDao.findAll();
 		//----------------------------------
 		
@@ -61,12 +62,27 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="/marcarConsultaView", method = RequestMethod.GET, params={"data"})
-	public ModelAndView marcarConsultaView(@RequestParam(value = "data") String date){
+	public ModelAndView marcarConsultaView(@RequestParam(value = "data") String data){
 		//TODO meter o lock de sessao
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("consulta_prompt");
-		mav.addObject("data", date);
+		mav.addObject("data", data);
 		return mav;
 	}
 	
+	@RequestMapping(value="/persistirConsulta", method = RequestMethod.POST,params={"data", "obs", "numUtente", "instituicao"})
+	public String persistirConsulta(@RequestParam(value="data") Date data, @RequestParam(value="obs") String obs, 
+									@RequestParam(value="numUtente") String numUtente, @RequestParam(value="instituicao") String instituicao, HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		consultaDao.novo(13, Integer.parseInt(numUtente), Integer.parseInt(instituicao), "amarela", data, obs);
+		return null;
+		}
+	
+
 }
+
+
+
+
+
+
+
