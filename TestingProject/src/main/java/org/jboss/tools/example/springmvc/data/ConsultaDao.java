@@ -26,7 +26,7 @@ public class ConsultaDao {
 	private EntityManager em;
 	
 	public Consulta novo(int idMedico, int numUtente, int idInstituicao, String sala, Date data) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		Consulta Consulta = new Consulta(idMedico, Cifras.encrypt(Integer.toString(numUtente)), idInstituicao, data);
+		Consulta Consulta = new Consulta(idMedico, Cifras.encrypt(Integer.toString(numUtente)), idInstituicao, sala, data);
 		em.persist(Consulta);
 		return Consulta;
 	}
@@ -34,6 +34,11 @@ public class ConsultaDao {
 	public List<Consulta> findAllByUtente(int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		TypedQuery<Consulta> query = em.createNamedQuery(Consulta.FIND_ALL_BY_UTENTE, Consulta.class);
 		query.setParameter(Consulta.UTENTE, Cifras.encrypt(Integer.toString(numUtente)));
+		return query.getResultList();
+	}
+	
+	public List<Consulta> findAll() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		TypedQuery<Consulta> query = em.createNamedQuery(Consulta.FIND_ALL, Consulta.class);
 		return query.getResultList();
 	}
 }

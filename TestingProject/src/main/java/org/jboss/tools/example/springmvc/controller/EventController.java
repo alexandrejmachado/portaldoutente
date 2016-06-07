@@ -7,12 +7,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 import org.jboss.tools.example.springmvc.data.ConsultaDao;
+import org.jboss.tools.example.springmvc.model.Consulta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,14 +36,16 @@ public class EventController {
 	@ResponseBody
 	public ArrayList<Object> getEventos() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		//----------------------------------
-		//consultaDao.novo(1, 123123123, 123, "1", new Date());
+		//consultaDao.novo(25, 123123123, 123, "1", new Date());
+		List<Consulta> all = consultaDao.findAll();
 		//----------------------------------
+		
 		ArrayList<Object> lista= new ArrayList<Object>();
-		for(int i = 0; i<2; i++){
+		for(Consulta c : all){
 			HashMap<String,Object> mapa = new HashMap<String,Object>();
-			mapa.put("id", Integer.toString(i));
-			mapa.put("title", "titulo");
-			mapa.put("start", new Date().getTime());
+			mapa.put("id", Integer.toString(c.getId()));
+			mapa.put("title", "Consulta");
+			mapa.put("start", c.getData());
 			lista.add(mapa);
 		}
 		return lista;
