@@ -16,6 +16,8 @@
     
         <link href= <c:url value="/resources/css/main.css" ></c:url> rel="stylesheet"/>
         
+        <script src='<c:url value="/resources/js/jquery.js"></c:url>'></script>
+        
         <title>Portal do Utente</title>
     </head>
     
@@ -29,8 +31,10 @@
     </select>
     
     <textarea rows="4" cols="50">Observações</textarea>
+    
     <p>Confirmar marcação da consulta para: ${data}</p>
-    <button>
+    
+    <button onclick="marcarConsulta()">
         Sim
     </button>
     
@@ -44,7 +48,21 @@
         <div id="wrapper">
 
 			<!-- Sidebar -->
-    
+    <script>
+     var data=new Date('${data}');
+     function marcarConsulta()
+     {
+    	 var temp=$("select").val();
+    	 temp=temp.split(":");
+    	 data.setHours(temp[0]);
+    	 data.setMinutes(temp[1]);
+    	 data.setSeconds(0);
+    	 console.log(data);
+    	 $.post("https://"+ window.location.host+"/testCalendar/persistirConsulta",{data:data,obs:$("textarea").val(),instituicao:"1"})
+    	 
+     }
+     
+    </script>
     </body>
     
 </html>

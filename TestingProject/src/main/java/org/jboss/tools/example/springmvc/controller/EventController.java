@@ -87,11 +87,13 @@ public class EventController {
 		
 	}
 	
-	@RequestMapping(value="/persistirConsulta", method = RequestMethod.POST,params={"data", "obs", "numUtente", "instituicao"})
-	public String persistirConsulta(@RequestParam(value="data") Date data, @RequestParam(value="obs") String obs, 
-									@RequestParam(value="numUtente") String numUtente, @RequestParam(value="instituicao") String instituicao, HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+	@RequestMapping(value="/persistirConsulta", method = RequestMethod.POST,params={"data", "obs", "instituicao"})
+	@ResponseBody
+	public boolean persistirConsulta(@RequestParam(value="data") Date data, @RequestParam(value="obs") String obs, 
+									 @RequestParam(value="instituicao") String instituicao, HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		String numUtente="123123123";
 		consultaDao.novo(13, Integer.parseInt(numUtente), Integer.parseInt(instituicao), "amarela", data, obs);
-		return null;
+		return true;
 		}
 	
 	
