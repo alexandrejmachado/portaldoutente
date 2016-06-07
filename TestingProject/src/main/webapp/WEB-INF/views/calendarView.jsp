@@ -16,13 +16,10 @@
 
 $(document).ready(function() {
 	$.get("https://"+ window.location.host+"/testCalendar/getEventos", function(data){
-			console.log(typeof data[0]["title"]);
-			var1 = data[0]["title"];
-			var2 = data[0]["start"];
-			console.log(var1);
-			console.log(var2);
 			var d = new Date();
 			$('#calendar').fullCalendar({
+				timezone:'local',
+				timeFormat: 'H:mm',
 					defaultDate: d,
 					editable: false,
 					disableDragging:true,
