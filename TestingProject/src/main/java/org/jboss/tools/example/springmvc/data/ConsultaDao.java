@@ -3,6 +3,7 @@ package org.jboss.tools.example.springmvc.data;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +40,13 @@ public class ConsultaDao {
 	
 	public List<Consulta> findAll() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		TypedQuery<Consulta> query = em.createNamedQuery(Consulta.FIND_ALL, Consulta.class);
+		return query.getResultList();
+	}
+	
+	public List<Consulta> findWithDate(int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		TypedQuery<Consulta> query = em.createNamedQuery(Consulta.FIND_WITH_DATE, Consulta.class);
+		query.setParameter(Consulta.UTENTE, Cifras.encrypt(Integer.toString(numUtente)));
+		query.setParameter(Consulta.DATA, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 		return query.getResultList();
 	}
 }

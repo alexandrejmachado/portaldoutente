@@ -18,7 +18,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @NamedQueries({
 	@NamedQuery(name=Consulta.FIND_ALL, query="SELECT c FROM Consulta c"),
-	@NamedQuery(name=Consulta.FIND_ALL_BY_UTENTE, query="SELECT c FROM Consulta c WHERE c.numUtente = :" + Consulta.UTENTE +" ORDER BY c.data DESC")
+	@NamedQuery(name=Consulta.FIND_ALL_BY_UTENTE, query="SELECT c FROM Consulta c WHERE c.numUtente = :" + Consulta.UTENTE +" ORDER BY c.data DESC"),
+	@NamedQuery(name=Consulta.FIND_WITH_DATE, query="SELECT c FROM Consulta c WHERE c.numUtente= :"+ Consulta.UTENTE + " AND c.data > :"+ Consulta.DATA +" ORDER BY c.data DESC")
 })
 public class Consulta {
 
@@ -26,7 +27,11 @@ public class Consulta {
 	
 	public static final String FIND_ALL = "Consulta.FindAll";
 	
+	public static final String FIND_WITH_DATE = "Consulta.FindWithDate";
+	
 	public static final String UTENTE = "numUtente";
+	
+	public static final String DATA = "data";
 	
 	@JsonIgnore
 	@Id

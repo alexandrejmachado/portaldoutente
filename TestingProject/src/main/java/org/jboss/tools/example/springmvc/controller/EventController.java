@@ -62,12 +62,29 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="/marcarConsultaView", method = RequestMethod.GET, params={"data"})
-	public ModelAndView marcarConsultaView(@RequestParam(value = "data") String data){
+	public ModelAndView marcarConsultaView(@RequestParam(value = "data") Date data, HttpSession session) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		//TODO meter o lock de sessao
+		//-----------------------------------------
+		int numUtente = (int) session.getAttribute("sessionID");
+		List<Consulta> all = consultaDao.findWithDate(numUtente);
+		//-----------------------------------------
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("consulta_prompt");
-		mav.addObject("data", data);
-		return mav;
+		if(all.size() == 0){
+			mav.setViewName("consulta_prompt");
+			mav.addObject("data", data);
+			return mav;
+		}
+		else{
+			if(all.get(0).getData().equals(data)){
+				mav.setViewName("cenas");
+				return mav;
+			}
+			else{
+				mav.setViewName("erro");
+				return mav;
+			}
+		}
+		
 	}
 	
 	@RequestMapping(value="/persistirConsulta", method = RequestMethod.POST,params={"data", "obs", "numUtente", "instituicao"})
@@ -76,6 +93,7 @@ public class EventController {
 		consultaDao.novo(13, Integer.parseInt(numUtente), Integer.parseInt(instituicao), "amarela", data, obs);
 		return null;
 		}
+	
 	
 
 }
