@@ -9,28 +9,28 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class MesesConverter {
 	
-	HashMap<Integer, String> meses = new HashMap<Integer, String>();
+	HashMap<String, String> meses = new HashMap<String, String>();
 	
 	public MesesConverter(){
-		meses.put(0, "Janeiro");
-		meses.put(1, "Fevereiro");
-		meses.put(2, "Março");
-		meses.put(3, "Abril");
-		meses.put(4, "Maio");
-		meses.put(5, "Junho");
-		meses.put(6, "Julho");
-		meses.put(7, "Agosto");
-		meses.put(8, "Setembro");
-		meses.put(9, "Outubro");
-		meses.put(10, "Novembro");
-		meses.put(11, "Dezembro");
+		meses.put("Jan","01");
+		meses.put("Feb","02");
+		meses.put("Mar","03");
+		meses.put("Apr","04");
+		meses.put("May","05");
+		meses.put("Jun","06");
+		meses.put("Jul","07");
+		meses.put("Aug","08");
+		meses.put("Sep","09");
+		meses.put("Oct","10");
+		meses.put("Nov","11");
+		meses.put("Dec","11");
 	}
 	
-	public String getMesById(int mes){
+	public String getMesByName(String mes){
 		return this.meses.get(mes);
 	}
 	
-	public HashMap<Integer, String> getMeses(){
+	public HashMap<String, String> getMeses(){
 		return this.meses;
 	}
 }

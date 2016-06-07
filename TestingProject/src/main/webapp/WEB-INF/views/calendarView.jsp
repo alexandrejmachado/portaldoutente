@@ -19,7 +19,7 @@ $(document).ready(function() {
 			var d = new Date();
 			$('#calendar').fullCalendar({
 				timezone:'local',
-				timeFormat: 'H:mm',
+				timeFormat: 'HH:mm',
 					defaultDate: d,
 					editable: false,
 					disableDragging:true,
@@ -37,7 +37,7 @@ $(document).ready(function() {
 					    {
 					    	$.fancybox.open({
 								title :  "Marque uma Consulta pls",
-								href : 'https://' + window.location.host + "/testCalendar/marcarConsultaView?data="+new Date(start).toISOString().slice(0,10),
+								href : 'https://' + window.location.host + "/testCalendar/marcarConsultaView?data="+new Date(start).getTime(),
 								type : 'iframe',
 								width: '60%',
 								height: '60%',

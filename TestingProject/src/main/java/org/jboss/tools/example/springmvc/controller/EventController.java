@@ -24,11 +24,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import org.jboss.tools.example.springmvc.controller.MesesConverter;
+
 import org.jboss.tools.example.springmvc.controller.Cifras;
 
 @Controller
 @RequestMapping(value="/testCalendar")
 public class EventController {
+	
+	@Autowired
+	private MesesConverter mConv;
 	
 	@Autowired
 	private ConsultaDao consultaDao;
@@ -62,24 +67,34 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="/marcarConsultaView", method = RequestMethod.GET, params={"data"})
-	public ModelAndView marcarConsultaView(@RequestParam(value = "data") Date data, HttpSession session) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+	public ModelAndView marcarConsultaView(@RequestParam(value = "data") String data, HttpSession session) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		//TODO meter o lock de sessao
+		
 		//-----------------------------------------
-		int numUtente = (int) session.getAttribute("sessionID");
+		//int numUtente = (int) session.getAttribute("sessionID");
+		int numUtente = 123123123;
 		List<Consulta> all = consultaDao.findWithDate(numUtente);
 		//-----------------------------------------
 		ModelAndView mav = new ModelAndView();
+		Date temp = new Date(Long.parseLong(data));
+		String[] tempD = temp.toString().split(" ");
+		
+		String out = tempD[5] + "-"+ mConv.getMesByName(tempD[1])+"-"+ tempD[2];
 		if(all.size() == 0){
 			mav.setViewName("consulta_prompt");
-			mav.addObject("data", data);
+			mav.addObject("data", out);
 			return mav;
 		}
 		else{
-			if(all.get(0).getData().equals(data)){
+			String data1 = all.get(0).getData().toString().split(" ")[0];
+			String data2 = new java.sql.Timestamp(temp.getTime()).toString().split(" ")[0];
+			if(data1.equals(data2)){
+				// enviar info sobre a consulta
 				mav.setViewName("cenas");
 				return mav;
 			}
 			else{
+				// informar que nao pode marcar consulta para outro dia
 				mav.setViewName("erro");
 				return mav;
 			}
@@ -96,6 +111,9 @@ public class EventController {
 		return true;
 		}
 	
+	@RequestMapping(value="/datatest")
+	@ResponseBody
+	public Date as(){return new Date();}
 	
 
 }
