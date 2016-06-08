@@ -24,8 +24,8 @@ public class MedicacaoDao {
 	@Autowired
 	private EntityManager em;
 	
-	public Medicacao novaMedicacao(){
-		Medicacao Medicacao = new Medicacao();
+	public Medicacao novaMedicacao(int numUtente, int idMedicamento, double dose, String indicacoes, String renovacao, int comprimidosPorCaixa) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		Medicacao Medicacao = new Medicacao(Cifras.encrypt(Integer.toString(numUtente)), idMedicamento, dose, indicacoes, renovacao, comprimidosPorCaixa);
 		em.persist(Medicacao);
 		return Medicacao;
 	}
