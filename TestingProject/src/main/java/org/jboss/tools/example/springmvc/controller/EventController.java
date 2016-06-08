@@ -15,6 +15,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpSession;
 
 import org.jboss.tools.example.springmvc.data.ConsultaDao;
+import org.jboss.tools.example.springmvc.model.Cirurgia;
 import org.jboss.tools.example.springmvc.model.Consulta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -84,6 +85,13 @@ public class EventController {
 		if(all.size() == 0){
 			mav.setViewName("consulta_prompt");
 			mav.addObject("data", out);
+			//---------------CONA-------------------------
+			ArrayList<String> lista = new ArrayList<String>();
+			lista.add("10:00");
+			lista.add("14:00");
+			lista.add("16:30");
+			mav.addObject("lista", lista);
+			//---------------CONA-------------------------
 			return mav;
 		}
 		else{

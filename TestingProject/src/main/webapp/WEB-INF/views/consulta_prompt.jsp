@@ -30,6 +30,12 @@
         <option value="16:30">16:30</option>
     </select>
     
+    <select>
+    	<c:forEach items="${horas}" var="slot">
+    		<option value="${slot}"><c:out value="${slot}"/></option>
+    	</c:forEach>	
+    </select>
+    
     <textarea rows="4" cols="50">Observações</textarea>
     
     <p>Confirmar marcação da consulta para: ${data}</p>
