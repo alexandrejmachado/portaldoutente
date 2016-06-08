@@ -30,9 +30,12 @@ public class MedicamentoDao {
 		return Medicamento;
 	}
 	
-	public List<Medicamento> findAllByUtente() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		TypedQuery<Medicamento> query = em.createNamedQuery(Medicamento.FIND_ALL, Medicamento.class);
-		return query.getResultList();
+	
+	public Medicamento findByNome(String nome) {
+		TypedQuery<Medicamento> query = em.createNamedQuery(Medicamento.FIND_BY_NAME, Medicamento.class);
+		query.setParameter(Medicamento.NOME, nome);
+		return query.getSingleResult();
 	}
+	
 	
 }
