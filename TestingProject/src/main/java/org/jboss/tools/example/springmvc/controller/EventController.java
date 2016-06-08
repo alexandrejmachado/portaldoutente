@@ -63,6 +63,7 @@ public class EventController {
 		//TODO meter o lock de sessao
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("calendarView");
+		mav.addObject("data", new Date().getTime());
 		return mav;
 	}
 	
@@ -110,6 +111,13 @@ public class EventController {
 		consultaDao.novo(13, Integer.parseInt(numUtente), Integer.parseInt(instituicao), "amarela", data, obs);
 		return true;
 		}
+	
+	@RequestMapping(value="/removerConsulta", method = RequestMethod.POST, params={"consultaId"})
+	@ResponseBody
+	public boolean removerConsulta(@RequestParam(value="consultaId") String consultaId){
+		consultaDao.remove(Integer.parseInt(consultaId));
+		return true;
+	}
 	
 	@RequestMapping(value="/datatest")
 	@ResponseBody

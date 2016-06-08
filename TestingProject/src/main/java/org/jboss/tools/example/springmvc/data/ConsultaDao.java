@@ -32,6 +32,26 @@ public class ConsultaDao {
 		return Consulta;
 	}
 	
+	
+	public boolean remove(int consultaId){
+		try{
+			Consulta consulta = findById(consultaId);
+			em.remove(consulta);
+			return true;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	
+	public Consulta findById(int id){
+		TypedQuery<Consulta> query = em.createNamedQuery(Consulta.FIND_BY_ID, Consulta.class);
+		query.setParameter(Consulta.ID, id);
+		return query.getSingleResult();
+	}
+	
 	public List<Consulta> findAllByUtente(int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		TypedQuery<Consulta> query = em.createNamedQuery(Consulta.FIND_ALL_BY_UTENTE, Consulta.class);
 		query.setParameter(Consulta.UTENTE, Cifras.encrypt(Integer.toString(numUtente)));

@@ -16,7 +16,8 @@
 
 $(document).ready(function() {
 	$.get("https://"+ window.location.host+"/testCalendar/getEventos", function(data){
-			var d = new Date();
+			var pel = ${data}
+			var d = new Date(pel);
 			$('#calendar').fullCalendar({
 				timezone:'local',
 				timeFormat: 'HH:mm',
@@ -28,7 +29,7 @@ $(document).ready(function() {
 					selectable: true,
 					selectHelper: true,
 					select: function(start, end) {
-						today= new Date
+						today= d
 					    if(new Date(start) < new Date())
 					    {
 					        alert("Não pode marcar consultas para datas passadas");
