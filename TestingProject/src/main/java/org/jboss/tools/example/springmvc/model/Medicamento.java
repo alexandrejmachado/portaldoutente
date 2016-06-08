@@ -25,11 +25,61 @@ public class Medicamento {
 	
 	private String tipo;
 	
-	private double doseDiaria;
+	private int comprimidosPorCaixa;
 	
 	
 	
 	public Medicamento(){}
+
+
+
+	public int getId() {
+		return id;
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+	public String getNome() {
+		return nome;
+	}
+
+
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+
+	public String getTipo() {
+		return tipo;
+	}
+
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
+
+	public int getComprimidos() {
+		return comprimidosPorCaixa;
+	}
+
+
+
+	public void setComprimidos(int comprimidosPorCaixa) {
+		this.comprimidosPorCaixa = comprimidosPorCaixa;
+	}
+	
+	
 	
 	
 	
