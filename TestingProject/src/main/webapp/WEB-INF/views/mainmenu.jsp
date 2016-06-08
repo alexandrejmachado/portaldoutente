@@ -74,6 +74,9 @@
 						<a href="#">Renovar Receita</a>
 					</li>
 					<li>
+						<a href="/medicacao/view">Registar Medicação</a>
+					</li>
+					<li>
 						<a href="/medicoes">Medições</a>
 					</li>
 					<li>

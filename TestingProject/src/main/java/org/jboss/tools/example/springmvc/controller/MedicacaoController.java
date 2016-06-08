@@ -1,5 +1,6 @@
 package org.jboss.tools.example.springmvc.controller;
 
+<<<<<<< HEAD
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -13,14 +14,25 @@ import org.jboss.tools.example.springmvc.data.MedicacaoDao;
 import org.jboss.tools.example.springmvc.data.MedicamentoDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
 import org.jboss.tools.example.springmvc.model.Medicamento;
+=======
+import java.util.Date;
+
+import org.jboss.tools.example.springmvc.data.UtenteDao;
+>>>>>>> branch 'master' of http://130.211.146.91/melancias/portalDoUtente1.git
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 @RequestMapping(value="/medicacao")
 public class MedicacaoController {
+
+	@Autowired
+	private UtenteDao utenteDao;
 	
+<<<<<<< HEAD
 	@Autowired
 	public MedicamentoDao medDao;
 	
@@ -42,5 +54,18 @@ public class MedicacaoController {
 	public void verificarMedicacao(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		medicacaoDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID"))); 
 	}
+=======
+	private AuthController as= new AuthController();
+	
+	
+	@RequestMapping(value="/view")
+	public ModelAndView calendarView(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("medicamentos");
+		return mav;
+	}
+
+
+>>>>>>> branch 'master' of http://130.211.146.91/melancias/portalDoUtente1.git
 
 }

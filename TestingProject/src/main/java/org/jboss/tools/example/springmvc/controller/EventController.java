@@ -85,13 +85,14 @@ public class EventController {
 		if(all.size() == 0){
 			mav.setViewName("consulta_prompt");
 			mav.addObject("data", out);
-			//---------------CONA-------------------------
-			ArrayList<String> lista = new ArrayList<String>();
-			lista.add("10:00");
-			lista.add("14:00");
-			lista.add("16:30");
+			//----------------------------------------
+			List<Consulta> conList = consultaDao.findByDate(data);
+			for(Consulta c : conList){
+				System.out.println(c.getData());
+			}
+			ArrayList<String> lista = Horarios.getHorarios();
 			mav.addObject("lista", lista);
-			//---------------CONA-------------------------
+			//----------------------------------------
 			return mav;
 		}
 		else{
