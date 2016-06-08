@@ -19,7 +19,9 @@
   	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 </head>
-
+<style>
+.ui-autocomplete { max-height: 200px; overflow-y: auto; overflow-x: hidden;}
+</style>
 <body background="/resources/gfx/Final2.png">
 
  <div class="container">
@@ -49,7 +51,7 @@
 
 <div id="automed" style="display:flex;align-items:center;">
 <label for="autocomplete">Escolha um Medicamento: </label>
-<input id="autocomplete">
+<input id="autocomplete" style="width: 40%;">
 </div>
 
 <script>
