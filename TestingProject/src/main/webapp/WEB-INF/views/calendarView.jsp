@@ -37,7 +37,7 @@ $(document).ready(function() {
 					    else
 					    {
 					    	$.fancybox.open({
-								title :  "Marque uma Consulta pls",
+								title :  "Marque uma consulta por favor",
 								href : 'https://' + window.location.host + "/testCalendar/marcarConsultaView?data="+new Date(start).getTime(),
 								type : 'iframe',
 								width: '60%',

@@ -22,18 +22,11 @@
     </head>
     
     <body background=<c:url value="/resources/gfx/Final2.png"/>>
-        
+         
     <select>
-        <option value="08:00">08:00</option>
-        <option value="11:30">11:30</option>
-        <option value="14:00">14:00</option>
-        <option value="16:30">16:30</option>
-    </select>
-    
-    <select>
-    	<c:forEach items="${horas}" var="slot">
+    	<c:forEach items="${lista}" var="slot">
     		<option value="${slot}"><c:out value="${slot}"/></option>
-    	</c:forEach>	
+    	</c:forEach>   		
     </select>
     
     <textarea rows="4" cols="50">Observações</textarea>
