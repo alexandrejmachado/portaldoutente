@@ -63,6 +63,7 @@ public class EventController {
 		//TODO meter o lock de sessao
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("calendarView");
+		mav.addObject("data", new Date().getTime());
 		return mav;
 	}
 	
