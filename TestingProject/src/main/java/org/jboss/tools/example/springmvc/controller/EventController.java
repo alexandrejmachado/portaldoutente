@@ -112,6 +112,13 @@ public class EventController {
 		return true;
 		}
 	
+	@RequestMapping(value="/removerConsulta", method = RequestMethod.POST, params={"consultaId"})
+	@ResponseBody
+	public boolean removerConsulta(@RequestParam(value="consultaId") String consultaId){
+		consultaDao.remove(Integer.parseInt(consultaId));
+		return true;
+	}
+	
 	@RequestMapping(value="/datatest")
 	@ResponseBody
 	public Date as(){return new Date();}
