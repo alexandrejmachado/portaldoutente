@@ -22,6 +22,8 @@ import org.jboss.tools.example.springmvc.data.UtenteDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -43,8 +45,8 @@ public class MedicacaoController {
 	
 	
 	
-	@RequestMapping(value="/inserir")
-	public void inserirMedicacao(HttpSession session, String nomeMedicamento, double dosagemDiaria, String indicacoes, String renovacao) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+	@RequestMapping(value="/inserir", method = RequestMethod.POST,params={"nome", "dosagem", "indicacoes", "renovacao"})
+	public void inserirMedicacao(HttpSession session, @RequestParam(value="nome") String nomeMedicamento, @RequestParam(value="dosagem") double dosagemDiaria, @RequestParam(value="indicacoes") String indicacoes, @RequestParam(value="renovacao") String renovacao) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		Medicamento med = medDao.findByNome(nomeMedicamento);
 		medicacaoDao.novaMedicacao(Integer.parseInt((String) session.getAttribute("sessionID")), med.getId(), dosagemDiaria, indicacoes, renovacao, med.getComprimidos());
 	}
