@@ -28,5 +28,8 @@
 <body>
   <h1>PAGINA INICIAL</h1>
   <a href="/TestingProject/cont/vista">Ir para Vista =D</a>
+  <p>CONSULTA: ${consultaId}</p>
+ <p> APAGAR CONSULTA?</p>
+ <button>SIM</button> <button>NÃO</button>
 </body>
 </html>

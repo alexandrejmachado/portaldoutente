@@ -81,8 +81,9 @@ public class EventController {
 		Date temp = new Date(Long.parseLong(data));
 		String[] tempD = temp.toString().split(" ");
 		
+		// data do dia que foi clicado
 		String out = tempD[5] + "-"+ mConv.getMesByName(tempD[1])+"-"+ tempD[2];
-		if(true){
+		if(all.size() == 0){
 			mav.setViewName("consulta_prompt");
 			mav.addObject("data", out);
 			//----------------------------------------
@@ -103,6 +104,8 @@ public class EventController {
 			String data2 = new java.sql.Timestamp(temp.getTime()).toString().split(" ")[0];
 			if(data1.equals(data2)){
 				// enviar info sobre a consulta
+				int consultaId = consultaDao.findByUtenteAndData(numUtente,data).getId();
+				mav.addObject("consultaId", consultaId);
 				mav.setViewName("cenas");
 				return mav;
 			}

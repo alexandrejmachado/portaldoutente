@@ -54,18 +54,24 @@ public class ConsultaDao {
 	}
 	
 	public List<Consulta> findByDate(String data) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		
+		try{
 			Query query = em.createNativeQuery("SELECT * FROM Consulta WHERE Consulta.data LIKE ?",Consulta.class);
 			String actualDate = new java.sql.Date(Long.parseLong(data)).toString() + "%";
 			query.setParameter(1, actualDate);
 			return query.getResultList();
-		
-		/*
+		}
 		catch(Exception e){
 			e.printStackTrace();
 			return null;
 		}
-		*/
+	}
+	
+	public Consulta findByUtenteAndData(int numUtente, String data) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		Query query = em.createNativeQuery("SELECT * FROM Consulta WHERE Consulta.numUtente = ? AND Consulta.data LIKE ?",Consulta.class);
+		String actualDate = new java.sql.Date(Long.parseLong(data)).toString() + "%";
+		query.setParameter(1,Cifras.encrypt(Integer.toString(numUtente)));
+		query.setParameter(2,actualDate);
+		return (Consulta) query.getSingleResult();
 	}
 	
 	public List<Consulta> findAllByUtente(int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
