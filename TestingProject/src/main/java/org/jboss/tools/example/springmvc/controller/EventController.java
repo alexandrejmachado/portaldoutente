@@ -82,17 +82,18 @@ public class EventController {
 		String[] tempD = temp.toString().split(" ");
 		
 		String out = tempD[5] + "-"+ mConv.getMesByName(tempD[1])+"-"+ tempD[2];
-		if(all.size() == 0){
+		if(true){
 			mav.setViewName("consulta_prompt");
 			mav.addObject("data", out);
 			//----------------------------------------
-			
+			ArrayList<String> lista = Horarios.getHorarios();
 			List<Consulta> conList = consultaDao.findByDate(data);
 			for(Consulta c : conList){
-				System.out.println(c.getData());
+				System.out.println(c.getData().toString().substring(11, 16));
+				lista.remove(c.getData().toString().substring(11, 16));
 			}
 			
-			ArrayList<String> lista = Horarios.getHorarios();
+			
 			mav.addObject("lista", lista);
 			//----------------------------------------
 			return mav;
