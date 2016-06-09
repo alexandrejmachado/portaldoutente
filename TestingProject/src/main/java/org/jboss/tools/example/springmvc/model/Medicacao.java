@@ -183,6 +183,10 @@ public class Medicacao {
 		else if (renovacao == EstadoRenovacao.CADUCADO) {
 			return false;
 		}
+		else if (cenas.after(cal)) {
+			setRenovacao("Caducado");
+			return false;
+		}
 		else {
 			return true;
 		}

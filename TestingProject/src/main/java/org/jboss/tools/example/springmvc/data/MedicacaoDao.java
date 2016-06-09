@@ -33,7 +33,11 @@ public class MedicacaoDao {
 	public List<Medicacao> findAllByUtente(int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		TypedQuery<Medicacao> query = em.createNamedQuery(Medicacao.FIND_ALL_BY_UTENTE, Medicacao.class);
 		query.setParameter(Medicacao.UTENTE, Cifras.encrypt(Integer.toString(numUtente)));
-		return query.getResultList();
+		List<Medicacao> lista = query.getResultList();
+		for (Medicacao elem : lista) {
+			elem.checkMedicacao();
+		}
+		return lista;
 	}
 	
 }
