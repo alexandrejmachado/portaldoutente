@@ -67,6 +67,50 @@ background: rgb(249, 249, 249);
   padding-bottom: 10px;
 }
 
+/*------Medicoes-----*/
+
+.registo,#frase{
+ margin-top: 4.5%;
+ text-align: center;
+ margin-right: 42%;
+ font-family:  'DengXian', Arial, sans-serif;
+ font-size: 20px;
+ color: black;
+}
+
+#frase {
+ text-align: center;
+ font-color: black;
+ width: 100%;
+}
+#medidas{
+ color: black;
+  text-align: center;
+ 	
+}
+
+#campo,.campo, #campos, .campos{
+ margin-bottom: 10px;
+ color: black;
+ font-size: 15px;
+  font-color: black;
+  text-align: center;
+}
+
+#botao_reg,#botao_voltar{
+ background: transparent;
+ border: 0.3px solid;
+ margin-top: 7px;
+ margin-bottom: 5px;
+  font-color: black;
+ }
+
+.botao_reg {
+	color: white; 
+}
+
+/*------- End Medicoes -------*/
+
 /*------Receitas--------------*/
 
 #caixaReceita  {
