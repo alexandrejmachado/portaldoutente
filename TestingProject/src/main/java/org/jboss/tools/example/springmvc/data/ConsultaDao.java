@@ -12,6 +12,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 
 import org.jboss.tools.example.springmvc.controller.Cifras;
 import org.jboss.tools.example.springmvc.model.Consulta;
@@ -53,10 +54,19 @@ public class ConsultaDao {
 	}
 	
 	public List<Consulta> findByDate(String data) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		TypedQuery<Consulta> query = em.createNamedQuery(Consulta.FIND_BY_DATE, Consulta.class);
-		String actualDate = new java.sql.Date(Long.parseLong(data)).toString() + "%";
-		query.setParameter(Consulta.DATA, actualDate);
-		return query.getResultList();
+		
+			Query query = em.createNativeQuery("SELECT * FROM Consulta WHERE Consulta.data LIKE ?");
+			String actualDate = new java.sql.Date(Long.parseLong(data)).toString() + "%";
+			System.out.println(actualDate);
+			query.setParameter(1, actualDate);
+			return query.getResultList();
+		
+		/*
+		catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+		*/
 	}
 	
 	public List<Consulta> findAllByUtente(int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{

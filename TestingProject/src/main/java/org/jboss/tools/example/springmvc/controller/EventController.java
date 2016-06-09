@@ -86,10 +86,12 @@ public class EventController {
 			mav.setViewName("consulta_prompt");
 			mav.addObject("data", out);
 			//----------------------------------------
+			
 			List<Consulta> conList = consultaDao.findByDate(data);
 			for(Consulta c : conList){
 				System.out.println(c.getData());
 			}
+			
 			ArrayList<String> lista = Horarios.getHorarios();
 			mav.addObject("lista", lista);
 			//----------------------------------------
