@@ -50,6 +50,7 @@ public class UtenteDao {
 //		return novoUtente;
 //	}
 	
+	
 	public Utente findUtenteById(int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		TypedQuery<Utente> query = em.createNamedQuery(Utente.FIND_BY_ID, Utente.class);
 		System.out.println("CIFRADO:"+Cifras.encrypt(Integer.toString(numUtente)));
