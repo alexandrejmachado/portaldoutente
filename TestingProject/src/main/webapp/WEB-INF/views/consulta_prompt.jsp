@@ -57,7 +57,7 @@
     	 data.setMinutes(temp[1]);
     	 data.setSeconds(0);
     	 console.log(data);
-    	 $.post("https://"+ window.location.host+"/testCalendar/persistirConsulta",{data:data,obs:$("textarea").val(),instituicao:"1"});
+    	 $.post("https://"+ window.location.host+"/calendario/persistirConsulta",{data:data,obs:$("textarea").val(),instituicao:"1"});
     	 parent.window.location.reload();
     	 
      }

@@ -155,9 +155,9 @@
 								      else $(this).find('span').html('&#x25BC;')
 								    })
 								});
-							  function verMedida()
+							  function verMedida(medida2)
 							  {
-								  $("#graph").load("https://"+path+"/visualizar/"+ medida);
+								  $("#peso").load("https://"+window.location.host+"/visualizar/"+ medida2);
 							  }
 							</script>
 							</div> 							
@@ -175,9 +175,8 @@
 							        </a>
 							      </h4>
 							    </div>
-							    <div id="collapseOne" class="panel-collapse collapse in">
-							      <div class="panel-body">
-							       TEXTO
+							    <div id="collapseOne" class="panel-collapse collapse in" onclick='verMedida("Peso")'>
+							      <div id="peso" class="panel-body">
 							      </div>
 							    </div>
 							  </div>

@@ -65,7 +65,7 @@
 				<ul class="barra">
 						
 					<li>
-						<a href="/calendario">Marcação de Consultas</a>
+						<a href="/calendario/view">Marcação de Consultas</a>
 					</li>
 					<li>
 						<a href="#">Marcações Confirmadas</a>

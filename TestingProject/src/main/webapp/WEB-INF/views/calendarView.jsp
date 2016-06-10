@@ -176,7 +176,7 @@
 <link href="<c:url value="/resources/res-cal/jquery.fancybox.css"> </c:url>" rel='stylesheet' media='screen' />
 <script>
 $(document).ready(function() {
-	$.get("https://"+ window.location.host+"/testCalendar/getEventos").done(function(data){
+	$.get("https://"+ window.location.host+"/calendario/getEventos").done(function(data){
 			var pel = ${data}
 			var d = new Date(pel);
 			$('#calendar').fullCalendar({
@@ -199,7 +199,7 @@ $(document).ready(function() {
 					    {
 					    	$.fancybox.open({
 								title :  "Marque uma consulta por favor",
-								href : 'https://' + window.location.host + "/testCalendar/marcarConsultaView?data="+new Date(start).getTime(),
+								href : 'https://' + window.location.host + "/calendario/marcarConsultaView?data="+new Date(start).getTime(),
 								type : 'iframe',
 								width: '60%',
 								height: '60%',

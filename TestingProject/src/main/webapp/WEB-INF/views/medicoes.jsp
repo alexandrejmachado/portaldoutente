@@ -155,9 +155,9 @@
 								      else $(this).find('span').html('&#x25BC;')
 								    })
 								});
-							  function verMedida()
+							  function verMedida(medida2)
 							  {
-								  $("#graph").load("https://"+path+"/visualizar/"+ medida);
+								  $("#"+medida2).html('<object data="https://'+window.location.host+'/visualizar/'+medida2+'" style="width:100%"/>')
 							  }
 							</script>
 							</div> 							
@@ -169,15 +169,15 @@
 							  <div class="panel panel-default">
 							    <div class="panel-heading">
 							      <h4 class="panel-title">
-							        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+							        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="verMedida('Peso')">
 							          <span class="glyphicon glyphicon-minus"></span>
 							          Peso
 							        </a>
 							      </h4>
 							    </div>
 							    <div id="collapseOne" class="panel-collapse collapse in">
-							      <div class="panel-body">
-							       TEXTO
+							      <div id="Peso" class="panel-body">
+							       
 							      </div>
 							    </div>
 							  </div>
@@ -185,15 +185,15 @@
 							  <div class="panel panel-default">
 							    <div class="panel-heading">
 							      <h4 class="panel-title">
-							        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+							        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="verMedida('Altura')">
 							          <span class="glyphicon glyphicon-plus"></span>
 							          Altura
 							        </a>
 							      </h4>
 							    </div>
 							    <div id="collapseTwo" class="panel-collapse collapse">
-							      <div class="panel-body">
-							      TEXTO
+							      <div id="Altura" class="panel-body">
+							      
 							        </div>
 							     </div>
 							  </div>
@@ -201,15 +201,15 @@
 							  <div class="panel panel-default">
 							    <div class="panel-heading">
 							      <h4 class="panel-title">
-							        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+							        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" onclick="verMedida('Colesterol')">
 							          <span class="glyphicon glyphicon-plus"></span>
 							          Colesterol
 							        </a>
 							      </h4>
 							    </div>
 							    <div id="collapseThree" class="panel-collapse collapse">
-							      <div class="panel-body">
-							        TEXTO
+							      <div id="Colesterol" class="panel-body">
+							       
 							      </div>
 							    </div>
 							  </div>

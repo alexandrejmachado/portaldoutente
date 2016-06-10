@@ -200,18 +200,6 @@ public class TestingController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/calendario")
-	public ModelAndView calendarioController(HttpSession session){
-		ModelAndView mav = new ModelAndView();
-		if(verifyLogin(session)){
-			mav.setViewName("calendario");
-		}
-		else{
-			mav.setViewName("redirect:/index");
-		}
-		return mav;
-	}
-	
 	
 	@RequestMapping(value = "/loginUtente", method = RequestMethod.POST, params={"username", "password"})
 	@ResponseBody

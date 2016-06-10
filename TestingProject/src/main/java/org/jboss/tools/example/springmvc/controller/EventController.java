@@ -30,7 +30,7 @@ import org.jboss.tools.example.springmvc.controller.MesesConverter;
 import org.jboss.tools.example.springmvc.controller.Cifras;
 
 @Controller
-@RequestMapping(value="/testCalendar")
+@RequestMapping(value="/calendario")
 public class EventController {
 	
 	@Autowired
@@ -133,10 +133,6 @@ public class EventController {
 		consultaDao.remove(Integer.parseInt(consultaId));
 		return true;
 	}
-	
-	@RequestMapping(value="/datatest")
-	@ResponseBody
-	public Date as(){return new Date();}
 	
 
 }
