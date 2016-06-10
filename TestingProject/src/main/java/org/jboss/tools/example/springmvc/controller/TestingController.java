@@ -206,11 +206,14 @@ public class TestingController {
 	public String loginUtente(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password, HttpSession session) throws NoSuchAlgorithmException{
 		ModelAndView mav = new ModelAndView();
 		try{
+			System.out.println("A tentar ir buscar o utente");
 			Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
+			System.out.println("Aqui em baixo vai o utente");
 			System.out.println(currentUser);
+			System.out.println("Pass do Utente:");
 			System.out.println(currentUser.getPassword());
 			String hashLogin = HashTextTest.sha256(password);
-			System.out.println(hashLogin);
+			System.out.println("PASS EM HASH:" + hashLogin);
 			String loginPassword=currentUser.getPassword();
 			String passwordGuardiao = currentUser.getPasswordGuardiao();
 			System.out.println("passe guardiao: " + hashLogin.equals(passwordGuardiao));

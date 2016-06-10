@@ -55,12 +55,11 @@ public class UtenteDao {
 		System.out.println("CIFRADO:"+Cifras.encrypt(Integer.toString(numUtente)));
 		query.setParameter(Utente.ID, Cifras.encrypt(Integer.toString(numUtente)));
 		try{
+			System.out.println("A verificar se existe alguem com o mesmo numero");
 			return query.getSingleResult();
 		}
 		catch(PersistenceException e){
-			System.out.println("AQUI VAI O DO DAO");
-			e.printStackTrace();
-			System.out.println("AQUI ACABOU O DO DAO");
+			System.out.println("Nao encontrei, devolvi null");
 			return null;
 		}
 	}
