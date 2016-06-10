@@ -452,7 +452,8 @@ public class TestingController {
 				
 				String hashTest;
 				hashTest = HashTextTest.sha256(password);
-				String code = as.sendEmail(mail);
+				//String code = as.sendEmail(mail);
+				String code = "";
 				String codeSms="";
 				try{
 				//codeSms = as.sendSms(telemovel);
