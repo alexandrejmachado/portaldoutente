@@ -39,7 +39,6 @@
 					<div class="col-md-11">Portal do Utente</div>
 					<div class="col-md-1" id="entrar">Entrar</div>
 				</div>
-            
             </div>
 			
 	<div class="col-lg-12" id="caixaGig">  <!--  -->

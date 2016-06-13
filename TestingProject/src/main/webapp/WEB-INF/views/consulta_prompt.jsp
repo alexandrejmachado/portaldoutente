@@ -13,38 +13,48 @@
         <meta charset="utf-8">
         
         <link href= <c:url value="/resources/css/bootstrap.min.css" ></c:url> rel="stylesheet"/>
-    
-        <link href= <c:url value="/resources/css/main.css" ></c:url> rel="stylesheet"/>
+    	<link href= <c:url value="/resources/css/bootstrap-select.css" ></c:url> rel="stylesheet"/>
+        <link href= <c:url value="/resources/css/main1.css" ></c:url> rel="stylesheet"/>
         
         <script src='<c:url value="/resources/js/jquery.js"></c:url>'></script>
         
         <title>Portal do Utente</title>
     </head>
+   
     
-    <body background=<c:url value="/resources/gfx/Final2.png"/>>
-         
-    <select>
-    	<c:forEach items="${lista}" var="slot">
-    		<option value="${slot}"><c:out value="${slot}"/></option>
-    	</c:forEach>   		
-    </select>
+    <body>
     
-    <textarea rows="4" cols="50">Observações</textarea>
     
-    <p>Confirmar marcação da consulta para: ${data}</p>
+    <div id="caixaMarcacao" style="text-align:center;">   
     
-    <button onclick="marcarConsulta()">
-        Sim
-    </button>
     
-    <button onclick="parent.$.fancybox.close()">
-        Não
-    </button>
+     <p id="pMarc">Confirmar marcação da consulta para: ${data}</p>
+     
+     
+	    <label for="hora">Selecione a hora:</label>
+	    <select style="padding:10px; border-radius: 5px; color: grey;" id="hora">
+	    	<c:forEach items="${lista}" var="slot">
+	    		<option value="${slot}"><c:out value="${slot}"/></option>
+	    	</c:forEach>   		
+	    </select>
+	    
+	    <br><br>
+	    
+		    <label for="texto">Observações:</label>
+		    <textarea rows="4" cols="50" id="texto"></textarea>
+	    <br>
+	    <button onclick="marcarConsulta()">
+	        Sim
+	    </button>
+	    
+	    <button onclick="parent.$.fancybox.close()">
+	        Não
+	    </button>
         
-        
+     </div>   
     
     
-        <div id="wrapper">
+   
 
 			<!-- Sidebar -->
     <script>

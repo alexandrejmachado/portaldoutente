@@ -343,10 +343,11 @@ nav #signup a {
  line-height: 25px;
  font-weight: bold;
  font-size: 15px;
- padding: 0 8px;
+ padding: 0 0px;
  text-decoration: none;
  text-transform: uppercase;
  color: white;
+ margin-right: 13px;
 }
 
 nav #signup a {
@@ -374,6 +375,8 @@ nav #login-content {
  padding: 15px;
  box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
  border-radius: 3px 0 3px 3px;
+ 
+  margin-right: 12px;
 }
 
 nav li #login-content {
@@ -477,4 +480,19 @@ input {
 
 /*--------Medicoes------------*/
 
+/*--------caixaMarcacoes------------*/
 
+
+.caixaMarcacao{
+	text-align: center;
+	 font-family:'LANENAR_', Arial, sans-serif;
+}
+.pMarc{
+
+
+ padding-top: 26px;
+ font-family:  'LANENAR_', Arial, sans-serif;
+ font-size: 20px;
+ color: DarkBlue;
+}
+/*--------end caixaMarcações------------*/
