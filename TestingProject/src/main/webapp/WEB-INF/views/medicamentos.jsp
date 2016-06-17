@@ -47,12 +47,51 @@
             </li>
           </ul>
         </nav>
-    </div>
+        <div class="col-lg-12" id="caixaGig">  <!--  -->
+	
+		<div id="wrapper">
 
+			<!-- Sidebar -->
+			<div id="sidebar-wrapper">
+				<ul class="barra">
+						
+					<li>
+						<a href="/calendario">Marcação de Consultas</a>
+					</li>
+					<li>
+						<a href="#">Marcações Confirmadas</a>
+					</li>
+					<li>
+						<a href="#">Renovar Receita</a>
+					</li>
+					<li>
+						<a href="/medicacao/view">Registar Medicação</a>
+					</li>
+					<li>
+						<a href="/medicoes">Medições</a>
+					</li>
+					<li>
+						<a href="#">Agregado Familiar</a>
+					</li>
+					<li>
+						<a href="/isencao">Pedido de Isenção</a>
+					</li>
+				</ul>
+			</div>
+    </div>
+<form method="post" id="medform" action="">
 <div id="automed" style="display:flex;align-items:center;">
 <label for="autocomplete">Escolha um Medicamento: </label>
 <input id="autocomplete" style="width: 40%;">
 </div>
+Quantidade: 
+<input id="quant" type="text" name="quantidade"><br>
+Indicacoes: <br>
+<textarea id="indicacoes" rows="10" cols="60" name="indicacoes"></textarea><br>
+<input type="submit">
+</form>
+
+
 
 <script>
 $(document).ready(function(){
