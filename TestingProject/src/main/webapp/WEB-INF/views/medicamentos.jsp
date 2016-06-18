@@ -82,15 +82,14 @@
 <form method="post" id="medform" >
 <div id="automed" style="display:flex;align-items:center;">
 <label for="autocomplete">Escolha um Medicamento: </label>
-<input id="autocomplete" style="width: 40%;">
+<input id="autocomplete" name = "nome" style="width: 40%;">
 </div>
 Quantidade: 
-<input id="quant" type="text" name="quantidade"><br>
+<input id="quant" type="text" name="dosagem"><br>
 Indicacoes: <br>
 <textarea id="indicacoes" rows="10" cols="60" name="indicacoes"></textarea><br>
-<input type="submit" onclick="medicamentos()">
 </form>
-
+<input id="medicacao" type="submit" onclick="medicamentos()">
 
 
 <script>
