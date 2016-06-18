@@ -79,7 +79,7 @@
 				</ul>
 			</div>
     </div>
-<form method="post" id="medform" action="">
+<form method="post" id="medform" >
 <div id="automed" style="display:flex;align-items:center;">
 <label for="autocomplete">Escolha um Medicamento: </label>
 <input id="autocomplete" style="width: 40%;">
@@ -88,7 +88,7 @@ Quantidade:
 <input id="quant" type="text" name="quantidade"><br>
 Indicacoes: <br>
 <textarea id="indicacoes" rows="10" cols="60" name="indicacoes"></textarea><br>
-<input type="submit">
+<input type="submit" onclick="medicamentos()">
 </form>
 
 
@@ -107,4 +107,16 @@ $.get(link).done(function( tags ) {
   });
   });
 });
+</script>
+<script>
+function medicamentos()
+{
+		path="https://" + window.location.host + "/medicacao/inserir";
+		$('.registo').append($('<img>',{id:'theImg',src:'resources/gfx/loadingGif.gif',width: '50', height: '50'}));
+		$.post(path, $("form").serialize()).done(function( data ) {
+			if (data[0]==true){window.location.replace(path);}
+			else {alert(data[0]);$("#theImg").remove();}}
+		);
+
+}
 </script>
