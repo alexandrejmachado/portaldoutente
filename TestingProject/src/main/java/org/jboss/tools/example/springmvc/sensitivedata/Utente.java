@@ -88,19 +88,17 @@ public class Utente {
 	
 	private boolean verified = false;
 	
+	private String hospital;
 	
+	private String centro_saude;
+
+
+
 	public Utente() {}
 	
-//	public Utente(int username, String password) {
-//		numUtente = username;
-//		this.password = password;
-//		nif = 1234;
-//		nome = "Tiago e parvo";
-//		dataNascimento = new Date();
-//		
-//	}
+
 	
-	public Utente(String username, int numUtente, int cc, String morada, String mail, String password, int telemovel, int nif, String code, String codeSms, int emergencia) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+	public Utente(String username, int numUtente, int cc, String morada, String mail, String password, int telemovel, int nif, String code, String codeSms, int emergencia, String hospital, String centro_saude) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		this.numUtente = Cifras.encrypt(Integer.toString(numUtente));
 		this.password = password;
 		this.nome = username;
@@ -110,6 +108,10 @@ public class Utente {
 		this.telemovel = Cifras.encrypt(Integer.toString(telemovel));
 		this.nif = Cifras.encrypt(Integer.toString(nif));
 		this.contactoEmergencia = Cifras.encrypt(Integer.toString(emergencia));
+		//-----------------------------------------
+		this.hospital = hospital;
+		this.centro_saude = centro_saude;
+		//-----------------------------------------
 		dataNascimento = new Date();
 		verificationCode = code;
 		verificationCodeSms = codeSms;
@@ -215,6 +217,28 @@ public class Utente {
 	
 	public int getCc() throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		return Integer.parseInt(Cifras.decrypt(cc));
+	}
+	
+	public String getHospital() {
+		return hospital;
+	}
+
+
+
+	public void setHospital(String hospital) {
+		this.hospital = hospital;
+	}
+
+
+
+	public String getCentro_saude() {
+		return centro_saude;
+	}
+
+
+
+	public void setCentro_saude(String centro_saude) {
+		this.centro_saude = centro_saude;
 	}
 
 	

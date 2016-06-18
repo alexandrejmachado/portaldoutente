@@ -45,7 +45,13 @@
   		<input id = "campo" type="text" name="emergencia"><br>
   		Numero de Identificacao Fiscal:*
   		<input id = "campo" type="text" name="nif"><br>
+  		Hospital:
+  		<input id = "campo" type="text" name="hospital"><br>
+  		Centro de Saúde:
+  		<input id = "campo" type="text" name="centro_saude"><br>
+  		
   		<p id="legenda"> * (campos obrigatorios) </p>
+  		
 	</form> 
 	<input id = "botao_reg" type="submit" onclick="registar()"/>
 </div>
