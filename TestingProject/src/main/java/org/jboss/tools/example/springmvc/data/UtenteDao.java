@@ -54,6 +54,7 @@ public class UtenteDao {
 	public Utente findUtenteById(int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		TypedQuery<Utente> query = em.createNamedQuery(Utente.FIND_BY_ID, Utente.class);
 		System.out.println("CIFRADO:"+Cifras.encrypt(Integer.toString(numUtente)));
+		System.out.println(Integer.toString(numUtente));
 		query.setParameter(Utente.ID, Cifras.encrypt(Integer.toString(numUtente)));
 		try{
 			System.out.println("A verificar se existe alguem com o mesmo numero");
