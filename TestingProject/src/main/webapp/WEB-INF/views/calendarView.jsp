@@ -125,7 +125,15 @@
 				
 		</div>
     </div>
+    <div id="instituicoesDrop" style="width: 100%;margin-bottom:0px;">
+	    <select id="inst" style="display:block; margin:auto;">
+	  		<option>1</option>
+	  		<option>2</option>
+	  		<option>3</option>
+	 	</select>
+ 	</div>
     <div id='calendar'></div>
+    
     <!-- /#wrapper -->
 
    <!-- jQuery -->
@@ -174,6 +182,14 @@
 <script src='<c:url value="/resources/res-cal/fullcalendar.js"></c:url>'></script>
 <script src='<c:url value="/resources/res-cal/lib/jquery.fancybox.pack.js"></c:url>'></script>
 <link href="<c:url value="/resources/res-cal/jquery.fancybox.css"> </c:url>" rel='stylesheet' media='screen' />
+ 
+	
+
+<script>
+$( "#inst" ).change(function() {
+			  alert( $("#inst").val() );
+			});
+</script>
 <script>
 $(document).ready(function() {
 	$.get("https://"+ window.location.host+"/calendario/getEventos").done(function(data){

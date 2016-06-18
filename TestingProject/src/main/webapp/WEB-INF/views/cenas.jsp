@@ -27,8 +27,9 @@
     <script src='<c:url value="/resources/js/jquery.js"></c:url>'></script>
 </head>
 
-<body onload="f()">
+<body>
   <h1>PAGINA INICIAL</h1>
+
   <p>CONSULTA: ${consultaId}</p>
   <c:set var="dataTratada" value="${fn:substring(data, 0, 16)}" />
   <p>DATA: ${dataTratada}</p>
