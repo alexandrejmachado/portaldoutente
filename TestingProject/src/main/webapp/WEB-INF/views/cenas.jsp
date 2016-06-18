@@ -16,6 +16,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <html>
 
@@ -23,13 +24,25 @@
     <title>SpringMVC Starter Application</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/static/resources/css/screen.css"/>"/>
+    <script src='<c:url value="/resources/js/jquery.js"></c:url>'></script>
 </head>
 
-<body>
+<body onload="f()">
   <h1>PAGINA INICIAL</h1>
-  <a href="/TestingProject/cont/vista">Ir para Vista =D</a>
   <p>CONSULTA: ${consultaId}</p>
+  <c:set var="dataTratada" value="${fn:substring(data, 0, 16)}" />
+  <p>DATA: ${dataTratada}</p>
  <p> APAGAR CONSULTA?</p>
- <button>SIM</button> <button>NÃO</button>
+ <button onclick="removerConsulta()">SIM</button> <button onclick="parent.$.fancybox.close()">NÃO</button>
+ 
+ <script>
+	function removerConsulta(){
+		var id = ${consultaId};
+		console.log("stuffs");
+		console.log(id);
+		$.post("https://"+ window.location.host+"/calendario/removerConsulta",{consultaId:id});
+		parent.window.location.reload();
+		}
+ </script>
 </body>
 </html>
