@@ -104,7 +104,9 @@ public class EventController {
 			String data2 = new java.sql.Timestamp(temp.getTime()).toString().split(" ")[0];
 			if(data1.equals(data2)){
 				// enviar info sobre a consulta
-				int consultaId = consultaDao.findByUtenteAndData(numUtente,data).getId();
+				Consulta currentConsulta = consultaDao.findByUtenteAndData(numUtente,data);
+				int consultaId = currentConsulta.getId();
+				mav.addObject("data", currentConsulta.getData());
 				mav.addObject("consultaId", consultaId);
 				mav.setViewName("cenas");
 				return mav;
@@ -130,8 +132,15 @@ public class EventController {
 	@RequestMapping(value="/removerConsulta", method = RequestMethod.POST, params={"consultaId"})
 	@ResponseBody
 	public boolean removerConsulta(@RequestParam(value="consultaId") String consultaId){
-		consultaDao.remove(Integer.parseInt(consultaId));
-		return true;
+		try{
+			System.out.println(consultaId);
+			consultaDao.remove(Integer.parseInt(consultaId));
+			return true;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 
