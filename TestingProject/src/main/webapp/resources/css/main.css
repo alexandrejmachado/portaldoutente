@@ -86,17 +86,15 @@
 	text-align: center;
 }
 
-#codigo1{
-	text-align: left;
-    clear: both;
-    float: left;
-    margin-right:15px;
-	align: center;
-	text-align: center;
+#codigo1 {
+    float: right;
+    margin-right: 300px;
+    text-align: left;
+    display: inline;
 }
-
-#botao_conf1{
-	float:right;
+#botao_conf1 {
+    display: inline;
+    float:center;
 }
 
 #smallBox{
@@ -141,6 +139,12 @@
 	border: none; 			
 	cursor: pointer; 			
 
+}
+
+#medform{
+	width: 50%;
+	margin-left: 25%;
+	margin-top: 1.8%;
 }
 
 .erro{
@@ -314,15 +318,16 @@ nav #login-trigger,
 nav #signup a {
  display: inline-block;
  *display: inline;
- *zoom: 1;s
+ *zoom: 1;
  height: 25px;
  line-height: 25px;
  font-weight: bold;
  font-size: 15px;
- padding: 0 8px;
+ padding: 0 0px;
  text-decoration: none;
  text-transform: uppercase;
  color: white;
+ margin-right: 13px;
 }
 
 nav #signup a {
@@ -350,6 +355,8 @@ nav #login-content {
  padding: 15px;
  box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
  border-radius: 3px 0 3px 3px;
+ 
+  margin-right: 12px;
 }
 
 nav li #login-content {
