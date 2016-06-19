@@ -25,25 +25,26 @@
            can find it in the source at src/main/webapp/WEB-INF/TestingProject-ds.xml -->
         <jta-data-source>java:jboss/portalDoUtenteDB</jta-data-source>
         <class>org.jboss.tools.example.springmvc.model.Altura</class>
+        <class>org.jboss.tools.example.springmvc.model.Boletim</class>
+        <class>org.jboss.tools.example.springmvc.model.Cirurgia</class>
         <class>org.jboss.tools.example.springmvc.model.Colesterol</class>
+        <class>org.jboss.tools.example.springmvc.model.Consulta</class>
+        <class>org.jboss.tools.example.springmvc.model.Exame</class>
         <class>org.jboss.tools.example.springmvc.model.Glicemia</class>
         <class>org.jboss.tools.example.springmvc.model.INR</class>
-        <class>org.jboss.tools.example.springmvc.sensitivedata.Instituicao</class>
-        <class>org.jboss.tools.example.springmvc.sensitivedata.Medico</class>
+        <class>org.jboss.tools.example.springmvc.model.Medicacao</class>
+        <class>org.jboss.tools.example.springmvc.model.Medicamento</class>
+        <class>org.jboss.tools.example.springmvc.model.Medicamentoid</class>
         <class>org.jboss.tools.example.springmvc.model.Peso</class>
+        <class>org.jboss.tools.example.springmvc.model.Receita</class>
         <class>org.jboss.tools.example.springmvc.model.SaturacaoO2</class>
         <class>org.jboss.tools.example.springmvc.model.TensaoArterial</class>
         <class>org.jboss.tools.example.springmvc.model.Trigliceridos</class>
-        <class>org.jboss.tools.example.springmvc.sensitivedata.Utente</class>
-        <class>org.jboss.tools.example.springmvc.model.Consulta</class>
-        <class>org.jboss.tools.example.springmvc.model.Receita</class>
-        <class>org.jboss.tools.example.springmvc.model.Boletim</class>
-        <class>org.jboss.tools.example.springmvc.model.Exame</class>
-        <class>org.jboss.tools.example.springmvc.model.Medicacao</class>
-        <class>org.jboss.tools.example.springmvc.model.Medicamento</class>
         <class>org.jboss.tools.example.springmvc.model.Vacina</class>
-        <class>org.jboss.tools.example.springmvc.model.Cirurgia</class>
         <class>org.jboss.tools.example.springmvc.sensitivedata.Guardiao</class>
+        <class>org.jboss.tools.example.springmvc.sensitivedata.Instituicao</class>
+        <class>org.jboss.tools.example.springmvc.sensitivedata.Medico</class>
+        <class>org.jboss.tools.example.springmvc.sensitivedata.Utente</class>
         <properties>
             <property name="jboss.entity.manager.factory.jndi.name" 
                       value="java:jboss/TestingProject/persistencebasic" />
