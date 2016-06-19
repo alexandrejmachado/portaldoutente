@@ -111,6 +111,18 @@
 													<td id="fixosMod">${nif} </td>
 												</tr>
 												<tr>
+													<td>Hospital</td> 
+													
+													<td id="fixosMod">${hospital}</td>
+													
+												</tr>
+												<tr>
+													<td>Centro de Saúde</td> 
+													
+													<td id="fixosMod">${centro_saude}</td>
+													
+												</tr>
+												<tr>
 													<td>Morada </td>
 													
 													<td id = "fixosMod" >${morada}  </td>

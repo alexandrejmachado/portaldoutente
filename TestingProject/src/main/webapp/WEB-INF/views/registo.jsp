@@ -11,7 +11,8 @@
 	<link href= <c:url value="/resources/css/bootstrap.min.css" ></c:url> rel="stylesheet"/>
     
     <link href= <c:url value="/resources/css/main.css" ></c:url> rel="stylesheet"/>
-
+	<meta charset="UTF-8">
+	
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <body background=<c:url value="/resources/gfx/Final2.png"/> />

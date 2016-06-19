@@ -50,6 +50,8 @@ public class PerfilController {
 	    	mav.addObject("cc", currentUser.getCc());
 	    	mav.addObject("mail", currentUser.getEmail());
 	    	mav.addObject("nif", currentUser.getNif());
+	    	mav.addObject("hospital", currentUser.getHospital());
+	    	mav.addObject("centro_saude", currentUser.getCentroSaude());
 	    	int telemovel = currentUser.getTelemovel();
 	    	int emergencia = currentUser.getContactoEmergencia();
 	    	mav.addObject("telemovel", ((telemovel == 0) ?  "000000000" : telemovel));
@@ -95,6 +97,8 @@ public class PerfilController {
 	    	mav.addObject("cc", currentUser.getCc());
 	    	mav.addObject("mail", currentUser.getEmail());
 	    	mav.addObject("nif", currentUser.getNif());
+	    	mav.addObject("hospital", currentUser.getHospital());
+	    	mav.addObject("centro_saude", currentUser.getCentroSaude());
 	    	int telemovel = currentUser.getTelemovel();
 	    	int emergencia = currentUser.getContactoEmergencia();
 	    	mav.addObject("telemovel", ((telemovel == 0) ?  "000000000" : telemovel));

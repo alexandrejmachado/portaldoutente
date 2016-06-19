@@ -231,13 +231,13 @@ public class Utente {
 
 
 
-	public String getCentro_saude() {
+	public String getCentroSaude() {
 		return centro_saude;
 	}
 
 
 
-	public void setCentro_saude(String centro_saude) {
+	public void setCentroSaude(String centro_saude) {
 		this.centro_saude = centro_saude;
 	}
 
