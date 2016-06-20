@@ -19,16 +19,19 @@ public class Instituicao {
 	
 	private String tipo;
 	
+	private String localidade;
+	
 	
 
 	public Instituicao(){}
 	
-	public Instituicao(String morada,String telefone, String email, String nome, String tipo){
+	public Instituicao(String morada,String telefone, String email, String nome, String localidade, String tipo){
 		this.morada = morada;
 		this.email = email;
 		this.telefone = telefone;
 		this.nome = nome;
 		this.tipo = tipo;
+		this.localidade = localidade;
 	}
 
 	public int getId() {
@@ -53,6 +56,10 @@ public class Instituicao {
 	
 	public String getTipo() {
 		return tipo;
+	}
+	
+	public String getLocalidade() {
+		return localidade;
 	}
 	
 }
