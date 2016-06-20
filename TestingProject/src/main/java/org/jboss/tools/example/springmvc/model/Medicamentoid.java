@@ -2,29 +2,38 @@ package org.jboss.tools.example.springmvc.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name=Medicamentoid.FIND_BY_NAME, query="SELECT m.id FROM Medicamentoid m WHERE m.nome = :" + Medicamentoid.NOME)
+})
 public class Medicamentoid {
 
 	
 	@Id
 	private int id;
 	
+	public final static String FIND_BY_NAME = "Medicamentoid.findByName";
+	
+	public final static String NOME = "nome";
+	
 	private String nome;
 	
-	private int getID() {
+	public int getID() {
 		return id;
 	}
 	
-	private String getNome() {
+	public String getNome() {
 		return nome;
 	}
 	
-	private void setID(int id) {
+	public void setID(int id) {
 		this.id = id;
 	}
 	
-	private void setNome(String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 }

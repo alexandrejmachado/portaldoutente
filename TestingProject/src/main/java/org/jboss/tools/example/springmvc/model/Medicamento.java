@@ -8,7 +8,8 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
 	@NamedQuery(name=Medicamento.FIND_ALL, query="SELECT m FROM Medicamento m"),
-	@NamedQuery(name=Medicamento.FIND_BY_NAME, query="SELECT m FROM Medicamento m WHERE m.nome = :" + Medicamento.NOME)
+	@NamedQuery(name=Medicamento.FIND_BY_NAME, query="SELECT m FROM Medicamento m WHERE m.nome = :" + Medicamento.NOME),
+	@NamedQuery(name=Medicamento.FIND_BY_ID, query = "SELECT m FROM Medicamento m WHERE m.id = :" + Medicamento.ID)
 })
 public class Medicamento {
 
@@ -16,7 +17,11 @@ public class Medicamento {
 	
 	public static final String FIND_BY_NAME = "Medicamento.findByName";
 	
+	public static final String FIND_BY_ID = "Medicamento.findById";
+	
 	public static final String NOME = "nome";
+	
+	public static final String ID = "id";
 	
 	@Id
 	private int id;

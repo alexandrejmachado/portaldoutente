@@ -20,8 +20,10 @@ import javax.servlet.http.HttpSession;
 
 import org.jboss.tools.example.springmvc.data.MedicacaoDao;
 import org.jboss.tools.example.springmvc.data.MedicamentoDao;
+import org.jboss.tools.example.springmvc.data.MedicamentoIdDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
 import org.jboss.tools.example.springmvc.model.Medicamento;
+import org.jboss.tools.example.springmvc.model.Medicamentoid;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -52,6 +54,9 @@ public class MedicacaoController {
 	@Autowired
 	public MedicacaoDao medicacaoDao;
 	
+	@Autowired
+	public MedicamentoIdDao medidDao;
+	
 	public HashMap<String,String> map = new HashMap<String, String>();
 
 	
@@ -59,7 +64,9 @@ public class MedicacaoController {
 	public boolean inserirMedicacao(HttpSession session, @RequestParam(value="nome") String nomeMedicamento, @RequestParam(value="dosagem") double dosagemDiaria, @RequestParam(value="indicacoes") String indicacoes) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		System.out.println("cheguei aqui");
 		
-		Medicamento med = medDao.findByNome(nomeMedicamento);
+		Medicamentoid medid= medidDao.findByNome(nomeMedicamento);
+		int id = medid.getID();
+		Medicamento med = medDao.findById(Integer.toString(id));
 		medicacaoDao.novaMedicacao(Integer.parseInt((String) session.getAttribute("sessionID")), med.getId(), dosagemDiaria, indicacoes, "Pendente", med.getComprimidos());
 		return true;
 	}

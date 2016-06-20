@@ -13,34 +13,30 @@ import javax.persistence.TypedQuery;
 
 import org.jboss.tools.example.springmvc.controller.Cifras;
 import org.jboss.tools.example.springmvc.model.Medicamento;
+import org.jboss.tools.example.springmvc.model.Medicamentoid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public class MedicamentoDao {
+public class MedicamentoIdDao {
 	
 	@Autowired
 	private EntityManager em;
 	
-	public Medicamento novoMedicamento() {
-		Medicamento Medicamento = new Medicamento();
-		em.persist(Medicamento);
-		return Medicamento;
+	public Medicamentoid novoMedicamento() {
+		Medicamentoid medicamentoId = new Medicamentoid();
+		em.persist(medicamentoId);
+		return medicamentoId;
 	}
 	
 	
-	public Medicamento findByNome(String nome) {
-		TypedQuery<Medicamento> query = em.createNamedQuery(Medicamento.FIND_BY_NAME, Medicamento.class);
-		query.setParameter(Medicamento.NOME, nome);
+	public Medicamentoid findByNome(String nome) {
+		TypedQuery<Medicamentoid> query = em.createNamedQuery(Medicamentoid.FIND_BY_NAME, Medicamentoid.class);
+		query.setParameter(Medicamentoid.NOME, nome);
 		return query.getSingleResult();
 	}
 	
-	public Medicamento findById(String id) {
-		TypedQuery<Medicamento> query = em.createNamedQuery(Medicamento.FIND_BY_ID, Medicamento.class);
-		query.setParameter(Medicamento.ID, id);
-		return query.getSingleResult();
-	}
 	
 }
