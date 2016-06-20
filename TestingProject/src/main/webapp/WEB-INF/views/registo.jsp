@@ -27,29 +27,25 @@
 
 	<form method="post">
   		Nome:*
-  		<input id = "campo" type="text" name="nome" required><br>
+  		<input id = "campo" type="text" name="nome" required>
   		Numero do Utente:*
   		<input id = "campo" type="text" name="num_utente" required><br>
   		Numero do CC:*
-  		<input id = "campo" type="text" name="cc" required><br>
+  		<input id = "campo" type="text" name="cc" required>
   		Morada:
   		<input id = "campo" type="text" name="morada"><br>
   		E-Mail *:
-  		<input id = "campo" type="text" name="mail" required><br>
+  		<input id = "campo" type="text" name="mail" required>
   		Password:*
   		<input id = "campo" type="password" name="pass" required><br>
   		Comfirmar Password:*
-  		<input id = "campo" type="password" name="passConfirm" required><br>
+  		<input id = "campo" type="password" name="passConfirm" required>
   		Numero de Telemovel:
   		<input id = "campo" type="text" name="telemovel"><br>
   		Contacto de Emergencia:
-  		<input id = "campo" type="text" name="emergencia"><br>
+  		<input id = "campo" type="text" name="emergencia">
   		Numero de Identificacao Fiscal:*
   		<input id = "campo" type="text" name="nif"><br>
-  		Hospital:
-  		<input id = "campo" type="text" name="hospital"><br>
-  		Centro de Saúde:
-  		<input id = "campo" type="text" name="centro_saude"><br>
   		
   		<p id="legenda"> * (campos obrigatorios) </p>
   		

@@ -38,8 +38,8 @@ public class UtenteDao {
 	@Autowired
 	private EntityManager em;
 	
-	public Utente newUtente(String username, String numUtente, String cc, String morada, String mail, String password, String telemovel, String nif, String code, String codeSms, String emergencia, String hospital, String centro_saude) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		Utente novoUtente = new Utente(username, Integer.parseInt(numUtente), Integer.parseInt(cc), morada, mail, password, Integer.parseInt(telemovel), Integer.parseInt(nif), code, codeSms, Integer.parseInt(emergencia), hospital, centro_saude);
+	public Utente newUtente(String username, String numUtente, String cc, String morada, String mail, String password, String telemovel, String nif, String code, String codeSms, String emergencia) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		Utente novoUtente = new Utente(username, Integer.parseInt(numUtente), Integer.parseInt(cc), morada, mail, password, Integer.parseInt(telemovel), Integer.parseInt(nif), code, codeSms, Integer.parseInt(emergencia));
 		em.persist(novoUtente);
 		return novoUtente;
 	}
