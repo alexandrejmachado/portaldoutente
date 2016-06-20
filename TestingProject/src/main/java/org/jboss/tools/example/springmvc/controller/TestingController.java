@@ -342,12 +342,12 @@ public class TestingController {
 	
 	
 	
-	@RequestMapping(value = "/registoUtente", method = RequestMethod.POST, params={"nome","num_utente","cc", "morada", "mail", "pass", "passConfirm","telemovel", "emergencia", "nif"})
+	@RequestMapping(value = "/registoUtente", method = RequestMethod.POST, params={"nome","num_utente","cc", "morada", "mail", "pass", "passConfirm","telemovel", "emergencia", "nif", "localidade"})
 	@ResponseBody
 	public List<String> registoUtente(@RequestParam(value = "nome") String username, @RequestParam(value="num_utente") String numUtente,
 										@RequestParam(value = "cc") String cc, @RequestParam(value="morada") String morada,
 											@RequestParam(value="mail") String mail, @RequestParam(value = "pass") String password,@RequestParam(value = "passConfirm") String passwordConfirm,
-												@RequestParam(value = "telemovel") String telemovel, @RequestParam(value = "emergencia") String emergencia, @RequestParam(value="nif") String nif,
+												@RequestParam(value = "telemovel") String telemovel, @RequestParam(value = "emergencia") String emergencia, @RequestParam(value="nif") String nif, @RequestParam(value="localidade") String localidade,
 													HttpSession session) throws NoSuchAlgorithmException, NumberFormatException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		//verificacao de parametros
 		boolean resp = true;

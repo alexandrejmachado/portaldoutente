@@ -17,13 +17,18 @@ public class Instituicao {
 	
 	private String nome;
 	
+	private String tipo;
+	
+	
+
 	public Instituicao(){}
 	
-	public Instituicao(String morada,String telefone, String email, String nome){
+	public Instituicao(String morada,String telefone, String email, String nome, String tipo){
 		this.morada = morada;
 		this.email = email;
 		this.telefone = telefone;
 		this.nome = nome;
+		this.tipo = tipo;
 	}
 
 	public int getId() {
@@ -44,6 +49,10 @@ public class Instituicao {
 
 	public String getNome() {
 		return nome;
+	}
+	
+	public String getTipo() {
+		return tipo;
 	}
 	
 }

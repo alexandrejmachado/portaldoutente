@@ -46,6 +46,8 @@
   		<input id = "campo" type="text" name="emergencia">
   		Numero de Identificacao Fiscal:*
   		<input id = "campo" type="text" name="nif"><br>
+  		Localidade:*
+  		<input id = "localidade" type="text" name="localidade"><br>
   		
   		<p id="legenda"> * (campos obrigatorios) </p>
   		
