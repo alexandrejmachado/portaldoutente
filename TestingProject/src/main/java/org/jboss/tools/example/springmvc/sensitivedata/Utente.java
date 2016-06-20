@@ -88,7 +88,6 @@ public class Utente {
 	
 	private boolean verified = false;
 	
-	private String hospital;
 	
 	private String centro_saude;
 
@@ -108,8 +107,7 @@ public class Utente {
 		this.telemovel = Cifras.encrypt(Integer.toString(telemovel));
 		this.nif = Cifras.encrypt(Integer.toString(nif));
 		this.contactoEmergencia = Cifras.encrypt(Integer.toString(emergencia));
-		//-----------------------------------------
-		this.hospital = null;
+		//----------------------------------------
 		this.centro_saude = null;
 		//-----------------------------------------
 		dataNascimento = new Date();
@@ -219,15 +217,6 @@ public class Utente {
 		return Integer.parseInt(Cifras.decrypt(cc));
 	}
 	
-	public String getHospital() {
-		return hospital;
-	}
-
-
-
-	public void setHospital(String hospital) {
-		this.hospital = hospital;
-	}
 
 
 
