@@ -187,6 +187,9 @@ html body div.container div#caixaGig.col-lg-12 div#wrapper div#sidebar-wrapper u
 	font-family:'LANENAR_', Arial, sans-serif;
     font-size: 30px;
     color: white;
+      -webkit-column-gap: 20px;
+     -moz-column-gap: 20px;
+          column-gap: 20px;
 }
 
 .registo table{
@@ -222,11 +225,19 @@ padding-bottom: 11px;
  font-size: 15px;
 }
 
-table td{
- color: white;
+
+table {
+  border-collapse: separate;
+  border-spacing: 20px 0;
+   color: white;
  font-size: 20px;
 }
 
+td {
+  padding: 10px 0;
+   color: white;
+ font-size: 20px;
+}
 
 
 #botao_reg{
