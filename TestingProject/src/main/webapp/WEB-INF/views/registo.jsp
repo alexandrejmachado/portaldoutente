@@ -10,7 +10,7 @@
 
 	<link href= <c:url value="/resources/css/bootstrap.min.css" ></c:url> rel="stylesheet"/>
     
-    <link href= <c:url value="/resources/css/main.css" ></c:url> rel="stylesheet"/>
+    <link href= <c:url value="/resources/css/registo.css" ></c:url> rel="stylesheet"/>
 	<meta charset="UTF-8">
 	
 </head>
@@ -20,47 +20,110 @@
 <div class= "container">    <!-- ROW -->
         <div class= "rowMajor">
             <div class="col-md-11">Portal do Utente</div>
-</div>
+		</div>
 </div>
 
-<div class = "registo">
 
-	<form method="post">
-  		Nome:*
-  		<input id = "campo" type="text" name="nome" required>
-  		Numero do Utente:*
-  		<input id = "campo" type="text" name="num_utente" required><br>
-  		Numero do CC:*
-  		<input id = "campo" type="text" name="cc" required>
-  		Morada:
-  		<input id = "campo" type="text" name="morada"><br>
-  		E-Mail *:
-  		<input id = "campo" type="text" name="mail" required>
-  		Password:*
-  		<input id = "campo" type="password" name="pass" required><br>
-  		Comfirmar Password:*
-  		<input id = "campo" type="password" name="passConfirm" required>
-  		Numero de Telemovel:
-  		<input id = "campo" type="text" name="telemovel"><br>
-  		Contacto de Emergencia:
-  		<input id = "campo" type="text" name="emergencia">
-  		Numero de Identificacao Fiscal:*
-  		<input id = "campo" type="text" name="nif"><br>
-  		Localidade:*
-  		<input id = "localidade" type="text" name="localidade"><br>
-  		
-  		<p id="legenda"> * (campos obrigatorios) </p>
-  		
-	</form> 
-	<input id = "botao_reg" type="submit" onclick="registar()"/>
+<div class="row" style="background:none">
+
+<div class="col-xs-2"></div> <!--empty-->
+
+	<div class= "registo1 col-sm-8">
+		<div class="colunas col-xs-8 col-sm-6" style="text-align:right" > <!--1a coluna cenas-->
+
+		
+				<form method="post">
+				<table>
+					<tr>
+						<td>Nome* </td>
+						<td> <input id = "campo" type="text" name="nome" required></td>
+						<td><div id="id1" class= "warning"></div> </td>
+	
+					</tr>
+					<tr>
+						<td>Número do Utente* </td>
+						<td> <input id = "campo" type="text" name="num_utente" required></td>
+						<td> </td>
+						
+					</tr>
+					<tr>
+						<td>Número do CC* </td>
+						<td><input id = "campo" type="text" name="cc" required> </td>
+						<td> </td>
+					</tr>
+					<tr>
+						<td>Morada </td>
+						<td><input id = "campo" type="text" name="morada"> </td>
+						<td> </td>
+					</tr>
+					<tr>
+						<td>Localidade</td>
+						<td> <input id = "campo" type="text" name="morada"></td>
+						<td> </td>
+					</tr>
+					
+				</table>	
+		</div>
+		<div class="colunas col-xs-8 col-sm-6" style="text-align:right"> <!--2a coluna cenas-->
+				<table>
+					<tr>
+						<td>E-Mail</td>
+						<td><input id = "campo" type="text" name="mail"></td>
+						<td> </td>
+					</tr>
+					<tr>
+						<td>Password* </td>
+						<td><input id = "campo" type="password" name="pass" required></td> 
+						<td> </td>
+					</tr>
+					<tr>
+						<td>Número de Telemóvel* </td>
+						<td><input id = "campo" type="text" name="telemovel" required></td> 
+						<td> </td>
+					</tr>
+					<tr>
+						<td>Contacto de Emergência </td>
+						<td><input id = "campo" type="text" name="emergencia"></td> 
+						<td> </td>
+						
+					</tr>	
+					<tr>
+						<td>Número de Identificação Fiscal</td>
+						<td><input id = "campo" type="text" name="nif"></td> 
+						<td> </td>
+						
+					</tr>
+					
+				</table>	
+				</form>
+		</div>
+		
+	</div>
+	<div class="col-xs-2" > </div> <!--empty-->
+	
 </div>
+
+<div class="col-xs-2" > </div> <!--empty-->	
+
+
+
+<div class="col-md-8" style="text-align:center">
+			<p id = "legenda"> * (campos obrigatorios) </p> 
+			<input id = "botao_reg" type="submit" onclick="registar()"/>
+</div>
+			
+
+
+</div>
+
+
 		
 <script>
 function registar()
 {
 		path="https://" + window.location.host + "/";
-		$('.registo').append($('<img>',{id:'theImg',src:'resources/gfx/loadingGif.gif',width: '50', height: '50'}));
-		$.post(path + 'registoUtente', $("form").serialize()).done(function( data ) {
+		$('.registo1').append($('<img>',{id:'theImg',src:'resources/gfx/loadingGif.gif',width: '50', height: '50'}));
+		$.post(path + 'registo1Utente', $("form").serialize()).done(function( data ) {
 			if (data[0]=="true"){window.location.replace(path + "index");}
 			else {alert(data[0]);$("#theImg").remove();}}
 		);

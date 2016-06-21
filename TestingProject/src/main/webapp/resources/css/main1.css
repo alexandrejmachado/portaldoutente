@@ -73,9 +73,9 @@ background: rgb(249, 249, 249);
  margin-top: 4.5%;
  text-align: center;
  margin-right: 42%;
- font-family:  'DengXian', Arial, sans-serif;
+ font-family:  LANENAR_, Arial, sans-serif;
  font-size: 20px;
- color: black;
+ color: white;
 }
 
 #frase {
@@ -87,6 +87,13 @@ background: rgb(249, 249, 249);
  color: black;
   text-align: center;
  	
+}
+.colunas{
+ margin-top: 4.5%;
+ text-align: right;
+ font-family:  'LANENAR_', Arial, sans-serif;
+ font-size: 20px;
+ color: white;
 }
 
 #campo,.campo, #campos, .campos{
@@ -312,10 +319,14 @@ table #td{
 
 #botao_reg{
  background: transparent;
- margin-right: 4.5%;
- border: 0.3px solid;
+ border: 0.3px solid white;
  margin-top: 7px;
  margin-bottom: 5px;
+ color: white;
+}
+.colunas{
+	text-align:right;
+	color: white;
 }
 #legenda{
  color: #355DC1;
