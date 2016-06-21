@@ -14,7 +14,9 @@
 	<meta charset="UTF-8">
 	
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <body background=<c:url value="/resources/gfx/Final2.png"/> />
 
 <div class= "container">    <!-- ROW -->
@@ -58,7 +60,8 @@
 					</tr>
 					<tr>
 						<td>Localidade</td>
-						<td> <input id = "campo" type="text" name="morada"></td>
+						<td>
+  							<input style="color:black;padding-left: 5%;color: black;font-size: 15px;" id="tags" name="localidade"></td>
 						<td> </td>
 					</tr>
 					
@@ -74,6 +77,11 @@
 					<tr>
 						<td>Password* </td>
 						<td><input id = "campo" type="password" name="pass" required></td> 
+						<td> </td>
+					</tr>
+					<tr>
+						<td>Confirmar Password* </td>
+						<td><input id = "campo" type="password" name="passConfirm" required></td> 
 						<td> </td>
 					</tr>
 					<tr>
@@ -116,14 +124,23 @@
 
 </div>
 
-
+<script>
+    var link="<c:url value="/resources/localidades.json"> </c:url>";
+    $.ajax({
+        type:       "GET",
+        url:        link,
+        success:    function(response) {
+            $("#tags").autocomplete({ source: response });
+        }
+    });
+</script>
 		
 <script>
 function registar()
 {
 		path="https://" + window.location.host + "/";
 		$('.registo1').append($('<img>',{id:'theImg',src:'resources/gfx/loadingGif.gif',width: '50', height: '50'}));
-		$.post(path + 'registo1Utente', $("form").serialize()).done(function( data ) {
+		$.post(path + 'registoUtente', $("form").serialize()).done(function( data ) {
 			if (data[0]=="true"){window.location.replace(path + "index");}
 			else {alert(data[0]);$("#theImg").remove();}}
 		);

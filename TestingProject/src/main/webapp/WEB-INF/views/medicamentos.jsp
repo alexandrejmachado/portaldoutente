@@ -22,7 +22,8 @@
 <style>
 .ui-autocomplete { max-height: 200px; overflow-y: auto; overflow-x: hidden;}
 </style>
-<body background="/resources/gfx/Final2.png">
+
+<body background=<c:url value="/resources/gfx/Final2.png"/> />
 
  <div class="container">
             
