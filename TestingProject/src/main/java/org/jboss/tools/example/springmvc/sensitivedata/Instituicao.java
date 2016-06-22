@@ -6,6 +6,8 @@ import javax.persistence.Id;
 @Entity
 public class Instituicao {
 	
+	public static final String ID = "id";
+	
 	@Id
 	private int id;
 	

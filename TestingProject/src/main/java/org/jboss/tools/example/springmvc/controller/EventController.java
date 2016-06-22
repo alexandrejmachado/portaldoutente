@@ -15,8 +15,10 @@ import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpSession;
 
 import org.jboss.tools.example.springmvc.data.ConsultaDao;
+import org.jboss.tools.example.springmvc.data.UtenteDao;
 import org.jboss.tools.example.springmvc.model.Cirurgia;
 import org.jboss.tools.example.springmvc.model.Consulta;
+import org.jboss.tools.example.springmvc.sensitivedata.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +40,9 @@ public class EventController {
 	
 	@Autowired
 	private ConsultaDao consultaDao;
+	
+	@Autowired
+	private UtenteDao utenteDao;
 
 	@RequestMapping(value="/getEventos")
 	@ResponseBody
@@ -75,6 +80,7 @@ public class EventController {
 		//-----------------------------------------
 		//int numUtente = (int) session.getAttribute("sessionID");
 		int numUtente = 123123123;
+		Utente curUtente = utenteDao.findUtenteById(numUtente);
 		List<Consulta> all = consultaDao.findWithDate(numUtente);
 		//-----------------------------------------
 		ModelAndView mav = new ModelAndView();

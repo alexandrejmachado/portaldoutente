@@ -125,13 +125,7 @@
 				
 		</div>
     </div>
-    <div id="instituicoesDrop" style="width: 100%;margin-bottom:0px;">
-	    <select id="inst" style="display:block; margin:auto;">
-	  		<option>1</option>
-	  		<option>2</option>
-	  		<option>3</option>
-	 	</select>
- 	</div>
+
     <div id='calendar'></div>
     
     <!-- /#wrapper -->
