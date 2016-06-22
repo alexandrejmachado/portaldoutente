@@ -151,7 +151,7 @@
                     </security>
                 </datasource>
                 <datasource jta="true" jndi-name="java:jboss/portalDoUtenteDB" pool-name="portalUtente" enabled="true" use-ccm="true">
-                    <connection-url>jdbc:mysql://23.251.158.161:3306,104.155.180.22:3306/portalDoUtente</connection-url>
+                    <connection-url>jdbc:mysql://23.251.158.161:3306,104.155.180.22:3306/portalDoUtente?failOverReadOnly=false&amp;autoReconnect=true</connection-url>
                     <driver-class>com.mysql.jdbc.Driver</driver-class>
                     <driver>mysql</driver>
                     <security>
