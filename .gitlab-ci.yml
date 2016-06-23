@@ -6,6 +6,7 @@ build_job:
   stage: build
   script:
   - echo "$USER"
+  - echo "wow"
   - ls
   - pwd
   - cd Test*
