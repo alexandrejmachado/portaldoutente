@@ -24,6 +24,7 @@ build_job:
 deploy_job:
   stage: deploy
   script:
+  - pwd
   - cp TestingProject/src/main/resources/import_new.sql import.sql
   - mysql -h 104.155.77.57 -uwebserver -pBolachas_2 portaldoutente < import.sql
   - DOCKER_TAG=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 4 | head -n 1) || true
