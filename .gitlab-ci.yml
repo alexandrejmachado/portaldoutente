@@ -24,14 +24,14 @@ deploy_job:
   stage: deploy
   script:
   - export PATH=$PATH:/usr/local/share/google/google-cloud-sdk/bin/
-  - gcloud config set account malandros@sapient-axle-129909.iam.gserviceaccount.com
-  - gcloud auth activate-service-account malandros@sapient-axle-129909.iam.gserviceaccount.com --key-file /opt/bitnami/key
-  - gcloud config set project sapient-axle-129909
-  - gcloud config set compute/zone us-central1-b
+  - gcloud config set account quesejadesta@composite-watch-135111.iam.gserviceaccount.com
+  - gcloud auth activate-service-account quesejadesta@composite-watch-135111.iam.gserviceaccount.com --key-file /opt/bitnami/key
+  - gcloud config set project composite-watch-135111
+  - gcloud config set compute/zone europe-west1-c
   - gcloud info
   - gcloud container clusters get-credentials cluster-1
-  - docker tag portaldoutente gcr.io/sapient-axle-129909/portaldoutente
-  - gcloud docker push gcr.io/sapient-axle-129909/portaldoutente:latest
+  - docker tag portaldoutente gcr.io/composite-watch-135111/portaldoutente
+  - gcloud docker push gcr.io/composite-watch-135111/portaldoutente:latest
   #- kubectl stop services portal-utente
   #- kubectl stop replicationcontroller portal-utente
   #- kubectl run portal-utente --image=gcr.io/sapient-axle-129909/portaldoutente:latest --port 8080
