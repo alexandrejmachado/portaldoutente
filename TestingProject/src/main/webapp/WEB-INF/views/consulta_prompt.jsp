@@ -44,7 +44,7 @@
 		    <textarea rows="4" cols="50" id="texto"></textarea>
 	    <br>
 	    <button onclick="marcarConsulta()">
-	        Simm
+	        Sim
 	    </button>
 	    
 	    <button onclick="parent.$.fancybox.close()">

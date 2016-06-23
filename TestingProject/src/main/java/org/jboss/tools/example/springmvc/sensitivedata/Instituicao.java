@@ -2,9 +2,19 @@ package org.jboss.tools.example.springmvc.sensitivedata;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+import org.jboss.tools.example.springmvc.model.Consulta;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name=Instituicao.FIND_LOCAL, query="SELECT i FROM Instituicao i WHERE i.localidade = :"+ Instituicao.LOCALIDADE)})
 public class Instituicao {
+	
+	public static final String FIND_LOCAL = "Instituicao.findLocal";
+	
+	public static final String LOCALIDADE = "localidade";
 	
 	public static final String ID = "id";
 	

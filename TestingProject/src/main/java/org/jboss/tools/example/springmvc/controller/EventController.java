@@ -81,7 +81,8 @@ public class EventController {
 		//int numUtente = (int) session.getAttribute("sessionID");
 		int numUtente = 123123123;
 		Utente curUtente = utenteDao.findUtenteById(numUtente);
-		List<Consulta> all = consultaDao.findWithDate(numUtente);
+		//List<Consulta> all = consultaDao.findWithDate(numUtente, numUtente.getCentroSaude());
+		List<Consulta> all = consultaDao.findWithDate(numUtente,1);
 		//-----------------------------------------
 		ModelAndView mav = new ModelAndView();
 		Date temp = new Date(Long.parseLong(data));
@@ -94,7 +95,7 @@ public class EventController {
 			mav.addObject("data", out);
 			//----------------------------------------
 			ArrayList<String> lista = Horarios.getHorarios();
-			List<Consulta> conList = consultaDao.findByDate(data);
+			List<Consulta> conList = consultaDao.findByDate(data,1);
 			for(Consulta c : conList){
 				System.out.println(c.getData().toString().substring(11, 16));
 				lista.remove(c.getData().toString().substring(11, 16));
@@ -131,6 +132,7 @@ public class EventController {
 	public boolean persistirConsulta(@RequestParam(value="data") Date data, @RequestParam(value="obs") String obs, 
 									 @RequestParam(value="instituicao") String instituicao, HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		String numUtente="123123123";
+		System.out.println("ESTOU AQUI DENTRO");
 		consultaDao.novo(13, Integer.parseInt(numUtente), Integer.parseInt(instituicao), "amarela", data, obs);
 		return true;
 		}
