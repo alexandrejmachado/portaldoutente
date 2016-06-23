@@ -32,7 +32,7 @@ deploy_job:
   - gcloud config set compute/zone europe-west1-c
   - gcloud info
   - gcloud container clusters get-credentials cluster-1
-  - docker tag portaldoutente gcr.io/composite-watch-135111/portaldoutente
+  - docker tag portaldoutente gcr.io/composite-watch-135111/portaldoutente:$DOCKER_TAG
   - gcloud docker push gcr.io/composite-watch-135111/portaldoutente:$DOCKER_TAG
   #- kubectl stop services portal-utente
   #- kubectl stop replicationcontroller portal-utente
