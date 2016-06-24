@@ -19,6 +19,9 @@
 
     <!-- Custom CSS -->
     <link href=<c:url value="/resources/css/main1.css" ></c:url> rel="stylesheet">
+    
+    <!-- Font -->
+  	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -81,16 +84,20 @@
 																								
 							<div class="col-lg-12">
 							
-							 <p id="frase">Preencha aqui os dados que pretende inserir no Sistema</p>
+							 <p  id="preenchaDados">Preencha aqui os dados que pretende inserir no Sistema</p>
 
-							<div class="registo">
-										<p style="color:black">Escolha a Medição:</p>><br>
+							<div class="medicoes">
+										<p style="color:black">Escolha a Medição:</p>
 								        <select id="medidas" onclick="testing()" style="color:black;">
-									    </select>
+									    </select> 
 									
-										<form id="campos" method="post"></form>
+										<form id="campos" method="post"></form> 
 										
-										<input id = "botao_reg" type="submit" onclick="aquivoueu()">
+										<div class="alert-div">Sucesso</div>
+										<p>
+										   
+										
+										<input id = "botao_reg" type="submit" onclick="aquivoueu()" style="color:black">
 									  	<button id = "botao_voltar" onclick= "verMedida()" >Histórico</button>
 							</div>
 							
@@ -141,7 +148,10 @@
 							    cache: false,    //This will force requested pages not to be cached by the browser
 							     processData:false, //To avoid making query String instead of JSON
 							     success: function(resposeJsonObject){
-							        alert(resposeJsonObject);
+							        // alert(resposeJsonObject);
+							    	 $("#botao_reg").click(function () {
+							    		    $("div.alert-div").fadeIn(300).delay(300).fadeOut(400);
+							    		});
 							    }
 							    });
 							  }
@@ -235,14 +245,12 @@
     <script src='<c:url value="/resources/js/bootstrap.min.js"></c:url>'></script>
 
     <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
+
     
 	<script>
+	$('#accordion .panel-default').on('click', function () {
+	    $('#accordion .panel-collapse').collapse('toggle');
+	});
 	$('.collapse').on('shown.bs.collapse', function(){
 	$(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
 	}).on('hidden.bs.collapse', function(){

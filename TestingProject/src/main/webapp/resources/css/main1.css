@@ -69,13 +69,25 @@ background: rgb(249, 249, 249);
 
 /*------Medicoes-----*/
 
-.registo,#frase{
- margin-top: 4.5%;
+.medicoes{
+ margin-top: 4%;
  text-align: center;
- margin-right: 42%;
- font-family:  LANENAR_, Arial, sans-serif;
+ margin-right: 5%;
+ font-family:  'Roboto', Arial, sans-serif;
+ font-weight: 100;
  font-size: 20px;
- color: white;
+}
+
+
+.alert-div {
+    width: 150px;
+    display:none;
+    background-color: #99ff99;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 20px;
+    margin-left: 40%;
 }
 
 #frase {
@@ -83,10 +95,15 @@ background: rgb(249, 249, 249);
  font-color: black;
  width: 100%;
 }
+
 #medidas{
  color: black;
   text-align: center;
- 	
+  margin-bottom: 10px;	
+}
+
+#preenchaDados{
+	text-align: center;
 }
 .colunas{
  margin-top: 4.5%;
@@ -104,17 +121,14 @@ background: rgb(249, 249, 249);
   text-align: center;
 }
 
-#botao_reg,#botao_voltar{
+#botao_reg, #botao_voltar{
  background: transparent;
  border: 0.3px solid;
  margin-top: 7px;
  margin-bottom: 5px;
-  font-color: black;
+ color: black;
  }
 
-.botao_reg {
-	color: white; 
-}
 
 /*------- End Medicoes -------*/
 
@@ -317,13 +331,7 @@ table #td{
  font-size: 15px;
 }
 
-#botao_reg{
- background: transparent;
- border: 0.3px solid white;
- margin-top: 7px;
- margin-bottom: 5px;
- color: white;
-}
+
 .colunas{
 	text-align:right;
 	color: white;
