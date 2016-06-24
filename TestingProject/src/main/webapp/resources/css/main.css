@@ -15,7 +15,54 @@
     font-family: 'DengXian';
     src: url('/resources/fonts/DengXian.ttf');
 }
+#tabela_exames{
+ margin-left: 25.5%;
+ margin-top: 30px;
+ width: 50%;
+ font-size: 15px;
+}
 
+#botao_tab{
+ font-size: 12px;
+}
+
+.exame{
+ margin-top: 20px;
+}
+
+#botao_con{
+ margin-right: 0%;
+ color: white;
+}
+
+#botao_upload{
+ margin-top: 30px;
+ margin-left: 47%;
+ text-align: center;
+ color: white;
+}
+
+#texto5, #texto_tab{
+ font-size: 15px;
+   color: white;
+   text-transform: uppercase;
+   text-align: center; 
+}
+
+
+
+#caixaText{
+ background-color: transparent;
+ border-color: white;
+}
+
+#escolherFile{
+ margin-top: 30px;
+ margin-left: 37%;
+ text-align: center;
+ font-size: 15px;
+ color: white;
+}
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
@@ -284,7 +331,7 @@ html body div.container div#caixaGig.col-lg-12 div#wrapper div#sidebar-wrapper u
  font-size: 15px;
 }
 
-#botao_reg,#botao_voltar{
+#botao_reg,#botao_voltar,#botao_tab{
  background: transparent;
  border: 0.3px solid;
  margin-top: 7px;

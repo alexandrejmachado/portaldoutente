@@ -14,7 +14,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Medicacao.FIND_ALL_BY_UTENTE, query="SELECT m FROM Medicacao m WHERE m.numUtente = :" + Medicacao.UTENTE +" ORDER BY m.cal DESC")
+	@NamedQuery(name=Medicacao.FIND_ALL_BY_UTENTE, query="SELECT m FROM Medicacao m WHERE m.numUtente = :" + Medicacao.UTENTE +" ORDER BY m.cal DESC"),
+	@NamedQuery(name=Medicacao.DELETE, query="DELETE FROM Medicacao m WHERE m.id = :" + Medicacao.ID)
 })
 public class Medicacao {
 
@@ -25,7 +26,11 @@ public class Medicacao {
 	
 	public static final String FIND_ALL_BY_UTENTE = "Medicacao.findAllByUtente";
 	
+	public static final String DELETE = "Medicacao.delete";
+	
 	public static final String UTENTE = "numUtente";
+	
+	public static final String ID = "id";
 	
 	@JsonIgnore
 	private String numUtente;

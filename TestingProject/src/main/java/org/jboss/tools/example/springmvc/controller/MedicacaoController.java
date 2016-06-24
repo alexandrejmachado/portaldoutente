@@ -22,19 +22,23 @@ import org.jboss.tools.example.springmvc.data.MedicacaoDao;
 import org.jboss.tools.example.springmvc.data.MedicamentoDao;
 import org.jboss.tools.example.springmvc.data.MedicamentoIdDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
+import org.jboss.tools.example.springmvc.model.Medicacao;
 import org.jboss.tools.example.springmvc.model.Medicamento;
 import org.jboss.tools.example.springmvc.model.Medicamentoid;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import org.jboss.tools.example.springmvc.data.UtenteDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -61,19 +65,29 @@ public class MedicacaoController {
 
 	
 	@RequestMapping(value="/inserir", method = RequestMethod.POST,params={"nome", "dosagem", "indicacoes"})
-	public boolean inserirMedicacao(HttpSession session, @RequestParam(value="nome") String nomeMedicamento, @RequestParam(value="dosagem") double dosagemDiaria, @RequestParam(value="indicacoes") String indicacoes) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+	public void inserirMedicacao(HttpSession session, @RequestParam(value="nome") String nomeMedicamento, @RequestParam(value="dosagem") double dosagemDiaria, @RequestParam(value="indicacoes") String indicacoes) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		System.out.println("cheguei aqui");
 		
 		Medicamentoid medid= medidDao.findByNome(nomeMedicamento);
 		int id = medid.getID();
 		Medicamento med = medDao.findById(Integer.toString(id));
 		medicacaoDao.novaMedicacao(Integer.parseInt((String) session.getAttribute("sessionID")), med.getId(), dosagemDiaria, indicacoes, "Pendente", med.getComprimidos());
-		return true;
+		verificarMedicacao(session);
+	}
+	
+	
+	@RequestMapping(value="/obterMedicacoes")
+	@ResponseBody
+	public List<Medicacao> obterMedicacao(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+		List<Medicacao> lista = medicacaoDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID"))); 
+		return lista;
 	}
 	
 	@RequestMapping(value="/verificar")
-	public void verificarMedicacao(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
-		medicacaoDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID"))); 
+	public ModelAndView verificarMedicacao(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("tabela_meds");
+		return mav;
 	}
 
 	private AuthController as= new AuthController();
