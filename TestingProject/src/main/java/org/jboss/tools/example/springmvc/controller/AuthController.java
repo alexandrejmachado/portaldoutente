@@ -17,11 +17,14 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
 import com.twilio.sdk.resource.factory.MessageFactory;
 
+@Service
 public class AuthController {
 		Properties props;
 		
@@ -42,6 +45,7 @@ public class AuthController {
 		props.put("mail.smtp.port", "465");
 	}
 	
+	@Async
 	public String sendEmail(String to) {
 
 		String code = nextSessionId();
@@ -61,7 +65,6 @@ public class AuthController {
 					InternetAddress.parse(to));
 			message.setSubject("Testing Subject");
 			message.setText(msg);
-
 			Transport.send(message);
 
 			return code;

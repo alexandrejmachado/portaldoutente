@@ -113,7 +113,6 @@ public class Utente {
 		dataNascimento = new Date();
 		verificationCode = code;
 		verificationCodeSms = codeSms;
-		System.out.println("NIF = " + getNif());
 	}
 	
 	public int getNumUtente() throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {

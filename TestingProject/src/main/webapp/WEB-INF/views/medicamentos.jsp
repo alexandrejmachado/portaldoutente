@@ -95,7 +95,7 @@ Indicacoes: <br>
 
 <script>
 $(document).ready(function(){
-	var link="<c:url value="/resources/meds.json"> </c:url>";
+	var link="<c:url value="/resources/meds3.json"> </c:url>";
 $.get(link).done(function( tags ) {
   $( "#autocomplete" ).autocomplete({
     source: function( request, response ) {

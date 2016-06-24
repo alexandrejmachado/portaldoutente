@@ -206,17 +206,12 @@ public class TestingController {
 	public String loginUtente(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password, HttpSession session) throws NoSuchAlgorithmException{
 		ModelAndView mav = new ModelAndView();
 		try{
-			System.out.println("A tentar ir buscar o utente");
 			Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
-			System.out.println("Aqui em baixo vai o utente");
 			System.out.println(currentUser);
-			System.out.println("Pass do Utente:");
 			System.out.println(currentUser.getPassword());
 			String hashLogin = HashTextTest.sha256(password);
-			System.out.println("PASS EM HASH:" + hashLogin);
 			String loginPassword=currentUser.getPassword();
 			String passwordGuardiao = currentUser.getPasswordGuardiao();
-			System.out.println("passe guardiao: " + hashLogin.equals(passwordGuardiao));
 			if((hashLogin.equals(loginPassword) && currentUser!=null)){
 				session.setAttribute("sessionMode", "user");
 				session.setAttribute("sessionID", username);
@@ -247,7 +242,7 @@ public class TestingController {
 			}
 		}
 		catch (Exception e){
-			e.printStackTrace();
+			System.out.println("Erro no Login");
 			//System.out.println(e);
 			return "false";
 
@@ -419,7 +414,6 @@ public class TestingController {
 			try{
 				campo = "num_utente";
 				Integer.parseInt(numUtente);
-				System.out.print("numero: ");
 				campo = "cc";
 				Integer.parseInt(cc);
 				if(telemovel.length() > 0){
@@ -445,7 +439,7 @@ public class TestingController {
 			resp = false;
 			finalmsg.add(e.getMessage());
 			finalmsg.add(campo);
-			System.out.println(e.getMessage());
+			System.out.println("ERRO no registo->ver mensagem");
 		}
 
 		if(resp)
@@ -453,8 +447,9 @@ public class TestingController {
 				
 				String hashTest;
 				hashTest = HashTextTest.sha256(password);
-				//String code = as.sendEmail(mail);
-				String code = "";
+				String code = as.sendEmail(mail);
+				System.out.println(code);
+				//String code = "";
 				String codeSms="";
 				try{
 				//codeSms = as.sendSms(telemovel);
