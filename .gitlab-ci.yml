@@ -25,7 +25,7 @@ deploy_job:
   stage: deploy
   script:
   - pwd
-  - DOCKER_TAG=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 4 | head -n 1) || true
+  - DOCKER_TAG=$(python /opt/random/random.py) || true
   - export PATH=$PATH:/usr/local/share/google/google-cloud-sdk/bin/
   - gcloud config set account quesejadesta@composite-watch-135111.iam.gserviceaccount.com
   - gcloud auth activate-service-account quesejadesta@composite-watch-135111.iam.gserviceaccount.com --key-file /opt/bitnami/key
