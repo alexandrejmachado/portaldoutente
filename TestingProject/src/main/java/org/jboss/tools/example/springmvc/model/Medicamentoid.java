@@ -7,7 +7,7 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Medicamentoid.FIND_BY_NAME, query="SELECT m.id FROM Medicamentoid m WHERE m.nome = :" + Medicamentoid.NOME)
+	@NamedQuery(name=Medicamentoid.FIND_BY_NAME, query="SELECT m FROM Medicamentoid m WHERE m.nome = :" + Medicamentoid.NOME)
 })
 public class Medicamentoid {
 
