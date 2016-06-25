@@ -47,39 +47,46 @@ public class EventController {
 	@RequestMapping(value="/getEventos")
 	@ResponseBody
 	public ArrayList<Object> getEventos(HttpSession session) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		//----------------------------------
-		//consultaDao.novo(25, 123123123, 123, "1", new Date(), "");
-		System.out.println("session of: "+session.getAttribute("sessionID"));
-		int numUtente = Integer.parseInt((String)session.getAttribute("sessionID"));
-		Utente curUtente = utenteDao.findUtenteById(numUtente);
-		List<Consulta> all = consultaDao.findAllByUtente(numUtente, curUtente.getCentroSaude());
-		//----------------------------------
-		
-		ArrayList<Object> lista= new ArrayList<Object>();
-		for(Consulta c : all){
-			HashMap<String,Object> mapa = new HashMap<String,Object>();
-			mapa.put("id", Integer.toString(c.getId()));
-			mapa.put("title", "Consulta");
-			mapa.put("start", c.getData());
-			lista.add(mapa);
+		if(verifyLogin(session)){
+			System.out.println("session of: "+session.getAttribute("sessionID"));
+			int numUtente = Integer.parseInt((String)session.getAttribute("sessionID"));
+			Utente curUtente = utenteDao.findUtenteById(numUtente);
+			List<Consulta> all = consultaDao.findAllByUtente(numUtente, curUtente.getCentroSaude());
+			//----------------------------------
+			
+			ArrayList<Object> lista= new ArrayList<Object>();
+			for(Consulta c : all){
+				HashMap<String,Object> mapa = new HashMap<String,Object>();
+				mapa.put("id", Integer.toString(c.getId()));
+				mapa.put("title", "Consulta");
+				mapa.put("start", c.getData());
+				lista.add(mapa);
+			}
+			return lista;
 		}
-		return lista;
-		
+		else{
+			ArrayList<Object> lista= new ArrayList<Object>();
+			lista.add(0, "STATUS: Unauthorized Access");
+			return lista;
+		}
 	}
 	
 	@RequestMapping(value="/view")
-	public ModelAndView calendarView(){
-		//TODO meter o lock de sessao
+	public ModelAndView calendarView(HttpSession session){
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("calendarView");
-		mav.addObject("data", new Date().getTime());
+		if(verifyLogin(session)){
+			mav.setViewName("calendarView");
+			mav.addObject("data", new Date().getTime());
+		}
+		else{
+			mav.setViewName("redirect:/index");
+		}
 		return mav;
 	}
 	
 	@RequestMapping(value="/marcarConsultaView", method = RequestMethod.GET, params={"data"})
 	public ModelAndView marcarConsultaView(@RequestParam(value = "data") String data, HttpSession session) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		//TODO meter o lock de sessao
-		
+
 		//-----------------------------------------
 		int numUtente = Integer.parseInt((String)session.getAttribute("sessionID"));
 		//int numUtente = 123123123;
@@ -98,7 +105,7 @@ public class EventController {
 			mav.addObject("data", out);
 			//----------------------------------------
 			ArrayList<String> lista = Horarios.getHorarios();
-			List<Consulta> conList = consultaDao.findByDate(data,1);
+			List<Consulta> conList = consultaDao.findByDate(data,curUtente.getCentroSaude());
 			for(Consulta c : conList){
 				System.out.println(c.getData().toString().substring(11, 16));
 				lista.remove(c.getData().toString().substring(11, 16));
@@ -155,6 +162,37 @@ public class EventController {
 		}
 	}
 	
+	public boolean verifyLogin(HttpSession session) {
+		if(session.getAttribute("sessionID") == null){
+			return false;
+		}
+		else{
+			try {
+				if(utenteDao.verifyActivatedUser((String)session.getAttribute("sessionID")))
+				return true;
+				else{
+					session.removeAttribute("sessionID");
+				return false;
+				}
+			} catch (InvalidKeyException e) {
+				e.printStackTrace();
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
+			} catch (NoSuchPaddingException e) {
+				e.printStackTrace();
+			} catch (IllegalBlockSizeException e) {
+				e.printStackTrace();
+			} catch (BadPaddingException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+		
+	}
 
 }
 
