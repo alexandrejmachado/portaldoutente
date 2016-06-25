@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 	@NamedQuery(name=Consulta.FIND_BY_ID, query="SELECT c FROM Consulta c WHERE c.id =:" + Consulta.ID),
 	@NamedQuery(name=Consulta.FIND_BY_DATE, query="SELECT c FROM Consulta c, Instituicao i WHERE i.id = :"+ Instituicao.ID +" AND c.data =:" + Consulta.DATA),
 	@NamedQuery(name=Consulta.FIND_ALL_BY_UTENTE, query="SELECT c FROM Consulta c WHERE c.numUtente = :" + Consulta.UTENTE +" ORDER BY c.data DESC"),
-	@NamedQuery(name=Consulta.FIND_WITH_DATE, query="SELECT c FROM Consulta c, Instituicao i WHERE i.id = :"+Consulta.INST_ID+" AND c.numUtente= :"+ Consulta.UTENTE + " AND c.data > :"+ Consulta.DATA +" ORDER BY c.data DESC")
+	@NamedQuery(name=Consulta.FIND_WITH_DATE, query="SELECT c FROM Consulta c WHERE c.idInstituicao = :"+Consulta.INST_ID+" AND c.numUtente= :"+ Consulta.UTENTE + " AND c.data > :"+ Consulta.DATA +" ORDER BY c.data DESC")
 })
 public class Consulta {
 

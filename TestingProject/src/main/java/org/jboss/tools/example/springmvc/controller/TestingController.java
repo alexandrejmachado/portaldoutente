@@ -410,6 +410,12 @@ public class TestingController {
 			if(!resp){
 				throw new BadRegistException("Formato de Nif incorrecto, deverá ter 9 digitos (Ex: 123456789)", campo);
 			}
+			//------------localidade------------
+			campo = "localidade";
+			
+			//----------SUPER IMPORTANTE--------
+			
+			
 			//-------------verificar numeros---------------
 			try{
 				campo = "num_utente";

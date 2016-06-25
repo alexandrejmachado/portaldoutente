@@ -63,9 +63,9 @@
 						<td> </td>
 					</tr>
 					<tr>
-						<td>Localidade</td>
+						<td>Localidade*</td>
 						<td>
-  							<input style="color:black;padding-left: 5%;color: black;font-size: 15px;" id="tags" name="localidade"></td>
+  							<input style="color:black;padding-left: 5%;color: black;font-size: 15px;" required id="tags" name="localidade"></td>
 						<td> </td>
 					</tr>
 					
@@ -74,8 +74,8 @@
 		<div class="colunas col-xs-8 col-sm-6" style="text-align:right"> <!--2a coluna cenas-->
 				<table>
 					<tr>
-						<td>E-Mail</td>
-						<td><input id = "campo" type="text" name="mail"></td>
+						<td>E-Mail*</td>
+						<td><input id = "campo" type="text" required name="mail"></td>
 						<td> </td>
 					</tr>
 					<tr>
@@ -100,8 +100,8 @@
 						
 					</tr>	
 					<tr>
-						<td>Número de Identificação Fiscal</td>
-						<td><input id = "campo" type="text" name="nif"></td> 
+						<td>Número de Identificação Fiscal*</td>
+						<td><input id = "campo" type="text" name="nif" required></td> 
 						<td> </td>
 						
 					</tr>
