@@ -37,7 +37,7 @@ public class MedicamentoDao {
 		return query.getSingleResult();
 	}
 	
-	public Medicamento findById(String id) {
+	public Medicamento findById(int id) {
 		TypedQuery<Medicamento> query = em.createNamedQuery(Medicamento.FIND_BY_ID, Medicamento.class);
 		query.setParameter(Medicamento.ID, id);
 		return query.getSingleResult();
