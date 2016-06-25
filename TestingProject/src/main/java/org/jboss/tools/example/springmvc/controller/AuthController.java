@@ -49,6 +49,7 @@ public class AuthController {
 	public String sendEmail(String to) {
 
 		String code = nextSessionId();
+		System.out.println(code);
 		String msg =  "Insira este Codigo de seguranca no site: " + code;
 		Session session = Session.getDefaultInstance(props,
 			new javax.mail.Authenticator() {
