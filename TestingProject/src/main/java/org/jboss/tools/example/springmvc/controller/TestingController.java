@@ -207,7 +207,7 @@ public class TestingController {
 		ModelAndView mav = new ModelAndView();
 		try{
 			Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
-			System.out.println(currentUser);
+			System.out.println(currentUser.getNif() + "CURRENT UTENTE");
 			System.out.println(currentUser.getPassword());
 			String hashLogin = HashTextTest.sha256(password);
 			String loginPassword=currentUser.getPassword();
@@ -243,7 +243,7 @@ public class TestingController {
 		}
 		catch (Exception e){
 			System.out.println("Erro no Login");
-			//System.out.println(e);
+			System.out.println(e.getMessage());
 			return "false";
 
 		}
