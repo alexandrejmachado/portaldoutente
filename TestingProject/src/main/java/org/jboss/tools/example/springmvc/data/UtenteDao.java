@@ -107,9 +107,13 @@ public class UtenteDao {
 	}
 	
 	public boolean verifyUser(String user, String code) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+		System.out.println("1");
 		Utente ut = findUtenteById(Integer.parseInt(user));
+		System.out.println("2");
 		System.out.println(ut.verifyClient(code));
+		System.out.println("3");
 		System.out.println(ut.verifyClientSms(code));
+		System.out.println("4");
 		return ut.isVerified();
 	}
 	
