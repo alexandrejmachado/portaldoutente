@@ -9,10 +9,13 @@ import org.jboss.tools.example.springmvc.model.Consulta;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Instituicao.FIND_LOCAL, query="SELECT i FROM Instituicao i WHERE i.localidade = :"+ Instituicao.LOCALIDADE)})
+	@NamedQuery(name=Instituicao.FIND_LOCAL, query="SELECT i FROM Instituicao i WHERE i.localidade = :"+ Instituicao.LOCALIDADE),
+	@NamedQuery(name=Instituicao.FIND_BY_ID, query="SELECT i FROM Instituicao i WHERE i.id = :"+ Instituicao.ID)})
 public class Instituicao {
 	
 	public static final String FIND_LOCAL = "Instituicao.findLocal";
+	
+	public static final String FIND_BY_ID = "Instituicao.findById";
 	
 	public static final String LOCALIDADE = "localidade";
 	
