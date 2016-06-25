@@ -70,7 +70,9 @@ public class MedicacaoController {
 		
 		Medicamentoid medid= medidDao.findByNome(nomeMedicamento);
 		int id = medid.getID();
-		Medicamento med = medDao.findById(Integer.toString(id));
+		Medicamento med = medDao.findById(id);
+		System.out.println("medicamento id: " + med.getId());
+		System.out.println("medicamento comprimidos: " + med.getComprimidos());
 		medicacaoDao.novaMedicacao(Integer.parseInt((String) session.getAttribute("sessionID")), med.getId(), dosagemDiaria, indicacoes, "Pendente", med.getComprimidos());
 		verificarMedicacao(session);
 	}
