@@ -100,7 +100,6 @@ public class UtenteDao {
 		}
 		catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
 				| BadPaddingException | IOException e) {
-			// TODO Auto-generated catch block
 			return false;
 		}
 		

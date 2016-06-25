@@ -28,6 +28,9 @@ public class TensaoArterial {
 		@GeneratedValue
 		private int id;
 		
+		private boolean sharable = false;
+		
+		
 		public static final String UTENTE = "numUtente";
 		
 		public static final String FIND_ALL_BY_UTENTE = "TensaoArterial.findAllByUtente";
@@ -84,5 +87,13 @@ public class TensaoArterial {
 		
 		public String toString(){
 			return this.getMax() + "/" + this.getMin() + TensaoArterial.UNIDADE;
+		}
+		
+		public boolean isSharable() {
+			return sharable;
+		}
+
+		public void setSharable(boolean sharable) {
+			this.sharable = sharable;
 		}
 }

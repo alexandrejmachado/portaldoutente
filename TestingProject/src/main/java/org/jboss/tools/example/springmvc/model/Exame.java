@@ -24,6 +24,9 @@ public class Exame {
 	@GeneratedValue
 	private int id;
 	
+	private boolean sharable = false;
+	
+	
 	
 	public static final String FIND_ALL_BY_UTENTE = "Exame.findAllByUtente";
 	
@@ -62,4 +65,11 @@ public class Exame {
 	
 	public String getMetalink(){return metalink;}
 	
+	public boolean isSharable() {
+		return sharable;
+	}
+
+	public void setSharable(boolean sharable) {
+		this.sharable = sharable;
+	}
 }

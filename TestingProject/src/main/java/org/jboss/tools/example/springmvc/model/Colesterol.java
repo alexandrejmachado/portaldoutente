@@ -27,6 +27,9 @@ public class Colesterol {
 	@GeneratedValue
 	private int id;
 	
+	private boolean sharable = false;
+	
+	
 	public static final String FIND_ALL_BY_UTENTE = "Colesterol.findAllByUtente";
 	
 	public static final String UTENTE = "numUtente";
@@ -47,6 +50,14 @@ public class Colesterol {
 		this.valor = valor;
 		this.data = new Date();
 		this.numUtente = numUtente;
+	}
+	
+	public boolean isSharable() {
+		return sharable;
+	}
+
+	public void setSharable(boolean sharable) {
+		this.sharable = sharable;
 	}
 	
 	@JsonIgnore

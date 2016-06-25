@@ -511,25 +511,25 @@ public class TestingController {
 				return false;
 				}
 			} catch (InvalidKeyException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			} catch (NoSuchAlgorithmException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			} catch (NoSuchPaddingException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			} catch (IllegalBlockSizeException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			} catch (BadPaddingException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		}
@@ -779,7 +779,7 @@ public class TestingController {
 		}
 		 catch (InvalidKeyException | NumberFormatException | NoSuchAlgorithmException | NoSuchPaddingException
 					| IllegalBlockSizeException | BadPaddingException | IOException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		return lista;
