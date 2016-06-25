@@ -46,10 +46,13 @@ public class EventController {
 
 	@RequestMapping(value="/getEventos")
 	@ResponseBody
-	public ArrayList<Object> getEventos() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+	public ArrayList<Object> getEventos(HttpSession session) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		//----------------------------------
 		//consultaDao.novo(25, 123123123, 123, "1", new Date(), "");
-		List<Consulta> all = consultaDao.findAll();
+		System.out.println("session of: "+session.getAttribute("sessionID"));
+		int numUtente = Integer.parseInt((String)session.getAttribute("sessionID"));
+		Utente curUtente = utenteDao.findUtenteById(numUtente);
+		List<Consulta> all = consultaDao.findAllByUtente(numUtente, curUtente.getCentroSaude());
 		//----------------------------------
 		
 		ArrayList<Object> lista= new ArrayList<Object>();
@@ -78,11 +81,11 @@ public class EventController {
 		//TODO meter o lock de sessao
 		
 		//-----------------------------------------
-		//int numUtente = (int) session.getAttribute("sessionID");
-		int numUtente = 123123123;
+		int numUtente = Integer.parseInt((String)session.getAttribute("sessionID"));
+		//int numUtente = 123123123;
 		Utente curUtente = utenteDao.findUtenteById(numUtente);
-		//List<Consulta> all = consultaDao.findWithDate(numUtente, numUtente.getCentroSaude());
-		List<Consulta> all = consultaDao.findWithDate(numUtente,1);
+		List<Consulta> all = consultaDao.findWithDate(numUtente, curUtente.getCentroSaude());
+		//List<Consulta> all = consultaDao.findWithDate(numUtente,1);
 		//-----------------------------------------
 		ModelAndView mav = new ModelAndView();
 		Date temp = new Date(Long.parseLong(data));
@@ -127,13 +130,14 @@ public class EventController {
 		
 	}
 	
-	@RequestMapping(value="/persistirConsulta", method = RequestMethod.POST,params={"data", "obs", "instituicao"})
+	@RequestMapping(value="/persistirConsulta", method = RequestMethod.POST,params={"data", "obs"})
 	@ResponseBody
 	public boolean persistirConsulta(@RequestParam(value="data") Date data, @RequestParam(value="obs") String obs, 
-									 @RequestParam(value="instituicao") String instituicao, HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		String numUtente="123123123";
-		System.out.println("ESTOU AQUI DENTRO");
-		consultaDao.novo(13, Integer.parseInt(numUtente), Integer.parseInt(instituicao), "amarela", data, obs);
+									  HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		int numUtente = Integer.parseInt((String)session.getAttribute("sessionID"));
+		Utente curUtente = utenteDao.findUtenteById(numUtente);
+		//TODO falta por o medico
+		consultaDao.novo(13, numUtente, curUtente.getCentroSaude(), "amarela", data, obs);
 		return true;
 		}
 	

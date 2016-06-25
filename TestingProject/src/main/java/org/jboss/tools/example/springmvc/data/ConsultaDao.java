@@ -56,10 +56,10 @@ public class ConsultaDao {
 	public List<Consulta> findByDate(String data, int instituicao) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		// usado para ver as horas disponiveis do dia
 		try{
-			Query query = em.createNativeQuery("SELECT * FROM Consulta, Instituicao WHERE Instituicao.id = ? AND Consulta.data LIKE ?",Consulta.class);
+			Query query = em.createNativeQuery("SELECT * FROM Consulta WHERE Consulta.idInstituicao = ? AND Consulta.data LIKE ?",Consulta.class);
 			String actualDate = new java.sql.Date(Long.parseLong(data)).toString() + "%";
-			query.setParameter(1, 1);
-			//query.setParameter(1, instituicao);
+			//query.setParameter(1, 1);
+			query.setParameter(1, instituicao);
 			query.setParameter(2, actualDate);
 			return query.getResultList();
 		}
@@ -77,9 +77,10 @@ public class ConsultaDao {
 		return (Consulta) query.getSingleResult();
 	}
 	
-	public List<Consulta> findAllByUtente(int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+	public List<Consulta> findAllByUtente(int numUtente, int instituicao) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		TypedQuery<Consulta> query = em.createNamedQuery(Consulta.FIND_ALL_BY_UTENTE, Consulta.class);
 		query.setParameter(Consulta.UTENTE, Cifras.encrypt(Integer.toString(numUtente)));
+		query.setParameter(Consulta.INST_ID, instituicao);
 		return query.getResultList();
 	}
 	

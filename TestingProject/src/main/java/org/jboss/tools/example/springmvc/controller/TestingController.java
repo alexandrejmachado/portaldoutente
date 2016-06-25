@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+import java.util.Random;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -40,6 +41,7 @@ import org.jboss.tools.example.springmvc.data.ExameDao;
 import org.jboss.tools.example.springmvc.data.GlicemiaDao;
 import org.jboss.tools.example.springmvc.data.GuardiaoDao;
 import org.jboss.tools.example.springmvc.data.INRDao;
+import org.jboss.tools.example.springmvc.data.InstituicaoDao;
 import org.jboss.tools.example.springmvc.data.PesoDao;
 import org.jboss.tools.example.springmvc.data.SaturacaoO2Dao;
 import org.jboss.tools.example.springmvc.data.TensaoArterialDao;
@@ -48,6 +50,7 @@ import org.jboss.tools.example.springmvc.data.UtenteDao;
 import org.jboss.tools.example.springmvc.model.Cirurgia;
 import org.jboss.tools.example.springmvc.model.Exame;
 import org.jboss.tools.example.springmvc.model.Glicemia;
+import org.jboss.tools.example.springmvc.sensitivedata.Instituicao;
 import org.jboss.tools.example.springmvc.sensitivedata.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -85,6 +88,9 @@ public class TestingController {
 	
 	@Autowired
 	private PesoDao pesoDao;
+	
+	@Autowired
+	private InstituicaoDao instDao;
 	
 	@Autowired
 	private INRDao inrDao;
@@ -349,6 +355,7 @@ public class TestingController {
 		String campo = null;
 		String msg=null;
 		List<String> finalmsg= new ArrayList<String>();
+		int localidadeId = 0;
 		try{
 			//------------passwords-------------
 			campo = "pass";
@@ -412,7 +419,21 @@ public class TestingController {
 			}
 			//------------localidade------------
 			campo = "localidade";
-			
+			List<Instituicao> listaInst = instDao.findByLocalidade(localidade);
+			if(listaInst.size() == 0){
+				throw new BadRegistException("Por favor insira uma Localidade válida", campo);
+			}
+			else{
+				if(listaInst.size() > 1){
+					Random ran = new Random();
+					int x = ran.nextInt(listaInst.size());
+					localidadeId = listaInst.get(x).getId();
+					System.out.println(localidadeId);
+				}
+				else{
+					localidadeId = listaInst.get(0).getId();
+				}
+			}
 			//----------SUPER IMPORTANTE--------
 			
 			
@@ -464,7 +485,7 @@ public class TestingController {
 				{
 					System.out.println("erro no codigo");
 				}
-				Utente ut = utenteDao.newUtente(username, numUtente, cc, morada, mail, hashTest, telemovel, nif, code, codeSms, emergencia);
+				Utente ut = utenteDao.newUtente(username, numUtente, cc, morada, mail, hashTest, telemovel, nif, code, codeSms, emergencia, localidadeId);
 				finalmsg.add("true");
 				return finalmsg;
 			}
