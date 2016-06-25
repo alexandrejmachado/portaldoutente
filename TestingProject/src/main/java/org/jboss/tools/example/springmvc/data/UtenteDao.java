@@ -59,6 +59,8 @@ public class UtenteDao {
 			return query.getSingleResult();
 		}
 		catch(PersistenceException e){
+			System.out.println("tentei encontrar a conta pelo id");
+			System.out.println(e.getMessage());
 			System.out.println("Conta nao existe");
 			return null;
 		}
