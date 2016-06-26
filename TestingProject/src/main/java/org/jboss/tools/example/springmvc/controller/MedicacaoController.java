@@ -155,13 +155,5 @@ public class MedicacaoController {
 	
 	
 
-	@RequestMapping(value="/view")
-	public ModelAndView calendarView(HttpSession session){
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("username", session.getAttribute("sessionName"));
-		mav.setViewName("medicamentos");
-		return mav;
-	}
-
 
 }
