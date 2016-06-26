@@ -75,11 +75,11 @@ public class Peso {
 	public String toString(){
 		return this.getValor() + Peso.UNIDADE;
 	}
-	
+	@JsonIgnore
 	public boolean isSharable() {
 		return sharable;
 	}
-
+	@JsonIgnore
 	public void setSharable(boolean sharable) {
 		this.sharable = sharable;
 	}

@@ -76,10 +76,12 @@ public class SaturacaoO2 {
 		return this.getValor() + Altura.UNIDADE;
 	}
 	
+	@JsonIgnore
 	public boolean isSharable() {
 		return sharable;
 	}
 
+	@JsonIgnore
 	public void setSharable(boolean sharable) {
 		this.sharable = sharable;
 	}

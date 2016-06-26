@@ -67,6 +67,12 @@
 					<li id="isencao">
 						<a href="/isencao">Pedido de Isenção</a>
 					</li>
+										<li style="opacity:0">
+						<a></a>
+					</li>
+					<li>
+						<a href="/">Voltar para o Menu</a>
+					</li>
 				</ul>
 			</div>
 			<!-- /#sidebar-wrapper -->
@@ -146,9 +152,7 @@
 							     processData:false, //To avoid making query String instead of JSON
 							     success: function(resposeJsonObject){
 							        // alert(resposeJsonObject);
-							    	 $("#botao_reg").click(function () {
 							    		    $("div.alert-div").fadeIn(300).delay(300).fadeOut(400);
-							    		});
 							    }
 							    });
 							  }
@@ -161,6 +165,7 @@
 								      else $(this).find('span').html('&#x25BC;')
 								    })
 								});
+							  
 							  function verMedida(medida2)
 							  {
 								  $("#"+medida2).html('<object data="https://'+window.location.host+'/visualizar/'+medida2+'" style="width:100%"/>')
@@ -207,13 +212,61 @@
 							  <div class="panel panel-default">
 							    <div class="panel-heading">
 							      <h4 class="panel-title">
-							        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" onclick="verMedida('Colesterol')">
+							        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" onclick="verMedida('Trigliceridos')">
+							          <span class="glyphicon glyphicon-plus"></span>
+							          Trigliceridos
+							        </a>
+							      </h4>
+							    </div>
+							    <div id="collapseThree" class="panel-collapse collapse">
+							      <div id="Altura" class="panel-body">
+							      
+							        </div>
+							     </div>
+							  </div>
+							  
+							  <div class="panel panel-default">
+							    <div class="panel-heading">
+							      <h4 class="panel-title">
+							        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" onclick="verMedida('INR')">
+							          <span class="glyphicon glyphicon-plus"></span>
+							          INR
+							        </a>
+							      </h4>
+							    </div>
+							    <div id="collapseFour" class="panel-collapse collapse">
+							      <div id="Altura" class="panel-body">
+							      
+							        </div>
+							     </div>
+							  </div>
+							  
+							  <div class="panel panel-default">
+							    <div class="panel-heading">
+							      <h4 class="panel-title">
+							        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" onclick="verMedida('TensaoArterial')">
+							          <span class="glyphicon glyphicon-plus"></span>
+							          Tensao Arterial 
+							        </a>
+							      </h4>
+							    </div>
+							    <div id="collapseFive" class="panel-collapse collapse">
+							      <div id="Altura" class="panel-body">
+							      
+							        </div>
+							     </div>
+							  </div>
+							  
+							  <div class="panel panel-default">
+							    <div class="panel-heading">
+							      <h4 class="panel-title">
+							        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" onclick="verMedida('Colesterol')">
 							          <span class="glyphicon glyphicon-plus"></span>
 							          Colesterol
 							        </a>
 							      </h4>
 							    </div>
-							    <div id="collapseThree" class="panel-collapse collapse">
+							    <div id="collapseSix" class="panel-collapse collapse">
 							      <div id="Colesterol" class="panel-body">
 							       
 							      </div>
@@ -245,9 +298,6 @@
 
     
 	<script>
-	$('#accordion .panel-default').on('click', function () {
-	    $('#accordion .panel-collapse').collapse('toggle');
-	});
 	$('.collapse').on('shown.bs.collapse', function(){
 	$(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
 	}).on('hidden.bs.collapse', function(){
