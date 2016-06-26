@@ -42,7 +42,7 @@
                 Opções <span>▼</span>
               </a>
               <div id="login-content">
-                <a button href= "/perfil" id = "aaa">Ver Perfil</button></a><br>
+                <a button href= "/perfil/dados" id = "aaa">Ver Perfil</button></a><br>
                 <a button href= "/logout" id ="aaa">Logout</button></a>
               </div>                     
             </li>
@@ -151,3 +151,16 @@ function medicamentos()
 
 }
 </script>
+
+    <!-- Menu Toggle Script -->
+<script>
+     $(document).ready(function(){
+   $('#login-trigger').click(function(){
+     $(this).next('#login-content').slideToggle();
+     $(this).toggleClass('active');          
+    
+     if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
+       else $(this).find('span').html('&#x25BC;')
+     })
+ });
+ </script>
