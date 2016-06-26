@@ -22,6 +22,7 @@ import org.jboss.tools.example.springmvc.data.MedicacaoDao;
 import org.jboss.tools.example.springmvc.data.MedicamentoDao;
 import org.jboss.tools.example.springmvc.data.MedicamentoIdDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
+import org.jboss.tools.example.springmvc.model.Cirurgia;
 import org.jboss.tools.example.springmvc.model.Medicacao;
 import org.jboss.tools.example.springmvc.model.Medicamento;
 import org.jboss.tools.example.springmvc.model.Medicamentoid;
@@ -49,6 +50,7 @@ public class MedicacaoController {
 	@Autowired
 	private UtenteDao utenteDao;
 	
+	
 	@Autowired
 	public MedicamentoDao medDao;
 	
@@ -66,7 +68,7 @@ public class MedicacaoController {
 	
 	@RequestMapping(value="/inserir", method = RequestMethod.POST,params={"nome", "dosagem", "indicacoes"})
 	@ResponseBody
-	public String inserirMedicacao(HttpSession session, @RequestParam(value="nome") String nomeMedicamento, @RequestParam(value="dosagem") double dosagemDiaria, @RequestParam(value="indicacoes") String indicacoes) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+	public boolean inserirMedicacao(HttpSession session, @RequestParam(value="nome") String nomeMedicamento, @RequestParam(value="dosagem") double dosagemDiaria, @RequestParam(value="indicacoes") String indicacoes) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		System.out.println("cheguei aqui");
 		
 		Medicamentoid medid= medidDao.findByNome(nomeMedicamento);
@@ -75,11 +77,11 @@ public class MedicacaoController {
 		System.out.println("medicamento id: " + med.getId());
 		System.out.println("medicamento comprimidos: " + med.getComprimidos());
 		if(medicacaoDao.exists(Integer.parseInt((String) session.getAttribute("sessionID")), med.getId())){
-			return "false";
+			return false;
 		}
 		else {
-			medicacaoDao.novaMedicacao(Integer.parseInt((String) session.getAttribute("sessionID")), med.getId(), dosagemDiaria, indicacoes, "Pendente", med.getComprimidos());
-			return "true";
+			medicacaoDao.novaMedicacao(Integer.parseInt((String) session.getAttribute("sessionID")), med.getId(), nomeMedicamento, dosagemDiaria, indicacoes, "Pendente", med.getComprimidos());
+			return true;
 		}
 	}
 	
@@ -91,22 +93,67 @@ public class MedicacaoController {
 		return lista;
 	}
 	
-	@RequestMapping(value="/verificar")
-	public ModelAndView verificarMedicacao(HttpSession session) {
+	
+	public boolean verifyLogin(HttpSession session) {
+		System.out.println(session.getAttribute("sessionID"));
+		if(session.getAttribute("sessionID") == null){
+			return false;
+		}
+		else{
+			try {
+				if(utenteDao.verifyActivatedUser((String)session.getAttribute("sessionID")))
+				return true;
+				else{
+					session.removeAttribute("sessionID");
+				return false;
+				}
+			} catch (InvalidKeyException e) {
+				
+				e.printStackTrace();
+			} catch (NumberFormatException e) {
+				
+				e.printStackTrace();
+			} catch (NoSuchAlgorithmException e) {
+				
+				e.printStackTrace();
+			} catch (NoSuchPaddingException e) {
+				
+				e.printStackTrace();
+			} catch (IllegalBlockSizeException e) {
+				
+				e.printStackTrace();
+			} catch (BadPaddingException e) {
+				
+				e.printStackTrace();
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		return false;
+		
+	}
+	
+	@RequestMapping(value = "/view")
+	public ModelAndView verificar(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("tabela_meds");
+		if(verifyLogin(session)){
+			List<Medicacao> lista = medicacaoDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			session.setAttribute("lista", lista);
+			mav.addObject("lista", lista);
+			mav.addObject("username", session.getAttribute("sessionName"));
+			mav.setViewName("medicamentos");
+		}
+		else {
+			mav.setViewName("redirect:/index");
+		}
 		return mav;
 	}
+	
 
 	private AuthController as= new AuthController();
 	
 	
-	@RequestMapping(value="/view")
-	public ModelAndView calendarView(){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("medicamentos");
-		return mav;
-	}
-
+	
 
 }
