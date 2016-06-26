@@ -22,7 +22,22 @@
 <div class= "container">    <!-- ROW -->
         <div class= "rowMajor">
             <div class="col-md-11">Portal do Utente</div>
-</div>
+            <div class="col-md-1" id="entrar">${username}</div>
+		</div>
+		
+		<nav>
+          <ul>
+            <li id="login">
+              <a id="login-trigger" href="#">
+                Opções <span>▼</span>
+              </a>
+              <div id="login-content">
+                <a button href= "/perfil/dados" id = "aaa">Ver Perfil</button></a><br>
+                <a button href= "/logout" id ="aaa">Logout</button></a>
+              </div>                     
+            </li>
+          </ul>
+        </nav>
 </div>
 <p id = "frase">Cirurgias pendentes</p>
 <div class = "registo">
@@ -30,7 +45,7 @@
   <c:forEach items="${lista}" var="cirurgia">
     <tr>
     	<td> <c:out value="${cirurgia.tipo }"/> </td>
-        <td>M�dico: <c:out value="${cirurgia.idMedico}"/></td>
+        <td>Médico: <c:out value="${cirurgia.idMedico}"/></td>
         <td>Data: <c:out value="${cirurgia.data}"/></td>
         <td><button id = "confirmar" value="${cirurgia.getId() }" onclick="confirmar(${cirurgia.getId() })"> Confirmar </button></td>
         <td><button id = "cancelar" value="${cirurgia.getId() }" onclick="cancelar(${cirurgia.getId() })"> Remarcar </button></td>
@@ -49,6 +64,18 @@ function confirmar(ID) {
 })}
 
 </script>
+
+<script>
+     $(document).ready(function(){
+   $('#login-trigger').click(function(){
+     $(this).next('#login-content').slideToggle();
+     $(this).toggleClass('active');          
+    
+     if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
+       else $(this).find('span').html('&#x25BC;')
+     })
+ });
+ </script>
 	
 </div>
 </body>
