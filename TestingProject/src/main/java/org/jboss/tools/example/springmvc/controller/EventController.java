@@ -15,9 +15,13 @@ import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpSession;
 
 import org.jboss.tools.example.springmvc.data.ConsultaDao;
+import org.jboss.tools.example.springmvc.data.InstituicaoDao;
+import org.jboss.tools.example.springmvc.data.MedicoDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
 import org.jboss.tools.example.springmvc.model.Cirurgia;
 import org.jboss.tools.example.springmvc.model.Consulta;
+import org.jboss.tools.example.springmvc.sensitivedata.Instituicao;
+import org.jboss.tools.example.springmvc.sensitivedata.Medico;
 import org.jboss.tools.example.springmvc.sensitivedata.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,7 +43,13 @@ public class EventController {
 	private MesesConverter mConv;
 	
 	@Autowired
+	private MedicoDao medicoDao;
+	
+	@Autowired
 	private ConsultaDao consultaDao;
+	
+	@Autowired
+	private InstituicaoDao insDao;
 	
 	@Autowired
 	private UtenteDao utenteDao;
@@ -122,15 +132,22 @@ public class EventController {
 			if(data1.equals(data2)){
 				// enviar info sobre a consulta
 				Consulta currentConsulta = consultaDao.findByUtenteAndData(numUtente,data);
+				// ALERTA: NAO TESTAR COM MEDICO INESISTENTE
+				Medico m = medicoDao.findById(currentConsulta.getIdMedico());
 				int consultaId = currentConsulta.getId();
+				Instituicao inst = insDao.findById(currentConsulta.getIdInstituicao());
+				
 				mav.addObject("data", currentConsulta.getData());
 				mav.addObject("consultaId", consultaId);
-				mav.setViewName("cenas");
+				mav.addObject("medico", m.getNome());
+				mav.addObject("sala", currentConsulta.getSala());
+				mav.addObject("centroSaude", inst.getNome());
+				mav.setViewName("desmarcar_consulta");
 				return mav;
 			}
 			else{
 				// informar que nao pode marcar consulta para outro dia
-				mav.setViewName("erro");
+				mav.setViewName("erro_consulta");
 				return mav;
 			}
 		}
@@ -143,8 +160,9 @@ public class EventController {
 									  HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		int numUtente = Integer.parseInt((String)session.getAttribute("sessionID"));
 		Utente curUtente = utenteDao.findUtenteById(numUtente);
-		//TODO falta por o medico
-		consultaDao.novo(13, numUtente, curUtente.getCentroSaude(), "amarela", data, obs);
+		//TODO maybe falta por lock quando medico == 0?????
+		int idMedico = curUtente.getMedico();
+		consultaDao.novo(idMedico, numUtente, curUtente.getCentroSaude(), "amarela", data, obs);
 		return true;
 		}
 	

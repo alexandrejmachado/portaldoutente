@@ -28,12 +28,14 @@
 </head>
 
 <body>
-  <h1>PAGINA INICIAL</h1>
+  <h1>Dados da Consulta</h1>
 
-  <p>CONSULTA: ${consultaId}</p>
+  <p>Centro de Saúde: ${centroSaude}</p>
+  <p>Médico: ${medico}</p>
+  <p>Sala: ${sala}</p>
   <c:set var="dataTratada" value="${fn:substring(data, 0, 16)}" />
-  <p>DATA: ${dataTratada}</p>
- <p> APAGAR CONSULTA?</p>
+  <p>Data: ${dataTratada}</p>
+ <p> Deseja desmarcar esta consulta?</p>
  <button onclick="removerConsulta()">SIM</button> <button onclick="parent.$.fancybox.close()">NÃO</button>
  
  <script>
@@ -42,6 +44,9 @@
 		console.log("stuffs");
 		console.log(id);
 		$.post("https://"+ window.location.host+"/calendario/removerConsulta",{consultaId:id});
+		$("body").html("<h1>Consulta Desmarcada</h1>");
+		setTimeout(function(){
+		}, 2000);
 		parent.window.location.reload();
 		}
  </script>

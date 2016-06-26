@@ -8,7 +8,7 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Medico.FIND_BY_ID, query="SELECT u FROM Utente u WHERE u.numUtente = :" + Medico.ID)
+	@NamedQuery(name=Medico.FIND_BY_ID, query="SELECT m FROM Medico m WHERE m.id = :" + Medico.ID)
 })
 public class Medico {
 	
