@@ -62,6 +62,8 @@ public class Utente {
 	private String verificationCodeSms;
 	
 	private String cc;
+	
+	private int medico;
 
 	@NotNull
 	private String password;
@@ -97,7 +99,11 @@ public class Utente {
 	
 
 	
-	public Utente(String username, int numUtente, int cc, String morada, String mail, String password, int telemovel, int nif, String code, String codeSms, int emergencia, int centroSaude) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+	public Utente(String username, int numUtente, int cc, String morada, String mail, String password, 
+									int telemovel, int nif, String code, String codeSms, int emergencia, int centroSaude, int medico) 
+																	throws NumberFormatException, InvalidKeyException, 
+																			NoSuchAlgorithmException, NoSuchPaddingException, 
+																				IllegalBlockSizeException, BadPaddingException, IOException{
 		this.numUtente = Cifras.encrypt(Integer.toString(numUtente));
 		this.password = password;
 		this.nome = username;
@@ -109,6 +115,7 @@ public class Utente {
 		this.contactoEmergencia = Cifras.encrypt(Integer.toString(emergencia));
 		//----------------------------------------
 		this.centro_saude = centroSaude;
+		this.medico = medico;
 		//-----------------------------------------
 		dataNascimento = new Date();
 		verificationCode = code;
@@ -227,6 +234,18 @@ public class Utente {
 
 	public void setCentroSaude(int centro_saude) {
 		this.centro_saude = centro_saude;
+	}
+
+
+
+	public int getMedico() {
+		return medico;
+	}
+
+
+
+	public void setMedico(int medico) {
+		this.medico = medico;
 	}
 
 	

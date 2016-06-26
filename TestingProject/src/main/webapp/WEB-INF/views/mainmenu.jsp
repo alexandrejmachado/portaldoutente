@@ -61,28 +61,22 @@
 		<div id="wrapper">
 
 			<!-- Sidebar -->
-			<div id="sidebar-wrapper">
+						<div id="sidebar-wrapper">
 				<ul class="barra">
 						
-					<li>
+					<li id="consulta">
 						<a href="/calendario/view">Marcação de Consultas</a>
 					</li>
-					<li>
-						<a href="#">Marcações Confirmadas</a>
-					</li>
-					<li>
-						<a href="#">Renovar Receita</a>
-					</li>
-					<li>
+					<li id="medicacao2">
 						<a href="/medicacao/view">Registar Medicação</a>
 					</li>
-					<li>
+					<li id="medicao">
 						<a href="/medicoes">Medições</a>
 					</li>
-					<li>
-						<a href="#">Agregado Familiar</a>
+					<li id="cirurgia">
+						<a href="/cirurgia">Cirurgia</a>
 					</li>
-					<li>
+					<li id="isencao">
 						<a href="/isencao">Pedido de Isenção</a>
 					</li>
 				</ul>
@@ -93,15 +87,10 @@
 				<!-- Page Content -->
 				<div id="page-content-wrapper">
 					<div class="container-fluid">
-						<form action="logout"><button id="logout" type="submit">Logout</button></form>
 							<div class="col-lg-12">
-								<h1>Tí­tulo</h1>
-								<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-								Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-								
-								<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Esconder Menu</a>
+								<h1>Bem vindo ao Portal Do Utente</h1>
+								<p id="mudartexto">Escolha uma opção para começar</p>
 							</div>
-					
 					</div>
 				</div>
 				<!-- /#page-content-wrapper -->
@@ -122,14 +111,25 @@
     <!-- Menu Toggle Script -->
     <script>
     $(document).ready(function(){
-  $('#login-trigger').click(function(){
-    $(this).next('#login-content').slideToggle();
-    $(this).toggleClass('active');          
-    
-    if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
-      else $(this).find('span').html('&#x25BC;')
-    })
-});
+    	var textos={'consulta':'Aqui marcam -se as consultas e verifica-se balelas',
+    				'medicacao2':'Texto para Medicacao',
+    				'medicao':'Texto para a Medicao',
+    				'cirurgia':'Texto para a Cirurgia',
+    				'isencao':'Texto para a Isencao'};
+    	
+    	$( "li" )
+    	  .mouseenter(function() {
+    		  var showID = $(this).attr("ID");
+    	    $("#mudartexto").text(textos[$(this).attr("id")]);
+    	  })
+		  $('#login-trigger').click(function(){
+		    $(this).next('#login-content').slideToggle();
+		    $(this).toggleClass('active');          
+		    
+		    if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
+		      else $(this).find('span').html('&#x25BC;')
+		    })
+	});
     </script>
     <script>
     

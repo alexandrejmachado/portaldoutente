@@ -13,10 +13,9 @@
     <meta name="author" content="">
 
     <!-- Bootstrap Core CSS -->
-    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/resources/css/main.css" rel="stylesheet">
+    <link href= <c:url value="/resources/css/bootstrap.min.css" ></c:url> rel="stylesheet"/>
+    
+    <link href= <c:url value="/resources/css/main.css" ></c:url> rel="stylesheet"/>
     
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -25,7 +24,7 @@
 </head>
 
 
-<body background="Final2.png"/>
+<body background=<c:url value="/resources/gfx/Final2.png"/> />
 
 
 <div class= "container">    <!-- ROW -->
@@ -37,8 +36,7 @@
 
 <div  class="erro">
 		<p id="texto3">Ocorreu um problema</p>
-		<p id="texto4">Nao pode marcar uma consulta para o horario em questao.</p>
-    <p id="texto4">Verifique novamente os detalhes da marcacao</p>
+		<p id="texto4">Não pode marcar uma consulta para o horário em questão até à realização de uma consulta prévia ou sua desmarcação.</p>
 				
 </div>
 
