@@ -51,11 +51,11 @@ public class Colesterol {
 		this.data = new Date();
 		this.numUtente = numUtente;
 	}
-	
+	@JsonIgnore
 	public boolean isSharable() {
 		return sharable;
 	}
-
+	@JsonIgnore
 	public void setSharable(boolean sharable) {
 		this.sharable = sharable;
 	}

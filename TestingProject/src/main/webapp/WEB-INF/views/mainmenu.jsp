@@ -122,6 +122,7 @@
     		  var showID = $(this).attr("ID");
     	    $("#mudartexto").text(textos[$(this).attr("id")]);
     	  })
+    	  
 		  $('#login-trigger').click(function(){
 		    $(this).next('#login-content').slideToggle();
 		    $(this).toggleClass('active');          

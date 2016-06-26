@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @NamedQueries({
 	@NamedQuery(name=Glicemia.FIND_ALL_BY_UTENTE, query="SELECT g FROM Glicemia g WHERE g.numUtente = :" + Glicemia.UTENTE +" ORDER BY g.data ASC")
 })
+
 public class Glicemia {
 
 	public static final String UNIDADE = "mg/dL";
@@ -80,10 +81,12 @@ public class Glicemia {
 		return this.getValor() + Glicemia.UNIDADE;
 	}
 	
+	@JsonIgnore
 	public boolean isSharable() {
 		return sharable;
 	}
 
+	@JsonIgnore
 	public void setSharable(boolean sharable) {
 		this.sharable = sharable;
 	}

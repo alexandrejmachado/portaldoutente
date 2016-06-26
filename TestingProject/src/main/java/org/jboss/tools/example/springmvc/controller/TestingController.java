@@ -314,7 +314,7 @@ public class TestingController {
 	@ResponseBody
 	public Object typeTest(@PathVariable("object") String object)  {
 		try {
-			List<String> ignoreList = new ArrayList<String>(Arrays.asList(new String[]{"Exame","Boletim", "Cirurgia", "Consulta", "Medicacao", "Medicamento", "Receita", "Vacina"}));
+			List<String> ignoreList = new ArrayList<String>(Arrays.asList(new String[]{"Exame","Boletim", "Cirurgia", "Consulta", "Medicacao", "Medicamento", "Receita", "Vacina","Medicamentoid","EstadoRenovacao"}));
 			String[] temp=object.split("\\.");
 			String finalname=temp[temp.length-1];
 			if(!ignoreList.contains(finalname))
