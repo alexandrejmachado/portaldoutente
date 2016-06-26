@@ -37,6 +37,7 @@ import org.jboss.tools.example.springmvc.data.AlturaDao;
 import org.jboss.tools.example.springmvc.data.CirurgiaDao;
 import org.jboss.tools.example.springmvc.data.ColesterolDao;
 import org.jboss.tools.example.springmvc.data.ConsultaDao;
+import org.jboss.tools.example.springmvc.data.ContratoMedicoDao;
 import org.jboss.tools.example.springmvc.data.ExameDao;
 import org.jboss.tools.example.springmvc.data.GlicemiaDao;
 import org.jboss.tools.example.springmvc.data.GuardiaoDao;
@@ -50,6 +51,7 @@ import org.jboss.tools.example.springmvc.data.UtenteDao;
 import org.jboss.tools.example.springmvc.model.Cirurgia;
 import org.jboss.tools.example.springmvc.model.Exame;
 import org.jboss.tools.example.springmvc.model.Glicemia;
+import org.jboss.tools.example.springmvc.sensitivedata.ContratoMedico;
 import org.jboss.tools.example.springmvc.sensitivedata.Instituicao;
 import org.jboss.tools.example.springmvc.sensitivedata.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +90,9 @@ public class TestingController {
 	
 	@Autowired
 	private PesoDao pesoDao;
+	
+	@Autowired
+	private ContratoMedicoDao cmDao;
 	
 	@Autowired
 	private InstituicaoDao instDao;
@@ -355,7 +360,7 @@ public class TestingController {
 		String campo = null;
 		String msg=null;
 		List<String> finalmsg= new ArrayList<String>();
-		int localidadeId = 0;
+		int centroId = 0;
 		try{
 			//------------passwords-------------
 			campo = "pass";
@@ -427,11 +432,11 @@ public class TestingController {
 				if(listaInst.size() > 1){
 					Random ran = new Random();
 					int x = ran.nextInt(listaInst.size());
-					localidadeId = listaInst.get(x).getId();
-					System.out.println(localidadeId);
+					centroId = listaInst.get(x).getId();
+					System.out.println(centroId);
 				}
 				else{
-					localidadeId = listaInst.get(0).getId();
+					centroId = listaInst.get(0).getId();
 				}
 			}
 			//----------SUPER IMPORTANTE--------
@@ -485,7 +490,16 @@ public class TestingController {
 				{
 					System.out.println("erro no codigo");
 				}
-				Utente ut = utenteDao.newUtente(username, numUtente, cc, morada, mail, hashTest, telemovel, nif, code, codeSms, emergencia, localidadeId);
+				
+				int medico;
+				List<ContratoMedico> cmNow = cmDao.findByCentro(centroId);
+				if(cmNow.size() == 0){
+					medico = 0;
+				}
+				else{
+					medico = cmNow.get(0).getMedicoId();
+					}
+				Utente ut = utenteDao.newUtente(username, numUtente, cc, morada, mail, hashTest, telemovel, nif, code, codeSms, emergencia, centroId, medico);
 				finalmsg.add("true");
 				return finalmsg;
 			}
