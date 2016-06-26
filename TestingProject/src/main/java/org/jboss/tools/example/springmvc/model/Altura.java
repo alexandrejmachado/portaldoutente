@@ -35,6 +35,9 @@ public class Altura {
 	@NotNull
 	private double valor;
 	
+	private boolean sharable = false;
+	
+
 	@JsonIgnore
 	@NotNull
 	private String numUtente;
@@ -70,6 +73,14 @@ public class Altura {
 	
 	public String toString(){
 		return this.getValor() + Altura.UNIDADE;
+	}
+	
+	public boolean isSharable() {
+		return sharable;
+	}
+
+	public void setSharable(boolean sharable) {
+		this.sharable = sharable;
 	}
 	
 }

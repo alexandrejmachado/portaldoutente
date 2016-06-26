@@ -27,6 +27,10 @@ public class Glicemia {
 	@JsonIgnore
 	private int id;
 	
+	private boolean sharable = false;
+	
+	
+	
 	public static final String UTENTE = "numUtente";
 	
 	public static final String FIND_ALL_BY_UTENTE = "Glicemia.findAllByUtente";
@@ -74,6 +78,14 @@ public class Glicemia {
 	
 	public String toString(){
 		return this.getValor() + Glicemia.UNIDADE;
+	}
+	
+	public boolean isSharable() {
+		return sharable;
+	}
+
+	public void setSharable(boolean sharable) {
+		this.sharable = sharable;
 	}
 	
 }

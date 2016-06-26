@@ -28,6 +28,10 @@ public class INR {
 	@JsonIgnore
 	private int id;
 	
+	private boolean sharable = false;
+	
+	
+	
 	public static final String UTENTE = "numUtente";
 	
 	public static final String FIND_ALL_BY_UTENTE = "INR.findAllByUtente";
@@ -85,4 +89,11 @@ public class INR {
 		return this.getValor() + Altura.UNIDADE;
 	}
 	
+	public boolean isSharable() {
+		return sharable;
+	}
+
+	public void setSharable(boolean sharable) {
+		this.sharable = sharable;
+	}
 }

@@ -28,6 +28,10 @@ public class SaturacaoO2 {
 	@JsonIgnore
 	private int id;
 	
+	private boolean sharable = false;
+	
+	
+	
 	public static final String UTENTE = "numUtente";
 	
 	public static final String FIND_ALL_BY_UTENTE = "SaturacaoO2.findAllByUtente";
@@ -70,6 +74,14 @@ public class SaturacaoO2 {
 	
 	public String toString(){
 		return this.getValor() + Altura.UNIDADE;
+	}
+	
+	public boolean isSharable() {
+		return sharable;
+	}
+
+	public void setSharable(boolean sharable) {
+		this.sharable = sharable;
 	}
 	
 }

@@ -27,6 +27,10 @@ public class Peso {
 	@GeneratedValue
 	private int id;
 	
+	private boolean sharable = false;
+	
+	
+	
 	public static final String UTENTE = "numUtente";
 	
 	public static final String FIND_ALL_BY_UTENTE = "Peso.findAllByUtente";
@@ -70,5 +74,13 @@ public class Peso {
 	
 	public String toString(){
 		return this.getValor() + Peso.UNIDADE;
+	}
+	
+	public boolean isSharable() {
+		return sharable;
+	}
+
+	public void setSharable(boolean sharable) {
+		this.sharable = sharable;
 	}
 }
