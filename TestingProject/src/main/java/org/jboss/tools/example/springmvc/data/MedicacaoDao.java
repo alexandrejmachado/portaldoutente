@@ -40,4 +40,15 @@ public class MedicacaoDao {
 		return lista;
 	}
 	
+	public boolean exists(int numUtente, int medId) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+		TypedQuery<Medicacao> query = em.createNamedQuery(Medicacao.FIND_BY_ID_AND_MED, Medicacao.class);
+		query.setParameter(Medicacao.UTENTE, Cifras.encrypt(Integer.toString(numUtente)));
+		query.setParameter(Medicacao.MEDICAMENTO, Integer.toString(medId));
+		Medicacao medicacao = query.getSingleResult();
+		if(medicacao.equals(null)) {
+			return false;
+		}
+		return true;
+	}
+	
 }

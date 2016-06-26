@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -15,14 +16,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @NamedQueries({
 	@NamedQuery(name=Medicacao.FIND_ALL_BY_UTENTE, query="SELECT m FROM Medicacao m WHERE m.numUtente = :" + Medicacao.UTENTE +" ORDER BY m.cal DESC"),
-	@NamedQuery(name=Medicacao.DELETE, query="DELETE FROM Medicacao m WHERE m.id = :" + Medicacao.ID)
+	@NamedQuery(name=Medicacao.DELETE, query="DELETE FROM Medicacao m WHERE m.id = :" + Medicacao.ID),
+	@NamedQuery(name=Medicacao.FIND_BY_ID_AND_MED, query="SELECT m FROM Medicacao m WHERE m.numUtente = :" + Medicacao.UTENTE + " AND m.idMedicamento = :"+Medicacao.MEDICAMENTO)
 })
 public class Medicacao {
 
 	
 	@Id
 	@JsonIgnore
+	@GeneratedValue
 	private int id;
+
+	public static final String FIND_BY_ID_AND_MED = "Medicacao.findByIdAndMed";
+	
+	public static final String MEDICAMENTO = "medicamento";
 	
 	public static final String FIND_ALL_BY_UTENTE = "Medicacao.findAllByUtente";
 	
@@ -178,6 +185,8 @@ public class Medicacao {
 		}
 		return false;
 	}
+	
+	
 	
 	public boolean checkMedicacao() {
 		Calendar cenas = Calendar.getInstance();
