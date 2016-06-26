@@ -44,24 +44,31 @@
                 <td>NOME</td>
                 <td>DOSE</td> 
                 <td>INDICAÇÕES</td>
+                <td>Renovar</td>
                 <td>Apagar</td>
             </tr>
 
-            <tr id = "texto_tab">
-                <td>NOME</td>
-                <td>DOSE</td> 
-                <td>INDICAÇÕES</td> 
-                <td><button id= "botao_tab">Apagar</button></td>
-            </tr>
-
-        <tr id ="texto_tab">
-            <td>NOME</td>
-            <td>DOSE</td> 
-            <td>INCICAÇÕES</td> 
-            <td><button id="botao_tab">Apagar</button></td>
-        </tr>
-
+         <c:forEach items="${lista}" var="medicacao">
+    <tr id = "texto_tab">
+    	<td> <c:out value="${medicacao.nomeMedicamento }"/> </td>
+        <td><c:out value="${medicacao.dose}"/></td>
+        <td><c:out value="${medicacao.indicacoes}"/></td>
+        <td><button id = "renovar" value="${medicacao.getId()}" onclick="renovar(${medicacao.id})"> Pedir Renovacao </button></td>
+        <td><button id = "apagar" value="${medicacao.getId() }" onclick="apagar(${medicacao.id})"> Apagar </button></td>
+        
+    </tr>
+</c:forEach>
         </table>
+      <script>
+function renovar(ID) { 
+	path="https://" + window.location.host + "/";
+	console.log(ID);
+	$.post(path+"confirmarCirurgia", {"id":ID},function(data){
+		if (data==true){window.location.replace(path + "index");}
+	else {alert("Falhou a Confirmar a Cirurgia!");}
+})}
+
+</script>
       
 </div>
 

@@ -54,31 +54,25 @@
 
 			<!-- Sidebar -->
 			<div id="sidebar-wrapper">
-				<ul class="barra">
-						
-					<li>
-						<a href="/calendario">Marcação de Consultas</a>
-					</li>
-					<li>
-						<a href="#">Marcações Confirmadas</a>
-					</li>
-					<li>
-						<a href="#">Renovar Receita</a>
-					</li>
-					<li>
-						<a href="/medicacao/view">Registar Medicação</a>
-					</li>
-					<li>
-						<a href="/medicoes">Medições</a>
-					</li>
-					<li>
-						<a href="#">Agregado Familiar</a>
-					</li>
-					<li>
-						<a href="/isencao">Pedido de Isenção</a>
-					</li>
-				</ul>
-			</div>
+                <ul class="barra">
+                        
+                    <li id="consulta">
+                        <a href="/calendario/view">Marcação de Consultas</a>
+                    </li>
+                    <li id="medicacao2">
+                        <a href="/medicacao/view">Registar Medicação</a>
+                    </li>
+                    <li id="medicao">
+                        <a href="/medicoes">Medições</a>
+                    </li>
+                    <li id="cirurgia">
+                        <a href="/cirurgia">Cirurgia</a>
+                    </li>
+                    <li id="isencao">
+                        <a href="/isencao">Pedido de Isenção</a>
+                    </li>
+                </ul>
+            </div>
     </div>
 <form method="post" id="medform" >
 <div id="automed" style="display:flex;align-items:center;">
@@ -91,6 +85,42 @@ Indicacoes: <br>
 <textarea id="indicacoes" rows="10" cols="60" name="indicacoes"></textarea><br>
 </form>
 <input id="medicacao" type="submit" onclick="medicamentos()">
+
+<div  class="exame">
+		<p id="texto2">Consulte abaixo os seus Exames MÃ©dicos</p>
+
+        <table id="tabela_exames">
+
+            <tr id = "texto_tab">
+                <td>NOME</td>
+                <td>DOSE</td> 
+                <td>INDICAÇÕES</td>
+                <td>Renovar</td>
+                <td>Apagar</td>
+            </tr>
+
+         <c:forEach items="${lista}" var="medicacao">
+    <tr id = "texto_tab">
+    	<td> <c:out value="${medicacao.nomeMedicamento }"/> </td>
+        <td><c:out value="${medicacao.dose}"/></td>
+        <td><c:out value="${medicacao.indicacoes}"/></td>
+        <td><button id = "renovar" value="${medicacao.getId()}" onclick="renovar(${medicacao.id})"> Pedir Renovacao </button></td>
+        <td><button id = "apagar" value="${medicacao.getId() }" onclick="apagar(${medicacao.id})"> Apagar </button></td>
+        
+    </tr>
+</c:forEach>
+        </table>
+      <script>
+function renovar(ID) { 
+	path="https://" + window.location.host + "/";
+	console.log(ID);
+	$.post(path+"confirmarCirurgia", {"id":ID},function(data){
+		if (data==true){window.location.replace(path + "index");}
+	else {alert("Falhou a Confirmar a Cirurgia!");}
+})}
+
+</script>
+      
 
 
 <script>
@@ -112,10 +142,11 @@ $.get(link).done(function( tags ) {
 function medicamentos()
 {
 		path="https://" + window.location.host + "/medicacao/inserir";
-		$('.registo').append($('<img>',{id:'theImg',src:'resources/gfx/loadingGif.gif',width: '50', height: '50'}));
 		$.post(path, $("form").serialize()).done(function( data ) {
-			if (data[0]==true){window.location.replace(path);}
-			else {alert(data[0]);$("#theImg").remove();}}
+			if (data==true){window.location.reload();}
+			
+			else {alert(data)}}
+
 		);
 
 }

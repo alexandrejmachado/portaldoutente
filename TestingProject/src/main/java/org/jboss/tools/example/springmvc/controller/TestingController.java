@@ -514,6 +514,7 @@ public class TestingController {
 	
 	
 	public boolean verifyLogin(HttpSession session) {
+		System.out.println(session.getAttribute("sessionID"));
 		if(session.getAttribute("sessionID") == null){
 			return false;
 		}

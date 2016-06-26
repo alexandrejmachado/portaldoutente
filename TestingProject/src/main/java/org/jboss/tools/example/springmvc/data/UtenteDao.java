@@ -119,6 +119,7 @@ public class UtenteDao {
 	}
 	
 	public boolean verifyActivatedUser(String user) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+		System.out.println(user);
 		Utente ut = findUtenteById(Integer.parseInt(user));
 		return ut.isVerified();
 	}

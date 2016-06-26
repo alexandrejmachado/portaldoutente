@@ -48,6 +48,8 @@ public class Medicacao {
 	@JsonIgnore
 	private int idMedicamento;
 	
+	private String nomeMedicamento;
+	
 
 	private boolean estado = false; //esta a true se o medico ja confirmou que esta medicao existe, caso nao tenha confirmado manter-se-a a falso
 
@@ -64,9 +66,10 @@ public class Medicacao {
 	
 	public Medicacao(){}
 	
-	public Medicacao(String numUtente, int idMedicamento, double dose, String indicacoes, String renovacao, int comprimidosPorCaixa) {
+	public Medicacao(String numUtente, int idMedicamento,String nomeMedicamento, double dose, String indicacoes, String renovacao, int comprimidosPorCaixa) {
 		this.numUtente = numUtente;
 		this.idMedicamento = idMedicamento;
+		this.nomeMedicamento = nomeMedicamento;
 		this.dose = dose;
 		this.indicacoes = indicacoes;
 		setRenovacao(renovacao);
@@ -94,6 +97,14 @@ public class Medicacao {
 
 	public void setNumUtente(String numUtente) {
 		this.numUtente = numUtente;
+	}
+	
+	public String getNomeMedicamento() {
+		return nomeMedicamento;
+	}
+	
+	public void setNomeMedicamento(String nomeMedicamento) {
+		this.nomeMedicamento = nomeMedicamento;
 	}
 
 	public Date getDataFinal() {

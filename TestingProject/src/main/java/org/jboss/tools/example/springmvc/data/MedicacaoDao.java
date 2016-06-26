@@ -24,8 +24,8 @@ public class MedicacaoDao {
 	@Autowired
 	private EntityManager em;
 	
-	public Medicacao novaMedicacao(int numUtente, int idMedicamento, double dose, String indicacoes, String renovacao, int comprimidosPorCaixa) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		Medicacao Medicacao = new Medicacao(Cifras.encrypt(Integer.toString(numUtente)), idMedicamento, dose, indicacoes, renovacao, comprimidosPorCaixa);
+	public Medicacao novaMedicacao(int numUtente, int idMedicamento, String nomeMedicamento, double dose, String indicacoes, String renovacao, int comprimidosPorCaixa) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		Medicacao Medicacao = new Medicacao(Cifras.encrypt(Integer.toString(numUtente)), idMedicamento,nomeMedicamento, dose, indicacoes, renovacao, comprimidosPorCaixa);
 		em.persist(Medicacao);
 		return Medicacao;
 	}
@@ -41,11 +41,16 @@ public class MedicacaoDao {
 	}
 	
 	public boolean exists(int numUtente, int medId) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+		System.out.println("numUtente " + numUtente);
+		System.out.println("medId " + medId);
 		TypedQuery<Medicacao> query = em.createNamedQuery(Medicacao.FIND_BY_ID_AND_MED, Medicacao.class);
 		query.setParameter(Medicacao.UTENTE, Cifras.encrypt(Integer.toString(numUtente)));
-		query.setParameter(Medicacao.MEDICAMENTO, Integer.toString(medId));
-		Medicacao medicacao = query.getSingleResult();
-		if(medicacao.equals(null)) {
+		System.out.println("cifrado " + Cifras.encrypt(Integer.toString(numUtente)));
+		query.setParameter(Medicacao.MEDICAMENTO, medId);
+		Medicacao medicacao;
+		try {medicacao = query.getSingleResult();}
+		catch (Exception e) {medicacao = null;}
+		if(medicacao == null) {
 			return false;
 		}
 		return true;
