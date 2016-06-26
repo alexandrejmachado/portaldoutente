@@ -203,6 +203,7 @@ public class TestingController {
 	public ModelAndView activateController(HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		if(verifyRegularLogin(session)){
+			mav.addObject("username", session.getAttribute("sessionName"));
 			mav.setViewName("confirmacao_pendente");
 		}
 		else{

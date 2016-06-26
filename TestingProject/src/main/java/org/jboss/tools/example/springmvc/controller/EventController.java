@@ -85,6 +85,7 @@ public class EventController {
 	public ModelAndView calendarView(HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		if(verifyLogin(session)){
+			mav.addObject("username", session.getAttribute("sessionName"));
 			mav.setViewName("calendarView");
 			mav.addObject("data", new Date().getTime());
 		}
