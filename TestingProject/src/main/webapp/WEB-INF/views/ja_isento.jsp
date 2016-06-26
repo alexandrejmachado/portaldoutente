@@ -48,29 +48,26 @@
 			<div id="wrapper">
 	
 				<!-- Sidebar -->
-				<div id="sidebar-wrapper">
-					<ul class="barra">
-							
-						<li>
-							<a href="/calendario">Marcação de Consultas</a>
-						</li>
-						<li>
-							<a href="#">Marcações Confirmadas</a>
-						</li>
-						<li>
-							<a href="#">Renovar Receita</a>
-						</li>
-						<li>
-							<a href="/medicoes">Medições</a>
-						</li>
-						<li>
-							<a href="#">Agregado Familiar</a>
-						</li>
-						<li>
-							<a href="/isencao">Pedido de Isenção</a>
-						</li>
-					</ul>
-				</div>
+			<div id="sidebar-wrapper">
+				<ul class="barra">
+						
+					<li id="consulta">
+						<a href="/calendario/view">Marcação de Consultas</a>
+					</li>
+					<li id="medicacao2">
+						<a href="/medicacao/view">Registar Medicação</a>
+					</li>
+					<li id="medicao">
+						<a href="/medicoes">Medições</a>
+					</li>
+					<li id="cirurgia">
+						<a href="/cirurgia">Cirurgia</a>
+					</li>
+					<li id="isencao">
+						<a href="/isencao">Pedido de Isenção</a>
+					</li>
+				</ul>
+			</div>
 				<!-- /#sidebar-wrapper -->
 			
 			
