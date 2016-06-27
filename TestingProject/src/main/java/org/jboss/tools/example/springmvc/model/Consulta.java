@@ -72,7 +72,7 @@ public class Consulta {
 	
 	
 
-	private boolean feita = false;
+	private boolean confirmada = false;
 	
 	public Consulta(){}
 	
@@ -109,8 +109,12 @@ public class Consulta {
 		return idInstituicao;
 	}
 
-	public boolean isFeita() {
-		return feita;
+	public boolean isConfirmada() {
+		return confirmada;
+	}
+	
+	public void setConfirmada(){
+		this.confirmada = true;
 	}
 	
 	public String getSala() {
