@@ -161,6 +161,16 @@ function renovar(id)
 
 	);
 	}
+function apagar(id)
+{
+	path="https://" + window.location.host + "/medicacao/apagar";
+	$.post(path, {'id':id}).done(function( data ) {
+		if (data==true){window.location.reload();}
+		
+		else {alert("falha algures, culpe o Justino")}}
+
+	);
+	}
 </script>
 
     <!-- Menu Toggle Script -->
