@@ -16,7 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 //test
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Trigliceridos.FIND_ALL_BY_UTENTE, query="SELECT t FROM Trigliceridos t WHERE t.numUtente = :" + Trigliceridos.UTENTE +" ORDER BY t.data ASC")
+	@NamedQuery(name=Trigliceridos.FIND_ALL_BY_UTENTE, query="SELECT t FROM Trigliceridos t WHERE t.numUtente = :" + Trigliceridos.UTENTE +" ORDER BY t.data ASC"),
+	@NamedQuery(name=Trigliceridos.FIND_SHARABLE, query="SELECT t FROM Trigliceridos t WHERE t.numUtente = :" + Trigliceridos.UTENTE +" AND t.sharable = true")
 })
 public class Trigliceridos {
 	
@@ -33,6 +34,8 @@ public class Trigliceridos {
 	public static final String UTENTE = "numUtente";
 	
 	public static final String FIND_ALL_BY_UTENTE = "Trigliceridos.findAllByUtente";
+	
+	public static final String FIND_SHARABLE = "Trigliceridos.findSharable";
 	
 	@NotNull
 	private double valor;

@@ -16,7 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Glicemia.FIND_ALL_BY_UTENTE, query="SELECT g FROM Glicemia g WHERE g.numUtente = :" + Glicemia.UTENTE +" ORDER BY g.data ASC")
+	@NamedQuery(name=Glicemia.FIND_ALL_BY_UTENTE, query="SELECT g FROM Glicemia g WHERE g.numUtente = :" + Glicemia.UTENTE +" ORDER BY g.data ASC"),
+	@NamedQuery(name=Glicemia.FIND_SHARABLE, query="SELECT g FROM Glicemia g WHERE g.numUtente = :" + Glicemia.UTENTE +" AND g.sharable = true")
 })
 
 public class Glicemia {
@@ -35,6 +36,8 @@ public class Glicemia {
 	public static final String UTENTE = "numUtente";
 	
 	public static final String FIND_ALL_BY_UTENTE = "Glicemia.findAllByUtente";
+	
+	public static final String FIND_SHARABLE = "Glicemia.findSharable";
 	
 	@NotNull
 	private double valor;

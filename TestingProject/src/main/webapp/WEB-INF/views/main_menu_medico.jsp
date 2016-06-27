@@ -8,11 +8,13 @@
 <title>Médico</title>
 </head>
 <body>
-	<h1>MÉDICO CONTROLLER</h1>
+	<h1>MÉDICO NUMERO: ${username}</h1>
 	
-	<form action="/medico/main" method="post" id="login">
-		<input id="username" type="text" name="username" placeholder="ID Medico" required>
-		<input type="submit" value="Entrar">
-	</form>
+	<c:forEach items="${listaUtentes}" var="utente">
+   		<tr id = "texto_tab">
+    		<td> <c:out value="${utente.getNome()}"/> </td>
+    		<td> <c:out value="${utente.getNumUtente()}"/> </td>
+    	</tr>
+	</c:forEach>
 </body>
 </html>
