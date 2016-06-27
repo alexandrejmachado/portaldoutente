@@ -47,9 +47,10 @@ public class MedicacaoDao {
 	}
 	
 	public boolean deleteMedicacao(int id) {
-		TypedQuery<Medicacao> query = em.createNamedQuery(Medicacao.DELETE, Medicacao.class);
+		TypedQuery<Medicacao> query = em.createNamedQuery(Medicacao.FIND_BY_ID, Medicacao.class);
 		query.setParameter(Medicacao.ID, id);
-		query.executeUpdate();
+		Medicacao med = query.getSingleResult();
+		em.remove(med);
 		return true;
 	}
 	
