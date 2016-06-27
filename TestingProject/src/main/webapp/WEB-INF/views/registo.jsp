@@ -48,13 +48,13 @@
 					</tr>
 					<tr>
 						<td>Número do Utente* </td>
-						<td> <input id = "campo" type="text" name="num_utente" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="9" required></td>
+						<td> <input id = "campo" type="text" name="num_utente" maxlength="9" required></td>
 						<td> </td>
 						
 					</tr>
 					<tr>
 						<td>Número do CC* </td>
-						<td><input id = "campo" type="text" name="cc"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="8" required> </td>
+						<td><input id = "campo" type="text" name="cc"  maxlength="8" required> </td>
 						<td> </td>
 					</tr>
 					<tr>
@@ -90,18 +90,18 @@
 					</tr>
 					<tr>
 						<td>Número de Telemóvel* </td>
-						<td><input id = "campo" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="telemovel" required></td> 
+						<td><input id = "campo" type="text" name="telemovel" required></td> 
 						<td> </td>
 					</tr>
 					<tr>
 						<td>Contacto de Emergência </td>
-						<td><input id = "campo" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="emergencia"></td> 
+						<td><input id = "campo" type="text" name="emergencia"></td> 
 						<td> </td>
 						
 					</tr>	
 					<tr>
 						<td>Número de Identificação Fiscal*</td>
-						<td><input id = "campo" type="text" name="nif"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' required></td> 
+						<td><input id = "campo" type="text" name="nif" required></td> 
 						<td> </td>
 						
 					</tr>

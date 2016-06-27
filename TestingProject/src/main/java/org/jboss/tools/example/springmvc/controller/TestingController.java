@@ -806,7 +806,7 @@ public class TestingController {
 	@RequestMapping(value = "/upload")
 	public ModelAndView uploadTemp() throws FileNotFoundException, IOException{
 		String rootPath = System.getProperty("jboss.server.config.dir"); 
-		this.storage=StorageOptions.builder().authCredentials(AuthCredentials.createForJson(new FileInputStream(rootPath+ File.separator+ "bucketkey.json"))).projectId("sapient-axle-129909").build().service();
+		this.storage=StorageOptions.builder().authCredentials(AuthCredentials.createForJson(new FileInputStream(rootPath+ File.separator+ "bucketkey.json"))).projectId("composite-watch-135111").build().service();
 		ModelAndView mav = new ModelAndView();
 			mav.setViewName("uploadtest");
 		return mav;
@@ -830,12 +830,12 @@ public class TestingController {
                 if (!dir.exists())
                     dir.mkdirs();
 
-                Bucket bucket = storage.get("userdata-exames");
+                Bucket bucket = storage.get("userdata-portal-exames");
                 String where=bucket.location();
                 System.out.println(where);
 				System.out.println((String) session.getAttribute("sessionId"));
 				String contentType = file.getContentType();
-                try (WriteChannel writer = storage.writer(BlobInfo.builder("userdata-exames", (String) session.getAttribute("sessionID") + "/" + file.getOriginalFilename() ).contentType(contentType).build())) {
+                try (WriteChannel writer = storage.writer(BlobInfo.builder("userdata-portal-exames", (String) session.getAttribute("sessionID") + "/" + file.getOriginalFilename() ).contentType(contentType).build())) {
                     byte[] buffer = new byte[1024];
                     try (InputStream input = file.getInputStream()) {
                       int limit;
@@ -864,7 +864,7 @@ public class TestingController {
    Object downloadFileHandler(@RequestParam("name") String name) throws IOException {
     	HttpHeaders respHeaders = new HttpHeaders();
         //Tipo de Return:ResponseEntity<InputStreamResource>
-    	Blob blob = storage.get(BlobId.of("userdata-exames", name));
+    	Blob blob = storage.get(BlobId.of("userdata-portal-exames", name));
     	PrintStream writeTo = System.out;
     	File temp=File.createTempFile("tempfile", ".temp");
     	writeTo = new PrintStream(new FileOutputStream(temp));
@@ -896,7 +896,7 @@ public class TestingController {
 	@ResponseBody
 	public List<String> listBucket()
     {
-    	Bucket bucket = storage.get("userdata-exames");
+    	Bucket bucket = storage.get("userdata-portal-exames");
     	ArrayList<String> filespresent= new ArrayList<String>();
         Iterator<Blob> blobIterator = bucket.list().iterateAll();
         while (blobIterator.hasNext()) {
