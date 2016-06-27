@@ -71,6 +71,12 @@
                     <li id="isencao">
                         <a href="/isencao">Pedido de Isenção</a>
                     </li>
+                    <li style="opacity:0">
+						<a></a>
+					</li>
+					<li>
+						<a href="/">Voltar para o Menu</a>
+					</li>
                 </ul>
             </div>
     </div>
