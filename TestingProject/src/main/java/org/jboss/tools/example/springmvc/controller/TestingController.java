@@ -482,7 +482,7 @@ public class TestingController {
 				String hashTest;
 				hashTest = HashTextTest.sha256(password);
 				String code = as.nextSessionId();
-				Future future = as.sendEmail(mail,code);
+				//Future future = as.sendEmail(mail,code);
 				System.out.println(code);
 				//String code = "";
 				String codeSms="";
