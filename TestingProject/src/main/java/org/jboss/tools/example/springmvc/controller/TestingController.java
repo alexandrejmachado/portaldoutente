@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.Future;
 import java.util.regex.Pattern;
 
 import javax.crypto.BadPaddingException;
@@ -480,7 +481,8 @@ public class TestingController {
 				
 				String hashTest;
 				hashTest = HashTextTest.sha256(password);
-				String code = as.sendEmail(mail);
+				String code = as.nextSessionId();
+				Future future = as.sendEmail(mail,code);
 				System.out.println(code);
 				//String code = "";
 				String codeSms="";

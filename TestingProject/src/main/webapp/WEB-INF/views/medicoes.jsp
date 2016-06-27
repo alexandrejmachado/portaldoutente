@@ -35,14 +35,41 @@
 
 <body background=<c:url value="/resources/gfx/Final2.png"/> />
 
+<style>
+.tamanho.panel-collapse.collapse,
+.tamanho.panel-collapse.collapse.in
+{
+	height:600px;
+}
+
+.tamanho.panel-collapse.collapse object,
+.tamanho.panel-collapse.collapse.in object
+{
+	height:600px;
+}
+</style>
 <div class= "container">   
         
             <div class="col-lg-12"> 
                 <div class= "rowMajor">
 					<div class="col-md-11">Portal do Utente</div>
-					<div class="col-md-1" id="entrar">${username}</div>
+					<div class="col-md-1" id="entrar">Entrar</div>
 				</div>
             </div>
+            
+        <nav>
+          <ul>
+            <li id="login">
+              <a id="login-trigger" href="#">
+                Opções <span>▼</span>
+              </a>
+              <div id="login-content">
+                <a button href= "/perfil/dados" id = "aaa">Ver Perfil</button></a><br>
+                <a button href= "/logout" id ="aaa">Logout</button></a>
+              </div>                     
+            </li>
+          </ul>
+        </nav>
 			
 	<div class="col-lg-12" id="caixaGig">  <!--  -->
 	
@@ -186,7 +213,7 @@
 							        </a>
 							      </h4>
 							    </div>
-							    <div id="collapseOne" class="panel-collapse collapse in">
+							    <div id="collapseOne" class="panel-collapse collapse tamanho in">
 							      <div id="Peso" class="panel-body">
 							       
 							      </div>
@@ -202,7 +229,7 @@
 							        </a>
 							      </h4>
 							    </div>
-							    <div id="collapseTwo" class="panel-collapse collapse">
+							    <div id="collapseTwo" class="panel-collapse collapse tamanho">
 							      <div id="Altura" class="panel-body">
 							      
 							        </div>
@@ -218,7 +245,7 @@
 							        </a>
 							      </h4>
 							    </div>
-							    <div id="collapseThree" class="panel-collapse collapse">
+							    <div id="collapseThree" class="panel-collapse collapse tamanho">
 							      <div id="Altura" class="panel-body">
 							      
 							        </div>
@@ -234,7 +261,7 @@
 							        </a>
 							      </h4>
 							    </div>
-							    <div id="collapseFour" class="panel-collapse collapse">
+							    <div id="collapseFour" class="panel-collapse collapse tamanho">
 							      <div id="Altura" class="panel-body">
 							      
 							        </div>
@@ -250,7 +277,7 @@
 							        </a>
 							      </h4>
 							    </div>
-							    <div id="collapseFive" class="panel-collapse collapse">
+							    <div id="collapseFive" class="panel-collapse collapse tamanho">
 							      <div id="Altura" class="panel-body">
 							      
 							        </div>
@@ -266,7 +293,7 @@
 							        </a>
 							      </h4>
 							    </div>
-							    <div id="collapseSix" class="panel-collapse collapse">
+							    <div id="collapseSix" class="panel-collapse collapse tamanho">
 							      <div id="Colesterol" class="panel-body">
 							       
 							      </div>
@@ -295,6 +322,17 @@
     <script src='<c:url value="/resources/js/bootstrap.min.js"></c:url>'></script>
 
     <!-- Menu Toggle Script -->
+<script>
+     $(document).ready(function(){
+   $('#login-trigger').click(function(){
+     $(this).next('#login-content').slideToggle();
+     $(this).toggleClass('active');          
+    
+     if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
+       else $(this).find('span').html('&#x25BC;')
+     })
+ });
+ </script>
 
     
 	<script>

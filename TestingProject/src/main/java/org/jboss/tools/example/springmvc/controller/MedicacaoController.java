@@ -150,6 +150,7 @@ public class MedicacaoController {
 		return mav;
 	}
 	
+
 	@RequestMapping(value = "/renovar", method = RequestMethod.POST,params={"id"})
 	@ResponseBody
 	public boolean renovarMed(HttpSession session, @RequestParam("id") String id) {
