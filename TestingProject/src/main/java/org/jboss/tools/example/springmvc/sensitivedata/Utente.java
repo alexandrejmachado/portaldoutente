@@ -179,7 +179,7 @@ public class Utente {
 	}
 	
 	public boolean verifyClient(String code) {
-		if (verificationCode.equals(code) || code.equals("I<3MEMES")) {
+		if (verificationCode.equals(code)) {
 			verified = true;
 		}
 		return verified;

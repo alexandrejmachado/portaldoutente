@@ -8,10 +8,10 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value="/medico")
 public class MedicoController {
 
-	@RequestMapping(value="/")
+	@RequestMapping(value="")
 	public ModelAndView index(){
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("cenas");
+		mav.setViewName("medico_inicio");
 		return mav;
 	}
 }

@@ -33,6 +33,12 @@ public class ConsultaDao {
 		return Consulta;
 	}
 	
+	public boolean confirmarConsulta(Consulta cons){
+		cons.setConfirmada();
+		em.merge(cons);
+		return true;
+	}
+	
 	
 	public boolean remove(int consultaId){
 		try{

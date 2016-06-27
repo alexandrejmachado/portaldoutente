@@ -70,7 +70,7 @@ public class Consulta {
 	
 	private String observacoes;
 	
-	
+	private boolean feita = false;
 
 	private boolean confirmada = false;
 	
@@ -87,6 +87,10 @@ public class Consulta {
 
 	public String getObservacoes(){
 		return observacoes;
+	}
+	
+	public boolean isFeita(){
+		return feita;
 	}
 	
 	public int getId() {

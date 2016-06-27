@@ -79,7 +79,7 @@
 <label for="autocomplete">Escolha um Medicamento: </label>
 <input id="autocomplete" name = "nome" style="width: 40%;">
 </div>
-Quantidade: 
+Dose Diária: 
 <input id="quant" type="text" name="dosagem"><br>
 Indicacoes: <br>
 <textarea id="indicacoes" rows="10" cols="60" name="indicacoes"></textarea><br>
@@ -87,7 +87,7 @@ Indicacoes: <br>
 <input id="medicacao" type="submit" onclick="medicamentos()">
 
 <div  class="exame">
-		<p id="texto2">Consulte abaixo os seus Exames MÃ©dicos</p>
+		<p id="texto2">Consulte abaixo as suas medicações</p>
 
         <table id="tabela_exames">
 

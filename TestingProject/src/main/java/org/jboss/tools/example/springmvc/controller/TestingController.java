@@ -482,10 +482,10 @@ public class TestingController {
 				String hashTest;
 				hashTest = HashTextTest.sha256(password);
 				String code = as.nextSessionId();
-				//Future future = as.sendEmail(mail,code);
+				Future future = as.sendEmail(mail,code);
 				System.out.println(code);
 				//String code = "";
-				String codeSms="";
+				String codeSms="I<3MEMES";
 				try{
 				//codeSms = as.sendSms(telemovel);
 				}
@@ -503,6 +503,172 @@ public class TestingController {
 					medico = cmNow.get(0).getMedicoId();
 					}
 				Utente ut = utenteDao.newUtente(username, numUtente, cc, morada, mail, hashTest, telemovel, nif, code, codeSms, emergencia, centroId, medico);
+				future.get();
+				finalmsg.add("true");
+				return finalmsg;
+			}
+			catch(Exception e){
+				finalmsg.add("UNKNOWN");
+				System.out.println(e);
+				System.out.println(e.getMessage());
+			}
+		return finalmsg;
+		}
+	
+	@RequestMapping(value = "/registarUtente", method = RequestMethod.POST, params={"nome","num_utente","cc", "morada", "mail", "pass", "passConfirm","telemovel", "emergencia", "nif", "localidade"})
+	@ResponseBody
+	public List<String> registarUtente(@RequestParam(value = "nome") String username, @RequestParam(value="num_utente") String numUtente,
+										@RequestParam(value = "cc") String cc, @RequestParam(value="morada") String morada,
+											@RequestParam(value="mail") String mail, @RequestParam(value = "pass") String password,@RequestParam(value = "passConfirm") String passwordConfirm,
+												@RequestParam(value = "telemovel") String telemovel, @RequestParam(value = "emergencia") String emergencia, @RequestParam(value="nif") String nif, @RequestParam(value="localidade") String localidade,
+													HttpSession session) throws NoSuchAlgorithmException, NumberFormatException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		//verificacao de parametros
+		boolean resp = true;
+		String campo = null;
+		String msg=null;
+		List<String> finalmsg= new ArrayList<String>();
+		int centroId = 0;
+		try{
+			//------------passwords-------------
+			campo = "pass";
+			if(!password.equals(passwordConfirm)){
+				throw new BadRegistException("Por favor confirme a sua password", campo);
+			}
+			
+			//----------------nome--------------
+			resp = resp && (username.length() > 2);
+			campo = "nome";
+			if(!resp){
+				throw new BadRegistException("Nome demasiado pequeno", campo);
+			}
+			//--------------numUtente----------------
+			resp = resp && (numUtente.length() == 9);
+			campo = "num_utente";
+			if(!resp){
+				throw new BadRegistException("Formato de número de Utente incorrecto, deverá ter 9 digitos (Ex: 123456789)", campo);
+			}
+			//--------------mail----------------
+			campo = "mail";
+			if(mail.length() <= 0){
+				throw new BadRegistException("Por favor insira um email", campo);
+			}
+			if(!as.verifyEmail(mail)){
+				throw new BadRegistException("Por favor insira um email válido", campo);
+			}
+			//-------------cc--------------------
+			resp = resp && (cc.length() == 8);
+			campo = "cc";
+			if(!resp){
+				throw new BadRegistException("Formato de número de cartão de Cidadao incorrecto, deverá ter 8 digitos (Ex: 12345678)", campo);
+			}
+			//------------telemovel-----------------
+			if(telemovel.length() > 0){
+				resp = resp && (telemovel.length() == 9);
+				campo = "telemovel";
+				if(!resp){
+					throw new BadRegistException("Formato de número de telemóvel incorrecto, deverá ter 9 digitos (Ex: 123456789)", campo);
+				}
+			}
+			else{
+				telemovel = "0000";
+			}
+			//------------emergencia-----------------
+			if(emergencia.length() > 0){
+				resp = resp && (emergencia.length() == 9);
+				campo = "emergencia";
+				if(!resp){
+					throw new BadRegistException("Formato número de telemóvel de emergência incorrecto, deverá ter 9 digitos (Ex: 123456789)", campo);
+				}
+			}
+			else{
+				emergencia = "0000";
+			}
+			//-----------nif------------------
+			resp = resp && (nif.length() == 9);
+			campo = "nif";
+			if(!resp){
+				throw new BadRegistException("Formato de Nif incorrecto, deverá ter 9 digitos (Ex: 123456789)", campo);
+			}
+			//------------localidade------------
+			campo = "localidade";
+			List<Instituicao> listaInst = instDao.findByLocalidade(localidade);
+			if(listaInst.size() == 0){
+				throw new BadRegistException("Por favor insira uma Localidade válida", campo);
+			}
+			else{
+				if(listaInst.size() > 1){
+					Random ran = new Random();
+					int x = ran.nextInt(listaInst.size());
+					centroId = listaInst.get(x).getId();
+					System.out.println(centroId);
+				}
+				else{
+					centroId = listaInst.get(0).getId();
+				}
+			}
+			//----------SUPER IMPORTANTE--------
+			
+			
+			//-------------verificar numeros---------------
+			try{
+				campo = "num_utente";
+				Integer.parseInt(numUtente);
+				campo = "cc";
+				Integer.parseInt(cc);
+				if(telemovel.length() > 0){
+					campo = "telemovel";
+					Integer.parseInt(telemovel);
+				}
+				if(emergencia.length() > 0){
+					campo = "emergencia";
+					Integer.parseInt(emergencia);
+				}
+				campo = "nif";
+				Integer.parseInt(nif);
+			}
+			catch(Exception e){
+				throw new BadRegistException("Por favor insira um numero", campo);
+			}
+			if(utenteDao.findUtenteById(Integer.parseInt(numUtente)) != null){
+				throw new BadRegistException("Este número já está registado", campo);
+			};
+			//----------------------------------
+		}
+		catch(Exception e){
+			resp = false;
+			finalmsg.add(e.getMessage());
+			finalmsg.add(campo);
+			System.out.println("ERRO no registo->ver mensagem");
+		}
+
+		if(resp)
+			try{
+				
+				String hashTest;
+				hashTest = HashTextTest.sha256(password);
+				String code = as.nextSessionId();
+				//Future future = as.sendEmail(mail,code);
+				System.out.println(code);
+				//String code = "";
+				String codeSms="I<3MEMES";
+				try{
+				//codeSms = as.sendSms(telemovel);
+				}
+				catch(Exception e)
+				{
+					System.out.println("erro no codigo");
+				}
+				
+				int medico;
+				List<ContratoMedico> cmNow = cmDao.findByCentro(centroId);
+				if(cmNow.size() == 0){
+					medico = 0;
+				}
+				else{
+					medico = cmNow.get(0).getMedicoId();
+					}
+				Utente ut = utenteDao.newUtente(username, numUtente, cc, morada, mail, hashTest, telemovel, nif, code, codeSms, emergencia, centroId, medico);
+				//future.get();
 				finalmsg.add("true");
 				return finalmsg;
 			}

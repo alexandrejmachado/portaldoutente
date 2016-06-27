@@ -163,7 +163,8 @@ public class EventController {
 		Utente curUtente = utenteDao.findUtenteById(numUtente);
 		//TODO maybe falta por lock quando medico == 0?????
 		int idMedico = curUtente.getMedico();
-		consultaDao.novo(idMedico, numUtente, curUtente.getCentroSaude(), "amarela", data, obs);
+		Consulta cons = consultaDao.novo(idMedico, numUtente, curUtente.getCentroSaude(), "amarela", data, obs);
+		consultaDao.confirmarConsulta(cons);
 		return true;
 		}
 	
@@ -180,6 +181,7 @@ public class EventController {
 			return false;
 		}
 	}
+	
 	
 	public boolean verifyLogin(HttpSession session) {
 		if(session.getAttribute("sessionID") == null){
