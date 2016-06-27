@@ -16,6 +16,7 @@ build_job:
   - cp Dockerfile target
   - cp putente.jks target
   - cp bucketkey.json target
+  - cp notakey.key target
   - cd target
   - cp -rf /opt/bitnami/mysqldrivers/ main/
   - touch TestingProject.war.dodeploy
