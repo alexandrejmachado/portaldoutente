@@ -17,7 +17,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @NamedQueries({
 	@NamedQuery(name=Medicacao.FIND_ALL_BY_UTENTE, query="SELECT m FROM Medicacao m WHERE m.numUtente = :" + Medicacao.UTENTE +" ORDER BY m.cal DESC"),
 	@NamedQuery(name=Medicacao.DELETE, query="DELETE FROM Medicacao m WHERE m.id = :" + Medicacao.ID),
-	@NamedQuery(name=Medicacao.FIND_BY_ID_AND_MED, query="SELECT m FROM Medicacao m WHERE m.numUtente = :" + Medicacao.UTENTE + " AND m.idMedicamento = :"+Medicacao.MEDICAMENTO)
+	@NamedQuery(name=Medicacao.FIND_BY_ID_AND_MED, query="SELECT m FROM Medicacao m WHERE m.numUtente = :" + Medicacao.UTENTE + " AND m.idMedicamento = :"+Medicacao.MEDICAMENTO),
+	@NamedQuery(name=Medicacao.FIND_BY_ID, query="SELECT m FROM Medicacao m WHERE m.id = :" + Medicacao.ID)
 })
 public class Medicacao {
 
@@ -28,6 +29,8 @@ public class Medicacao {
 	private int id;
 
 	public static final String FIND_BY_ID_AND_MED = "Medicacao.findByIdAndMed";
+	
+	public static final String FIND_BY_ID = "Medicacao.findById";
 	
 	public static final String MEDICAMENTO = "medicamento";
 	
@@ -58,6 +61,7 @@ public class Medicacao {
 	
 	private Calendar validade;
 	
+	
 	private double dose;
 	
 	private String indicacoes;
@@ -77,6 +81,7 @@ public class Medicacao {
 		
 		validade= Calendar.getInstance();
 		validade.add(Calendar.MONTH, 6);
+		
 		
 		cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, getDiasParaRenovacao() - 5);

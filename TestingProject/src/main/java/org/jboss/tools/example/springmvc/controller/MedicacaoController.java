@@ -150,18 +150,21 @@ public class MedicacaoController {
 		return mav;
 	}
 	
-
-	private AuthController as= new AuthController();
-	
-	
-
-	@RequestMapping(value="/view")
-	public ModelAndView calendarView(HttpSession session){
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("username", session.getAttribute("sessionName"));
-		mav.setViewName("medicamentos");
-		return mav;
+	@RequestMapping(value = "/renovar", method = RequestMethod.POST,params={"id"})
+	@ResponseBody
+	public boolean renovarMed(HttpSession session, @RequestParam("id") String id) {
+		Medicacao medAtual = medicacaoDao.findById(Integer.parseInt(id));
+		boolean estado = medAtual.checkMedicacao();
+		return estado;
 	}
+	
+	@RequestMapping(value = "/apagar", method = RequestMethod.POST, params={"id"})
+	@ResponseBody
+	public boolean apagarMed(HttpSession session, @RequestParam("id") String id) {
+		return medicacaoDao.deleteMedicacao(Integer.parseInt(id));
+	}
+	
+
 
 
 }

@@ -104,8 +104,8 @@ Indicacoes: <br>
     	<td> <c:out value="${medicacao.nomeMedicamento }"/> </td>
         <td><c:out value="${medicacao.dose}"/></td>
         <td><c:out value="${medicacao.indicacoes}"/></td>
-        <td><button id = "renovar" value="${medicacao.getId()}" onclick="renovar(${medicacao.id})"> Pedir Renovacao </button></td>
-        <td><button id = "apagar" value="${medicacao.getId() }" onclick="apagar(${medicacao.id})"> Apagar </button></td>
+        <td><button id = "renovar${medicacao.getId()}" value="${medicacao.getId()}" onclick="renovar(${medicacao.id})"> Pedir Renovacao </button></td>
+        <td><button id = "apagar${medicacao.getId()}" value="${medicacao.getId() }" onclick="apagar(${medicacao.id})"> Apagar </button></td>
         
     </tr>
 </c:forEach>
@@ -150,4 +150,15 @@ function medicamentos()
 		);
 
 }
+
+function renovar(id)
+{
+	path="https://" + window.location.host + "/medicacao/renovar";
+	$.post(path, {'id':id}).done(function( data ) {
+		if (data==true){alert("renovacao pedida com sucesso, o seu médico entrará em contacto consigo")}
+		
+		else {alert("renovacao falhada, ainda e muito cedo para pedir")}}
+
+	);
+	}
 </script>

@@ -40,6 +40,19 @@ public class MedicacaoDao {
 		return lista;
 	}
 	
+	public Medicacao findById(int id) {
+		TypedQuery<Medicacao> query = em.createNamedQuery(Medicacao.FIND_BY_ID, Medicacao.class);
+		query.setParameter(Medicacao.ID, id);
+		return query.getSingleResult();
+	}
+	
+	public boolean deleteMedicacao(int id) {
+		TypedQuery<Medicacao> query = em.createNamedQuery(Medicacao.DELETE, Medicacao.class);
+		query.setParameter(Medicacao.ID, id);
+		query.executeUpdate();
+		return true;
+	}
+	
 	public boolean exists(int numUtente, int medId) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		System.out.println("numUtente " + numUtente);
 		System.out.println("medId " + medId);

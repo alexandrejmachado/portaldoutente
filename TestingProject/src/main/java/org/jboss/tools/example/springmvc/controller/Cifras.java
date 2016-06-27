@@ -37,8 +37,10 @@ public class Cifras {
 	
 	public static SecretKey getKey() throws IOException, NoSuchAlgorithmException {
 		System.out.println(Utente.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-		File f = new File("notakey.key");
+		String rootPath = System.getProperty("jboss.server.config.dir"); 
+		File f = new File(rootPath+ File.separator+ "notakey.key");
 		if (!f.exists()) {
+			System.out.println("criei nova key");
 			KeyGenerator kg = KeyGenerator.getInstance("AES");
 			kg.init(128);
 			SecretKey key3 = kg.generateKey();
@@ -52,7 +54,7 @@ public class Cifras {
 			fos.close();
 		}
 		
-		FileInputStream fis = new FileInputStream("notakey.key");
+		FileInputStream fis = new FileInputStream(f);
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		byte[] key = new byte[16];
 		ois.read(key);
