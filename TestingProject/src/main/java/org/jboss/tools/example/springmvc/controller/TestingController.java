@@ -63,6 +63,7 @@ import org.springframework.core.type.filter.RegexPatternTypeFilter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -87,6 +88,7 @@ import com.google.cloud.storage.StorageOptions;
 
 @Controller
 @RequestMapping(value = "/")
+@EnableAsync
 public class TestingController {
 	
 	@Autowired
@@ -482,8 +484,9 @@ public class TestingController {
 				String hashTest;
 				hashTest = HashTextTest.sha256(password);
 				String code = as.nextSessionId();
+				System.out.println("Vou mandar o mail no Testing");
 				Future future = as.sendEmail(mail,code);
-				System.out.println(code);
+				System.out.println("Ja saltei para o resto");
 				//String code = "";
 				String codeSms="I<3MEMES";
 				try{
@@ -502,6 +505,7 @@ public class TestingController {
 				else{
 					medico = cmNow.get(0).getMedicoId();
 					}
+				System.out.println("vou criar o utente na DB");
 				Utente ut = utenteDao.newUtente(username, numUtente, cc, morada, mail, hashTest, telemovel, nif, code, codeSms, emergencia, centroId, medico);
 				future.get();
 				finalmsg.add("true");

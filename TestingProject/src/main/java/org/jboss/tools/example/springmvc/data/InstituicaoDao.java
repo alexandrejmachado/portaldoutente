@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Repository
@@ -26,13 +24,9 @@ public class InstituicaoDao {
 		}
 	
 	public List<Instituicao> findByLocalidade(String localidade){
-		Instituicao temp=null;
 		TypedQuery<Instituicao> query = em.createNamedQuery(Instituicao.FIND_LOCAL, Instituicao.class);
-		if(localidade.equals("Balelas")){temp=new Instituicao("1","2","3","2","Balelas","asd");}
 		query.setParameter(Instituicao.LOCALIDADE, localidade);
-		if(temp.equals(null)){return query.getResultList();}
-		else{return new ArrayList<Instituicao>(Arrays.asList(new Instituicao[]{temp}));}
-		
+		return query.getResultList();
 		}
 	
 }
