@@ -38,22 +38,73 @@
             </li>
           </ul>
         </nav>
-</div>
-<p id = "frase">Cirurgias pendentes</p>
-<div class = "registo">
-<table id = "tabela_ciru">
-  <c:forEach items="${lista}" var="cirurgia">
-    <tr>
-    	<td> <c:out value="${cirurgia.tipo }"/> </td>
-        <td>MÃ©dico: <c:out value="${cirurgia.idMedico}"/></td>
-        <td>Data: <c:out value="${cirurgia.data}"/></td>
-        <td><button id = "confirmar" value="${cirurgia.getId() }" onclick="confirmar(${cirurgia.getId() })"> Confirmar </button></td>
-        <td><button id = "cancelar" value="${cirurgia.getId() }" onclick="cancelar(${cirurgia.getId() })"> Remarcar </button></td>
         
-    </tr>
-</c:forEach>
-</table>
+        
+        <div class="col-lg-12" id="caixaGig">  <!--  -->
+		
+			<div id="wrapper">
 	
+				<!-- Sidebar -->
+			<div id="sidebar-wrapper">
+				<ul class="barra">
+						
+					<li id="consulta">
+						<a href="/calendario/view">Marcação de Consultas</a>
+					</li>
+					<li id="medicacao2">
+						<a href="/medicacao/view">Registar Medicação</a>
+					</li>
+					<li id="medicao">
+						<a href="/medicoes">Medições</a>
+					</li>
+					<li id="cirurgia">
+						<a href="/cirurgia">Cirurgia</a>
+					</li>
+					<li id="isencao">
+						<a href="/isencao">Pedido de Isenção</a>
+					</li>
+										<li style="opacity:0">
+						<a></a>
+					</li>
+					<li>
+						<a href="/">Voltar para o Menu</a>
+					</li>
+				</ul>
+			</div>
+	        	<!-- /#sidebar-wrapper -->
+			
+			
+			<!-- Page Content -->
+			<div id="page-content-wrapper">
+			   <div class="container-fluid">
+							
+				<div class="col-lg-12">
+	
+	<p id = "frase">Cirurgias pendentes</p>
+	<div class = "registo">
+	<table id = "tabela_ciru">
+	  <c:forEach items="${lista}" var="cirurgia">
+	    <tr>
+	    	<td> <c:out value="${cirurgia.tipo }"/> </td>
+	        <td>MÃ©dico: <c:out value="${cirurgia.idMedico}"/></td>
+	        <td>Data: <c:out value="${cirurgia.data}"/></td>
+	        <td><button id = "confirmar" value="${cirurgia.getId() }" onclick="confirmar(${cirurgia.getId() })"> Confirmar </button></td>
+	        <td><button id = "cancelar" value="${cirurgia.getId() }" onclick="cancelar(${cirurgia.getId() })"> Remarcar </button></td>
+	        
+	    </tr>
+	</c:forEach>
+	</table>
+	</div>
+	
+				</div>
+						
+				</div>
+			</div><!-- /#page-content-wrapper -->
+	
+					
+			</div>    <!-- /#wrapper -->
+	    </div><!-- caixaGig -->
+		
 <script>
 function confirmar(ID) { 
 	path="https://" + window.location.host + "/";
@@ -77,6 +128,6 @@ function confirmar(ID) {
  });
  </script>
 	
-</div>
+
 </body>
 </html>
