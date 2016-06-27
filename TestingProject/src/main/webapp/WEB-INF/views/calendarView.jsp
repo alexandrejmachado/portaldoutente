@@ -199,6 +199,12 @@ $(document).ready(function() {
 					events: data,
 					selectable: true,
 					selectHelper: true,
+					dayRender: function(date, cell){
+						if(date < new Date()){
+							cell.css("background-color","#D3D3D3");
+							cell.css("opacity", "0.5");
+						}
+					},
 					select: function(start, end) {
 						today= d
 					    if(new Date(start) < new Date())

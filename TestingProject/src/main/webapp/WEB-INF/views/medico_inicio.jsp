@@ -8,5 +8,9 @@
 </head>
 <body>
 	<h1>MEDICO CONTROLLER</h1>
+	
+	<form action="/medico/login" method="post" id="login">
+		<input id="username" type="text" pattern="\d*" maxlength="9" name="username" placeholder="ID Medico" required>
+	</form>
 </body>
 </html>
