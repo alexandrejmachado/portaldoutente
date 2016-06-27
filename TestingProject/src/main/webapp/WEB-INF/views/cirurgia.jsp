@@ -1,31 +1,49 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+        
+<!DOCTYPE html>
+<html lang="pt">
 
-<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-	 <title>Portal do Utente</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-	<!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <title>Portal do Utente</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href=<c:url value="/resources/css/bootstrap.min.css" ></c:url> rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/resources/css/main.css" rel="stylesheet">
+    <link href=<c:url value="/resources/css/main.css" ></c:url> rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<body background="/resources/gfx/Final2.png">
 
-<div class= "container">    <!-- ROW -->
-        <div class= "rowMajor">
-            <div class="col-md-11">Portal do Utente</div>
-            <div class="col-md-1" id="entrar">${username}</div>
-		</div>
-		
-		<nav>
+
+<body background=<c:url value="/resources/gfx/Final2.png"/> />
+
+	 <div class="container">
+            
+            <div class="col-lg-12"> 
+                <div class= "rowMajor">
+                	<div id="divisento"></div>
+					<div class="col-md-11">Portal do Utente</div>
+					<div class="col-md-1" id="entrar">${username}</div>
+				</div>
+            
+            </div>
+        <nav>
           <ul>
             <li id="login">
               <a id="login-trigger" href="#">
@@ -40,7 +58,8 @@
         </nav>
         
         
-        <div class="col-lg-12" id="caixaGig">  <!--  -->
+				
+		<div class="col-lg-12" id="caixaGig">  <!--  -->
 		
 			<div id="wrapper">
 	
@@ -49,19 +68,19 @@
 				<ul class="barra">
 						
 					<li id="consulta">
-						<a href="/calendario/view">Marcação de Consultas</a>
+						<a href="/calendario/view">MarcaÃ§Ã£o de Consultas</a>
 					</li>
 					<li id="medicacao2">
-						<a href="/medicacao/view">Registar Medicação</a>
+						<a href="/medicacao/view">Registar MedicaÃ§Ã£o</a>
 					</li>
 					<li id="medicao">
-						<a href="/medicoes">Medições</a>
+						<a href="/medicoes">MediÃ§Ãµes</a>
 					</li>
 					<li id="cirurgia">
 						<a href="/cirurgia">Cirurgia</a>
 					</li>
 					<li id="isencao">
-						<a href="/isencao">Pedido de Isenção</a>
+						<a href="/isencao">Pedido de IsenÃ§Ã£o</a>
 					</li>
 										<li style="opacity:0">
 						<a></a>
@@ -71,63 +90,80 @@
 					</li>
 				</ul>
 			</div>
-	        	<!-- /#sidebar-wrapper -->
+				<!-- /#sidebar-wrapper -->
 			
 			
-			<!-- Page Content -->
-			<div id="page-content-wrapper">
-			   <div class="container-fluid">
+					<!-- Page Content -->
+					<div id="page-content-wrapper">
+						<div class="container-fluid">
 							
-				<div class="col-lg-12">
-	
-	<p id = "frase">Cirurgias pendentes</p>
-	<div class = "registo">
-	<table id = "tabela_ciru">
-	  <c:forEach items="${lista}" var="cirurgia">
-	    <tr>
-	    	<td> <c:out value="${cirurgia.tipo }"/> </td>
-	        <td>MÃ©dico: <c:out value="${cirurgia.idMedico}"/></td>
-	        <td>Data: <c:out value="${cirurgia.data}"/></td>
-	        <td><button id = "confirmar" value="${cirurgia.getId() }" onclick="confirmar(${cirurgia.getId() })"> Confirmar </button></td>
-	        <td><button id = "cancelar" value="${cirurgia.getId() }" onclick="cancelar(${cirurgia.getId() })"> Remarcar </button></td>
-	        
-	    </tr>
-	</c:forEach>
-	</table>
-	</div>
-	
-				</div>
+								<div class="col-lg-12">
+								   <h1>Cirurgias Pendentes</h1>
+									<div class="row" id = "caixaReceita">
+										
+								
+								<div class = "registo">
+								<table id = "tabela_ciru">
+								  <c:forEach items="${lista}" var="cirurgia">
+									<tr>
+										<td> <c:out value="${cirurgia.tipo }"/> </td>
+										<td>MÃƒÂ©dico: <c:out value="${cirurgia.idMedico}"/></td>
+										<td>Data: <c:out value="${cirurgia.data}"/></td>
+										<td><button id = "confirmar" value="${cirurgia.getId() }" onclick="confirmar(${cirurgia.getId() })"> Confirmar </button></td>
+										<td><button id = "cancelar" value="${cirurgia.getId() }" onclick="cancelar(${cirurgia.getId() })"> Remarcar </button></td>
+										
+									</tr>
+								</c:forEach>
+								</table>
+								</div>
+											
+									
+									</div>
 						
-				</div>
-			</div><!-- /#page-content-wrapper -->
+								</div>
+						
+						</div>
+					</div>
+					<!-- /#page-content-wrapper -->
 	
 					
-			</div>    <!-- /#wrapper -->
-	    </div><!-- caixaGig -->
-		
-<script>
-function confirmar(ID) { 
-	path="https://" + window.location.host + "/";
-	console.log(ID);
-	$.post(path+"confirmarCirurgia", {"id":ID},function(data){
-		if (data==true){window.location.replace(path + "index");}
-	else {alert("Falhou a Confirmar a Cirurgia!");}
-})}
-
-</script>
-
-<script>
-     $(document).ready(function(){
-   $('#login-trigger').click(function(){
-     $(this).next('#login-content').slideToggle();
-     $(this).toggleClass('active');          
-    
-     if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
-       else $(this).find('span').html('&#x25BC;')
-     })
- });
- </script>
+			</div>
+	    </div>
+	    <!-- /#wrapper -->
 	
+	    <!-- jQuery -->
+	   <!-- <script src="js/jquery.js">  </script> -->
+	    <script src='<c:url value="/resources/js/jquery.js"></c:url>'></script>
+	
+	    <!-- Bootstrap Core JavaScript -->
+	    <!-- <script src="js/bootstrap.min.js"></script> -->
+	    <script src='<c:url value="/resources/js/bootstrap.min.js"></c:url>'></script>
+	
+				<script>
+				function confirmar(ID) { 
+					path="https://" + window.location.host + "/";
+					console.log(ID);
+					$.post(path+"confirmarCirurgia", {"id":ID},function(data){
+						if (data==true){window.location.replace(path + "index");}
+					else {alert("Falhou a Confirmar a Cirurgia!");}
+				})}
 
+				</script>
+
+				<script>
+					 $(document).ready(function(){
+				   $('#login-trigger').click(function(){
+					 $(this).next('#login-content').slideToggle();
+					 $(this).toggleClass('active');          
+					
+					 if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
+					   else $(this).find('span').html('&#x25BC;')
+					 })
+				 });
+				 </script>
+	</div>
 </body>
+
+
+
 </html>
