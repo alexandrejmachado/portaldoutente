@@ -28,7 +28,6 @@ import com.twilio.sdk.TwilioRestException;
 import com.twilio.sdk.resource.factory.MessageFactory;
 
 @Service
-@EnableAsync
 public class AuthController {
 		Properties props;
 		
@@ -51,7 +50,6 @@ public class AuthController {
 	
 	@Async
 	public Future<Boolean> sendEmail(String to,String code) {
-		System.out.println("Vou mandar o email");
 		System.out.println(code);
 		String msg =  "Insira este Codigo de seguranca no site: " + code;
 		Session session = Session.getInstance(props,
@@ -71,6 +69,7 @@ public class AuthController {
 			message.setText(msg);
 			Transport.send(message);
 
+			System.out.println("Acabei de mandar o mail");
 			return new AsyncResult<Boolean>(true);
 
 		} catch (MessagingException e) {

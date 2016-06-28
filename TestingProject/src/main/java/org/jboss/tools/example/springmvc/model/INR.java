@@ -17,7 +17,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 
 @NamedQueries({
-	@NamedQuery(name=INR.FIND_ALL_BY_UTENTE, query="SELECT i FROM INR i WHERE i.numUtente = :" + INR.UTENTE +" ORDER BY i.data ASC")
+	@NamedQuery(name=INR.FIND_ALL_BY_UTENTE, query="SELECT i FROM INR i WHERE i.numUtente = :" + INR.UTENTE +" ORDER BY i.data ASC"),
+	@NamedQuery(name=INR.FIND_SHARABLE, query="SELECT i FROM INR i WHERE i.numUtente = :" + INR.UTENTE +" AND i.sharable = true")
 })
 public class INR {
 	
@@ -35,6 +36,8 @@ public class INR {
 	public static final String UTENTE = "numUtente";
 	
 	public static final String FIND_ALL_BY_UTENTE = "INR.findAllByUtente";
+	
+	public static final String FIND_SHARABLE = "INR.findSharable";
 	
 	private double min = 2;
 	

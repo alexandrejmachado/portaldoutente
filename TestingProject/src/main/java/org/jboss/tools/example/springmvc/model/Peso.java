@@ -16,7 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Peso.FIND_ALL_BY_UTENTE, query="SELECT p FROM Peso p WHERE p.numUtente = :" + Peso.UTENTE +" ORDER BY p.data ASC")
+	@NamedQuery(name=Peso.FIND_ALL_BY_UTENTE, query="SELECT p FROM Peso p WHERE p.numUtente = :" + Peso.UTENTE +" ORDER BY p.data ASC"),
+	@NamedQuery(name=Peso.FIND_SHARABLE, query="SELECT p FROM Peso p WHERE p.numUtente = :" + Peso.UTENTE +" AND p.sharable = true")
 })
 public class Peso {
 
@@ -34,6 +35,8 @@ public class Peso {
 	public static final String UTENTE = "numUtente";
 	
 	public static final String FIND_ALL_BY_UTENTE = "Peso.findAllByUtente";
+	
+	public static final String FIND_SHARABLE = "Peso.findSharable";
 	
 	@NotNull
 	private double valor;

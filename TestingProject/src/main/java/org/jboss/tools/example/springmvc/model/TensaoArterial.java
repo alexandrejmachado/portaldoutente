@@ -17,7 +17,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 
 @NamedQueries({
-	@NamedQuery(name=TensaoArterial.FIND_ALL_BY_UTENTE, query="SELECT t FROM TensaoArterial t WHERE t.numUtente = :" + TensaoArterial.UTENTE +" ORDER BY t.data ASC")
+	@NamedQuery(name=TensaoArterial.FIND_ALL_BY_UTENTE, query="SELECT t FROM TensaoArterial t WHERE t.numUtente = :" + TensaoArterial.UTENTE +" ORDER BY t.data ASC"),
+	@NamedQuery(name=TensaoArterial.FIND_SHARABLE, query="SELECT t FROM TensaoArterial t WHERE t.numUtente = :" + TensaoArterial.UTENTE +" AND t.sharable = true")
 })
 public class TensaoArterial {
 
@@ -34,6 +35,8 @@ public class TensaoArterial {
 		public static final String UTENTE = "numUtente";
 		
 		public static final String FIND_ALL_BY_UTENTE = "TensaoArterial.findAllByUtente";
+		
+		public static final String FIND_SHARABLE = "TensaoArterial.findSharable";
 		
 		@Temporal(TemporalType.TIMESTAMP)
 		private Date data;

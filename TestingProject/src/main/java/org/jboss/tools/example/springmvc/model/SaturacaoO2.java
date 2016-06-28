@@ -17,7 +17,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 
 @NamedQueries({
-	@NamedQuery(name=SaturacaoO2.FIND_ALL_BY_UTENTE, query="SELECT s FROM SaturacaoO2 s WHERE s.numUtente = :" + SaturacaoO2.UTENTE +" ORDER BY s.data ASC")
+	@NamedQuery(name=SaturacaoO2.FIND_ALL_BY_UTENTE, query="SELECT s FROM SaturacaoO2 s WHERE s.numUtente = :" + SaturacaoO2.UTENTE +" ORDER BY s.data ASC"),
+	@NamedQuery(name=SaturacaoO2.FIND_SHARABLE, query="SELECT s FROM SaturacaoO2 s WHERE s.numUtente = :" + SaturacaoO2.UTENTE +" AND s.sharable = true")
 })
 public class SaturacaoO2 {
 	
@@ -35,6 +36,8 @@ public class SaturacaoO2 {
 	public static final String UTENTE = "numUtente";
 	
 	public static final String FIND_ALL_BY_UTENTE = "SaturacaoO2.findAllByUtente";
+	
+	public static final String FIND_SHARABLE = "SaturacaoO2.findSharable";
 	
 	@NotNull
 	private double valor;

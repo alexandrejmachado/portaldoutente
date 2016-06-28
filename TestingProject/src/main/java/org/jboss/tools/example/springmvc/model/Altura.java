@@ -17,7 +17,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 
 @NamedQueries({
-	@NamedQuery(name=Altura.FIND_ALL_BY_UTENTE, query="SELECT a FROM Altura a WHERE a.numUtente = :" + Altura.UTENTE +" ORDER BY a.data ASC")
+	@NamedQuery(name=Altura.FIND_ALL_BY_UTENTE, query="SELECT a FROM Altura a WHERE a.numUtente = :" + Altura.UTENTE +" ORDER BY a.data ASC"),
+	@NamedQuery(name=Altura.FIND_SHARABLE, query="SELECT a FROM Altura a WHERE a.numUtente = :" + Altura.UTENTE +" AND a.sharable = true")
 })
 public class Altura {
 	
@@ -29,6 +30,8 @@ public class Altura {
 	private int id;
 	
 	public static final String FIND_ALL_BY_UTENTE = "Altura.findAllByUtente";
+	
+	public static final String FIND_SHARABLE = "Altura.findSharable";
 	
 	public static final String UTENTE = "numUtente";
 	

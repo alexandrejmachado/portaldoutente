@@ -38,7 +38,8 @@ import sun.misc.BASE64Encoder;
 @NamedQueries({
 	@NamedQuery(name=Utente.FIND_BY_ID, query="SELECT u FROM Utente u WHERE u.numUtente = :" + Utente.ID),
 	@NamedQuery(name=Utente.FIND_ALL, query="SELECT u FROM Utente u"),
-	@NamedQuery(name=Utente.FIND_BY_NIF, query="SELECT u FROM Utente u WHERE u.nif = :" + Utente.NIF)
+	@NamedQuery(name=Utente.FIND_BY_NIF, query="SELECT u FROM Utente u WHERE u.nif = :" + Utente.NIF),
+	@NamedQuery(name=Utente.FIND_BY_MEDICO, query="SELECT u FROM Utente u WHERE u.medico = :" + Utente.MEDICO)
 })
 public class Utente {
 	
@@ -48,7 +49,11 @@ public class Utente {
 	
 	public static final String FIND_ALL = "Utente.FindAll";
 	
+	public static final String FIND_BY_MEDICO = "Utente.FindByMedico";
+	
 	public static final String ID = "numUtente";
+	
+	public static final String MEDICO = "medico";
 	
 	public static final String NIF = "nif";
 

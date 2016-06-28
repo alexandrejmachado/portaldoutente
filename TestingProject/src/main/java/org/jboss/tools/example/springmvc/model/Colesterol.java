@@ -16,7 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 //test
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Colesterol.FIND_ALL_BY_UTENTE, query="SELECT c FROM Colesterol c WHERE c.numUtente = :" + Colesterol.UTENTE +" ORDER BY c.data ASC")
+	@NamedQuery(name=Colesterol.FIND_ALL_BY_UTENTE, query="SELECT c FROM Colesterol c WHERE c.numUtente = :" + Colesterol.UTENTE +" ORDER BY c.data ASC"),
+	@NamedQuery(name=Colesterol.FIND_SHARABLE, query="SELECT c FROM Colesterol c WHERE c.numUtente = :" + Colesterol.UTENTE +" AND c.sharable = true")
 })
 public class Colesterol {
 	
@@ -31,6 +32,8 @@ public class Colesterol {
 	
 	
 	public static final String FIND_ALL_BY_UTENTE = "Colesterol.findAllByUtente";
+	
+	public static final String FIND_SHARABLE = "Colesterol.findShareble";
 	
 	public static final String UTENTE = "numUtente";
 	

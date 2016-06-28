@@ -43,12 +43,12 @@ public class UtenteDao {
 		em.persist(novoUtente);
 		return novoUtente;
 	}
-	
-//	public Utente novoUtente(String username, String password) {
-//		Utente novoUtente = new Utente(Integer.parseInt(username), password);
-//		em.persist(novoUtente);
-//		return novoUtente;
-//	}
+
+	public List<Utente> findByMedico(int medicoId){
+		TypedQuery<Utente> query = em.createNamedQuery(Utente.FIND_BY_MEDICO, Utente.class);
+		query.setParameter(Utente.MEDICO, medicoId);
+		return query.getResultList();
+	}
 	
 	
 	public Utente findUtenteById(int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
