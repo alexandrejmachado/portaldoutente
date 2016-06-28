@@ -29,7 +29,7 @@ public class MedicoUtente {
 	
 	private int medico;
 	
-	private int utente;
+	private String utente;
 	
 	private boolean altura = false;
 	
@@ -46,6 +46,13 @@ public class MedicoUtente {
 	private boolean tensao = false;
 	
 	private boolean trigliceridos = false;
+	
+	public MedicoUtente(){}
+	
+	public MedicoUtente( int medico, String utente){
+		this.medico = medico;
+		this.utente = utente;
+	}
 
 	public int getId() {
 		return id;
@@ -63,11 +70,11 @@ public class MedicoUtente {
 		this.medico = medico;
 	}
 
-	public int getUtente() {
+	public String getUtente() {
 		return utente;
 	}
 
-	public void setUtente(int utente) {
+	public void setUtente(String utente) {
 		this.utente = utente;
 	}
 
