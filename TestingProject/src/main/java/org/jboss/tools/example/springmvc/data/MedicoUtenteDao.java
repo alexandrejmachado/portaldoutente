@@ -37,4 +37,10 @@ public class MedicoUtenteDao {
 		query.setParameter(MedicoUtente.MEDICO, medico);
 		return query.getResultList();
 	}
+	
+	public MedicoUtente findByUtente(int utente) {
+		TypedQuery<MedicoUtente> query = em.createNamedQuery(MedicoUtente.FIND_BY_UTENTE, MedicoUtente.class);
+		query.setParameter(MedicoUtente.UTENTE, utente);
+		return query.getSingleResult();		
+	}
 }
