@@ -26,6 +26,7 @@
 <div class= "container">    <!-- ROW -->
         <div class= "rowMajor">
             <div class="col-md-11">Portal do Utente</div>
+            <div class="col-md-1" id="entrar"><a style="color:white; text-decoration:none;" href="/">Voltar </a></div>
 		</div>
 </div>
 

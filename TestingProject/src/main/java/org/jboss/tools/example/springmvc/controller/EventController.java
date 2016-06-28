@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -137,7 +139,12 @@ public class EventController {
 				Medico m = medicoDao.findById(currentConsulta.getIdMedico());
 				int consultaId = currentConsulta.getId();
 				Instituicao inst = insDao.findById(currentConsulta.getIdInstituicao());
-				
+				if(currentConsulta.isConfirmada()){
+					mav.addObject("confirmada", "A sua consulta está confirmada!");
+				}
+				else{
+					mav.addObject("confirmada", "A sua consulta ainda não está confirmada!");
+				}
 				mav.addObject("data", currentConsulta.getData());
 				mav.addObject("consultaId", consultaId);
 				mav.addObject("medico", m.getNome());
@@ -159,12 +166,16 @@ public class EventController {
 	@ResponseBody
 	public boolean persistirConsulta(@RequestParam(value="data") Date data, @RequestParam(value="obs") String obs, 
 									  HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		
 		int numUtente = Integer.parseInt((String)session.getAttribute("sessionID"));
 		Utente curUtente = utenteDao.findUtenteById(numUtente);
 		//TODO maybe falta por lock quando medico == 0?????
 		int idMedico = curUtente.getMedico();
-		Consulta cons = consultaDao.novo(idMedico, numUtente, curUtente.getCentroSaude(), "amarela", data, obs);
-		consultaDao.confirmarConsulta(cons);
+		Random ran = new Random();
+		int x = ran.nextInt(31);
+		//Consulta cons = consultaDao.novo(idMedico, numUtente, curUtente.getCentroSaude(), "amarela", data, obs);
+		consultaDao.novo(idMedico, numUtente, curUtente.getCentroSaude(),Integer.toString(x), data, obs);
+		//consultaDao.confirmarConsulta(cons);
 		return true;
 		}
 	
