@@ -12,7 +12,21 @@ import javax.crypto.NoSuchPaddingException;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
 
+import org.jboss.tools.example.springmvc.data.AlturaDao;
+import org.jboss.tools.example.springmvc.data.CirurgiaDao;
+import org.jboss.tools.example.springmvc.data.ColesterolDao;
+import org.jboss.tools.example.springmvc.data.ContratoMedicoDao;
+import org.jboss.tools.example.springmvc.data.GlicemiaDao;
+import org.jboss.tools.example.springmvc.data.GuardiaoDao;
+import org.jboss.tools.example.springmvc.data.INRDao;
+import org.jboss.tools.example.springmvc.data.InstituicaoDao;
+import org.jboss.tools.example.springmvc.data.MedicoUtenteDao;
+import org.jboss.tools.example.springmvc.data.PesoDao;
+import org.jboss.tools.example.springmvc.data.SaturacaoO2Dao;
+import org.jboss.tools.example.springmvc.data.TensaoArterialDao;
+import org.jboss.tools.example.springmvc.data.TrigliceridosDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
+import org.jboss.tools.example.springmvc.model.MedicoUtente;
 import org.jboss.tools.example.springmvc.sensitivedata.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +43,11 @@ public class PerfilController {
 	
 	@Autowired
 	private UtenteDao utenteDao;
+	
+	@Autowired
+	private MedicoUtenteDao muDao;
+	
+	
 	
 	private AuthController as= new AuthController();
 	
@@ -251,6 +270,84 @@ public class PerfilController {
 		}
 		return false;
 		
+	}
+	
+	@RequestMapping(value="/mudarPrivacidade")
+	@ResponseBody
+	public boolean mudarPrivacidade(HttpSession session, String tipo, String booleano) {
+		if (verifyLogin(session)) {
+			MedicoUtente mu = muDao.findByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+		switch (tipo) {
+		case "Altura" :
+			if (booleano.equals("true")){
+				mu.setAltura(true);
+			}
+			else {
+				mu.setAltura(false);
+			}
+			break;
+		case "Glicemia" :
+			if (booleano.equals("true")){
+				mu.setGlicemia(true);
+			}
+			else {
+				mu.setGlicemia(false);
+			}
+			break;
+		case "Colesterol":
+			if (booleano.equals("true")){
+				mu.setColesterol(true);
+			}
+			else {
+				mu.setColesterol(false);
+			}
+			break;
+		case "INR":
+			if (booleano.equals("true")){
+				mu.setInr(true);
+			}
+			else {
+				mu.setInr(false);
+			}
+			break;
+		case "Peso":
+			if (booleano.equals("true")){
+				mu.setPeso(true);
+			}
+			else {
+				mu.setPeso(false);
+			}
+			break;
+		case "SaturacaoO2":
+			if (booleano.equals("true")){
+				mu.setSaturacao(true);
+			}
+			else {
+				mu.setSaturacao(false);
+			}
+			break;
+		case "Trigliceridos":
+			if (booleano.equals("true")){
+				mu.setTrigliceridos(true);
+			}
+			else {
+				mu.setTrigliceridos(false);
+			}
+			break;
+		case "TensaoArterial":
+			if (booleano.equals("true")){
+				mu.setTensao(true);
+			}
+			else {
+				mu.setTensao(false);
+			}
+			break;
+		}
+		return true;
+		}
+		else {
+			return false;
+		}
 	}
 }
 

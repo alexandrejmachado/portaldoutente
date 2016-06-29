@@ -15,11 +15,20 @@
     font-family: 'DengXian';
     src: url('/resources/fonts/DengXian.ttf');
 }
-#tabela_exames{
+#tabela_exames, #tabela_med{
  margin-left: 25.5%;
  margin-top: 30px;
  width: 50%;
  font-size: 15px;
+}
+
+#tabela_med{
+    width: 100%;
+    margin-left: 0%;
+}
+
+#botao_med{
+    margin-right: 1%;
 }
 
 #botao_tab{
@@ -42,11 +51,16 @@
  color: white;
 }
 
-#texto5, #texto_tab{
+#texto5, #texto_tab, #texto7{
  font-size: 15px;
    color: white;
    text-transform: uppercase;
    text-align: center; 
+}
+
+#texto7{
+    color: black;
+    margin-top: 3%;
 }
 
 
@@ -76,11 +90,11 @@
 }
 
 #sidebar-wrapper {
-	display:inline-block;
+    display:inline-block;
     position: absolute;
     width: 0;
     left: 0px;
-	padding-right: 0px;
+    padding-right: 0px;
    /*atencao para responsive*/
     overflow-y: auto;
     background: none; /*background da barra*/
@@ -92,17 +106,17 @@
 
 
 #caixaGig{
-	background: none; 
+    background: none; 
 }
 
 .row{
-	background: rgb(249, 249, 249);
+    background: rgb(249, 249, 249);
 }
 .container-fluid{
     background: rgb(249, 249, 249);
     padding: 0px;
     margin: 0px;
-	marigin-bottom: 10px;
+    marigin-bottom: 10px;
     min-height: 316px;
     text-align: center;
     font-family:'LANENAR_', sans-serif; /*ATTENTION*/
@@ -117,20 +131,20 @@
 /*------Receitas--------------*/
 
 #caixaReceita  {
-	margin-top: 20px;
-	margin-left: 15px;
-	margin-right: 15px;
-	padding: 6px;
-	text-align: center;
+    margin-top: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 6px;
+    text-align: center;
     border-bottom-style: solid;
-	border-color: #E0E0E0;
-	font-size: 18px;
-	
+    border-color: #E0E0E0;
+    font-size: 18px;
+    
 }
 #codigo{
     margin-right:15px;
-	align: center;
-	text-align: center;
+    align: center;
+    text-align: center;
 }
 
 #codigo1 {
@@ -145,7 +159,7 @@
 }
 
 #smallBox{
-	display: inline-block;
+    display: inline-block;
     vertical-align: middle;
     float: none;
 }
@@ -153,9 +167,9 @@
 /*------Receitas fim --------------*/
 
 #page-content-wrapper {
-	margin-left: 0px;
+    margin-left: 0px;
     padding-left: 0px;
-	font-family:'LANENAR_', sans-serif;
+    font-family:'LANENAR_', sans-serif;
 }
 
 .rowMajor{
@@ -179,27 +193,27 @@
    /* border: 3px solid black;*/
     padding-top: 5px;
     font-family:'DengXian', sans-serif; 
-        color: white; 	
-		
-    padding: 16px; 			
-	font-size: 16px; 			
-	border: none; 			
-	cursor: pointer; 			
+        color: white;   
+        
+    padding: 16px;          
+    font-size: 16px;            
+    border: none;           
+    cursor: pointer;            
 
 }
 
 #medform{
-	width: 50%;
-	margin-left: 25%;
-	margin-top: 1.8%;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 1.8%;
 }
 
 #medicacao {
-	margin-left: 25%;
+    margin-left: 25%;
 }
 
 .erro{
-	text-align: center;
+    text-align: center;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -212,11 +226,11 @@ input[type="number"] {
 }
 
 #opcao {
-	color:black;
+    color:black;
 }
 
 #medida {
-	color:black;	
+    color:black;    
 }
 
 #texto1, #texto3 {
@@ -237,9 +251,18 @@ input[type="number"] {
 }
 
 #texto3 {
-	text-align: center;
-	font-size: 60px;
+    text-align: center;
+    font-size: 60px;
 }
+
+
+#medicamentos, #confConsulta{
+    font-family:'Roboto', Arial, sans-serif;
+    font-weight: 100;
+    background-color: white;
+    text-align: center;
+}
+
 
 
 
@@ -264,28 +287,28 @@ input[type="number"] {
 .barra li {
  /*border: 1px solid black; */
  
-	background: rgb(249,249,249);
-	text-align: center;
-	font-family: "LANENAR_", sans-serif;
-	font-size: 18px;
-	margin-bottom: 8px;
-	color: rbg(31,78,121);
+    background: rgb(249,249,249);
+    text-align: center;
+    font-family: "LANENAR_", sans-serif;
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: rbg(31,78,121);
 }
 
 #sidebar-wrapper a {
-	padding-bottom: 10px; 
-	padding-top: 10px;
+    padding-bottom: 10px; 
+    padding-top: 10px;
 }
 
 .barra li:first-child{
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 /* apagar? */
 .sidebar-nav {
     position: absolute;
     top: 0;
-	height: 500px;
+    height: 500px;
     width: 250px; /*L*/
     margin: 0;
     padding: 0;
@@ -308,7 +331,7 @@ html body div.container div#caixaGig.col-lg-12 div#wrapper div#sidebar-wrapper u
  html body div.container div#caixaGig.col-lg-12 div#wrapper div#sidebar-wrapper ul.barra li:hover{
     text-decoration: none;
     background: #1f4e79;
-	color: white;
+    color: white;
 }
 
 .registo,#frase{
@@ -331,7 +354,7 @@ html body div.container div#caixaGig.col-lg-12 div#wrapper div#sidebar-wrapper u
  font-size: 15px;
 }
 
-#botao_reg,#botao_voltar,#botao_tab{
+#botao_reg,#botao_voltar,#botao_tab, #medicacao, #apagar, #renovar, #botao_med{
  background: transparent;
  border: 0.3px solid;
  margin-top: 7px;
@@ -340,7 +363,12 @@ html body div.container div#caixaGig.col-lg-12 div#wrapper div#sidebar-wrapper u
 }
 
 .butao_reg {
-	color: white; 
+    color: white; 
+}
+
+#medicacao, #renovar, #apagar, #botao_med {
+    background: transparent;
+    color:  black;
 }
 
 #tabela_ciru{
@@ -482,7 +510,7 @@ input {
     #wrapper {
         padding-left: 250px;
     }
-	
+    
 
     #wrapper.toggled {
         padding-left: 0;
@@ -499,11 +527,23 @@ input {
     #page-content-wrapper {
         padding: 20px;
         position: relative;
-		margin-top: 20px;
+        margin-top: 20px;
     }
 
     #wrapper.toggled #page-content-wrapper {
         position: relative;
         margin-right: 0;
+    }
+    
+    #confConsulta{
+	    width: 50%;
+	    text-align:center;
+	    margin-left: 24.5%;
+	    background-color: #f9f9f9;
+	}
+	
+	#caixaMarcacao{
+	font-family:'Roboto', Arial, sans-serif;
+    font-weight: 100;
     }
 }

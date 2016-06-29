@@ -79,44 +79,53 @@
 					</li>
                 </ul>
             </div>
-    </div>
-<form method="post" id="medform" >
-<div id="automed" style="display:flex;align-items:center;">
-<label for="autocomplete">Escolha um Medicamento: </label>
-<input id="autocomplete" name = "nome" style="width: 40%;">
-</div>
-Dose Diária: 
-<input id="quant" type="text" name="dosagem"><br>
-Indicacoes: <br>
-<textarea id="indicacoes" rows="10" cols="60" name="indicacoes"></textarea><br>
-</form>
-<input id="medicacao" type="submit" onclick="medicamentos()">
-
-<div  class="exame">
-		<p id="texto2">Consulte abaixo as suas medicações</p>
-
-        <table id="tabela_exames">
-
-            <tr id = "texto_tab">
-                <td>NOME</td>
-                <td>DOSE</td> 
-                <td>INDICAÇÕES</td>
-                <td>Renovar</td>
-                <td>Apagar</td>
-            </tr>
-
-         <c:forEach items="${lista}" var="medicacao">
-    <tr id = "texto_tab">
-    	<td> <c:out value="${medicacao.nomeMedicamento }"/> </td>
-        <td><c:out value="${medicacao.dose}"/></td>
-        <td><c:out value="${medicacao.indicacoes}"/></td>
-        <td><button id = "renovar${medicacao.getId()}" value="${medicacao.getId()}" onclick="renovar(${medicacao.id})"> Pedir Renovacao </button></td>
-        <td><button id = "apagar${medicacao.getId()}" value="${medicacao.getId() }" onclick="apagar(${medicacao.id})"> Apagar </button></td>
-        
-    </tr>
-</c:forEach>
-        </table>
-      <script>
+            
+            
+    <div id="page-content-wrapper">
+    <div  class="container-fluid">
+			<form method="post" id="medform">
+			<div id="automed" style="display:flex;align-items:center;">
+			<label for="autocomplete">Escolha um Medicamento: </label>
+			<input id="autocomplete" name = "nome" style="width: 40%; display:block;">
+			</div>
+			Dose Diária: 
+			<input id="quant" type="text" name="dosagem"><br>
+			Indicações: <br>
+			<textarea id="indicacoes" rows="10" cols="40" name="indicacoes" style="display:block"></textarea><br>
+			</form>
+			<input id="medicacao" type="submit" onclick="medicamentos()">
+			
+			
+					<p id="texto2">Consulte abaixo as suas medicações</p>
+			
+			        <table id="tabela_exames">
+			
+			            <tr id = "texto_tab">
+			                <td>NOME</td>
+			                <td>DOSE</td> 
+			                <td>INDICAÇÕES</td>
+			                <td>Renovar</td>
+			                <td>Apagar</td>
+			            </tr>
+			
+			         <c:forEach items="${lista}" var="medicacao">
+			    <tr id = "texto_tab">
+			    	<td> <c:out value="${medicacao.nomeMedicamento }"/> </td>
+			        <td><c:out value="${medicacao.dose}"/></td>
+			        <td><c:out value="${medicacao.indicacoes}"/></td>
+			        <td><button id = "renovar${medicacao.getId()}" value="${medicacao.getId()}" onclick="renovar(${medicacao.id})"> Pedir Renovacao </button></td>
+			        <td><button id = "apagar${medicacao.getId()}" value="${medicacao.getId() }" onclick="apagar(${medicacao.id})"> Apagar </button></td>
+			        
+			    </tr>
+				</c:forEach>
+			    </table>
+			    
+	</div> <!--  containerfluid -->
+	</div>  <!--  page content wrapper -->
+	</div> <!--  wrapper -->
+    
+    
+<script>
 function renovar(ID) { 
 	path="https://" + window.location.host + "/";
 	console.log(ID);

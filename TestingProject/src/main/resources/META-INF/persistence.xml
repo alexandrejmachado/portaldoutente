@@ -41,11 +41,12 @@
         <class>org.jboss.tools.example.springmvc.model.TensaoArterial</class>
         <class>org.jboss.tools.example.springmvc.model.Trigliceridos</class>
         <class>org.jboss.tools.example.springmvc.model.Vacina</class>
+        <class>org.jboss.tools.example.springmvc.sensitivedata.ContratoMedico</class>
         <class>org.jboss.tools.example.springmvc.sensitivedata.Guardiao</class>
         <class>org.jboss.tools.example.springmvc.sensitivedata.Instituicao</class>
         <class>org.jboss.tools.example.springmvc.sensitivedata.Medico</class>
         <class>org.jboss.tools.example.springmvc.sensitivedata.Utente</class>
-        <class>org.jboss.tools.example.springmvc.sensitivedata.ContratoMedico</class>
+        <class>org.jboss.tools.example.springmvc.model.MedicoUtente</class>
         <properties>
             <property name="jboss.entity.manager.factory.jndi.name" 
                       value="java:jboss/TestingProject/persistencebasic" />

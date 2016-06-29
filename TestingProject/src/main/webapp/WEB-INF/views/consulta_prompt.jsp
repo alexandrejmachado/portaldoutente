@@ -12,9 +12,10 @@
         <meta name="author" content="">
         <meta charset="utf-8">
         
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
         <link href= <c:url value="/resources/css/bootstrap.min.css" ></c:url> rel="stylesheet"/>
     	<link href= <c:url value="/resources/css/bootstrap-select.css" ></c:url> rel="stylesheet"/>
-        <link href= <c:url value="/resources/css/main1.css" ></c:url> rel="stylesheet"/>
+        <link href= <c:url value="/resources/css/main.css" ></c:url> rel="stylesheet"/>
         
         <script src='<c:url value="/resources/js/jquery.js"></c:url>'></script>
         
@@ -22,7 +23,7 @@
     </head>
    
     
-    <body>
+    <body style="background-color: #f9f9f9">
     
     
     <div id="caixaMarcacao" style="text-align:center;">   
@@ -31,23 +32,23 @@
      <p id="pMarc">Confirmar marcação da consulta para: ${data}</p>
      
      
-	    <label for="hora">Selecione a hora:</label>
+	    <label for="hora">Selecione a hora:</label><br>
 	    <select style="padding:10px; border-radius: 5px; color: grey;" id="hora">
 	    	<c:forEach items="${lista}" var="slot">
 	    		<option value="${slot}"><c:out value="${slot}"/></option>
-	    	</c:forEach>   		
+	    	</c:forEach>	
 	    </select>
 	    
 	    <br><br>
 	    
-		    <label for="texto">Observações:</label>
+		    <label for="texto">Observações:</label><br>
 		    <textarea rows="4" cols="50" id="texto"></textarea>
 	    <br>
-	    <button onclick="marcarConsulta()">
+	    <button id="botao_med" onclick="marcarConsulta()">
 	        Sim
 	    </button>
 	    
-	    <button onclick="parent.$.fancybox.close()">
+	    <button id="botao_med" onclick="parent.$.fancybox.close()">
 	        Não
 	    </button>
         
@@ -67,7 +68,7 @@
     	 data.setMinutes(temp[1]);
     	 data.setSeconds(0);
     	 console.log(data);
-    	 $.post("https://"+ window.location.host+"/calendario/persistirConsulta",{data:data,obs:$("textarea").val(),instituicao:"1"});
+    	 $.post("https://"+ window.location.host+"/calendario/persistirConsulta",{data:data,obs:$("textarea").val()});
     	 parent.window.location.reload();
     	 
      }

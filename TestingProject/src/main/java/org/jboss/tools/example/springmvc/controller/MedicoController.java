@@ -34,4 +34,13 @@ public class MedicoController {
 		mav.addObject("listaUtentes", utenteDao.findByMedico(Integer.parseInt(username)));
 		return mav;
 	}
+	
+	@RequestMapping(value="/consultasPendentes", method = RequestMethod.POST)
+	public ModelAndView consultasPendentes(@RequestParam(value="numUtente") String numUtente, HttpSession session){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("main_menu_medico");
+		mav.addObject("utente", numUtente);
+		mav.addObject("username", session.getAttribute("username"));
+		return mav;
+	}
 }
