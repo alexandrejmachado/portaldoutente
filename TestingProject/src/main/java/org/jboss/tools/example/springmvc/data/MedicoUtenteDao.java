@@ -20,6 +20,7 @@ public class MedicoUtenteDao {
 	private EntityManager em;
 	
 	public MedicoUtente novo(int medico, String numUtente){
+		System.out.println("something is wrong");
 		MedicoUtente mu = new MedicoUtente(medico, Integer.parseInt(numUtente));
 		em.persist(mu);
 		return mu;

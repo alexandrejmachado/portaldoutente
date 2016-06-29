@@ -103,4 +103,14 @@ public class ConsultaDao {
 		query.setParameter(Consulta.INST_ID, instituicao );
 		return query.getResultList();
 	}
+	
+public List<Consulta> findWithDateMedico(int idMedico) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		
+		TypedQuery<Consulta> query = em.createNamedQuery(Consulta.FIND_WITH_DATE_MEDICO, Consulta.class);
+		query.setParameter(Consulta.ID_MEDICO, idMedico);
+		query.setParameter(Consulta.DATA, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+		return query.getResultList();
+	}
+
+
 }

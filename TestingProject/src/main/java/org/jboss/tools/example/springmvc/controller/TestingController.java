@@ -100,6 +100,9 @@ public class TestingController {
 	private ContratoMedicoDao cmDao;
 	
 	@Autowired
+	private MedicoUtenteDao muDao;
+	
+	@Autowired
 	private InstituicaoDao instDao;
 	
 	@Autowired
@@ -226,7 +229,9 @@ public class TestingController {
 	public String loginUtente(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password, HttpSession session) throws NoSuchAlgorithmException{
 		ModelAndView mav = new ModelAndView();
 		try{
+			System.out.println("ACESSO A BD");
 			Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
+			System.out.println("ACESSO FEITO A BD");
 			System.out.println(currentUser.getNif() + "CURRENT UTENTE");
 			System.out.println(currentUser.getPassword());
 			String hashLogin = HashTextTest.sha256(password);
@@ -511,8 +516,13 @@ public class TestingController {
 					medico = cmNow.get(0).getMedicoId();
 					}
 				System.out.println("vou criar o utente na DB");
+<<<<<<< HEAD
 				muDao.novo(medico,numUtente);
+=======
+				
+>>>>>>> branch 'master' of http://130.211.78.192/melancias/portaldoutente.git
 				Utente ut = utenteDao.newUtente(username, numUtente, cc, morada, mail, hashTest, telemovel, nif, code, codeSms, emergencia, centroId, medico);
+				muDao.novo(medico, numUtente);
 				future.get();
 				finalmsg.add("true");
 				return finalmsg;
@@ -677,7 +687,9 @@ public class TestingController {
 				else{
 					medico = cmNow.get(0).getMedicoId();
 					}
+				
 				Utente ut = utenteDao.newUtente(username, numUtente, cc, morada, mail, hashTest, telemovel, nif, code, codeSms, emergencia, centroId, medico);
+				muDao.novo(medico, numUtente);
 				//future.get();
 				finalmsg.add("true");
 				return finalmsg;
@@ -886,7 +898,7 @@ public class TestingController {
 			trigDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getAttribute("sessionID")));
 			break;
 		case "TensaoArterial":
-			tenArtDao.novo(Integer.parseInt((String)medicoes.get("max")),(Integer)medicoes.get("min"), Integer.parseInt((String)session.getAttribute("sessionID")));
+			tenArtDao.novo(Integer.parseInt((String)medicoes.get("max")),Integer.parseInt((String)medicoes.get("min")), Integer.parseInt((String)session.getAttribute("sessionID")));
 			break;
 		}
 		return "Adicionado";

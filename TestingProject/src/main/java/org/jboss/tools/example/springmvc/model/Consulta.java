@@ -1,7 +1,13 @@
 package org.jboss.tools.example.springmvc.model;
 
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,6 +18,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.jboss.tools.example.springmvc.sensitivedata.Utente;
+import org.jboss.tools.example.springmvc.controller.Cifras;
 import org.jboss.tools.example.springmvc.sensitivedata.Instituicao;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -22,7 +29,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 	@NamedQuery(name=Consulta.FIND_BY_ID, query="SELECT c FROM Consulta c WHERE c.id =:" + Consulta.ID),
 	@NamedQuery(name=Consulta.FIND_BY_DATE, query="SELECT c FROM Consulta c WHERE c.idInstituicao = :"+ Instituicao.ID +" AND c.data =:" + Consulta.DATA),
 	@NamedQuery(name=Consulta.FIND_ALL_BY_UTENTE, query="SELECT c FROM Consulta c WHERE c.numUtente = :"+Consulta.UTENTE +" AND c.idInstituicao = :"+ Consulta.INST_ID+" AND c.numUtente = :" + Consulta.UTENTE +" ORDER BY c.data DESC"),
-	@NamedQuery(name=Consulta.FIND_WITH_DATE, query="SELECT c FROM Consulta c WHERE c.idInstituicao = :"+Consulta.INST_ID+" AND c.numUtente= :"+ Consulta.UTENTE + " AND c.data > :"+ Consulta.DATA +" ORDER BY c.data DESC")
+	@NamedQuery(name=Consulta.FIND_WITH_DATE, query="SELECT c FROM Consulta c WHERE c.idInstituicao = :"+Consulta.INST_ID+" AND c.numUtente= :"+ Consulta.UTENTE + " AND c.data > :"+ Consulta.DATA +" ORDER BY c.data DESC"),
+			@NamedQuery(name=Consulta.FIND_WITH_DATE_MEDICO, query="SELECT c FROM Consulta c WHERE c.idMedico= :"+ Consulta.ID_MEDICO + " AND c.data > :"+ Consulta.DATA +" ORDER BY c.data DESC")
 })
 public class Consulta {
 
@@ -36,7 +44,11 @@ public class Consulta {
 	
 	public static final String FIND_WITH_DATE = "Consulta.FindWithDate";
 	
+	public static final String FIND_WITH_DATE_MEDICO = "Consulta.FindWithDateMedico";
+	
 	public static final String UTENTE = "numUtente";
+	
+	public static final String ID_MEDICO = "idMedico";
 	
 	public static final String DATA = "data";
 	
@@ -105,8 +117,8 @@ public class Consulta {
 		return idMedico;
 	}
 
-	public String getNumUtente() {
-		return numUtente;
+	public String getNumUtente() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+		return Cifras.decrypt(numUtente);
 	}
 
 	public int getIdInstituicao() {
