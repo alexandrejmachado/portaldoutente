@@ -890,7 +890,7 @@ public class TestingController {
 			trigDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getAttribute("sessionID")));
 			break;
 		case "TensaoArterial":
-			tenArtDao.novo(Integer.parseInt((String)medicoes.get("max")),(Integer)medicoes.get("min"), Integer.parseInt((String)session.getAttribute("sessionID")));
+			tenArtDao.novo(Integer.parseInt((String)medicoes.get("max")),Integer.parseInt((String)medicoes.get("min")), Integer.parseInt((String)session.getAttribute("sessionID")));
 			break;
 		}
 		return "Adicionado";
