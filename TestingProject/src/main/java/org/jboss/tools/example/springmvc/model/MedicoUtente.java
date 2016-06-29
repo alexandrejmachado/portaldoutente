@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @NamedQueries({
@@ -32,7 +34,7 @@ public class MedicoUtente {
 	
 	private int medico;
 	
-	private String utente;
+	private int utente;
 	
 	private boolean altura = false;
 	
@@ -52,32 +54,38 @@ public class MedicoUtente {
 	
 	public MedicoUtente(){}
 	
-	public MedicoUtente( int medico, String utente){
+	public MedicoUtente( int medico, int utente){
 		this.medico = medico;
 		this.utente = utente;
 	}
 
+	@JsonIgnore
 	public int getId() {
 		return id;
 	}
 
+	@JsonIgnore
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	@JsonIgnore
 	public int getMedico() {
 		return medico;
 	}
 
+	@JsonIgnore
 	public void setMedico(int medico) {
 		this.medico = medico;
 	}
 
-	public String getUtente() {
+	@JsonIgnore
+	public int getUtente() {
 		return utente;
 	}
 
-	public void setUtente(String utente) {
+	@JsonIgnore
+	public void setUtente(int utente) {
 		this.utente = utente;
 	}
 

@@ -272,11 +272,11 @@ public class PerfilController {
 		
 	}
 	
-	@RequestMapping(value="/mudarPrivacidade")
+	@RequestMapping(value="/mudarPrivacidade", method = RequestMethod.POST, params={"tipo", "booleano"})
 	@ResponseBody
-	public boolean mudarPrivacidade(HttpSession session, String tipo, String booleano) {
+	public boolean mudarPrivacidade(HttpSession session, @RequestParam(value="tipo") String tipo, @RequestParam(value="booleano") String booleano) {
 		if (verifyLogin(session)) {
-			MedicoUtente mu = muDao.findByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			MedicoUtente mu = muDao.findByUtente((String) session.getAttribute("sessionID"));
 		switch (tipo) {
 		case "Altura" :
 			if (booleano.equals("true")){
@@ -348,6 +348,15 @@ public class PerfilController {
 		else {
 			return false;
 		}
+	}
+	
+	@RequestMapping(value="/verPrivacidades")
+	public ModelAndView verPrivacidades (HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("privacidade");
+		MedicoUtente mu = muDao.findByUtente((String) session.getAttribute("sessionID"));
+		mav.addObject("mu", mu);
+		return mav;
 	}
 }
 

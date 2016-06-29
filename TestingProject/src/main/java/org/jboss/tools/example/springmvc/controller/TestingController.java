@@ -44,6 +44,7 @@ import org.jboss.tools.example.springmvc.data.GlicemiaDao;
 import org.jboss.tools.example.springmvc.data.GuardiaoDao;
 import org.jboss.tools.example.springmvc.data.INRDao;
 import org.jboss.tools.example.springmvc.data.InstituicaoDao;
+import org.jboss.tools.example.springmvc.data.MedicoUtenteDao;
 import org.jboss.tools.example.springmvc.data.PesoDao;
 import org.jboss.tools.example.springmvc.data.SaturacaoO2Dao;
 import org.jboss.tools.example.springmvc.data.TensaoArterialDao;
@@ -52,6 +53,7 @@ import org.jboss.tools.example.springmvc.data.UtenteDao;
 import org.jboss.tools.example.springmvc.model.Cirurgia;
 import org.jboss.tools.example.springmvc.model.Exame;
 import org.jboss.tools.example.springmvc.model.Glicemia;
+import org.jboss.tools.example.springmvc.model.MedicoUtente;
 import org.jboss.tools.example.springmvc.sensitivedata.ContratoMedico;
 import org.jboss.tools.example.springmvc.sensitivedata.Instituicao;
 import org.jboss.tools.example.springmvc.sensitivedata.Utente;
@@ -129,6 +131,9 @@ public class TestingController {
 	
 	@Autowired
 	private TrigliceridosDao trigDao;
+	
+	@Autowired
+	private MedicoUtenteDao muDao;
 	
 	@Autowired
 	private ConsultaDao consultaDao;
@@ -506,6 +511,7 @@ public class TestingController {
 					medico = cmNow.get(0).getMedicoId();
 					}
 				System.out.println("vou criar o utente na DB");
+				muDao.novo(medico,numUtente);
 				Utente ut = utenteDao.newUtente(username, numUtente, cc, morada, mail, hashTest, telemovel, nif, code, codeSms, emergencia, centroId, medico);
 				future.get();
 				finalmsg.add("true");

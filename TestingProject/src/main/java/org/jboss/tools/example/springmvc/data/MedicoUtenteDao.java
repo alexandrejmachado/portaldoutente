@@ -20,7 +20,7 @@ public class MedicoUtenteDao {
 	private EntityManager em;
 	
 	public MedicoUtente novo(int medico, String numUtente){
-		MedicoUtente mu = new MedicoUtente(medico, numUtente);
+		MedicoUtente mu = new MedicoUtente(medico, Integer.parseInt(numUtente));
 		em.persist(mu);
 		return mu;
 	}
@@ -38,9 +38,9 @@ public class MedicoUtenteDao {
 		return query.getResultList();
 	}
 	
-	public MedicoUtente findByUtente(int utente) {
+	public MedicoUtente findByUtente(String utente) {
 		TypedQuery<MedicoUtente> query = em.createNamedQuery(MedicoUtente.FIND_BY_UTENTE, MedicoUtente.class);
-		query.setParameter(MedicoUtente.UTENTE, utente);
+		query.setParameter(MedicoUtente.UTENTE, Integer.parseInt(utente));
 		return query.getSingleResult();		
 	}
 }
