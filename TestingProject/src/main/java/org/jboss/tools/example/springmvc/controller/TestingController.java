@@ -99,9 +99,7 @@ public class TestingController {
 	@Autowired
 	private ContratoMedicoDao cmDao;
 	
-	@Autowired
-	private MedicoUtenteDao muDao;
-	
+
 	@Autowired
 	private InstituicaoDao instDao;
 	
@@ -516,11 +514,9 @@ public class TestingController {
 					medico = cmNow.get(0).getMedicoId();
 					}
 				System.out.println("vou criar o utente na DB");
-<<<<<<< HEAD
+
 				muDao.novo(medico,numUtente);
-=======
-				
->>>>>>> branch 'master' of http://130.211.78.192/melancias/portaldoutente.git
+
 				Utente ut = utenteDao.newUtente(username, numUtente, cc, morada, mail, hashTest, telemovel, nif, code, codeSms, emergencia, centroId, medico);
 				muDao.novo(medico, numUtente);
 				future.get();
