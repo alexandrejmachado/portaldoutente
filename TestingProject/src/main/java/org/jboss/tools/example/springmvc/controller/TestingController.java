@@ -221,7 +221,9 @@ public class TestingController {
 	public String loginUtente(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password, HttpSession session) throws NoSuchAlgorithmException{
 		ModelAndView mav = new ModelAndView();
 		try{
+			System.out.println("ACESSO A BD");
 			Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
+			System.out.println("ACESSO FEITO A BD");
 			System.out.println(currentUser.getNif() + "CURRENT UTENTE");
 			System.out.println(currentUser.getPassword());
 			String hashLogin = HashTextTest.sha256(password);
