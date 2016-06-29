@@ -111,4 +111,6 @@ public List<Consulta> findWithDateMedico(int idMedico) throws InvalidKeyExceptio
 		query.setParameter(Consulta.DATA, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 		return query.getResultList();
 	}
+
+
 }

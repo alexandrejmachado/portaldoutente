@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -55,5 +56,29 @@ public class MedicoController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/confirmarConsulta", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean confirmarConsulta(HttpSession session,@RequestParam(value="idConsulta") String idConsulta){
+		try{
+			Consulta cons = consultaDao.findById(Integer.parseInt(idConsulta));
+			consultaDao.confirmarConsulta(cons);
+			return true;
+		}
+		catch(Exception e){
+			return false;
+		}
+	}
+	
+	@RequestMapping(value="/removerConsulta", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean rejeitarConsulta(HttpSession session,@RequestParam(value="idConsulta") String idConsulta){
+		try{
+			consultaDao.remove(Integer.parseInt(idConsulta));
+			return true;
+		}
+		catch(Exception e){
+			return false;
+		}
+	}
 	
 }
