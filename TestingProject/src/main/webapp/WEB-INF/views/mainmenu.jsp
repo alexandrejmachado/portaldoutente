@@ -111,7 +111,7 @@
     <!-- Menu Toggle Script -->
     <script>
     $(document).ready(function(){
-    	var textos={'consulta':'Aqui marcam -se as consultas e verifica-se balelas',
+    	var textos={'consulta':'Aqui marcam -se as consultas',
     				'medicacao2':'Texto para Medicacao',
     				'medicao':'Texto para a Medicao',
     				'cirurgia':'Texto para a Cirurgia',
