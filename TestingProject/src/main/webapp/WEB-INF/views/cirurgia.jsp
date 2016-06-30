@@ -104,7 +104,7 @@
 								
 								<div class = "registo">
 								
-									<table id = "tabela_ciru ">
+									<table id = "tabela_ciru" style= "width:170%; color:black;">
 									
 									<tr>
 											<td>Tipo </td>
