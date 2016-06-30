@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -870,7 +871,7 @@ public class TestingController {
 	@RequestMapping(value = "/medicoes/guardar", method = RequestMethod.POST)
 	@ResponseBody
 	public String guardarMedicao(@RequestBody HashMap medicoes, HttpSession session) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		System.out.println(medicoes);
+		System.out.println("Medicao a guardar: " + medicoes + "ID da pessoa:" + session.getAttribute("sessionID"));
 		switch ((String)medicoes.get("medida")) {
 		case "Altura" :
 			altDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getAttribute("sessionID")));
@@ -934,7 +935,15 @@ public class TestingController {
 	@RequestMapping(value="/verifyCode", method = RequestMethod.POST, params={"codigo"})
 	@ResponseBody
 	public String verifyCode(@RequestParam(value="codigo") String codigo, HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
-		System.out.println("NUTENTE:" + session.getAttribute("sessionID"));
+		System.out.println("A IR BUSCAR O SESSIONID:");
+		System.out.println("LISTA DE ATRIBUTOS");
+		Enumeration<String> o=session.getAttributeNames();
+		while (o.hasMoreElements())
+		{
+			String s=o.nextElement();
+			System.out.println("elemento: " +s +" valor: " + session.getAttribute(s));
+		}
+		System.out.println("RESULTADO" + session.getAttribute("sessionID"));
 		boolean ok = utenteDao.verifyUser((String) session.getAttribute("sessionID"), codigo);
 		if (ok) {
 			return "true";
