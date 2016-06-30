@@ -512,14 +512,13 @@ public class TestingController {
 					medico = 0;
 				}
 				else{
+					//TODO random
 					medico = cmNow.get(0).getMedicoId();
 					}
 				System.out.println("vou criar o utente na DB");
 
-				muDao.novo(medico,numUtente);
 
 				Utente ut = utenteDao.newUtente(username, numUtente, cc, morada, mail, hashTest, telemovel, nif, code, codeSms, emergencia, centroId, medico);
-				muDao.novo(medico, numUtente);
 				future.get();
 				finalmsg.add("true");
 				return finalmsg;
@@ -985,6 +984,46 @@ public class TestingController {
 			break;
 		case "TensaoArterial":
 			lista = tenArtDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			break;
+		}
+		}
+		 catch (InvalidKeyException | NumberFormatException | NoSuchAlgorithmException | NoSuchPaddingException
+					| IllegalBlockSizeException | BadPaddingException | IOException e) {
+				
+				e.printStackTrace();
+			}
+		return lista;
+	}
+	
+	@RequestMapping(value="/obterMedidaMedico/{tipoMedida}/{utente}",method = RequestMethod.GET)
+	@ResponseBody
+	public List<?> obterMedidaMedico(HttpSession session, @PathVariable("tipoMedida") String tipoMedida,@PathVariable("utente") String utente) {
+		List<?> lista = null;
+		try {
+		switch (tipoMedida) {
+		case "Altura":
+			lista = altDao.findAllByUtente(Integer.parseInt(utente));
+			break;
+		case "Glicemia":
+			lista = glicDao.findAllByUtente(Integer.parseInt(utente));
+			break;
+		case "Colesterol":
+			lista = colDao.findAllByUtente(Integer.parseInt(utente));
+			break;
+		case "INR":
+			lista = inrDao.findAllByUtente(Integer.parseInt(utente));
+			break;
+		case "Peso":
+			lista = pesoDao.findAllByUtente(Integer.parseInt(utente));
+			break;
+		case "SaturacaoO2":
+			lista = satDao.findAllByUtente(Integer.parseInt(utente));
+			break;
+		case "Trigliceridos":
+			lista = trigDao.findAllByUtente(Integer.parseInt(utente));
+			break;
+		case "TensaoArterial":
+			lista = tenArtDao.findAllByUtente(Integer.parseInt(utente));
 			break;
 		}
 		}

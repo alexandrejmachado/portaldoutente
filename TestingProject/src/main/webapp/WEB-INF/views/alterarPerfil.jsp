@@ -11,6 +11,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <meta charset="utf-8">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
         
         <link href= <c:url value="/resources/css/bootstrap.min.css"></c:url> rel="stylesheet"/>
     
@@ -114,9 +115,9 @@
 													<td id="fixosMod">${nif} </td>
 												</tr>
 												<tr>
-													<td>Hospital</td> 
+													<td>Médico de Família</td> 
 													
-													<td id="fixosMod">${hospital}</td>
+													<td id="fixosMod">${medico}</td>
 													
 												</tr>
 												<tr>
