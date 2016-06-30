@@ -114,9 +114,9 @@
 													<td id="fixosMod">${nif} </td>
 												</tr>
 												<tr>
-													<td>Hospital</td> 
+													<td>Médico de Família</td> 
 													
-													<td id="fixosMod">${hospital}</td>
+													<td id="fixosMod">${medico}</td>
 													
 												</tr>
 												<tr>

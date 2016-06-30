@@ -512,11 +512,11 @@ public class TestingController {
 					medico = 0;
 				}
 				else{
+					//TODO random
 					medico = cmNow.get(0).getMedicoId();
 					}
 				System.out.println("vou criar o utente na DB");
 
-				muDao.novo(medico,numUtente);
 
 				Utente ut = utenteDao.newUtente(username, numUtente, cc, morada, mail, hashTest, telemovel, nif, code, codeSms, emergencia, centroId, medico);
 				muDao.novo(medico, numUtente);
