@@ -70,7 +70,7 @@ public class MedicacaoController {
 	@ResponseBody
 	public boolean inserirMedicacao(HttpSession session, @RequestParam(value="nome") String nomeMedicamento, @RequestParam(value="dosagem") double dosagemDiaria, @RequestParam(value="indicacoes") String indicacoes) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		System.out.println("cheguei aqui");
-		
+		System.out.println("tentei corresponder o medicamento:" + nomeMedicamento);
 		Medicamentoid medid= medidDao.findByNome(nomeMedicamento);
 		int id = medid.getID();
 		Medicamento med = medDao.findById(id);
