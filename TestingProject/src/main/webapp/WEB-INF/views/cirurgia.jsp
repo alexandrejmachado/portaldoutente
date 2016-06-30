@@ -17,7 +17,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href=<c:url value="/resources/css/bootstrap.min.css" ></c:url> rel="stylesheet">
-
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'> 
     <!-- Custom CSS -->
     <link href=<c:url value="/resources/css/main.css" ></c:url> rel="stylesheet">
 
@@ -104,11 +104,23 @@
 								
 								<div class = "registo">
 								<table id = "tabela_ciru">
+								
+								<tr>
+										<td>Tipo </td>
+										<td>Médico</td>
+										<td>Data e Hora</td>
+										<td></td>
+										<td></td>
+										
+								</tr>
+								
 								  <c:forEach items="${lista}" var="cirurgia">
+									
+								
 									<tr>
 										<td> <c:out value="${cirurgia.tipo }"/> </td>
-										<td>MÃ©dico: <c:out value="${cirurgia.idMedico}"/></td>
-										<td>Data: <c:out value="${cirurgia.data}"/></td>
+										<td> <c:out value="${cirurgia.idMedico}"/></td>
+										<td> <c:out value="${cirurgia.data}"/></td>
 										<td><button id = "confirmar" value="${cirurgia.getId() }" onclick="confirmar(${cirurgia.getId() })"> Confirmar </button></td>
 										<td><button id = "cancelar" value="${cirurgia.getId() }" onclick="cancelar(${cirurgia.getId() })"> Remarcar </button></td>
 										

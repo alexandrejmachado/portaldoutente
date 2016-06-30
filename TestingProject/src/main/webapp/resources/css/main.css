@@ -394,8 +394,16 @@ html body div.container div#caixaGig.col-lg-12 div#wrapper div#sidebar-wrapper u
 }
 
 #tabela_ciru{
-  width: 100%;
-  margin-left: 18.5%;
+  width: 200%;
+  color: black;
+  font-family:'Roboto', Arial, sans-serif;
+  font-weight: 100;
+  text-align:center;
+}
+
+h1{
+ font-family:'Roboto', Arial, sans-serif;
+ font-weight: 100;	
 }
 
 #tabela_pri{
@@ -511,7 +519,7 @@ input {
  width: 100px;
  cursor: pointer;
  font-family:'Roboto', Arial, sans-serif;
-	font-weight: 100;
+ font-weight: 100;
  color: #fff;
  margin-right: 10px;
 }
