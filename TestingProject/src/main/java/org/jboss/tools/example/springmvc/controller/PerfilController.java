@@ -20,6 +20,7 @@ import org.jboss.tools.example.springmvc.data.GlicemiaDao;
 import org.jboss.tools.example.springmvc.data.GuardiaoDao;
 import org.jboss.tools.example.springmvc.data.INRDao;
 import org.jboss.tools.example.springmvc.data.InstituicaoDao;
+import org.jboss.tools.example.springmvc.data.MedicoDao;
 import org.jboss.tools.example.springmvc.data.MedicoUtenteDao;
 import org.jboss.tools.example.springmvc.data.PesoDao;
 import org.jboss.tools.example.springmvc.data.SaturacaoO2Dao;
@@ -47,6 +48,12 @@ public class PerfilController {
 	@Autowired
 	private MedicoUtenteDao muDao;
 	
+	@Autowired
+	private InstituicaoDao insDao;
+	
+	@Autowired
+	private MedicoDao medicoDao;
+	
 	
 	
 	private AuthController as= new AuthController();
@@ -69,7 +76,8 @@ public class PerfilController {
 	    	mav.addObject("cc", currentUser.getCc());
 	    	mav.addObject("mail", currentUser.getEmail());
 	    	mav.addObject("nif", currentUser.getNif());
-	    	mav.addObject("centro_saude", currentUser.getCentroSaude());
+	    	mav.addObject("centro_saude", insDao.findById(currentUser.getCentroSaude()).getNome());
+	    	mav.addObject("medico", medicoDao.findById(currentUser.getMedico()).getNome());
 	    	int telemovel = currentUser.getTelemovel();
 	    	int emergencia = currentUser.getContactoEmergencia();
 	    	mav.addObject("telemovel", ((telemovel == 0) ?  "000000000" : telemovel));
@@ -115,7 +123,8 @@ public class PerfilController {
 	    	mav.addObject("cc", currentUser.getCc());
 	    	mav.addObject("mail", currentUser.getEmail());
 	    	mav.addObject("nif", currentUser.getNif());
-	    	mav.addObject("centro_saude", currentUser.getCentroSaude());
+	    	mav.addObject("centro_saude", insDao.findById(currentUser.getCentroSaude()).getNome());
+	    	mav.addObject("medico", medicoDao.findById(currentUser.getMedico()).getNome());
 	    	int telemovel = currentUser.getTelemovel();
 	    	int emergencia = currentUser.getContactoEmergencia();
 	    	mav.addObject("telemovel", ((telemovel == 0) ?  "000000000" : telemovel));

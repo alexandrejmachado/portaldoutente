@@ -8,18 +8,19 @@
 
 /* Toggle Styles */
 @font-face {
-    font-family: 'LANENAR_';
-    src: url('/resources/fonts/LANENAR_.ttf');
+    font-family:'Roboto', Arial, sans-serif;
+	font-weight: 100;
 }
-@font-face {
-    font-family: 'DengXian';
-    src: url('/resources/fonts/DengXian.ttf');
-}
+
 #tabela_exames, #tabela_med{
  margin-left: 25.5%;
  margin-top: 30px;
  width: 50%;
  font-size: 15px;
+ color: black;
+ font-family:'Roboto', Arial, sans-serif;
+ font-weight: 100;
+ 
 }
 
 #tabela_med{
@@ -121,7 +122,8 @@
     marigin-bottom: 10px;
     min-height: 316px;
     text-align: center;
-    font-family:'LANENAR_', sans-serif; /*ATTENTION*/
+    font-family:'Roboto', Arial, sans-serif;
+	font-weight: 100;
     font-size: 1.7em;
 }
 
@@ -171,7 +173,8 @@
 #page-content-wrapper {
     margin-left: 0px;
     padding-left: 0px;
-    font-family:'LANENAR_', sans-serif;
+    font-family:'Roboto', Arial, sans-serif;
+	font-weight: 100;
 }
 
 .rowMajor{
@@ -187,15 +190,17 @@
     padding-top: 100px;
     position: relative;
     background: none; /*background da barra*/
-    font-family:'DengXian', sans-serif; 
+    font-family:'Roboto', Arial, sans-serif;
+	font-weight: 100;
 }
 
 #entrar{
     font-size: 20px;
    /* border: 3px solid black;*/
     padding-top: 5px;
-    font-family:'DengXian', sans-serif; 
-        color: white;   
+    font-family:'Roboto', Arial, sans-serif;
+	font-weight: 100;
+    color: white;   
         
     padding: 16px;          
     font-size: 16px;            
@@ -205,9 +210,10 @@
 }
 
 #medform{
-    width: 50%;
-    margin-left: 25%;
-    margin-top: 1.8%;
+   text-align:center;
+   margin-left:10%;
+   margin-right:10%;
+   margin-top: 1.8%;
 }
 
 #medicacao {
@@ -241,7 +247,8 @@ input[type="number"] {
     color: white;
     text-transform: uppercase;
     text-align: center;
-    font-family:'DengXian',sans-serif;  
+    font-family:'Roboto', Arial, sans-serif;
+	font-weight: 100;
 }
 #texto2, #texto4 {
  
@@ -249,7 +256,8 @@ input[type="number"] {
     color: white;
     text-transform: uppercase;
     text-align: center;
-    font-family:'DengXian',sans-serif; 
+    font-family:'Roboto', Arial, sans-serif;
+	font-weight: 100;
 }
 
 #texto3 {
@@ -290,7 +298,8 @@ input[type="number"] {
  
     background: rgb(249,249,249);
     text-align: center;
-    font-family: "LANENAR_", sans-serif;
+    font-family:'Roboto', Arial, sans-serif;
+	font-weight: 100;
     font-size: 18px;
     margin-bottom: 8px;
     color: rbg(31,78,121);
@@ -333,13 +342,16 @@ html body div.container div#caixaGig.col-lg-12 div#wrapper div#sidebar-wrapper u
     text-decoration: none;
     background: #1f4e79;
     color: white;
+    font-family:'Roboto', Arial, sans-serif;
+	font-weight: 100;
 }
 
 .registo,#frase{
  margin-top: 4.5%;
  text-align: right;
  margin-right: 42%;
- font-family:  'DengXian', Arial, sans-serif;
+ font-family:'Roboto', Arial, sans-serif;
+	font-weight: 100;
  font-size: 20px;
  color: white;
 }
@@ -498,7 +510,8 @@ input {
  padding: 0;
  width: 100px;
  cursor: pointer;
- font: bold 14px Arial, Helvetica;
+ font-family:'Roboto', Arial, sans-serif;
+	font-weight: 100;
  color: #fff;
  margin-right: 10px;
 }
