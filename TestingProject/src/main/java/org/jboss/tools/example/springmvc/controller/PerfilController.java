@@ -277,69 +277,71 @@ public class PerfilController {
 	public boolean mudarPrivacidade(HttpSession session, @RequestParam(value="tipo") String tipo, @RequestParam(value="booleano") String booleano) {
 		if (verifyLogin(session)) {
 			MedicoUtente mu = muDao.findByUtente((String) session.getAttribute("sessionID"));
+			System.out.println("tipo= " + tipo);
+			System.out.println("booleano = " + booleano);
 		switch (tipo) {
 		case "Altura" :
 			if (booleano.equals("true")){
-				mu.setAltura(true);
+				muDao.setAltura(mu,true);
 			}
 			else {
-				mu.setAltura(false);
+				muDao.setAltura(mu,false);
 			}
 			break;
 		case "Glicemia" :
 			if (booleano.equals("true")){
-				mu.setGlicemia(true);
+				muDao.setGlicemia(mu, true);
 			}
 			else {
-				mu.setGlicemia(false);
+				muDao.setGlicemia(mu, false);
 			}
 			break;
 		case "Colesterol":
 			if (booleano.equals("true")){
-				mu.setColesterol(true);
+				muDao.setColesterol(mu, true);
 			}
 			else {
-				mu.setColesterol(false);
+				muDao.setColesterol(mu, false);
 			}
 			break;
 		case "INR":
 			if (booleano.equals("true")){
-				mu.setInr(true);
+				muDao.setInr(mu, true);
 			}
 			else {
-				mu.setInr(false);
+				muDao.setInr(mu, false);
 			}
 			break;
 		case "Peso":
 			if (booleano.equals("true")){
-				mu.setPeso(true);
+				muDao.setPeso(mu, true);
 			}
 			else {
-				mu.setPeso(false);
+				muDao.setPeso(mu, false);
 			}
 			break;
 		case "SaturacaoO2":
 			if (booleano.equals("true")){
-				mu.setSaturacao(true);
+				muDao.setSaturacao(mu, true);
 			}
 			else {
-				mu.setSaturacao(false);
+				muDao.setSaturacao(mu, false);
 			}
 			break;
 		case "Trigliceridos":
 			if (booleano.equals("true")){
-				mu.setTrigliceridos(true);
+				muDao.setTrigliceridos(mu, true);
 			}
 			else {
-				mu.setTrigliceridos(false);
+				muDao.setTrigliceridos(mu, false);
 			}
 			break;
 		case "TensaoArterial":
 			if (booleano.equals("true")){
-				mu.setTensao(true);
+				muDao.setTensao(mu, true);
 			}
 			else {
-				mu.setTensao(false);
+				muDao.setTensao(mu, false);
 			}
 			break;
 		}
@@ -355,7 +357,10 @@ public class PerfilController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("privacidade");
 		MedicoUtente mu = muDao.findByUtente((String) session.getAttribute("sessionID"));
-		mav.addObject("mu", mu);
+		List<MedicoUtente> lista = new ArrayList<MedicoUtente>();
+		lista.add(mu);
+		System.out.println(lista);
+		mav.addObject("mu", lista);
 		return mav;
 	}
 }

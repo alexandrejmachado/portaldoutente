@@ -108,48 +108,112 @@
 								  	<td>Medida</td>
 								  	<td>Permissao</td>
 								  </tr>
-								  
+								  <c:forEach items = "${mu}" var="medicoUtente">
+								  <c:if test="${medicoUtente.isAltura() == 'false'}">
 								  <tr id = "texto7">
 								  	<td>Altura</td>
-								  	<td><button class= "botao_med" id="altura">Ativar</button></td>
+								  	<td><button class= "botao_med" id="altura" onclick="permitir('Altura')">Ativar</button></td>
 								  </tr>
+								  </c:if>
+								  <c:if test="${medicoUtente.isAltura() == 'true'}">
+								  <tr id = "texto7">
+								  	<td>Altura</td>
+								  	<td><button class= "botao_med" id="altura" onclick="retirar('Altura')">Desativar</button></td>
+								  </tr>
+								  </c:if>
 								  
+								  <c:if test="${medicoUtente.isColesterol() == 'false'}">
 								  <tr id = "texto7">
 								  	<td>Colesterol</td>
-								  	<td><button class= "botao_med" id="colesterol">Ativar</button></td>
+								  	<td><button class= "botao_med" id="colesterol" onclick="permitir('Colesterol')">Ativar</button></td>
 								  </tr>
+								  </c:if>
+								  <c:if test="${medicoUtente.isColesterol() == 'true'}">
+								  <tr id = "texto7">
+								  	<td>Colesterol</td>
+								  	<td><button class= "botao_med" id="colesterol" onclick="retirar('Colesterol')">Desativar</button></td>
+								  </tr>
+								  </c:if>
 								  
+								  <c:if test="${medicoUtente.isGlicemia() == 'false'}">
 								  <tr id = "texto7">
 								  	<td>Glicemia</td>
-								  	<td><button class= "botao_med" id="glicemia">Ativar</button></td>
+								  	<td><button class= "botao_med" id="glicemia" onclick="permitir('Glicemia')">Ativar</button></td>
 								  </tr>
+								  </c:if>
+								  <c:if test="${medicoUtente.isGlicemia() == 'true'}">
+								  <tr id = "texto7">
+								  	<td>Glicemia</td>
+								  	<td><button class= "botao_med" id="glicemia" onclick="retirar('Glicemia')">Desativar</button></td>
+								  </tr>
+								  </c:if>
 								  
+								  <c:if test="${medicoUtente.isInr() == 'false'}">
 								  <tr id = "texto7">
 								  	<td>INR</td>
-								  	<td><button class= "botao_med" id="inr">Ativar</button></td>
+								  	<td><button class= "botao_med" id="inr" onclick="permitir('INR')">Ativar</button></td>
 								  </tr>
+								  </c:if>
+								  <c:if test="${medicoUtente.isInr() == 'true'}">
+								  <tr id = "texto7">
+								  	<td>INR</td>
+								  	<td><button class= "botao_med" id="inr" onclick="retirar('INR')">Desativar</button></td>
+								  </tr>
+								  </c:if>
 								  
+								  <c:if test="${medicoUtente.isPeso() == 'false'}">
 								  <tr id = "texto7">
 								  	<td>Peso</td>
-								  	<td><button class= "botao_med" id="peso">Ativar</button></td>
+								  	<td><button class= "botao_med" id="peso" onclick="permitir('Peso')">Ativar</button></td>
 								  </tr>
+								  </c:if>
+								  <c:if test="${medicoUtente.isPeso() == 'true'}">
+								  <tr id = "texto7">
+								  	<td>Peso</td>
+								  	<td><button class= "botao_med" id="peso" onclick="retirar('Peso')">Desativar</button></td>
+								  </tr>
+								  </c:if>
 								  
+								  <c:if test="${medicoUtente.isSaturacao() == 'false'}">
 								  <tr id = "texto7">
 								  	<td>Saturacao O2</td>
-								  	<td><button class= "botao_med" id="saturacao">Ativar</button></td>
+								  	<td><button class= "botao_med" id="saturacao" onclick="permitir('SaturacaoO2')">Ativar</button></td>
 								  </tr>
+								  </c:if>
+								  <c:if test="${medicoUtente.isSaturacao() == 'true'}">
+								  <tr id = "texto7">
+								  	<td>Saturacao O2</td>
+								  	<td><button class= "botao_med" id="saturacao" onclick="retirar('SaturacaoO2')">Desativar</button></td>
+								  </tr>
+								  </c:if>
 								  
+								  <c:if test="${medicoUtente.isTensao() == 'false'}">
 								  <tr id = "texto7">
 								  	<td>Tensao Arterial</td>
-								  	<td><button class= "botao_med" id="tensao">Ativar</button></td>
+								  	<td><button class= "botao_med" id="tensao" onclick="permitir('TensaoArterial')">Ativar</button></td>
 								  </tr>
-								  
+								  </c:if>
+								  <c:if test="${medicoUtente.isTensao() == 'true'}">
 								  <tr id = "texto7">
-								  	<td>Trigliceridos</td>
-								  	<td><button class= "botao_med" id="trigliceridos">Ativar</button></td>
+								  	<td>Tensao Arterial</td>
+								  	<td><button class= "botao_med" id="tensao" onclick="retirar('TensaoArterial')">Desativar</button></td>
 								  </tr>
+								  </c:if>
 								  
+								  <c:if test="${medicoUtente.isTrigliceridos() == 'false'}">
+								  <tr id = "texto7">
+								  	<td>Triglicéridos</td>
+								  	<td><button class= "botao_med" id="trigliceridos" onclick="permitir('Trigliceridos')">Ativar</button></td>
+								  </tr>
+								  </c:if>
+								  <c:if test="${medicoUtente.isTrigliceridos() == 'true'}">
+								  <tr id = "texto7">
+								  	<td>Triglicéridos</td>
+								  	<td><button class= "botao_med" id="trigliceridos" onclick="retirar('Trigliceridos')">Desativar</button></td>
+								  </tr>
+								  </c:if>
 								  
+								  </c:forEach>
 								</table>
 								</div>
 											
@@ -179,21 +243,22 @@
 				function permitir(ID) { 
 					path="https://" + window.location.host + "/";
 					$.post(path+"perfil/mudarPrivacidade", {"tipo":ID, "booleano":"true"},function(data){
-						if (data==true){window.location.replace(path + "index");}
+						if (data==true){window.location.reload();}
 					else {alert("Falhou a Confirmar a Cirurgia!");}
 				})}
 
 				function retirar(ID) { 
 					path="https://" + window.location.host + "/";
 					$.post(path+"perfil/mudarPrivacidade", {"tipo":ID, "booleano":"false"},function(data){
-						if (data==true){window.location.replace(path + "index");}
+						if (data==true){window.location.reload();}
 					else {alert("Falhou a Confirmar a Cirurgia!");}
 				})}
 				</script>
 
 				<script>
 					 $(document).ready(function(){
-				   		mu = ${mu};
+				   		
+				   		
 				   		
 					 })
 				 });

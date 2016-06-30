@@ -44,4 +44,46 @@ public class MedicoUtenteDao {
 		query.setParameter(MedicoUtente.UTENTE, Integer.parseInt(utente));
 		return query.getSingleResult();		
 	}
+
+	public void setAltura(MedicoUtente mu, boolean b) {
+		mu.setAltura(b);
+		em.merge(mu);
+	}
+
+	public void setGlicemia(MedicoUtente mu, boolean b) {
+		mu.setGlicemia(b);
+		em.merge(mu);
+	}
+
+	public void setColesterol(MedicoUtente mu, boolean b) {
+		mu.setColesterol(b);
+		em.merge(mu);
+	}
+
+	public void setInr(MedicoUtente mu, boolean b) {
+		mu.setInr(b);
+		em.merge(mu);
+	}
+
+	public void setPeso(MedicoUtente mu, boolean b) {
+		mu.setPeso(b);
+		em.merge(mu);
+		
+	}
+
+	public void setSaturacao(MedicoUtente mu, boolean b) {
+		mu.setSaturacao(b);
+		em.merge(mu);
+	}
+
+	public void setTrigliceridos(MedicoUtente mu, boolean b) {
+		mu.setTrigliceridos(b);
+		em.merge(mu);
+	}
+
+	public void setTensao(MedicoUtente mu, boolean b) {
+		mu.setTensao(b);
+		em.merge(mu);
+		
+	}
 }

@@ -98,11 +98,15 @@ public class MedicoUtente {
 	}
 
 	public boolean isColesterol() {
+		System.out.println("get = " + colesterol);
 		return colesterol;
+		
 	}
 
 	public void setColesterol(boolean colesterol) {
+		System.out.println(this.colesterol);
 		this.colesterol = colesterol;
+		System.out.println(this.colesterol);
 	}
 
 	public boolean isGlicemia() {
