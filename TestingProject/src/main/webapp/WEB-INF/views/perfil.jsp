@@ -116,7 +116,7 @@
 												<tr>
 													<td>Médico de Família</td> 
 													
-													<td id="fixosMod">${medico}</td>
+													<td id="fixosMod">${medico} Nº ${medicoId}</td>
 													
 												</tr>
 												<tr>

@@ -512,8 +512,9 @@ public class TestingController {
 					medico = 0;
 				}
 				else{
-					//TODO random
-					medico = cmNow.get(0).getMedicoId();
+					Random ran = new Random();
+					int x = ran.nextInt(cmNow.size());
+					medico = cmNow.get(x).getMedicoId();
 					}
 				System.out.println("vou criar o utente na DB");
 
@@ -681,7 +682,9 @@ public class TestingController {
 					medico = 0;
 				}
 				else{
-					medico = cmNow.get(0).getMedicoId();
+					Random ran = new Random();
+					int x = ran.nextInt(cmNow.size());
+					medico = cmNow.get(x).getMedicoId();
 					}
 				
 				Utente ut = utenteDao.newUtente(username, numUtente, cc, morada, mail, hashTest, telemovel, nif, code, codeSms, emergencia, centroId, medico);

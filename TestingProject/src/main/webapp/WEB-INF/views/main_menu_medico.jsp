@@ -30,36 +30,38 @@
             </div>
     	</div>
     	
-    	<div id = "medico" style="text-align: center; width:80%; font-family:'Roboto',Arial, sans-serif; margin-left:10%;">
+    	<div id = "medico" style="text-align: center; width:90%; font-family:'Roboto',Arial, sans-serif; margin-left:5%;">
 <ul class="tab">
-  <li style="width: 33%;"><a href="#" class="tablinks" onclick="change(event, 'ConsultaMed')">Confirmacao de Consultas</a></li>
+  <li style="width: 33%;"><a href="#" class="tablinks active" onclick="change(event, 'ConsultaMed')">Confirmação de Consultas</a></li>
   <li style="width: 33%;"><a href="#" class="tablinks" onclick="change(event, 'DadosMed')">Consultar dados do Utente</a></li>
-  <li style="width: 33%;"><a href="#" class="tablinks" onclick="change(event, 'MedicacaoMed')">Renovacao de Medicacao</a></li>
+  <li style="width: 33%;"><a href="#" class="tablinks" onclick="change(event, 'MedicacaoMed')">Renovação de Medicacao</a></li>
 </ul>
 
-	<div id="ConsultaMed" class="tabcontent">
+	<div id="ConsultaMed" class="tabcontent" style="display: block;">
 	   <table style="width: 100%;">
-			<tr style="width:100%; margin-top: 10px;">
-				<td style="width:20%; text-align: center;">Número do Utente</td>
-				<td style="width:20%; text-align: center;">Data</td>
-				<td style="width:20%; text-align: center;">Número da Instituição</td>
-				<td style="width:20%; text-align: center;">Estado</td>
-				<td style="width:20%; text-align: center;">Acção</td>
+			<tr style="width:100%; margin-top: 10px; background-color:#ddd;">
+				<td style="width:16%; text-align: center;">Nome</td>
+				<td style="width:16%; text-align: center;">Número do Utente</td>
+				<td style="width:16%; text-align: center;">Data</td>
+				<td style="width:16%; text-align: center;">Número da Instituição</td>
+				<td style="width:16%; text-align: center;">Estado</td>
+				<td style="width:16%; text-align: center;">Acção</td>
 			</tr>
 			<c:forEach items="${listaParaTratar}" var="mu">
 		   		<tr id = "texto_tab" style="width:100%;">
 		   			<c:set var="dataTratada" value="${fn:substring(mu.getData(), 0, 16)}" />
-		    		<td id="texto7" style="width:20%; text-align: center;"> <c:out value="${mu.getNumUtente()}"/> </td>
-		    		<td id="texto7" style="width:20%; text-align: center;"> <c:out value="${dataTratada}"/> </td>
-		    		<td id="texto7" style="width:20%; text-align: center;"> <c:out value="${mu.getIdInstituicao()}"/> </td>
+		   			<td id="texto7" style="width:16%; text-align: center;"> <c:out value="${mu.getNomeUtente()}"/> </td>
+		    		<td id="texto7" style="width:16%; text-align: center;"> <c:out value="${mu.getNumUtente()}"/> </td>
+		    		<td id="texto7" style="width:16%; text-align: center;"> <c:out value="${dataTratada}"/> </td>
+		    		<td id="texto7" style="width:16%; text-align: center;"> <c:out value="${mu.getIdInstituicao()}"/> </td>
 		    		<c:if test="${mu.isConfirmada() == 'false'}">
-						<td id="texto7" style="width:20%; text-align: center;"> <c:out value="Pendente"/> </td>
-		  				<td id="texto7" style="width:20%; text-align: center;"><button id="botao_med" onclick="confirmar(${mu.getId()})"> <c:out value="Confirmar"></c:out> </button> <button id="botao_med" onclick="rejeitar(${mu.getId()})"> <c:out value="Rejeitar"></c:out> </button></td>
+						<td id="texto7" style="width:16%; text-align: center;"> <c:out value="Pendente"/> </td>
+		  				<td id="texto7" style="width:16%; text-align: center;"><button id="botao_med" onclick="confirmar(${mu.getId()})"> <c:out value="Confirmar"></c:out> </button> <button id="botao_med" onclick="rejeitar(${mu.getId()})"> <c:out value="Rejeitar"></c:out> </button></td>
 		    		</c:if>
 		    		
 		    		<c:if test="${mu.isConfirmada() == 'true'}">
-		    			<td id="texto7" style="width:20%; text-align: center;"> <c:out value="Confirmada"/> </td>
-		    			<td id="texto7" style="width:20%; text-align: center;"><button id="botao_med" onclick="rejeitar(${mu.getId()})"> <c:out value="Rejeitar"></c:out> </button></td>
+		    			<td id="texto7" style="width:16%; text-align: center;"> <c:out value="Confirmada"/> </td>
+		    			<td id="texto7" style="width:16%; text-align: center;"><button id="botao_med" onclick="rejeitar(${mu.getId()})"> <c:out value="Rejeitar"></c:out> </button></td>
 		    		</c:if>
 		  
 		    	</tr>
@@ -69,25 +71,31 @@
 
 	<div id="DadosMed" class="tabcontent">
 	   <table style="width: 100%;">
-			<tr style="width:100%; margin-top: 10px;">
-				<td style="width:20%; text-align: center;">Número do Utente</td>
-				<td style="width:20%; text-align: center;">Email</td>
-				<td style="width:20%; text-align: center;">Número de Telemóvel</td>
-				<td style="width:20%; text-align: center;">Acção</td>		
+			<tr style="width:100%; margin-top: 10px;  background-color:#ddd;">
+				<td style="width:16%; text-align: center;">Nome</td>
+				<td style="width:16%; text-align: center;">Número do Utente</td>
+				<td style="width:16%; text-align: center;">Email</td>
+				<td style="width:16%; text-align: center;">Número de Telemóvel</td>
+				<td style="width:16%; text-align: center;">Acção</td>		
 			</tr>
 			<c:forEach items="${listaUtentes}" var="ut">
 				<tr id = "texto_tab" style="width:100%;">
-					<td id="texto7" style="width:20%; text-align: center;"> <c:out value="${ut.getNumUtente()}"/> </td>
-					<td id="texto7" style="width:20%; text-align: center;"> <c:out value="${ut.getEmail()}"/> </td>
-					<td id="texto7" style="width:20%; text-align: center;"> <c:out value="${ut.getTelemovel()}"/> </td>
-					<td id="texto7" style="width:20%; text-align: center;"><button id="botao_med" onclick="verDados(${ut.getNumUtente()})"> <c:out value="Ver Dados"></c:out> </button></td>
+					<td id="texto7" style="width:16%; text-align: center;"> <c:out value="${ut.getNome()}"/> </td>
+					<td id="texto7" style="width:16%; text-align: center;"> <c:out value="${ut.getNumUtente()}"/> </td>
+					<td id="texto7" style="width:16%; text-align: center;"> <c:out value="${ut.getEmail()}"/> </td>
+					<td id="texto7" style="width:16%; text-align: center;"> <c:out value="${ut.getTelemovel()}"/> </td>
+					<td id="texto7" style="width:16%; text-align: center;"><button id="botao_med" onclick="verDados(${ut.getNumUtente()})"> <c:out value="Ver Dados"></c:out> </button></td>
 				</tr>
 			</c:forEach>
 		</table>
 	</div>
 	
 	<div id="MedicacaoMed" class="tabcontent">
-	   
+	   	   <table style="width: 100%;">
+			<tr style="width:100%; margin-top: 10px;  background-color:#ddd;">
+				<td style="width:20%; text-align: center;">Número do Utente</td>		
+			</tr>
+		</table>
 	</div>
 </div>
 	<script type="text/javascript">

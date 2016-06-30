@@ -174,7 +174,7 @@ public class EventController {
 		Random ran = new Random();
 		int x = ran.nextInt(31);
 		//Consulta cons = consultaDao.novo(idMedico, numUtente, curUtente.getCentroSaude(), "amarela", data, obs);
-		consultaDao.novo(idMedico, numUtente, curUtente.getCentroSaude(),Integer.toString(x), data, obs);
+		consultaDao.novo(idMedico, numUtente, curUtente.getCentroSaude(),Integer.toString(x), data, obs, curUtente.getNome());
 		//consultaDao.confirmarConsulta(cons);
 		return true;
 		}
