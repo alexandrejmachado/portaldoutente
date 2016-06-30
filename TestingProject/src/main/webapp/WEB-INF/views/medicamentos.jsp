@@ -16,6 +16,8 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>   
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  	<script src="/resources/js/jquery.flexText.js"></script>
+  	<script src="/resources/js/jquery.flexText.min.js"></script>
   	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 </head>
@@ -191,6 +193,9 @@ function apagar(id)
     <!-- Menu Toggle Script -->
 <script>
      $(document).ready(function(){
+    	 $(function () {
+    		    $('textarea').flexText();
+    		});
    $('#login-trigger').click(function(){
      $(this).next('#login-content').slideToggle();
      $(this).toggleClass('active');          
