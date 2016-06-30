@@ -103,30 +103,32 @@
 										
 								
 								<div class = "registo">
-								<table id = "tabela_ciru">
 								
-								<tr>
-										<td>Tipo </td>
-										<td>Médico</td>
-										<td>Data e Hora</td>
-										<td></td>
-										<td></td>
-										
-								</tr>
-								
-								  <c:forEach items="${lista}" var="cirurgia">
+									<table id = "tabela_ciru ">
 									
-								
 									<tr>
-										<td> <c:out value="${cirurgia.tipo }"/> </td>
-										<td> <c:out value="${cirurgia.idMedico}"/></td>
-										<td> <c:out value="${cirurgia.data}"/></td>
-										<td><button id = "confirmar" value="${cirurgia.getId() }" onclick="confirmar(${cirurgia.getId() })"> Confirmar </button></td>
-										<td><button id = "cancelar" value="${cirurgia.getId() }" onclick="cancelar(${cirurgia.getId() })"> Remarcar </button></td>
-										
+											<td>Tipo </td>
+											<td>Médico</td>
+											<td>Data e Hora</td>
+											<td></td>
+											<td></td>
+											
 									</tr>
-								</c:forEach>
-								</table>
+									
+									  <c:forEach items="${lista}" var="cirurgia">
+										
+									
+										<tr>
+											<td> <c:out value="${cirurgia.tipo }"/> </td>
+											<td> <c:out value="${cirurgia.idMedico}"/></td>
+											<td> <c:out value="${cirurgia.data}"/></td>
+											<td><button id = "confirmar" value="${cirurgia.getId() }" onclick="confirmar(${cirurgia.getId() })"> Confirmar </button>
+											<button id = "cancelar" value="${cirurgia.getId() }" onclick="cancelar(${cirurgia.getId() })" style= "display:inline"> Remarcar </button></td>
+											
+										</tr>
+									</c:forEach>
+									</table>
+								
 								</div>
 											
 									
