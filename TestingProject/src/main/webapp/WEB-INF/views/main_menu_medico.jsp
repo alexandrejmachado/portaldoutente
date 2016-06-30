@@ -7,13 +7,14 @@
 <head>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Médico</title>
+<title>Início - Médico</title>
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
 <!-- Bootstrap Core CSS -->
     <link href=<c:url value="/resources/css/bootstrap.min.css" ></c:url> rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href=<c:url value="/resources/css/main.css" ></c:url> rel="stylesheet">
+    <script src='<c:url value="/resources/js/jquery.js"></c:url>'></script>
 </head>
 <body background=<c:url value="/resources/gfx/Final2.png"/> />
 	
@@ -22,8 +23,8 @@
             <div class="col-lg-12"> 
                 <div class= "rowMajor">
                     <div id="divisento"></div>
-                    <div class="col-md-11">Número Médico:</div>
-                    <div class="col-md-1" id="entrar">${username}</div>
+                    <div class="col-md-11">Número Médico: ${username}</div>
+                    <div class="col-md-1" id="entrar"><a style="color:white; text-decoration:none;" href="/medico/logout">Sair </a></div>
                 </div>
             
             </div>
@@ -74,6 +75,14 @@
 				<td style="width:20%; text-align: center;">Número de Telemóvel</td>
 				<td style="width:20%; text-align: center;">Acção</td>		
 			</tr>
+			<c:forEach items="${listaUtentes}" var="ut">
+				<tr id = "texto_tab" style="width:100%;">
+					<td id="texto7" style="width:20%; text-align: center;"> <c:out value="${ut.getNumUtente()}"/> </td>
+					<td id="texto7" style="width:20%; text-align: center;"> <c:out value="${ut.getEmail()}"/> </td>
+					<td id="texto7" style="width:20%; text-align: center;"> <c:out value="${ut.getTelemovel()}"/> </td>
+					<td id="texto7" style="width:20%; text-align: center;"><button id="botao_med" onclick="verDados(${ut.getNumUtente()})"> <c:out value="Ver Dados"></c:out> </button></td>
+				</tr>
+			</c:forEach>
 		</table>
 	</div>
 	
@@ -101,6 +110,11 @@
 			else {alert("Erro a rejeitar consulta!")}}
 
 		);
+		}
+
+	function verDados(id){
+		path="https://" + window.location.host + "/medico/consultarDados?utente="+id;
+		window.location.assign(path);
 		}
 
 function change(evt, tabs) {

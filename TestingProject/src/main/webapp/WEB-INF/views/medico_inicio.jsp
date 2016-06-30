@@ -10,8 +10,9 @@
 <body>
 	<h1>MÉDICO CONTROLLER</h1>
 	
-	<form action="/medico/main" method="post" id="login">
-		<input id="username" type="text" name="username" placeholder="ID Medico" required>
+	<form action="/medico/entrar" method="post" id="login">
+		<input id="username" type="text" name="username" placeholder="ID Medico" required><br>
+		<input id="username" type="text" name="pass" placeholder="Pass" required>
 		<input type="submit" value="Entrar">
 	</form>
 </body>
