@@ -13,7 +13,7 @@
 
     <!-- Custom CSS -->
     <link href="/resources/css/main.css" rel="stylesheet">
-    
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>   
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -84,12 +84,12 @@
     <div id="page-content-wrapper">
     <div  class="container-fluid">
 			<form method="post" id="medform">
-			<div id="automed" style="display:flex;align-items:center;">
-			<label for="autocomplete">Escolha um Medicamento: </label>
-			<input id="autocomplete" name = "nome" style="width: 40%; display:block;">
+			<div id="automed">
+			<label for="autocomplete">Escolha um Medicamento: </label> <br>
+			<input id="autocomplete" name = "nome" style="width: 80%; display:block; font-size: 13px;">
 			</div>
-			Dose Diária: 
-			<input id="quant" type="text" name="dosagem"><br>
+			Dose Diária: <br>
+			<input id="quant" type="text" name="dosagem" style="display: block"><br>
 			Indicações: <br>
 			<textarea id="indicacoes" rows="10" cols="40" name="indicacoes" style="display:block"></textarea><br>
 			</form>
