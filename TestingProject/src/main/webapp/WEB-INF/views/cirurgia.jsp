@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -265,6 +264,9 @@
 					</li>
 					<li id="isencao">
 						<a href="/isencao">Pedido de Isenção</a>
+					</li>
+					<li id="upload">
+						<a href="/upload">Submeter Exames</a>
 					</li>
 										<li style="opacity:0">
 						<a></a>
