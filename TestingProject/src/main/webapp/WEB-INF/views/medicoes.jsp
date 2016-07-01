@@ -211,12 +211,12 @@
 							    <div class="panel-heading">
 							      <h4 class="panel-title">
 							        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="verMedida('Peso')">
-							          <span class="glyphicon glyphicon-minus"></span>
+							          <span class="glyphicon glyphicon-plus"></span>
 							          Peso
 							        </a>
 							      </h4>
 							    </div>
-							    <div id="collapseOne" class="panel-collapse collapse tamanho in">
+							    <div id="collapseOne" class="panel-collapse collapse tamanho">
 							      <div id="Peso" class="panel-body">
 							       
 							      </div>

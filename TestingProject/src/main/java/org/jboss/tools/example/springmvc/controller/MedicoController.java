@@ -46,6 +46,7 @@ public class MedicoController {
 
 	@RequestMapping(value="")
 	public ModelAndView index(){
+		//TODO por css na view
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("medico_inicio");
 		return mav;
@@ -89,7 +90,7 @@ public class MedicoController {
 			return mav;
 		}
 		else{
-			mav.setViewName("redirect:medico");
+			mav.setViewName("redirect:/medico");
 			return mav;
 		}
 	}
