@@ -77,6 +77,9 @@
 					<li id="isencao">
 						<a href="/isencao">Pedido de Isenção</a>
 					</li>
+					<li id="upload">
+						<a href="/upload">Submeter Exames</a>
+					</li>
 										<li style="opacity:0">
 						<a></a>
 					</li>
@@ -93,7 +96,7 @@
         <input type="submit" value="Upload"> Carrega aqui para fazer upload
     </form>
     
-    <input type="submit" value="Get File List" onclick="wow()">
+    <input type="submit" value="Lista de ficheiros" onclick="wow()">
     <br>
     <br>
     <div id="files"></div>

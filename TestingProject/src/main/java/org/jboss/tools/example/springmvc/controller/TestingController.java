@@ -1054,9 +1054,9 @@ public class TestingController {
             @RequestParam("file") MultipartFile file, HttpSession session) {
     	
     	if(name.isEmpty()){name="temporario";}
-        if (!file.isEmpty() & session.getAttribute("sessionID")==null ) {
+        if (!file.isEmpty() & !session.getAttribute("sessionID").equals(null) ) {
             try {
-                byte[] bytes = file.getBytes();
+                
  
                 // Creating the directory to store file
                 String rootPath = System.getProperty("jboss.server.config.dir"); 
@@ -1068,7 +1068,7 @@ public class TestingController {
                 Bucket bucket = storage.get("userdata-portal-exames");
                 String where=bucket.location();
                 System.out.println(where);
-				System.out.println((String) session.getAttribute("sessionId"));
+				System.out.println((String) session.getAttribute("sessionID"));
 				String contentType = file.getContentType();
                 try (WriteChannel writer = storage.writer(BlobInfo.builder("userdata-portal-exames", (String) session.getAttribute("sessionID") + "/" + file.getOriginalFilename() ).contentType(contentType).build())) {
                     byte[] buffer = new byte[1024];
@@ -1078,6 +1078,7 @@ public class TestingController {
                         try {
                           writer.write(ByteBuffer.wrap(buffer, 0, limit));
                         } catch (Exception ex) {
+                        	System.out.println("foi aqui: " + buffer + " " + limit);
                           ex.printStackTrace();
                         }
                       }
