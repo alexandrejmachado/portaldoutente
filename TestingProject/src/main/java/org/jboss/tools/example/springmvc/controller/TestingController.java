@@ -1039,10 +1039,12 @@ public class TestingController {
 	}
 	 //Controlador Novo de upload
 	@RequestMapping(value = "/upload")
-	public ModelAndView uploadTemp() throws FileNotFoundException, IOException{
+	public ModelAndView uploadTemp(HttpSession session) throws FileNotFoundException, IOException, InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException{
 		String rootPath = System.getProperty("jboss.server.config.dir"); 
 		this.storage=StorageOptions.builder().authCredentials(AuthCredentials.createForJson(new FileInputStream(rootPath+ File.separator+ "bucketkey.json"))).projectId("composite-watch-135111").build().service();
+		List<Exame> exames = listBucket(session);
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("exames", exames);
 			mav.setViewName("uploadtest");
 		return mav;
 	}
@@ -1050,8 +1052,8 @@ public class TestingController {
 	//O Puxa carrocas de isto tudo
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public @ResponseBody
-    Boolean uploadFileHandler(@RequestParam("name") String name,
-            @RequestParam("file") MultipartFile file, HttpSession session) {
+    ModelAndView uploadFileHandler(@RequestParam("name") String name,
+            @RequestParam("file") MultipartFile file, HttpSession session, @RequestParam("tipo") String tipo) throws InvalidKeyException, NumberFormatException, FileNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
     	
     	if(name.isEmpty()){name="temporario";}
         if (!file.isEmpty() & !session.getAttribute("sessionID").equals(null) ) {
@@ -1084,15 +1086,25 @@ public class TestingController {
                       }
                     }
                   };
-                  exameDao.novoExame(Integer.parseInt((String) session.getAttribute("sessionID")), new Date(), (String) session.getAttribute("sessionID") + "/" + file.getOriginalFilename() );
+                  exameDao.novoExame(Integer.parseInt((String) session.getAttribute("sessionID")), new Date(), (String) session.getAttribute("sessionID") + "/" + name , tipo);
             } catch (Exception e) {
             	System.out.println(e.toString());
-                return false;
+            	ModelAndView mav = new ModelAndView();
+            	mav.setViewName("erro");
+                return mav;
             }
         } else {
-            return false;
+        	ModelAndView mav = new ModelAndView();
+        	mav.setViewName("erro");
+            return mav;
         }
-		return true;
+        String rootPath = System.getProperty("jboss.server.config.dir"); 
+		this.storage=StorageOptions.builder().authCredentials(AuthCredentials.createForJson(new FileInputStream(rootPath+ File.separator+ "bucketkey.json"))).projectId("composite-watch-135111").build().service();
+		List<Exame> exames = listBucket(session);
+        ModelAndView mav = new ModelAndView();
+		mav.addObject("exames", exames);
+			mav.setViewName("uploadtest");
+		return mav;
     }
 
     @RequestMapping(value = "/getFile", method = RequestMethod.POST)
@@ -1130,7 +1142,7 @@ public class TestingController {
 
     @RequestMapping(value="/ListFiles")
 	@ResponseBody
-	public List<String> listBucket()
+	public List<Exame> listBucket(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException
     {
     	Bucket bucket = storage.get("userdata-portal-exames");
     	ArrayList<String> filespresent= new ArrayList<String>();
@@ -1138,7 +1150,8 @@ public class TestingController {
         while (blobIterator.hasNext()) {
           filespresent.add(blobIterator.next().name());
         }
-        return filespresent;
+        List<Exame> exames = exameDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+        return exames;
     }
     
     @RequestMapping(value="/ListFilesViaNutente", method = RequestMethod.POST)

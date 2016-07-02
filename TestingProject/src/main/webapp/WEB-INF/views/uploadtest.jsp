@@ -1,5 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 
@@ -16,6 +19,13 @@
 
     <!-- Custom CSS -->
     <link href=<c:url value="/resources/css/main.css" ></c:url> rel="stylesheet">
+    
+    
+    
+  	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  	<script src="/resources/js/jquery.flexText.js"></script>
+  	<script src="/resources/js/jquery.flexText.min.js"></script>
+  	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -93,30 +103,34 @@
     <form method="POST" action="uploadFile" enctype="multipart/form-data" id="medform">
         Ficheiro a submeter <br /> <input type="file" name="file"> <br>
         Nome: <input type="text" name="name"><br /> <br /> 
+        Descrição: <input type="text" name="tipo"><br/>
         <input type="submit" value="Upload"> Carrega aqui para fazer upload
     </form>
     
-    <input type="submit" value="Lista de ficheiros" onclick="wow()">
     <br>
     <br>
-    <div id="files"></div>
+    <table id="files">
+    	<tr>
+    		<td>Nome</td>
+    		<td>Data</td>
+    		<td>Tipo de Exame</td>
+    		<td>Download</td>
+    	</tr>
+    	<c:forEach items="${exames}" var="exame">
+    	<tr>
+    		<td><c:out value="${exame.getNome()}"/></td>
+    		<td><c:out value="${exame.getDate() }"/></td>
+    		<td><c:out value="${exame.getTipo() }"/></td>
+    		<td><button> Download ficheiro </button></td>
+    	</tr>
+    	</c:forEach>
+    </table>
     <form method="POST" action="getFile">
         Nome: <input type="text" name="name"><br /> <br /> 
         <input type="submit" value="Download"> Carrega aqui para sacar o ficheiro
     </form>
 
 </div></div>
-<script>
-function wow(){
-	path=window.location.host
-	$.getJSON('https://'+ path +'/ListFiles',function(data){
-		data.forEach(function(entry) {
-			$("#files").append("<p>"+ entry +"</p>")
-		});
-		
-		})
 
-}
-</script>
 </body>
 </html>
