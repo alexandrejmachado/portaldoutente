@@ -117,12 +117,12 @@
     		<td>Download</td>
     	</tr>
     	<c:forEach items="${exames}" var="exame">
-    	<tr>
-    		<td><c:out value="${exame.getNome()}"/></td>
-    		<td><c:out value="${exame.getDate() }"/></td>
-    		<td><c:out value="${exame.getTipo() }"/></td>
-    		<td><button> Download ficheiro </button></td>
-    	</tr>
+    		<form action="getFile" method="POST">
+    		<p><c:out value="${exame.getNome()}"/></p>
+    		<p><c:out value="${exame.getDate() }"/></p>
+    		<p><c:out value="${exame.getTipo() }"/></p>
+    		<input type="submit" value="Download Ficheiro">
+    		</form>
     	</c:forEach>
     </table>
     <form method="POST" action="getFile">
@@ -131,6 +131,13 @@
     </form>
 
 </div></div>
+<script>
+function sacar(nome) {
+	path="https://" + window.location.host + "/";
+	$.post(path+"getFile", {"name": nome},function(data){
+		
+})}
+</script>
 
 </body>
 </html>
