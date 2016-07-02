@@ -39,13 +39,15 @@
 .tamanho.panel-collapse.collapse,
 .tamanho.panel-collapse.collapse.in
 {
-	height:600px;
+	height:480px;
+	width:755px;
 }
 
 .tamanho.panel-collapse.collapse object,
 .tamanho.panel-collapse.collapse.in object
 {
-	height:600px;
+	height:480px;
+	width:755px;
 }
 </style>
 <div class= "container">   
@@ -246,7 +248,7 @@
 							      </h4>
 							    </div>
 							    <div id="collapseThree" class="panel-collapse collapse tamanho">
-							      <div id="Altura" class="panel-body">
+							      <div id="Trigliceridos" class="panel-body">
 							      
 							        </div>
 							     </div>
@@ -262,7 +264,7 @@
 							      </h4>
 							    </div>
 							    <div id="collapseFour" class="panel-collapse collapse tamanho">
-							      <div id="Altura" class="panel-body">
+							      <div id="INR" class="panel-body">
 							      
 							        </div>
 							     </div>
@@ -278,7 +280,7 @@
 							      </h4>
 							    </div>
 							    <div id="collapseFive" class="panel-collapse collapse tamanho">
-							      <div id="Altura" class="panel-body">
+							      <div id="TensaoArterial" class="panel-body">
 							      
 							        </div>
 							     </div>

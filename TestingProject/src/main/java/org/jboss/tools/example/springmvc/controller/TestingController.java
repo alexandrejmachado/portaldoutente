@@ -905,7 +905,14 @@ public class TestingController {
 	{
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("medida", tipoMedida);
-		mav.setViewName("graficos");
+		if(tipoMedida.equals("TensaoArterial"))
+		{
+			mav.setViewName("graficos2");
+		}
+		else{
+			mav.setViewName("graficos");
+		}
+		
 		return mav;
 	}
 	
