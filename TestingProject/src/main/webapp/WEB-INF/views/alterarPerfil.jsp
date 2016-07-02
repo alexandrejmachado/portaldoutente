@@ -67,6 +67,9 @@
 					<li id="isencao">
 						<a href="/isencao">Pedido de Isenção</a>
 					</li>
+					<li id="upload">
+						<a href="/upload">Submeter Exames</a>
+					</li>
 					<li style="opacity:0">
 						<a></a>
 					</li>
@@ -117,7 +120,7 @@
 												<tr>
 													<td>Médico de Família</td> 
 													
-													<td id="fixosMod">${medico}</td>
+													<td id="fixosMod">${medico} Nº ${medicoId}</td>
 													
 												</tr>
 												<tr>

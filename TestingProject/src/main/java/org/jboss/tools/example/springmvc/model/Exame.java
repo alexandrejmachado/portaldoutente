@@ -52,18 +52,30 @@ public class Exame {
 	@NotNull
 	private String metalink;
 	
+	private String nome;
+	
 	public Exame(){}
 	
-	public Exame(String numUtente,Date date,String metalink)
+	public Exame(String numUtente,Date date,String metalink, String tipo)
 	{
 		this.numUtente=numUtente;
 		this.data=date;
 		this.metalink=metalink;
+		this.nome = metalink.split("/")[1];
+		System.out.println(nome);
+		this.tipo = tipo;
+		System.out.println(tipo);
 	}
 	
 	public String getNumUtente(){return numUtente;}
 	
 	public String getMetalink(){return metalink;}
+	
+	public Date getDate() {return data;}
+	
+	public String getTipo() {return tipo;}
+	
+	public String getNome() {return nome;}
 	
 	public boolean isSharable() {
 		return sharable;

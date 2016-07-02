@@ -36,8 +36,8 @@
 
 
 <div  class="exame">
-		<p id="texto2">SubmissÃ£o de Exames MÃ©dicos</p>
-		<p id="texto5">Submeta abaixo os exames mÃ©dicos que pretende inserir no sistema:</p>
+		<p id="texto2">Submissão de Exames Médicos</p>
+		<p id="texto5">Submeta abaixo os exames médicos que pretende inserir no sistema:</p>
       
 </div>
 

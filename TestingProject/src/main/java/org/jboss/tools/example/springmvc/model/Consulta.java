@@ -22,6 +22,7 @@ import org.jboss.tools.example.springmvc.controller.Cifras;
 import org.jboss.tools.example.springmvc.sensitivedata.Instituicao;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.java.swing.plaf.motif.resources.motif;
 
 @Entity
 @NamedQueries({
@@ -86,15 +87,18 @@ public class Consulta {
 
 	private boolean confirmada = false;
 	
+	private String nomeUtente;
+	
 	public Consulta(){}
 	
-	public Consulta(int idMedico, String numUtente, int idInstituicao, String sala, Date data, String observacoes){
+	public Consulta(int idMedico, String numUtente, int idInstituicao, String sala, Date data, String observacoes, String nomeUtente){
 		this.idMedico = idMedico;
 		this.numUtente = numUtente;
 		this.idInstituicao = idInstituicao;
 		this.data = data;
 		this.sala = sala;
 		this.observacoes = observacoes;
+		this.nomeUtente = nomeUtente;
 	}
 
 	public String getObservacoes(){
@@ -103,6 +107,10 @@ public class Consulta {
 	
 	public boolean isFeita(){
 		return feita;
+	}
+	
+	public String getNomeUtente(){
+		return nomeUtente;
 	}
 	
 	public int getId() {

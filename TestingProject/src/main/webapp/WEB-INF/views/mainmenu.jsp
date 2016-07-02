@@ -79,6 +79,9 @@
 					<li id="isencao">
 						<a href="/isencao">Pedido de Isenção</a>
 					</li>
+					<li id="upload">
+						<a href="/upload">Submeter Exames</a>
+					</li>
 				</ul>
 			</div>
 			<!-- /#sidebar-wrapper -->

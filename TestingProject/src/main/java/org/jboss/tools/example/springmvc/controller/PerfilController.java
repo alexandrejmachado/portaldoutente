@@ -78,6 +78,7 @@ public class PerfilController {
 	    	mav.addObject("nif", currentUser.getNif());
 	    	mav.addObject("centro_saude", insDao.findById(currentUser.getCentroSaude()).getNome());
 	    	mav.addObject("medico", medicoDao.findById(currentUser.getMedico()).getNome());
+	    	mav.addObject("medicoId", currentUser.getMedico());
 	    	int telemovel = currentUser.getTelemovel();
 	    	int emergencia = currentUser.getContactoEmergencia();
 	    	mav.addObject("telemovel", ((telemovel == 0) ?  "000000000" : telemovel));
@@ -125,6 +126,7 @@ public class PerfilController {
 	    	mav.addObject("nif", currentUser.getNif());
 	    	mav.addObject("centro_saude", insDao.findById(currentUser.getCentroSaude()).getNome());
 	    	mav.addObject("medico", medicoDao.findById(currentUser.getMedico()).getNome());
+	    	mav.addObject("medicoId", currentUser.getMedico());
 	    	int telemovel = currentUser.getTelemovel();
 	    	int emergencia = currentUser.getContactoEmergencia();
 	    	mav.addObject("telemovel", ((telemovel == 0) ?  "000000000" : telemovel));

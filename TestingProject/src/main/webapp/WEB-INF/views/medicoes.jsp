@@ -96,6 +96,9 @@
 					<li id="isencao">
 						<a href="/isencao">Pedido de Isenção</a>
 					</li>
+					<li id="upload">
+						<a href="/upload">Submeter Exames</a>
+					</li>
 										<li style="opacity:0">
 						<a></a>
 					</li>
@@ -210,12 +213,12 @@
 							    <div class="panel-heading">
 							      <h4 class="panel-title">
 							        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="verMedida('Peso')">
-							          <span class="glyphicon glyphicon-minus"></span>
+							          <span class="glyphicon glyphicon-plus"></span>
 							          Peso
 							        </a>
 							      </h4>
 							    </div>
-							    <div id="collapseOne" class="panel-collapse collapse tamanho in">
+							    <div id="collapseOne" class="panel-collapse collapse tamanho">
 							      <div id="Peso" class="panel-body">
 							       
 							      </div>
