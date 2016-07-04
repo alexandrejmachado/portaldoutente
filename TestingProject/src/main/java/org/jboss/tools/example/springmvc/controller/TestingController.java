@@ -32,6 +32,8 @@ import java.util.regex.Pattern;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.RowFilter.Entry;
 
@@ -68,6 +70,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -179,6 +182,14 @@ public class TestingController {
 //		return mav;
 //	}
 		
+	@RequestMapping(value="/cookie")
+	public String cookie(HttpServletResponse response){
+		Cookie cookie = new Cookie("hitCounter", "a tua mae!");
+		response.addCookie(cookie);
+		return "HELLO";
+	}
+	
+	
 	@RequestMapping(value = "/")
 	public ModelAndView workaround(HttpSession session){
 		ModelAndView mav = new ModelAndView();
@@ -225,7 +236,7 @@ public class TestingController {
 	
 	@RequestMapping(value = "/loginUtente", method = RequestMethod.POST, params={"username", "password"})
 	@ResponseBody
-	public String loginUtente(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password, HttpSession session) throws NoSuchAlgorithmException{
+	public String loginUtente(HttpServletResponse response, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password, HttpSession session) throws NoSuchAlgorithmException{
 		ModelAndView mav = new ModelAndView();
 		try{
 			System.out.println("ACESSO A BD");
@@ -233,6 +244,8 @@ public class TestingController {
 			System.out.println("ACESSO FEITO A BD");
 			System.out.println(currentUser.getNif() + "CURRENT UTENTE");
 			System.out.println(currentUser.getPassword());
+			Cookie cookie = new Cookie("sessionID", username);
+			response.addCookie(cookie);
 			String hashLogin = HashTextTest.sha256(password);
 			String loginPassword=currentUser.getPassword();
 			String passwordGuardiao = currentUser.getPasswordGuardiao();
