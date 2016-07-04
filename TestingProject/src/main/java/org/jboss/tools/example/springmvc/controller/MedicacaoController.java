@@ -231,7 +231,7 @@ public class MedicacaoController {
 			mav.addObject("extenso", "dois");
 		}
 		else if (dose == 3) {
-			mav.addObject("extenso", "três");
+			mav.addObject("extenso", "tres");
 		}
 		Instituicao inst = instDao.findById(ut.getCentroSaude());
 		mav.addObject("medicacaoID", med.getId());
