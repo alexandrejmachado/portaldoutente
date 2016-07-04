@@ -42,41 +42,36 @@
 ​
 ​
         <textarea id = "sexta" rows="2" cols="40">
-            <p>Receita Médica No.: <c:out value="${medicacaoID }"></c:out></p>
-            <p>Local de Prescricao: <c:out value="${instituicao }"></c:out></p>
-            <p>Médico Prescritor: <c:out value="${nomeMedico }"></c:out></p>
+            Receita Médica No.: <c:out value="${medicacaoID }"></c:out>
+            Local de Prescricao: <c:out value="${instituicao }"></c:out>
+            Médico Prescritor: <c:out value="${nomeMedico }"></c:out>
+            Contacto Telefónico da Instituição: <c:out value="${contactoInstituicao }"></c:out>            
         </textarea>
 ​
 ​
 ​
         <textarea id = "setima" rows="2" cols="40">
-            1!!!
+            Dados do Utente
+            Nome do Utente: <c:out value="${utenteName }"></c:out>
         </textarea>
 ​
 ​
 ​
         <textarea id = "oitava" rows="1" cols="40">
-            1!!!
+            Entidade Responsável: CEDS/EHIC
+            Nº do Beneficiário: <c:out value="${utenteID }"></c:out>
         </textarea>
 ​
 ​
 ​
-        <textarea id = "nona" rows="1" cols="28">
-            1!!!
-        </textarea>
+        <input id = "nona" value="${nomeMedicamento}">
 ​
 ​
 ​
-        <textarea id = "decima" rows="1" cols="1">
-            1!!!
-        </textarea>
+        <input id = "decima" value="${dose}">
 ​
 ​
-​
-        <textarea id = "decima1" rows="1" cols="1">
-            1!!!
-        </textarea>
-​
+        <input id = "decima1" value="${extenso}">
 ​
 </body>
 ​
