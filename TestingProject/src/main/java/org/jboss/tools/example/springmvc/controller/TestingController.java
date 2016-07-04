@@ -9,12 +9,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.WritableByteChannel;
 import java.nio.file.Files;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -953,6 +955,11 @@ public class TestingController {
 		return "false";
 	}
 	
+	public String getToken() {
+		SecureRandom random = new SecureRandom();
+		String s = new BigInteger(130, random).toString(32);
+		return s;
+	}
 		
 	@RequestMapping(value="/obterMedida/{tipoMedida}",method = RequestMethod.GET)
 	@ResponseBody
