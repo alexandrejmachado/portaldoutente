@@ -925,39 +925,11 @@ public class TestingController {
 	}
 	
 	
-	// TESTE DE SESSOES
-	//--------------------------------------------------
-	@RequestMapping(value = "/sessionSet")
-	public ModelAndView setSessao(HttpSession session){
-		session.setAttribute("logged", "LOGED USER");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("setSession");
-		mav.addObject("loggedUser", session.getAttribute("logged"));
-		mav.addObject("tempo", session.getMaxInactiveInterval());
-		return mav;
-	}
-	
-	@RequestMapping(value = "/sessionTest")
-	public ModelAndView testSessao(HttpSession session){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("testSession");
-		mav.addObject("loggedUser", session.getAttribute("logged"));
-		return mav;
-	}
-	//--------------------------------------------------
+
 	
 	@RequestMapping(value="/verifyCode", method = RequestMethod.POST, params={"codigo"})
 	@ResponseBody
 	public String verifyCode(@RequestParam(value="codigo") String codigo, HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
-		System.out.println("A IR BUSCAR O SESSIONID:");
-		System.out.println("LISTA DE ATRIBUTOS");
-		Enumeration<String> o=session.getAttributeNames();
-		while (o.hasMoreElements())
-		{
-			String s=o.nextElement();
-			System.out.println("elemento: " +s +" valor: " + session.getAttribute(s));
-		}
-		System.out.println("RESULTADO" + session.getAttribute("sessionID"));
 		boolean ok = utenteDao.verifyUser((String) session.getAttribute("sessionID"), codigo);
 		if (ok) {
 			return "true";
