@@ -158,6 +158,18 @@
 							  $("#campos").append(items);
 							  })
 							  }
+
+								function testing2(){
+								medida="Altura";
+								$.getJSON( path + "/daoInputs/" + medida, function( data ) {
+							  var items = [];
+							  $("#campos").html("");
+							  $.each( data, function( key, val ) {
+							    if(key!="data"){items.push( key + ":\n <input class='campo' name='" + key + "'><br>" );}
+							  });
+							  $("#campos").append(items);
+							  })
+							  }
 							
 							  function getthem(){
 								$.getJSON( path + "/avaliableMeasures", function( val ) {
@@ -170,7 +182,8 @@
 							  $("#medidas").append(items);
 							  })
 							  }
-							  getthem();
+							 
+							  
 							
 							  function aquivoueu()
 							  {
@@ -193,6 +206,8 @@
 							    });
 							  }
 							  $(document).ready(function(){
+								  getthem();
+								  testing2();
 								  $('#login-trigger').click(function(){
 								    $(this).next('#login-content').slideToggle();
 								    $(this).toggleClass('active');          
