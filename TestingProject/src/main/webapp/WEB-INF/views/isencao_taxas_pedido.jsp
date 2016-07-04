@@ -114,7 +114,7 @@
 											<p>Introduza o seu número de Identificação de Segurança Social:</p>
 											
 	
-											<div  class="col-md-6" id="smallBox"><form method="post"><input id="codigo" type="text" name="segsoc">	</form>
+											<div  class="col-md-6" id="smallBox"><form method="post" style="padding-bottom:10px;"><input id="codigo" type="text" name="segsoc">	</form>
 												<input id = "botao_conf" type="submit" onclick="lolada()"/>
 											</div>
 											

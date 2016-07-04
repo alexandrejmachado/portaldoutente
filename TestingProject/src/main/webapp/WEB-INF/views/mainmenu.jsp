@@ -120,7 +120,7 @@
     				'medicacao2':'Aqui regista-se e consulta-se a medicação e pede-se novas receitas',
     				'medicao':'Aqui registam-se e consultam-se as medições',
     				'cirurgia':'Aqui marcam-se e consultam-se as cirurgias',
-    				'isencao':'Aqui pede-se e consulta-se a isenção de taxas moderadoras',
+    				'isencao':'Aqui pede-se a isenção de taxas moderadoras',
     				'upload':'Aqui submetem-se e consultam-se exames médicos'};
     	
     	$( "li" )
