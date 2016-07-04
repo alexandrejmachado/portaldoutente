@@ -24,6 +24,7 @@ import org.jboss.tools.example.springmvc.data.MedicoDao;
 import org.jboss.tools.example.springmvc.data.MedicoUtenteDao;
 import org.jboss.tools.example.springmvc.data.PesoDao;
 import org.jboss.tools.example.springmvc.data.SaturacaoO2Dao;
+import org.jboss.tools.example.springmvc.data.SessaoDao;
 import org.jboss.tools.example.springmvc.data.TensaoArterialDao;
 import org.jboss.tools.example.springmvc.data.TrigliceridosDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
@@ -53,6 +54,9 @@ public class PerfilController {
 	
 	@Autowired
 	private MedicoDao medicoDao;
+	
+	@Autowired
+	private SessaoDao sessaoDao;
 	
 	
 	

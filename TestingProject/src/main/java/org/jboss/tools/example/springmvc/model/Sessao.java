@@ -24,26 +24,55 @@ public class Sessao {
 	@GeneratedValue
 	private int id;
 	
-	private Map<String,Object> mapa = new HashMap<String,Object>();
+	private String sessionID;
+	
+	private String sessionMode;
+	
+	private String sessionName;
 	
 	private String token;
 	
 	public Sessao() {}
 	
-	public Sessao(String token) {
+	public Sessao(String token, String sessionID, String sessionMode, String sessionName) {
 		this.token = token;
+		this.sessionID = sessionID;
+		this.sessionMode = sessionMode;
+		this.sessionName = sessionName;
 	}
 	
+	
+	public int getId(){
+		return id;
+	}
+	
+	public String getSessionID() {
+		return sessionID;
+	}
+
+	public void setSessionID(String sessionID) {
+		this.sessionID = sessionID;
+	}
+
+	public String getSessionMode() {
+		return sessionMode;
+	}
+
+	public void setSessionMode(String sessionMode) {
+		this.sessionMode = sessionMode;
+	}
+
+	public String getSessionName() {
+		return sessionName;
+	}
+
+	public void setSessionName(String sessionName) {
+		this.sessionName = sessionName;
+	}
+
 	public String getToken() {return token;}
 	
 	public void setToken(String token) {this.token = token;}
 	
-	public void setAttribute(String nome, Object obj) {
-		mapa.put(nome, obj);
-	}
-	
-	public Object getAttribute(String nome) {
-		return mapa.get(nome);
-	}
 	
 }
