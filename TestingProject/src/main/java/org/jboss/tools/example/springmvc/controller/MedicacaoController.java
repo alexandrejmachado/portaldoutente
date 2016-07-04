@@ -70,6 +70,12 @@ public class MedicacaoController {
 	public UtenteDao utDao;
 	
 	@Autowired
+	public MedicoDao medicoDao;
+	
+	@Autowired
+	public InstituicaoDao instDao;
+	
+	@Autowired
 	public MedicacaoDao medicacaoDao;
 	
 	@Autowired
@@ -202,6 +208,39 @@ public class MedicacaoController {
 		}
 		System.out.println("Esta e a cookie: "+ sessionToken);
 		return sessionToken;
+	}
+	
+	@RequestMapping(value="/verReceita", method = RequestMethod.POST, params={"medicacaoID"})
+	@ResponseBody
+	public ModelAndView verReceita(HttpSession session, @RequestParam("id") String id) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("receita");
+		Utente ut = utDao.findUtenteById(Integer.parseInt((String) session.getAttribute("sessionID")));
+		mav.addObject("utenteName", ut.getNome());
+		mav.addObject("utenteID", ut.getNumUtente());
+		mav.addObject("utenteTelemovel", ut.getTelemovel());
+		int idMedicacao = Integer.parseInt(id);
+		Medicacao med = medicacaoDao.findById(idMedicacao);
+		mav.addObject("nomeMedicamento", med.getNomeMedicamento());
+		double dose = med.getDose();
+		mav.addObject("dose", dose);
+		if (dose == 1) {
+			mav.addObject("extenso", "um");
+		}
+		else if (dose == 2) {
+			mav.addObject("extenso", "dois");
+		}
+		else if (dose == 3) {
+			mav.addObject("extenso", "três");
+		}
+		Instituicao inst = instDao.findById(ut.getCentroSaude());
+		mav.addObject("medicacaoID", med.getId());
+		mav.addObject("instituicao", inst.getNome());
+		Medico medico = medicoDao.findById(ut.getMedico());
+		mav.addObject("nomeMedico", medico.getNome());
+		mav.addObject("contactoInstituicao", inst.getTelefone());
+		mav.addObject("data", new Date());
+		return mav;
 	}
 
 
