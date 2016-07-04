@@ -52,6 +52,7 @@
               </a>
               <div id="login-content">
                 <a button href= "/perfil/dados" id = "aaa">Ver Perfil</button></a><br>
+                <a button href= "/perfil/verPrivacidades" id = "aaa">Privacidade das Medições</button></a><br>
                 <a button href= "/logout" id ="aaa">Logout</button></a>
               </div>                     
             </li>
@@ -259,14 +260,17 @@
 				})}
 				</script>
 
-				<script>
-					 $(document).ready(function(){
-				   		
-				   		
-				   		
-					 })
-				 });
-				 </script>
+				    <script>
+    $(document).ready(function(){
+  $('#login-trigger').click(function(){
+    $(this).next('#login-content').slideToggle();
+    $(this).toggleClass('active');          
+    
+    if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
+      else $(this).find('span').html('&#x25BC;')
+    })
+});
+    </script>
 	</div>
 </body>
 

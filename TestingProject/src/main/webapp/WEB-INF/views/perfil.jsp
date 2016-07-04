@@ -22,11 +22,13 @@
     
     <body background=<c:url value="/resources/gfx/Final2.png"/> />
     <div class="container">
-            <div class="col-lg-12"> 
+           <div class="col-lg-12"> 
                 <div class= "rowMajor">
-					<div class="col-md-6"><a id = "PortalDoUtente" href="/" style="text-decoration:none; color: white; font-weight:100">Portal do Utente</a></div>
-					<div class="col-md-6" id="entrar" style="text-align: right;">${username}</div>
-				</div>    
+                	<div id="divisento"></div>
+						<div class="col-md-6"><a id = "PortalDoUtente" href="/" style="text-decoration:none; color: white; font-weight:100">Portal do Utente</a></div>
+						<div class="col-md-6" id="entrar" style="text-align: right;">${username}</div>
+				</div>
+            
             </div>
         <nav>
           <ul>
@@ -35,9 +37,10 @@
                 Opções <span>▼</span>
               </a>
               <div id="login-content">
-                <a href= "/perfil" id = "aaa">Ver Perfil</a><br>
-                <a href= "/logout" id ="aaa">Logout</a>
-              </div>                     
+                <a button href= "/perfil/dados" id = "aaa">Ver Perfil</button></a><br>
+                <a button href= "/perfil/verPrivacidades" id = "aaa">Privacidade das Medições</button></a><br>
+                <a button href= "/logout" id ="aaa">Logout</button></a>
+              </div>                      
             </li>
           </ul>
         </nav>
