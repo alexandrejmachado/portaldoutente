@@ -9,12 +9,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.WritableByteChannel;
 import java.nio.file.Files;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -32,6 +34,9 @@ import java.util.regex.Pattern;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.RowFilter.Entry;
 
@@ -48,6 +53,7 @@ import org.jboss.tools.example.springmvc.data.InstituicaoDao;
 import org.jboss.tools.example.springmvc.data.MedicoUtenteDao;
 import org.jboss.tools.example.springmvc.data.PesoDao;
 import org.jboss.tools.example.springmvc.data.SaturacaoO2Dao;
+import org.jboss.tools.example.springmvc.data.SessaoDao;
 import org.jboss.tools.example.springmvc.data.TensaoArterialDao;
 import org.jboss.tools.example.springmvc.data.TrigliceridosDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
@@ -55,6 +61,7 @@ import org.jboss.tools.example.springmvc.model.Cirurgia;
 import org.jboss.tools.example.springmvc.model.Exame;
 import org.jboss.tools.example.springmvc.model.Glicemia;
 import org.jboss.tools.example.springmvc.model.MedicoUtente;
+import org.jboss.tools.example.springmvc.model.Sessao;
 import org.jboss.tools.example.springmvc.sensitivedata.ContratoMedico;
 import org.jboss.tools.example.springmvc.sensitivedata.Instituicao;
 import org.jboss.tools.example.springmvc.sensitivedata.Utente;
@@ -68,6 +75,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -138,6 +146,9 @@ public class TestingController {
 	private MedicoUtenteDao muDao;
 	
 	@Autowired
+	private SessaoDao sessaoDao;
+	
+	@Autowired
 	private ConsultaDao consultaDao;
 	
 	@Autowired
@@ -179,11 +190,36 @@ public class TestingController {
 //		return mav;
 //	}
 		
+	public String getSessaoToken(HttpServletRequest request){
+		String sessionToken = "empty";
+		System.out.println("Token de sessao antes: "+sessionToken);
+		Cookie[] listaCookies = request.getCookies();
+		if(listaCookies != null){
+			for(Cookie c:listaCookies){
+				if(c.getName().equals("sessionToken")){
+					sessionToken = c.getValue();
+				}
+			}
+		}
+		System.out.println("Esta e a cookie: "+ sessionToken);
+		return sessionToken;
+	}
+	
+	@RequestMapping(value="/cookie")
+	public String cookie(HttpServletResponse response){
+		Cookie cookie = new Cookie("hitCounter", "TESTE");
+		response.addCookie(cookie);
+		return "HELLO";
+	}
+	
+	
 	@RequestMapping(value = "/")
-	public ModelAndView workaround(HttpSession session){
+	public ModelAndView workaround(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
-		if(verifyLogin(session)){
-			mav.addObject("username", session.getAttribute("sessionName"));
+		String token = getSessaoToken(request);
+		if(verifyLogin(token)){
+			Sessao session = sessaoDao.getSessao(token);
+			mav.addObject("username", session.getSessionName());
 			mav.setViewName("mainmenu");
 		}
 		else{
@@ -194,11 +230,13 @@ public class TestingController {
 	
 	
 	@RequestMapping(value = "/index")
-	public ModelAndView vistaController(HttpSession session){
+	public ModelAndView vistaController(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
-		if(verifyLogin(session)){
-			mav.addObject("username", session.getAttribute("sessionName"));
-			if (session.getAttribute("sessionMode").equals("guardiao")) {
+		String token = getSessaoToken(request);
+		if(verifyLogin(token)){
+			Sessao session = sessaoDao.getSessao(token);
+			mav.addObject("username", session.getSessionName());
+			if (session.getSessionMode().equals("guardiao")) {
 				mav.addObject("sessionMode", "guardian");
 			}
 			mav.setViewName("mainmenu");
@@ -210,10 +248,12 @@ public class TestingController {
 	}
 	
 	@RequestMapping(value = "/activate")
-	public ModelAndView activateController(HttpSession session){
+	public ModelAndView activateController(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
-		if(verifyRegularLogin(session)){
-			mav.addObject("username", session.getAttribute("sessionName"));
+		String token = getSessaoToken(request);
+		if(verifyRegularLogin(token)){
+			Sessao session = sessaoDao.getSessao(token);
+			mav.addObject("username", session.getSessionName());
 			mav.setViewName("confirmacao_pendente");
 		}
 		else{
@@ -225,7 +265,7 @@ public class TestingController {
 	
 	@RequestMapping(value = "/loginUtente", method = RequestMethod.POST, params={"username", "password"})
 	@ResponseBody
-	public String loginUtente(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password, HttpSession session) throws NoSuchAlgorithmException{
+	public String loginUtente(HttpServletResponse response, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password, HttpServletRequest request) throws NoSuchAlgorithmException{
 		ModelAndView mav = new ModelAndView();
 		try{
 			System.out.println("ACESSO A BD");
@@ -233,13 +273,18 @@ public class TestingController {
 			System.out.println("ACESSO FEITO A BD");
 			System.out.println(currentUser.getNif() + "CURRENT UTENTE");
 			System.out.println(currentUser.getPassword());
+			//------------SESSAO--------------
+			String token = getToken();
+			Cookie cookie = new Cookie("sessionToken", token);
+			cookie.setMaxAge(1800);
+			response.addCookie(cookie);
+		
+			//--------------------------------
 			String hashLogin = HashTextTest.sha256(password);
 			String loginPassword=currentUser.getPassword();
 			String passwordGuardiao = currentUser.getPasswordGuardiao();
 			if((hashLogin.equals(loginPassword) && currentUser!=null)){
-				session.setAttribute("sessionMode", "user");
-				session.setAttribute("sessionID", username);
-				session.setAttribute("sessionName", currentUser.getNome());
+				sessaoDao.iniciarSessao(token, username, "user", currentUser.getNome());
 				mav.addObject("username", currentUser.getNome());
 				if (currentUser.isVerified()) {
 					return "true";
@@ -249,9 +294,7 @@ public class TestingController {
 				}
 				}
 			else if ((hashLogin.equals(passwordGuardiao) && currentUser!=null)) {
-				session.setAttribute("sessionMode", "guardiao");
-				session.setAttribute("sessionID", username);
-				session.setAttribute("sessionName", currentUser.getNome());
+				sessaoDao.iniciarSessao(token, username, "guardiao", currentUser.getNome());
 				mav.addObject("username", currentUser.getNome());
 				if (currentUser.isVerified()) {
 					return "true";
@@ -273,12 +316,12 @@ public class TestingController {
 		}
 		}
 	
-	
+	/**
 	@RequestMapping(value = "/mudarPassword")
-	public String mudarPassword(HttpSession session, @RequestParam(value = "password") String password) throws NoSuchAlgorithmException {
+	public String mudarPassword(HttpServletRequest request, @RequestParam(value = "password") String password) throws NoSuchAlgorithmException {
 		ModelAndView mav = new ModelAndView();
 		String hashLogin = HashTextTest.sha256(password);
-		boolean thing = utenteDao.changePassword((Integer) session.getAttribute("sessionID"), hashLogin);
+		boolean thing = utenteDao.changePassword((Integer) session.getSessionID(), hashLogin);
 		if (thing) {
 			return "true";
 		}
@@ -287,22 +330,24 @@ public class TestingController {
 		}
 		
 	}
-	
+	**/
 	
 
 	// preciso de esclarecer umas situacoes
 	@RequestMapping(value = "/registo")
-	public ModelAndView registoController(HttpSession session){
-	ModelAndView mav = new ModelAndView();
-	if(!verifyLogin(session)){
-		mav.addObject("username", session.getAttribute("sessionName"));
-		mav.setViewName("registo");
+	public ModelAndView registoController(HttpServletRequest request){
+		String token = getSessaoToken(request);
+		ModelAndView mav = new ModelAndView();
+		if(!verifyLogin(token)){
+			Sessao session = sessaoDao.getSessao(token);
+			mav.addObject("username", session.getSessionName());
+			mav.setViewName("registo");
+		}
+		else{
+			mav.setViewName("index");
+		}
+		return mav;
 	}
-	else{
-		mav.setViewName("index");
-	}
-	return mav;
-}
 	
   //Devolve lista de todos os objectos a ser persistidos 
   //Remover da lista Objectos que não são medidas
@@ -367,7 +412,7 @@ public class TestingController {
 										@RequestParam(value = "cc") String cc, @RequestParam(value="morada") String morada,
 											@RequestParam(value="mail") String mail, @RequestParam(value = "pass") String password,@RequestParam(value = "passConfirm") String passwordConfirm,
 												@RequestParam(value = "telemovel") String telemovel, @RequestParam(value = "emergencia") String emergencia, @RequestParam(value="nif") String nif, @RequestParam(value="localidade") String localidade,
-													HttpSession session) throws NoSuchAlgorithmException, NumberFormatException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+													HttpServletRequest request) throws NoSuchAlgorithmException, NumberFormatException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		//verificacao de parametros
 		boolean resp = true;
 		String campo = null;
@@ -538,7 +583,7 @@ public class TestingController {
 										@RequestParam(value = "cc") String cc, @RequestParam(value="morada") String morada,
 											@RequestParam(value="mail") String mail, @RequestParam(value = "pass") String password,@RequestParam(value = "passConfirm") String passwordConfirm,
 												@RequestParam(value = "telemovel") String telemovel, @RequestParam(value = "emergencia") String emergencia, @RequestParam(value="nif") String nif, @RequestParam(value="localidade") String localidade,
-													HttpSession session) throws NoSuchAlgorithmException, NumberFormatException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+													HttpServletRequest request) throws NoSuchAlgorithmException, NumberFormatException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		//verificacao de parametros
 		boolean resp = true;
 		String campo = null;
@@ -702,17 +747,25 @@ public class TestingController {
 		}
 	
 	
-	public boolean verifyLogin(HttpSession session) {
-		System.out.println(session.getAttribute("sessionID"));
-		if(session.getAttribute("sessionID") == null){
+	public boolean verifyLogin(String sessionToken) {
+		System.out.println(sessionToken);
+		System.out.println("A VERIFICAR SE ESTA LOGADO:");
+		if(sessionToken.equals("empty")){
+			System.out.println("NAO TEM SESSAO");
 			return false;
 		}
 		else{
+			System.out.println("antes");
+			Sessao session = sessaoDao.getSessao(sessionToken);
+			System.out.println("depois");
+			System.out.println(session);
 			try {
-				if(utenteDao.verifyActivatedUser((String)session.getAttribute("sessionID")))
-				return true;
+				System.out.println("VERIFICAR SE ESTA ACTIVA A CONTA");
+				if(utenteDao.verifyActivatedUser(session.getSessionID())){System.out.println("VERFICAR SE ESTA ACTIVA A CONTA");
+					return true;}
 				else{
-					session.removeAttribute("sessionID");
+					System.out.println("NAO ESTA ACTIVA A CONTA");
+					sessaoDao.removerSessao(sessionToken);
 				return false;
 				}
 			} catch (InvalidKeyException e) {
@@ -738,12 +791,14 @@ public class TestingController {
 				e.printStackTrace();
 			}
 		}
+		System.out.println("ERRO ESTRANHO");
 		return false;
 		
 	}
 	
-	public static boolean verifyRegularLogin(HttpSession session){
-		if(session.getAttribute("sessionID") == null){
+	public boolean verifyRegularLogin(String token){
+		Sessao session = sessaoDao.getSessao(token);
+		if(session.equals(null)){
 			return false;
 		}
 		else{
@@ -752,7 +807,7 @@ public class TestingController {
 	}
 	
 	@RequestMapping(value="/guardiao") 
-	public ModelAndView guardiao(HttpSession session) {
+	public ModelAndView guardiao(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("atribuirGuardiao");
 		return mav;
@@ -760,9 +815,10 @@ public class TestingController {
 	
 	
 	@RequestMapping(value="/atribuirGuardiao")
-	public ModelAndView atribuirGuardiao(HttpSession session, @RequestParam(value="numGuardiao") int numGuardiao, @RequestParam(value= "permissao") String permissoes) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+	public ModelAndView atribuirGuardiao(HttpServletRequest request, @RequestParam(value="numGuardiao") int numGuardiao, @RequestParam(value= "permissao") String permissoes) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		if (utenteDao.checkId(numGuardiao)) {
-			guardiaoDao.atribuirGuardiao( utenteDao.findUtenteById(Integer.parseInt((String) session.getAttribute("sessionID"))), utenteDao.findUtenteById(numGuardiao), permissoes);
+			Sessao session = sessaoDao.getSessao(getSessaoToken(request));
+			guardiaoDao.atribuirGuardiao( utenteDao.findUtenteById(Integer.parseInt((String) session.getSessionID())), utenteDao.findUtenteById(numGuardiao), permissoes);
 		}
 		System.out.println("guardiao feito");
 		ModelAndView mav = new ModelAndView();
@@ -772,12 +828,14 @@ public class TestingController {
 	
 	
 	@RequestMapping(value = "/isencao")
-	public ModelAndView pedirIsencao(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+	public ModelAndView pedirIsencao(HttpServletRequest request) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		ModelAndView mav = new ModelAndView();
-		if(verifyLogin(session)){
-			System.out.println(utenteDao.checkIsencao(Integer.parseInt((String) session.getAttribute("sessionID"))));
-			if (!(utenteDao.checkIsencao(Integer.parseInt((String) session.getAttribute("sessionID"))))) {
-				mav.addObject("username", session.getAttribute("sessionName"));
+		String token = getSessaoToken(request);
+		if(verifyLogin(token)){
+			Sessao session = sessaoDao.getSessao(token);
+			System.out.println(utenteDao.checkIsencao(Integer.parseInt((String) session.getSessionID())));
+			if (!(utenteDao.checkIsencao(Integer.parseInt((String) session.getSessionID())))) {
+				mav.addObject("username", session.getSessionName());
 				mav.setViewName("isencao_taxas_pedido");
 			}
 			else {
@@ -792,8 +850,9 @@ public class TestingController {
 	
 	@RequestMapping(value= "/verificarIsencao")
 	@ResponseBody
-	public String verificarIsencao(HttpSession session, @RequestParam(value = "segsoc") int username) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
-		String userID = (String) session.getAttribute("sessionID");
+	public String verificarIsencao(HttpServletRequest request, @RequestParam(value = "segsoc") int username) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+		Sessao session = sessaoDao.getSessao(getSessaoToken(request));
+		String userID = (String) session.getSessionID();
 		Utente u;
 		try{
 			if (true){
@@ -815,7 +874,7 @@ public class TestingController {
 	}
 	
 	@RequestMapping(value="/isento")
-	public ModelAndView isento(HttpSession session) {
+	public ModelAndView isento(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("isento");
 		mav.setViewName("mainmenu");
@@ -823,24 +882,28 @@ public class TestingController {
 	}
 	
 	@RequestMapping(value="/logout")
-	public ModelAndView logout(HttpSession session) {
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
-		session.removeAttribute("sessionID");
+		//Sessao session = sessaoDao.getSessao(getSessaoToken(request));
+		sessaoDao.removerSessao(getSessaoToken(request));
+		Cookie cookie = new Cookie("sessionToken", "empty");
+		response.addCookie(cookie);
 		mav.setViewName("index");
 		return mav;
 	}
 	
 	
 	@RequestMapping(value = "/cirurgia")
-	public ModelAndView Cirurgia(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+	public ModelAndView Cirurgia(HttpServletRequest request) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		ModelAndView mav = new ModelAndView();
-		if(verifyLogin(session)){
-			cirurgiaDao.novaCirurgia((String) session.getAttribute("sessionID"), "Dr. Jorge Jesus", "Cirurgia ao Figado");
-			System.out.println("cirurgia: " + session.getAttribute("sessionID"));
-			List<Cirurgia> lista = cirurgiaDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
-			session.setAttribute("lista", lista);
+		String token = getSessaoToken(request);
+		if(verifyLogin(token)){
+			Sessao session = sessaoDao.getSessao(token);
+			cirurgiaDao.novaCirurgia((String) session.getSessionID(), "Dr. Jorge Jesus", "Cirurgia ao Figado");
+			System.out.println("cirurgia: " + session.getSessionID());
+			List<Cirurgia> lista = cirurgiaDao.findAllByUtente(Integer.parseInt((String) session.getSessionID()));
 			mav.addObject("lista", lista);
-			mav.addObject("username", session.getAttribute("sessionName"));
+			mav.addObject("username", session.getSessionName());
 			mav.setViewName("cirurgia");
 		}
 		else {
@@ -851,16 +914,18 @@ public class TestingController {
 	
 	
 	@RequestMapping(value = "/confirmarCirurgia")
-	public boolean confirmarCirurgia(HttpSession session, @RequestParam(value = "id") Object id){
+	public boolean confirmarCirurgia(HttpServletRequest request, @RequestParam(value = "id") Object id){
 		return cirurgiaDao.confirmarCirurgia(Integer.parseInt((String) id));
 	}
 	
 	
 	@RequestMapping(value = "/medicoes")
-	public ModelAndView medicoesController(HttpSession session){
+	public ModelAndView medicoesController(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
-		if(verifyLogin(session)){
-			mav.addObject("username", session.getAttribute("sessionName"));
+		String token = getSessaoToken(request);
+		if(verifyLogin(token)){
+			Sessao session = sessaoDao.getSessao(token);
+			mav.addObject("username", session.getSessionName());
 			mav.setViewName("medicoes");
 		}
 		else{
@@ -872,39 +937,41 @@ public class TestingController {
 	//Controlador para guardar as medidas
 	@RequestMapping(value = "/medicoes/guardar", method = RequestMethod.POST)
 	@ResponseBody
-	public String guardarMedicao(@RequestBody HashMap medicoes, HttpSession session) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		System.out.println("Medicao a guardar: " + medicoes + "ID da pessoa:" + session.getAttribute("sessionID"));
+	public String guardarMedicao(@RequestBody HashMap medicoes, HttpServletRequest request) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		String token = getSessaoToken(request);
+		Sessao session = sessaoDao.getSessao(token);
+		System.out.println("Medicao a guardar: " + medicoes + "ID da pessoa:" + session.getSessionID());
 		switch ((String)medicoes.get("medida")) {
 		case "Altura" :
-			altDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getAttribute("sessionID")));
+			altDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getSessionID()));
 			break;
 		case "Glicemia" :
-			glicDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getAttribute("sessionID")));
+			glicDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getSessionID()));
 			break;
 		case "Colesterol":
-			colDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getAttribute("sessionID")));
+			colDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getSessionID()));
 			break;
 		case "INR":
-			inrDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getAttribute("sessionID")));
+			inrDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getSessionID()));
 			break;
 		case "Peso":
-			pesoDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getAttribute("sessionID")));
+			pesoDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getSessionID()));
 			break;
 		case "SaturacaoO2":
-			satDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getAttribute("sessionID")));
+			satDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getSessionID()));
 			break;
 		case "Trigliceridos":
-			trigDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getAttribute("sessionID")));
+			trigDao.novo(Double.parseDouble((String) medicoes.get("valor")), Integer.parseInt((String)session.getSessionID()));
 			break;
 		case "TensaoArterial":
-			tenArtDao.novo(Integer.parseInt((String)medicoes.get("max")),Integer.parseInt((String)medicoes.get("min")), Integer.parseInt((String)session.getAttribute("sessionID")));
+			tenArtDao.novo(Integer.parseInt((String)medicoes.get("max")),Integer.parseInt((String)medicoes.get("min")), Integer.parseInt((String)session.getSessionID()));
 			break;
 		}
 		return "Adicionado";
 	}
 	
 	@RequestMapping(value="/visualizar/{tipoMedida}", method = RequestMethod.GET)
-	public ModelAndView showMedidas(HttpSession session,@PathVariable("tipoMedida") String tipoMedida)
+	public ModelAndView showMedidas(HttpServletRequest request,@PathVariable("tipoMedida") String tipoMedida)
 	{
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("medida", tipoMedida);
@@ -920,40 +987,14 @@ public class TestingController {
 	}
 	
 	
-	// TESTE DE SESSOES
-	//--------------------------------------------------
-	@RequestMapping(value = "/sessionSet")
-	public ModelAndView setSessao(HttpSession session){
-		session.setAttribute("logged", "LOGED USER");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("setSession");
-		mav.addObject("loggedUser", session.getAttribute("logged"));
-		mav.addObject("tempo", session.getMaxInactiveInterval());
-		return mav;
-	}
-	
-	@RequestMapping(value = "/sessionTest")
-	public ModelAndView testSessao(HttpSession session){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("testSession");
-		mav.addObject("loggedUser", session.getAttribute("logged"));
-		return mav;
-	}
-	//--------------------------------------------------
+
 	
 	@RequestMapping(value="/verifyCode", method = RequestMethod.POST, params={"codigo"})
 	@ResponseBody
-	public String verifyCode(@RequestParam(value="codigo") String codigo, HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
-		System.out.println("A IR BUSCAR O SESSIONID:");
-		System.out.println("LISTA DE ATRIBUTOS");
-		Enumeration<String> o=session.getAttributeNames();
-		while (o.hasMoreElements())
-		{
-			String s=o.nextElement();
-			System.out.println("elemento: " +s +" valor: " + session.getAttribute(s));
-		}
-		System.out.println("RESULTADO" + session.getAttribute("sessionID"));
-		boolean ok = utenteDao.verifyUser((String) session.getAttribute("sessionID"), codigo);
+	public String verifyCode(@RequestParam(value="codigo") String codigo, HttpServletRequest request) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+		String token = getSessaoToken(request);
+		Sessao session = sessaoDao.getSessao(token);
+		boolean ok = utenteDao.verifyUser((String) session.getSessionID(), codigo);
 		if (ok) {
 			return "true";
 			//return "redirect:/index";
@@ -962,38 +1003,46 @@ public class TestingController {
 		return "false";
 	}
 	
+	public String getToken() {
+		SecureRandom random = new SecureRandom();
+		String s = new BigInteger(130, random).toString(32);
+		return s;
+	}
 		
 	@RequestMapping(value="/obterMedida/{tipoMedida}",method = RequestMethod.GET)
 	@ResponseBody
-	public List<?> obterMedida(HttpSession session, @PathVariable("tipoMedida") String tipoMedida) {
+	public List<?> obterMedida(HttpServletRequest request, @PathVariable("tipoMedida") String tipoMedida) {
+		String token = getSessaoToken(request);
+		Sessao session = sessaoDao.getSessao(token);
+		
 		List<?> lista = null;
 		try {
 		System.out.println(tipoMedida);
-		System.out.println(session.getAttribute("sessionID"));
+		System.out.println(session.getSessionID());
 		switch (tipoMedida) {
 		case "Altura":
-			lista = altDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			lista = altDao.findAllByUtente(Integer.parseInt((String) session.getSessionID()));
 			break;
 		case "Glicemia":
-			lista = glicDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			lista = glicDao.findAllByUtente(Integer.parseInt((String) session.getSessionID()));
 			break;
 		case "Colesterol":
-			lista = colDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			lista = colDao.findAllByUtente(Integer.parseInt((String) session.getSessionID()));
 			break;
 		case "INR":
-			lista = inrDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			lista = inrDao.findAllByUtente(Integer.parseInt((String) session.getSessionID()));
 			break;
 		case "Peso":
-			lista = pesoDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			lista = pesoDao.findAllByUtente(Integer.parseInt((String) session.getSessionID()));
 			break;
 		case "SaturacaoO2":
-			lista = satDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			lista = satDao.findAllByUtente(Integer.parseInt((String) session.getSessionID()));
 			break;
 		case "Trigliceridos":
-			lista = trigDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			lista = trigDao.findAllByUtente(Integer.parseInt((String) session.getSessionID()));
 			break;
 		case "TensaoArterial":
-			lista = tenArtDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+			lista = tenArtDao.findAllByUtente(Integer.parseInt((String) session.getSessionID()));
 			break;
 		}
 		}
@@ -1007,7 +1056,7 @@ public class TestingController {
 	
 	@RequestMapping(value="/obterMedidaMedico/{tipoMedida}/{utente}",method = RequestMethod.GET)
 	@ResponseBody
-	public List<?> obterMedidaMedico(HttpSession session, @PathVariable("tipoMedida") String tipoMedida,@PathVariable("utente") String utente) {
+	public List<?> obterMedidaMedico(HttpServletRequest request, @PathVariable("tipoMedida") String tipoMedida,@PathVariable("utente") String utente) {
 		List<?> lista = null;
 		try {
 		switch (tipoMedida) {
@@ -1046,10 +1095,12 @@ public class TestingController {
 	}
 	 //Controlador Novo de upload
 	@RequestMapping(value = "/upload")
-	public ModelAndView uploadTemp(HttpSession session) throws FileNotFoundException, IOException, InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException{
+	public ModelAndView uploadTemp(HttpServletRequest request) throws FileNotFoundException, IOException, InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException{
+		String token = getSessaoToken(request);
+		Sessao session = sessaoDao.getSessao(token);
 		String rootPath = System.getProperty("jboss.server.config.dir"); 
 		this.storage=StorageOptions.builder().authCredentials(AuthCredentials.createForJson(new FileInputStream(rootPath+ File.separator+ "bucketkey.json"))).projectId("composite-watch-135111").build().service();
-		List<Exame> exames = listBucket(session);
+		List<Exame> exames = listBucket(request);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("exames", exames);
 			mav.setViewName("uploadtest");
@@ -1060,10 +1111,11 @@ public class TestingController {
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public @ResponseBody
     ModelAndView uploadFileHandler(@RequestParam("name") String name,
-            @RequestParam("file") MultipartFile file, HttpSession session, @RequestParam("tipo") String tipo) throws InvalidKeyException, NumberFormatException, FileNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
-    	
+            @RequestParam("file") MultipartFile file, HttpServletRequest request, @RequestParam("tipo") String tipo) throws InvalidKeyException, NumberFormatException, FileNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+    	String token = getSessaoToken(request);
+		Sessao session = sessaoDao.getSessao(token);
     	if(name.isEmpty()){name="temporario";}
-        if (!file.isEmpty() & !session.getAttribute("sessionID").equals(null) ) {
+        if (!file.isEmpty() & !session.getSessionID().equals(null) ) {
             try {
                 
  
@@ -1077,9 +1129,9 @@ public class TestingController {
                 Bucket bucket = storage.get("userdata-portal-exames");
                 String where=bucket.location();
                 System.out.println(where);
-				System.out.println((String) session.getAttribute("sessionID"));
+				System.out.println((String) session.getSessionID());
 				String contentType = file.getContentType();
-                try (WriteChannel writer = storage.writer(BlobInfo.builder("userdata-portal-exames", (String) session.getAttribute("sessionID") + "/" + file.getOriginalFilename() ).contentType(contentType).build())) {
+                try (WriteChannel writer = storage.writer(BlobInfo.builder("userdata-portal-exames", (String) session.getSessionID() + "/" + file.getOriginalFilename() ).contentType(contentType).build())) {
                     byte[] buffer = new byte[1024];
                     try (InputStream input = file.getInputStream()) {
                       int limit;
@@ -1093,7 +1145,7 @@ public class TestingController {
                       }
                     }
                   };
-                  exameDao.novoExame(Integer.parseInt((String) session.getAttribute("sessionID")), new Date(), (String) session.getAttribute("sessionID") + "/" + file.getOriginalFilename(), tipo);
+                  exameDao.novoExame(Integer.parseInt((String) session.getSessionID()), new Date(), (String) session.getSessionID() + "/" + file.getOriginalFilename(), tipo);
             } catch (Exception e) {
             	System.out.println(e.toString());
             	ModelAndView mav = new ModelAndView();
@@ -1107,7 +1159,7 @@ public class TestingController {
         }
         String rootPath = System.getProperty("jboss.server.config.dir"); 
 		this.storage=StorageOptions.builder().authCredentials(AuthCredentials.createForJson(new FileInputStream(rootPath+ File.separator+ "bucketkey.json"))).projectId("composite-watch-135111").build().service();
-		List<Exame> exames = listBucket(session);
+		List<Exame> exames = listBucket(request);
         ModelAndView mav = new ModelAndView();
 		mav.addObject("exames", exames);
 			mav.setViewName("uploadtest");
@@ -1150,15 +1202,17 @@ public class TestingController {
 
     @RequestMapping(value="/ListFiles")
 	@ResponseBody
-	public List<Exame> listBucket(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException
+	public List<Exame> listBucket(HttpServletRequest request) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException
     {
+    	String token = getSessaoToken(request);
+		Sessao session = sessaoDao.getSessao(token);
     	Bucket bucket = storage.get("userdata-portal-exames");
     	ArrayList<String> filespresent= new ArrayList<String>();
         Iterator<Blob> blobIterator = bucket.list().iterateAll();
         while (blobIterator.hasNext()) {
           filespresent.add(blobIterator.next().name());
         }
-        List<Exame> exames = exameDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
+        List<Exame> exames = exameDao.findAllByUtente(Integer.parseInt((String) session.getSessionID()));
         return exames;
     }
     

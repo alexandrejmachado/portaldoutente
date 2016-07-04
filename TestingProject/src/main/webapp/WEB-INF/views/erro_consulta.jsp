@@ -14,7 +14,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href= <c:url value="/resources/css/bootstrap.min.css" ></c:url> rel="stylesheet"/>
-    
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>    
     <link href= <c:url value="/resources/css/main.css" ></c:url> rel="stylesheet"/>
     
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -29,7 +29,8 @@
 
 <div class= "container">    <!-- ROW -->
         <div class= "rowMajor">
-            <div class="col-md-11">Portal do Utente</div>
+			<div class="col-md-6"><a id = "PortalDoUtente" href="/" style="text-decoration:none; color: white; font-weight:100">Portal do Utente</a></div>
+			<div class="col-md-6" id="entrar" style="text-align: right;">${username}</div>
         </div>
 </div>
 

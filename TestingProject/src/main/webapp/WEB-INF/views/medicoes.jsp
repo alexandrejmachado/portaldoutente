@@ -52,27 +52,30 @@
 </style>
 <div class= "container">   
         
-            <div class="col-lg-12"> 
-                <div class= "rowMajor">
-					<div class="col-md-11">Portal do Utente</div>
-					<div class="col-md-1" id="entrar">${username}</div>
+  <div class="col-lg-12"> 
+  
+  
+                <div class= "rowMajor ">
+                	<div id="divisento"></div>
+					<div class="col-md-6"><a id = "PortalDoUtente" href="/" style="text-decoration:none; color: white; font-weight:100">Portal do Utente</a></div>
+					<div class="col-md-6" id="entrar" style="text-align: right;">${username}</div>
 				</div>
-            </div>
-            
-        <nav>
-          <ul>
-            <li id="login">
-              <a id="login-trigger" href="#">
-                Opções <span>▼</span>
-              </a>
-              <div id="login-content">
-                <a button href= "/perfil/dados" id = "aaa">Ver Perfil</button></a><br>
-                <a button href= "/logout" id ="aaa">Logout</button></a>
-              </div>                     
-            </li>
-          </ul>
-        </nav>
-			
+			        <nav>
+			          <ul>
+			            <li id="login">
+			              <a id="login-trigger" href="#">
+			                Opções <span>▼</span>
+			              </a>
+			              <div id="login-content">
+			                <a button href= "/perfil/dados" id = "aaa">Ver Perfil</button></a><br>
+			                <a button href= "/logout" id ="aaa">Logout</button></a>
+			              </div>                     
+			            </li>
+			          </ul>
+			        </nav>
+ 			</div>
+ 			
+ 			
 	<div class="col-lg-12" id="caixaGig">  <!--  -->
 	
 		<div id="wrapper">
@@ -318,7 +321,7 @@
 		</div>
     </div>
     <!-- /#wrapper -->
-
+</div>
     <!-- jQuery -->
     <script src='<c:url value="/resources/js/jquery.js"></c:url>'></script>
 
@@ -327,17 +330,6 @@
     <script src='<c:url value="/resources/js/bootstrap.min.js"></c:url>'></script>
 
     <!-- Menu Toggle Script -->
-<script>
-     $(document).ready(function(){
-   $('#login-trigger').click(function(){
-     $(this).next('#login-content').slideToggle();
-     $(this).toggleClass('active');          
-    
-     if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
-       else $(this).find('span').html('&#x25BC;')
-     })
- });
- </script>
 
     
 	<script>
