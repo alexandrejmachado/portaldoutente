@@ -20,16 +20,21 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.jboss.tools.example.springmvc.data.InstituicaoDao;
 import org.jboss.tools.example.springmvc.data.MedicacaoDao;
 import org.jboss.tools.example.springmvc.data.MedicamentoDao;
 import org.jboss.tools.example.springmvc.data.MedicamentoIdDao;
 import org.jboss.tools.example.springmvc.data.SessaoDao;
+import org.jboss.tools.example.springmvc.data.MedicoDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
 import org.jboss.tools.example.springmvc.model.Cirurgia;
 import org.jboss.tools.example.springmvc.model.Medicacao;
 import org.jboss.tools.example.springmvc.model.Medicamento;
 import org.jboss.tools.example.springmvc.model.Medicamentoid;
 import org.jboss.tools.example.springmvc.model.Sessao;
+import org.jboss.tools.example.springmvc.sensitivedata.Instituicao;
+import org.jboss.tools.example.springmvc.sensitivedata.Medico;
+import org.jboss.tools.example.springmvc.sensitivedata.Utente;
 
 import java.util.Date;
 import java.util.HashMap;
