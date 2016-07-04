@@ -16,16 +16,20 @@ import java.security.NoSuchAlgorithmException;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.jboss.tools.example.springmvc.data.MedicacaoDao;
 import org.jboss.tools.example.springmvc.data.MedicamentoDao;
 import org.jboss.tools.example.springmvc.data.MedicamentoIdDao;
+import org.jboss.tools.example.springmvc.data.SessaoDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
 import org.jboss.tools.example.springmvc.model.Cirurgia;
 import org.jboss.tools.example.springmvc.model.Medicacao;
 import org.jboss.tools.example.springmvc.model.Medicamento;
 import org.jboss.tools.example.springmvc.model.Medicamentoid;
+import org.jboss.tools.example.springmvc.model.Sessao;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -49,6 +53,9 @@ public class MedicacaoController {
 
 	@Autowired
 	private UtenteDao utenteDao;
+	
+	@Autowired
+	private SessaoDao sessaoDao;
 	
 	
 	@Autowired
@@ -94,21 +101,25 @@ public class MedicacaoController {
 	}
 	
 	
-	public boolean verifyLogin(HttpSession session) {
+	public boolean verifyLogin(String sessionToken) {
+		System.out.println(sessionToken);
 		System.out.println("A VERIFICAR SE ESTA LOGADO:");
-		System.out.println("ID DE ACESSO:" + session.getAttribute("sessionID"));
-		if(session.getAttribute("sessionID") == null){
+		if(sessionToken.equals("empty")){
 			System.out.println("NAO TEM SESSAO");
 			return false;
 		}
 		else{
+			System.out.println("antes");
+			Sessao session = sessaoDao.getSessao(sessionToken);
+			System.out.println("depois");
+			System.out.println(session);
 			try {
-				System.out.println("VERFICAR SE ESTA ACTIVA A CONTA");
-				if(utenteDao.verifyActivatedUser((String)session.getAttribute("sessionID"))){System.out.println("VERFICAR SE ESTA ACTIVA A CONTA");
+				System.out.println("VERIFICAR SE ESTA ACTIVA A CONTA");
+				if(utenteDao.verifyActivatedUser(session.getSessionID())){System.out.println("VERFICAR SE ESTA ACTIVA A CONTA");
 					return true;}
 				else{
 					System.out.println("NAO ESTA ACTIVA A CONTA");
-					session.removeAttribute("sessionID");
+					sessaoDao.removerSessao(sessionToken);
 				return false;
 				}
 			} catch (InvalidKeyException e) {
@@ -141,13 +152,15 @@ public class MedicacaoController {
 	
 	
 	@RequestMapping(value = "/view")
-	public ModelAndView verificar(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+	public ModelAndView verificar(HttpServletRequest request) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		ModelAndView mav = new ModelAndView();
-		if(verifyLogin(session)){
-			List<Medicacao> lista = medicacaoDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID")));
-			session.setAttribute("lista", lista);
+		
+		String token = getSessaoToken(request);
+		if(verifyLogin(token)){
+			Sessao session = sessaoDao.getSessao(token);
+			List<Medicacao> lista = medicacaoDao.findAllByUtente(Integer.parseInt((String) session.getSessionID()));
 			mav.addObject("lista", lista);
-			mav.addObject("username", session.getAttribute("sessionName"));
+			mav.addObject("username", session.getSessionName());
 			mav.setViewName("medicamentos");
 		}
 		else {
@@ -170,6 +183,21 @@ public class MedicacaoController {
 		return medicacaoDao.deleteMedicacao(Integer.parseInt(id));
 	}
 	
+	
+	public String getSessaoToken(HttpServletRequest request){
+		String sessionToken = "empty";
+		System.out.println("Token de sessao antes: "+sessionToken);
+		Cookie[] listaCookies = request.getCookies();
+		if(listaCookies != null){
+			for(Cookie c:listaCookies){
+				if(c.getName().equals("sessionToken")){
+					sessionToken = c.getValue();
+				}
+			}
+		}
+		System.out.println("Esta e a cookie: "+ sessionToken);
+		return sessionToken;
+	}
 
 
 
