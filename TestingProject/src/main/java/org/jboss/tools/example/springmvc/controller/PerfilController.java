@@ -251,14 +251,19 @@ public class PerfilController {
 	}
 	
 	public boolean verifyLogin(HttpSession session) {
+		System.out.println("A VERIFICAR SE ESTA LOGADO:");
+		System.out.println("ID DE ACESSO:" + session.getAttribute("sessionID"));
 		if(session.getAttribute("sessionID") == null){
+			System.out.println("NAO TEM SESSAO");
 			return false;
 		}
 		else{
 			try {
-				if(utenteDao.verifyActivatedUser((String)session.getAttribute("sessionID")))
-				return true;
+				System.out.println("VERFICAR SE ESTA ACTIVA A CONTA");
+				if(utenteDao.verifyActivatedUser((String)session.getAttribute("sessionID"))){System.out.println("VERFICAR SE ESTA ACTIVA A CONTA");
+					return true;}
 				else{
+					System.out.println("NAO ESTA ACTIVA A CONTA");
 					session.removeAttribute("sessionID");
 				return false;
 				}
@@ -285,6 +290,7 @@ public class PerfilController {
 				e.printStackTrace();
 			}
 		}
+		System.out.println("ERRO ESTRANHO");
 		return false;
 		
 	}

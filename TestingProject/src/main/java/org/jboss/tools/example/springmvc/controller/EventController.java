@@ -195,33 +195,46 @@ public class EventController {
 	
 	
 	public boolean verifyLogin(HttpSession session) {
+		System.out.println("A VERIFICAR SE ESTA LOGADO:");
+		System.out.println("ID DE ACESSO:" + session.getAttribute("sessionID"));
 		if(session.getAttribute("sessionID") == null){
+			System.out.println("NAO TEM SESSAO");
 			return false;
 		}
 		else{
 			try {
-				if(utenteDao.verifyActivatedUser((String)session.getAttribute("sessionID")))
-				return true;
+				System.out.println("VERFICAR SE ESTA ACTIVA A CONTA");
+				if(utenteDao.verifyActivatedUser((String)session.getAttribute("sessionID"))){System.out.println("VERFICAR SE ESTA ACTIVA A CONTA");
+					return true;}
 				else{
+					System.out.println("NAO ESTA ACTIVA A CONTA");
 					session.removeAttribute("sessionID");
 				return false;
 				}
 			} catch (InvalidKeyException e) {
+				
 				e.printStackTrace();
 			} catch (NumberFormatException e) {
+				
 				e.printStackTrace();
 			} catch (NoSuchAlgorithmException e) {
+				
 				e.printStackTrace();
 			} catch (NoSuchPaddingException e) {
+				
 				e.printStackTrace();
 			} catch (IllegalBlockSizeException e) {
+				
 				e.printStackTrace();
 			} catch (BadPaddingException e) {
+				
 				e.printStackTrace();
 			} catch (IOException e) {
+				
 				e.printStackTrace();
 			}
 		}
+		System.out.println("ERRO ESTRANHO");
 		return false;
 		
 	}
