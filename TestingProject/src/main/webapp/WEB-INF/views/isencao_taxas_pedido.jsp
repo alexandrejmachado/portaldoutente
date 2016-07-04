@@ -57,13 +57,7 @@
 			        </nav>
  			</div>
 
-            
-          
-
-            
-         
-       
-        
+    
 				
 		<div class="col-lg-12" id="caixaGig">  <!--  -->
 		
