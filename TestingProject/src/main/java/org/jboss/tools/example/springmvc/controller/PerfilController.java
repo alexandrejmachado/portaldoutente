@@ -12,7 +12,6 @@ import javax.crypto.NoSuchPaddingException;
 import javax.persistence.EntityManager;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.jboss.tools.example.springmvc.data.AlturaDao;
 import org.jboss.tools.example.springmvc.data.CirurgiaDao;

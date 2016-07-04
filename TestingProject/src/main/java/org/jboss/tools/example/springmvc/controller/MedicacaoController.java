@@ -18,7 +18,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.jboss.tools.example.springmvc.data.InstituicaoDao;
 import org.jboss.tools.example.springmvc.data.MedicacaoDao;
@@ -86,19 +85,23 @@ public class MedicacaoController {
 	
 	@RequestMapping(value="/inserir", method = RequestMethod.POST,params={"nome", "dosagem", "indicacoes"})
 	@ResponseBody
-	public boolean inserirMedicacao(HttpSession session, @RequestParam(value="nome") String nomeMedicamento, @RequestParam(value="dosagem") double dosagemDiaria, @RequestParam(value="indicacoes") String indicacoes) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+	public boolean inserirMedicacao(HttpServletRequest request, @RequestParam(value="nome") String nomeMedicamento, @RequestParam(value="dosagem") double dosagemDiaria, @RequestParam(value="indicacoes") String indicacoes) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		System.out.println("cheguei aqui");
 		System.out.println("tentei corresponder o medicamento:" + nomeMedicamento);
 		Medicamentoid medid= medidDao.findByNome(nomeMedicamento);
+		
+		String token = getSessaoToken(request);
+		Sessao session = sessaoDao.getSessao(token);
+		
 		int id = medid.getID();
 		Medicamento med = medDao.findById(id);
 		System.out.println("medicamento id: " + med.getId());
 		System.out.println("medicamento comprimidos: " + med.getComprimidos());
-		if(medicacaoDao.exists(Integer.parseInt((String) session.getAttribute("sessionID")), med.getId())){
+		if(medicacaoDao.exists(Integer.parseInt(session.getSessionID()), med.getId())){
 			return false;
 		}
 		else {
-			medicacaoDao.novaMedicacao(Integer.parseInt((String) session.getAttribute("sessionID")), med.getId(), nomeMedicamento, dosagemDiaria, indicacoes, "Pendente", med.getComprimidos());
+			medicacaoDao.novaMedicacao(Integer.parseInt(session.getSessionID()), med.getId(), nomeMedicamento, dosagemDiaria, indicacoes, "Pendente", med.getComprimidos());
 			return true;
 		}
 	}
@@ -106,8 +109,10 @@ public class MedicacaoController {
 	
 	@RequestMapping(value="/obterMedicacoes")
 	@ResponseBody
-	public List<Medicacao> obterMedicacao(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
-		List<Medicacao> lista = medicacaoDao.findAllByUtente(Integer.parseInt((String) session.getAttribute("sessionID"))); 
+	public List<Medicacao> obterMedicacao(HttpServletRequest request) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+		String token = getSessaoToken(request);
+		Sessao session = sessaoDao.getSessao(token);
+		List<Medicacao> lista = medicacaoDao.findAllByUtente(Integer.parseInt(session.getSessionID())); 
 		return lista;
 	}
 	
@@ -183,14 +188,14 @@ public class MedicacaoController {
 
 	@RequestMapping(value = "/renovar", method = RequestMethod.POST,params={"id"})
 	@ResponseBody
-	public boolean renovarMed(HttpSession session, @RequestParam("id") String id) {
+	public boolean renovarMed(HttpServletRequest request, @RequestParam("id") String id) {
 		System.out.println("im here");
 		return medicacaoDao.renovarMed(Integer.parseInt(id));
 	}
 	
 	@RequestMapping(value = "/apagar", method = RequestMethod.POST, params={"id"})
 	@ResponseBody
-	public boolean apagarMed(HttpSession session, @RequestParam("id") String id) {
+	public boolean apagarMed(HttpServletRequest request, @RequestParam("id") String id) {
 		return medicacaoDao.deleteMedicacao(Integer.parseInt(id));
 	}
 	
