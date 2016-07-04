@@ -163,6 +163,10 @@
     float:center;
 }
 
+#botao_conf{
+	margin-right:5%;
+}
+
 #smallBox{
     display: inline-block;
     vertical-align: middle;
@@ -337,7 +341,7 @@ input[type="number"] {
 
 
 
-html body div.container div#caixaGig.col-lg-12 div#wrapper div#sidebar-wrapper ul.barra li:active,
+ html body div.container div#caixaGig.col-lg-12 div#wrapper div#sidebar-wrapper ul.barra li:active,
  html body div.container div#caixaGig.col-lg-12 div#wrapper div#sidebar-wrapper ul.barra li:focus,
  html body div.container div#caixaGig.col-lg-12 div#wrapper div#sidebar-wrapper ul.barra li:hover{
     text-decoration: none;
@@ -373,7 +377,6 @@ html body div.container div#caixaGig.col-lg-12 div#wrapper div#sidebar-wrapper u
  border: 0.3px solid;
  margin-top: 7px;
  margin-bottom: 5px;
- 
 }
 
 .botao_med {
@@ -421,8 +424,7 @@ nav ul {
  position: relative;
  float: right;
  background: transparent;
- border-bottom: 1px solid #fff;
- border-radius: 3px;
+
 }
 
 nav li {
@@ -443,6 +445,7 @@ nav #signup a {
  text-transform: uppercase;
  color: white;
  margin-right: 13px;
+ border: none !important;
 }
 
 nav #signup a {
@@ -510,10 +513,10 @@ input {
  background-image: linear-gradient(top, #e97171, #d14545);
  -moz-border-radius: 3px;
  -webkit-border-radius: 3px;
- border-radius: 3px;
+/*  border-radius: 3px; */
  text-shadow: 0 1px 0 rgba(0,0,0,.5);
  box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;    
- border: 1px solid #7e1515;
+/*  border: 1px solid #7e1515; */
  float: left;
  height: 30px;
  padding: 0;
