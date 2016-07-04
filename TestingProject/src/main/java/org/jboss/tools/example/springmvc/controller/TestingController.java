@@ -340,8 +340,6 @@ public class TestingController {
 		ModelAndView mav = new ModelAndView();
 		if(!verifyLogin(token)){
 			Sessao session = sessaoDao.getSessao(token);
-			mav.addObject("username", session.getSessionName());
-			mav.setViewName("registo");
 		}
 		else{
 			mav.setViewName("index");
