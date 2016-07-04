@@ -18,14 +18,19 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpSession;
 
+import org.jboss.tools.example.springmvc.data.InstituicaoDao;
 import org.jboss.tools.example.springmvc.data.MedicacaoDao;
 import org.jboss.tools.example.springmvc.data.MedicamentoDao;
 import org.jboss.tools.example.springmvc.data.MedicamentoIdDao;
+import org.jboss.tools.example.springmvc.data.MedicoDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
 import org.jboss.tools.example.springmvc.model.Cirurgia;
 import org.jboss.tools.example.springmvc.model.Medicacao;
 import org.jboss.tools.example.springmvc.model.Medicamento;
 import org.jboss.tools.example.springmvc.model.Medicamentoid;
+import org.jboss.tools.example.springmvc.sensitivedata.Instituicao;
+import org.jboss.tools.example.springmvc.sensitivedata.Medico;
+import org.jboss.tools.example.springmvc.sensitivedata.Utente;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -56,6 +61,12 @@ public class MedicacaoController {
 	
 	@Autowired
 	public UtenteDao utDao;
+	
+	@Autowired
+	public InstituicaoDao instDao;
+	
+	@Autowired
+	public MedicoDao medicoDao;
 	
 	@Autowired
 	public MedicacaoDao medicacaoDao;
@@ -157,6 +168,40 @@ public class MedicacaoController {
 	}
 	
 
+	@RequestMapping(value="/verReceita", method = RequestMethod.POST, params={"medicacaoID"})
+	@ResponseBody
+	public ModelAndView verReceita(HttpSession session, @RequestParam("id") String id) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("receita");
+		Utente ut = utDao.findUtenteById(Integer.parseInt((String) session.getAttribute("sessionID")));
+		mav.addObject("utenteName", ut.getNome());
+		mav.addObject("utenteID", ut.getNumUtente());
+		mav.addObject("utenteTelemovel", ut.getTelemovel());
+		int idMedicacao = Integer.parseInt(id);
+		Medicacao med = medicacaoDao.findById(idMedicacao);
+		mav.addObject("nomeMedicamento", med.getNomeMedicamento());
+		double dose = med.getDose();
+		mav.addObject("dose", dose);
+		if (dose == 1) {
+			mav.addObject("extenso", "um");
+		}
+		else if (dose == 2) {
+			mav.addObject("extenso", "dois");
+		}
+		else if (dose == 3) {
+			mav.addObject("extenso", "três");
+		}
+		Instituicao inst = instDao.findById(ut.getCentroSaude());
+		mav.addObject("medicacaoID", med.getId());
+		mav.addObject("instituicao", inst.getNome());
+		Medico medico = medicoDao.findById(ut.getMedico());
+		mav.addObject("nomeMedico", medico.getNome());
+		mav.addObject("contactoInstituicao", inst.getTelefone());
+		mav.addObject("data", new Date());
+		return mav;
+	}
+	
+	
 	@RequestMapping(value = "/renovar", method = RequestMethod.POST,params={"id"})
 	@ResponseBody
 	public boolean renovarMed(HttpSession session, @RequestParam("id") String id) {
