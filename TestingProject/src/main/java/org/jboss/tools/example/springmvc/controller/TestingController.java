@@ -198,9 +198,7 @@ public class TestingController {
 			for(Cookie c:listaCookies){
 				if(c.getName().equals("sessionToken")){
 					sessionToken = c.getValue();
-					System.out.println("Dentro");
 				}
-				System.out.println("Meio Dentro");
 			}
 		}
 		System.out.println("Esta e a cookie: "+ sessionToken);
@@ -752,7 +750,6 @@ public class TestingController {
 	public boolean verifyLogin(String sessionToken) {
 		System.out.println(sessionToken);
 		System.out.println("A VERIFICAR SE ESTA LOGADO:");
-		//System.out.println("ID DE ACESSO:" + sessionToken);
 		if(sessionToken.equals("empty")){
 			System.out.println("NAO TEM SESSAO");
 			return false;
