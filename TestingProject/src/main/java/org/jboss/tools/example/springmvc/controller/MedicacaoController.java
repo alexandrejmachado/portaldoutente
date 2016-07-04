@@ -212,10 +212,12 @@ public class MedicacaoController {
 	
 	@RequestMapping(value="/verReceita", method = RequestMethod.POST, params={"medicacaoID"})
 	@ResponseBody
-	public ModelAndView verReceita(HttpSession session, @RequestParam("id") String id) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+	public ModelAndView verReceita(HttpServletRequest request, @RequestParam("id") String id) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		ModelAndView mav = new ModelAndView();
+		String token = getSessaoToken(request);
+		Sessao session = sessaoDao.getSessao(token);
 		mav.setViewName("receita");
-		Utente ut = utDao.findUtenteById(Integer.parseInt((String) session.getAttribute("sessionID")));
+		Utente ut = utDao.findUtenteById(Integer.parseInt(session.getSessionID()));
 		mav.addObject("utenteName", ut.getNome());
 		mav.addObject("utenteID", ut.getNumUtente());
 		mav.addObject("utenteTelemovel", ut.getTelemovel());
@@ -231,7 +233,7 @@ public class MedicacaoController {
 			mav.addObject("extenso", "dois");
 		}
 		else if (dose == 3) {
-			mav.addObject("extenso", "três");
+			mav.addObject("extenso", "tres");
 		}
 		Instituicao inst = instDao.findById(ut.getCentroSaude());
 		mav.addObject("medicacaoID", med.getId());

@@ -399,10 +399,12 @@ public class PerfilController {
 	}
 	
 	@RequestMapping(value="/verPrivacidades")
-	public ModelAndView verPrivacidades (HttpSession session) {
+	public ModelAndView verPrivacidades (HttpServletRequest request) {
+		String token = getSessaoToken(request);
+		Sessao session = sessaoDao.getSessao(token);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("privacidade");
-		MedicoUtente mu = muDao.findByUtente((String) session.getAttribute("sessionID"));
+		MedicoUtente mu = muDao.findByUtente(session.getSessionID());
 		List<MedicoUtente> lista = new ArrayList<MedicoUtente>();
 		lista.add(mu);
 		System.out.println(lista);
