@@ -56,8 +56,9 @@
               </a>
               <div id="login-content">
                 <a button href= "/perfil/dados" id = "aaa">Ver Perfil</button></a><br>
+                <a button href= "/perfil/verPrivacidades" id = "aaa">Privacidade das Medições</button></a><br>
                 <a button href= "/logout" id ="aaa">Logout</button></a>
-              </div>                     
+              </div>                      
             </li>
           </ul>
         </nav>

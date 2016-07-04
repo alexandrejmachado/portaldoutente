@@ -18,7 +18,7 @@
     <link href=<c:url value="/resources/css/bootstrap.min.css" ></c:url> rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href=<c:url value="/resources/css/main1.css" ></c:url> rel="stylesheet">
+    <link href=<c:url value="/resources/css/main.css" ></c:url> rel="stylesheet">
     
     <!-- Font -->
   	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
@@ -68,8 +68,9 @@
 			              </a>
 			              <div id="login-content">
 			                <a button href= "/perfil/dados" id = "aaa">Ver Perfil</button></a><br>
+			                <a button href= "/perfil/verPrivacidades" id = "aaa">Privacidade das Medições</button></a><br>
 			                <a button href= "/logout" id ="aaa">Logout</button></a>
-			              </div>                     
+			              </div>                      
 			            </li>
 			          </ul>
 			        </nav>

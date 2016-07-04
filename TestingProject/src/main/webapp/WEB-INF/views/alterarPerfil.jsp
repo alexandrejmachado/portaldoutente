@@ -37,9 +37,10 @@
                 Opções <span>▼</span>
               </a>
               <div id="login-content">
-                <a href= "/perfil" id = "aaa">Ver Perfil</a><br>
-                <a href= "/logout" id ="aaa">Logout</a>
-              </div>                     
+                <a button href= "/perfil/dados" id = "aaa">Ver Perfil</button></a><br>
+                <a button href= "/perfil/verPrivacidades" id = "aaa">Privacidade das Medições</button></a><br>
+                <a button href= "/logout" id ="aaa">Logout</button></a>
+              </div>                      
             </li>
           </ul>
         </nav>

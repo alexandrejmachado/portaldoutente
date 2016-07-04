@@ -403,6 +403,7 @@ public class PerfilController {
 		Sessao session = sessaoDao.getSessao(token);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("privacidade");
+		mav.addObject("username", session.getSessionName());
 		MedicoUtente mu = muDao.findByUtente(session.getSessionID());
 		List<MedicoUtente> lista = new ArrayList<MedicoUtente>();
 		lista.add(mu);
