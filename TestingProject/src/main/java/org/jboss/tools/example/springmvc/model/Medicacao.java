@@ -84,7 +84,6 @@ public class Medicacao {
 		
 		
 		cal = Calendar.getInstance();
-		cal.add(Calendar.DATE, getDiasParaRenovacao() - 5);
 	}
 	
 	
@@ -129,6 +128,7 @@ public class Medicacao {
 	}
 	
 	public String getRenovacao() {
+		System.out.println("get = " + renovacao);
 		switch (renovacao) {
 		case ACEITE:
 			return "Aceite";
@@ -145,10 +145,13 @@ public class Medicacao {
 		switch (renovacao) {
 		case "Aceite":
 			this.renovacao = EstadoRenovacao.ACEITE;
+			break;
 		case "Pendente":
 			this.renovacao = EstadoRenovacao.PENDENTE;
+			break;
 		case "Caducado":
 			this.renovacao = EstadoRenovacao.CADUCADO;
+			break;
 		default:
 			this.renovacao = EstadoRenovacao.REJEITADO;
 	}
@@ -193,10 +196,11 @@ public class Medicacao {
 	public boolean renovarMedicacao() {
 		Calendar cenas = Calendar.getInstance();
 		if (cenas.before(validade) && cenas.after(cal) && estado && renovacao==EstadoRenovacao.CADUCADO) {
-			renovacao=EstadoRenovacao.ACEITE;
+			renovacao=EstadoRenovacao.PENDENTE;
 			return true;
 		}
 		else if (renovacao == EstadoRenovacao.PENDENTE) {
+			setRenovacao("Aceite");
 			return true;
 		}
 		return false;
@@ -206,18 +210,29 @@ public class Medicacao {
 	
 	public boolean checkMedicacao() {
 		Calendar cenas = Calendar.getInstance();
+		System.out.println(cenas.getTime());
+		System.out.println(validade.getTime());
+		System.out.println(renovacao);
 		if (cenas.after(validade)) {
+			System.out.println("1");
 			renovacao = EstadoRenovacao.REJEITADO;
 			return false;
 		}
 		else if (renovacao == EstadoRenovacao.CADUCADO) {
+			System.out.println(2);
 			return false;
 		}
-		else if (cenas.after(cal)) {
+		else if (cenas.before(cal)) {
+			System.out.println(3);
 			setRenovacao("Caducado");
 			return false;
 		}
+		else if (getRenovacao().equals("Pendente")) {
+			return true;
+		}
 		else {
+			System.out.println(4);
+			setRenovacao("Aceite");
 			return true;
 		}
 	}

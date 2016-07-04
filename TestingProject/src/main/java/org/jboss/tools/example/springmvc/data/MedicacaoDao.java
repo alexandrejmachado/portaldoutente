@@ -10,12 +10,14 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.servlet.http.HttpSession;
 
 import org.jboss.tools.example.springmvc.controller.Cifras;
 import org.jboss.tools.example.springmvc.model.Medicacao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Repository
 @Transactional
@@ -36,6 +38,7 @@ public class MedicacaoDao {
 		List<Medicacao> lista = query.getResultList();
 		for (Medicacao elem : lista) {
 			elem.checkMedicacao();
+			em.persist(elem);
 		}
 		return lista;
 	}
@@ -52,6 +55,14 @@ public class MedicacaoDao {
 		Medicacao med = query.getSingleResult();
 		em.remove(med);
 		return true;
+	}
+	
+	public boolean renovarMed(int id) {
+		Medicacao medAtual = findById(id);
+		boolean estado = medAtual.renovarMedicacao();
+		em.persist(medAtual);
+		System.out.println(medAtual.getRenovacao());
+		return estado;
 	}
 	
 	public boolean exists(int numUtente, int medId) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {

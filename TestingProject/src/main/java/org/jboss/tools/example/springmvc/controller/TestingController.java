@@ -1086,7 +1086,7 @@ public class TestingController {
                       }
                     }
                   };
-                  exameDao.novoExame(Integer.parseInt((String) session.getAttribute("sessionID")), new Date(), (String) session.getAttribute("sessionID") + "/" + name , tipo);
+                  exameDao.novoExame(Integer.parseInt((String) session.getAttribute("sessionID")), new Date(), (String) session.getAttribute("sessionID") + "/" + file.getOriginalFilename(), tipo);
             } catch (Exception e) {
             	System.out.println(e.toString());
             	ModelAndView mav = new ModelAndView();

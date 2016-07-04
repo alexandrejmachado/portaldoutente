@@ -130,16 +130,7 @@
 	</div> <!--  wrapper -->
     
     
-<script>
-function renovar(ID) { 
-	path="https://" + window.location.host + "/";
-	console.log(ID);
-	$.post(path+"confirmarCirurgia", {"id":ID},function(data){
-		if (data==true){window.location.replace(path + "index");}
-	else {alert("Falhou a Confirmar a Cirurgia!");}
-})}
 
-</script>
       
 
 
