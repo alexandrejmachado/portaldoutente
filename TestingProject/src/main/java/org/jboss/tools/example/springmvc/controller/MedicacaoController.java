@@ -217,7 +217,7 @@ public class MedicacaoController {
 	
 	@RequestMapping(value="/verReceita", method = RequestMethod.POST, params={"medicacaoID"})
 	@ResponseBody
-	public ModelAndView verReceita(HttpServletRequest request, @RequestParam("id") String id) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+	public ModelAndView verReceita(HttpServletRequest request, @RequestParam("medicacaoID") int id) throws NumberFormatException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		ModelAndView mav = new ModelAndView();
 		String token = getSessaoToken(request);
 		Sessao session = sessaoDao.getSessao(token);
@@ -226,7 +226,7 @@ public class MedicacaoController {
 		mav.addObject("utenteName", ut.getNome());
 		mav.addObject("utenteID", ut.getNumUtente());
 		mav.addObject("utenteTelemovel", ut.getTelemovel());
-		int idMedicacao = Integer.parseInt(id);
+		int idMedicacao = id;
 		Medicacao med = medicacaoDao.findById(idMedicacao);
 		mav.addObject("nomeMedicamento", med.getNomeMedicamento());
 		double dose = med.getDose();
