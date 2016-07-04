@@ -110,7 +110,6 @@
 			                <td>DOSE</td> 
 			                <td>INDICAÇÕES</td>
 			                <td>Renovar</td>
-			                <td>Apagar</td>
 			            </tr>
 			
 			         <c:forEach items="${lista}" var="medicacao">
@@ -120,6 +119,13 @@
 			        <td><c:out value="${medicacao.indicacoes}"/></td>
 			        <td><button id = "renovar" value="${medicacao.getId()}" onclick="renovar(${medicacao.id})"> Pedir Renovacao </button></td>
 			        <td><button id = "apagar" value="${medicacao.getId() }" onclick="apagar(${medicacao.id})"> Apagar </button></td>
+			        <td>
+		    		<form action="medicacao/verReceita" method="POST">
+		    		<input type="text" name="medicacaoID" style="display:none" value="${medicacao.id}">
+		    		<input type="submit" value="Download Ficheiro">
+		    		</form>
+		    		</td>
+			        
 			        
 			    </tr>
 				</c:forEach>
