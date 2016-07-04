@@ -48,6 +48,7 @@
         <class>org.jboss.tools.example.springmvc.sensitivedata.Instituicao</class>
         <class>org.jboss.tools.example.springmvc.sensitivedata.Medico</class>
         <class>org.jboss.tools.example.springmvc.sensitivedata.Utente</class>
+        <class>org.jboss.tools.example.springmvc.model.Sessao</class>
         <properties>
             <property name="jboss.entity.manager.factory.jndi.name" 
                       value="java:jboss/TestingProject/persistencebasic" />
