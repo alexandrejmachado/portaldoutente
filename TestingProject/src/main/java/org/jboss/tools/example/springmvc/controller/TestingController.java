@@ -345,7 +345,7 @@ public class TestingController {
 	@RequestMapping(value="/medicoes/avaliableMeasures",method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody List<String> listAllMeasures() throws ClassNotFoundException {
 		List<String> finalnames = new ArrayList<String>();
-		List<String> ignoreList = new ArrayList<String>(Arrays.asList(new String[]{"Exame","Boletim", "Cirurgia", "Consulta", "Medicacao", "Medicamento", "Receita", "Vacina"}));
+		List<String> ignoreList = new ArrayList<String>(Arrays.asList(new String[]{"Exame","Boletim", "Cirurgia", "Consulta", "Medicacao", "Medicamento", "Receita", "Vacina","Medicamentoid","EstadoRenovacao","MedicoUtente"}));
 		for(String s : checkMeasures())
 		{
 			String[] temp=s.split("\\.");

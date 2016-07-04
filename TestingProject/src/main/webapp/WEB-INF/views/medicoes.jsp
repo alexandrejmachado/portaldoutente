@@ -133,7 +133,6 @@
 										   
 										
 										<input id = "botao_reg" type="submit" onclick="aquivoueu()" style="color:black">
-									  	<button id = "botao_voltar" onclick= "verMedida()" >Histórico</button>
 							</div>
 							
 							<div id="graph"></div>
@@ -184,6 +183,7 @@
 							     processData:false, //To avoid making query String instead of JSON
 							     success: function(resposeJsonObject){
 							        // alert(resposeJsonObject);
+							        		$(".campo").val("");
 							    		    $("div.alert-div").fadeIn(300).delay(300).fadeOut(400);
 							    }
 							    });
