@@ -1093,7 +1093,7 @@ public class TestingController {
                       }
                     }
                   };
-                  exameDao.novoExame(Integer.parseInt((String) session.getAttribute("sessionID")), new Date(), (String) session.getAttribute("sessionID") + "/" + name , tipo);
+                  exameDao.novoExame(Integer.parseInt((String) session.getAttribute("sessionID")), new Date(), (String) session.getAttribute("sessionID") + "/" + file.getOriginalFilename(), tipo);
             } catch (Exception e) {
             	System.out.println(e.toString());
             	ModelAndView mav = new ModelAndView();
@@ -1116,8 +1116,9 @@ public class TestingController {
 
     @RequestMapping(value = "/getFile", method = RequestMethod.POST)
     public @ResponseBody
-   Object downloadFileHandler(@RequestParam("name") String name) throws IOException {
+   Object downloadFileHandler(@RequestParam("name") String name) throws IOException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
     	HttpHeaders respHeaders = new HttpHeaders();
+    	System.out.println("nome= " + name);
         //Tipo de Return:ResponseEntity<InputStreamResource>
     	Blob blob = storage.get(BlobId.of("userdata-portal-exames", name));
     	PrintStream writeTo = System.out;

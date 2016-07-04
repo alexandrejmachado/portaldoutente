@@ -102,9 +102,8 @@
 	<div class="container-fluid">
     <form method="POST" action="uploadFile" enctype="multipart/form-data" id="medform">
         Ficheiro a submeter <br /> <input type="file" name="file"> <br>
-        Nome: <input type="text" name="name"><br /> <br /> 
         Descrição: <input type="text" name="tipo"><br/>
-        <input type="submit" value="Upload"> Carrega aqui para fazer upload
+        <input type="submit" value="Upload"> 
     </form>
     
     <br>
@@ -121,16 +120,24 @@
     		<td><c:out value="${exame.getNome()}"/></td>
     		<td><c:out value="${exame.getDate() }"/></td>
     		<td><c:out value="${exame.getTipo() }"/></td>
-    		<td><button> Download ficheiro </button></td>
+    		<td>
+    		<form action="getFile" method="POST">
+    		<input type="text" name="name" style="display:none" value="${exame.getMetalink()}">
+    		<input type="submit" value="Download Ficheiro">
+    		</form>
+    		</td>
     	</tr>
     	</c:forEach>
     </table>
-    <form method="POST" action="getFile">
-        Nome: <input type="text" name="name"><br /> <br /> 
-        <input type="submit" value="Download"> Carrega aqui para sacar o ficheiro
-    </form>
 
 </div></div>
+<script>
+function sacar(nome) {
+	path="https://" + window.location.host + "/";
+	$.post(path+"getFile", {"name": nome},function(data){
+		
+})}
+</script>
 
 </body>
 </html>

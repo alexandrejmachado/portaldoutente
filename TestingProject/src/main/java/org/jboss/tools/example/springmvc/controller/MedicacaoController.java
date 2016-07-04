@@ -154,9 +154,8 @@ public class MedicacaoController {
 	@RequestMapping(value = "/renovar", method = RequestMethod.POST,params={"id"})
 	@ResponseBody
 	public boolean renovarMed(HttpSession session, @RequestParam("id") String id) {
-		Medicacao medAtual = medicacaoDao.findById(Integer.parseInt(id));
-		boolean estado = medAtual.checkMedicacao();
-		return estado;
+		System.out.println("im here");
+		return medicacaoDao.renovarMed(Integer.parseInt(id));
 	}
 	
 	@RequestMapping(value = "/apagar", method = RequestMethod.POST, params={"id"})
