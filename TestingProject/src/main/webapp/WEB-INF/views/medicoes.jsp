@@ -249,7 +249,7 @@
 							      <h4 class="panel-title">
 							        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" onclick="verMedida('Trigliceridos')">
 							          <span class="glyphicon glyphicon-plus"></span>
-							          Trigliceridos
+							          Triglicéridos
 							        </a>
 							      </h4>
 							    </div>
@@ -281,7 +281,7 @@
 							      <h4 class="panel-title">
 							        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" onclick="verMedida('TensaoArterial')">
 							          <span class="glyphicon glyphicon-plus"></span>
-							          Tensao Arterial 
+							          Tensão Arterial 
 							        </a>
 							      </h4>
 							    </div>
