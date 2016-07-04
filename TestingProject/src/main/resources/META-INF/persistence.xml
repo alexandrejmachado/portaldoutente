@@ -39,7 +39,6 @@
         <class>org.jboss.tools.example.springmvc.model.Peso</class>
         <class>org.jboss.tools.example.springmvc.model.Receita</class>
         <class>org.jboss.tools.example.springmvc.model.SaturacaoO2</class>
-        <class>org.jboss.tools.example.springmvc.model.Sessao</class>
         <class>org.jboss.tools.example.springmvc.model.TensaoArterial</class>
         <class>org.jboss.tools.example.springmvc.model.Trigliceridos</class>
         <class>org.jboss.tools.example.springmvc.model.Vacina</class>

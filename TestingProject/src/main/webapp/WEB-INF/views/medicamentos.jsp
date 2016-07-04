@@ -170,6 +170,7 @@ function renovar(id)
 		else {alert("renovacao falhada, ainda e muito cedo para pedir")}}
 
 	);
+	
 	}
 function apagar(id)
 {
