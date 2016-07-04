@@ -19,7 +19,7 @@
 
     <!-- Custom CSS -->
     <link href=<c:url value="/resources/css/main.css" ></c:url> rel="stylesheet">
-    
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
     
     
   	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -43,8 +43,8 @@
             <div class="col-lg-12"> 
                 <div class= "rowMajor">
                 	<div id="divisento"></div>
-					<div class="col-md-11">Portal do Utente</div>
-					<div class="col-md-1" id="entrar">${username}</div>
+						<div class="col-md-6"><a id = "PortalDoUtente" href="/" style="text-decoration:none; color: white; font-weight:100">Portal do Utente</a></div>
+						<div class="col-md-6" id="entrar" style="text-align: right;">${username}</div>
 				</div>
             
             </div>
@@ -101,22 +101,22 @@
 	<div id="page-content-wrapper">
 	<div class="container-fluid">
     <form method="POST" action="uploadFile" enctype="multipart/form-data" id="medform">
-        Ficheiro a submeter <br /> <input type="file" name="file"> <br>
-        Descrição: <input type="text" name="tipo"><br/>
+        Ficheiro a submeter <br /> <input   type="file" name="file"> <br>
+        Descrição:<br> <input type="text" name="tipo"><br/>
         <input type="submit" value="Upload"> 
     </form>
     
     <br>
     <br>
-    <table id="files">
-    	<tr>
+    <table class= "tabela_med" id="files">
+    	<tr id = "texto7">
     		<td>Nome</td>
     		<td>Data</td>
     		<td>Tipo de Exame</td>
     		<td>Download</td>
     	</tr>
     	<c:forEach items="${exames}" var="exame">
-    	<tr>
+    	<tr id= "texto7">
     		<td><c:out value="${exame.getNome()}"/></td>
     		<td><c:out value="${exame.getDate() }"/></td>
     		<td><c:out value="${exame.getTipo() }"/></td>

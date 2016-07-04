@@ -14,14 +14,18 @@ import java.util.Random;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.jboss.tools.example.springmvc.data.ConsultaDao;
 import org.jboss.tools.example.springmvc.data.InstituicaoDao;
 import org.jboss.tools.example.springmvc.data.MedicoDao;
+import org.jboss.tools.example.springmvc.data.SessaoDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
 import org.jboss.tools.example.springmvc.model.Cirurgia;
 import org.jboss.tools.example.springmvc.model.Consulta;
+import org.jboss.tools.example.springmvc.model.Sessao;
 import org.jboss.tools.example.springmvc.sensitivedata.Instituicao;
 import org.jboss.tools.example.springmvc.sensitivedata.Medico;
 import org.jboss.tools.example.springmvc.sensitivedata.Utente;
@@ -51,6 +55,9 @@ public class EventController {
 	private ConsultaDao consultaDao;
 	
 	@Autowired
+	private SessaoDao sessaoDao;
+	
+	@Autowired
 	private InstituicaoDao insDao;
 	
 	@Autowired
@@ -58,10 +65,12 @@ public class EventController {
 
 	@RequestMapping(value="/getEventos")
 	@ResponseBody
-	public ArrayList<Object> getEventos(HttpSession session) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		if(verifyLogin(session)){
-			System.out.println("session of: "+session.getAttribute("sessionID"));
-			int numUtente = Integer.parseInt((String)session.getAttribute("sessionID"));
+	public ArrayList<Object> getEventos(HttpServletRequest request) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		String token = getSessaoToken(request);
+		if(verifyLogin(token)){
+			Sessao session = sessaoDao.getSessao(token);
+			System.out.println("session of: "+session.getSessionID());
+			int numUtente = Integer.parseInt(session.getSessionID());
 			Utente curUtente = utenteDao.findUtenteById(numUtente);
 			List<Consulta> all = consultaDao.findAllByUtente(numUtente, curUtente.getCentroSaude());
 			//----------------------------------
@@ -84,10 +93,12 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="/view")
-	public ModelAndView calendarView(HttpSession session){
+	public ModelAndView calendarView(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
-		if(verifyLogin(session)){
-			mav.addObject("username", session.getAttribute("sessionName"));
+		String token = getSessaoToken(request);
+		if(verifyLogin(token)){
+			Sessao session = sessaoDao.getSessao(token);
+			mav.addObject("username", session.getSessionName());
 			mav.setViewName("calendarView");
 			mav.addObject("data", new Date().getTime());
 		}
@@ -98,10 +109,11 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="/marcarConsultaView", method = RequestMethod.GET, params={"data"})
-	public ModelAndView marcarConsultaView(@RequestParam(value = "data") String data, HttpSession session) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-
+	public ModelAndView marcarConsultaView(@RequestParam(value = "data") String data, HttpServletRequest request) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		String token = getSessaoToken(request);
+		Sessao session = sessaoDao.getSessao(token);
 		//-----------------------------------------
-		int numUtente = Integer.parseInt((String)session.getAttribute("sessionID"));
+		int numUtente = Integer.parseInt(session.getSessionID());
 		//int numUtente = 123123123;
 		Utente curUtente = utenteDao.findUtenteById(numUtente);
 		List<Consulta> all = consultaDao.findWithDate(numUtente, curUtente.getCentroSaude());
@@ -165,9 +177,11 @@ public class EventController {
 	@RequestMapping(value="/persistirConsulta", method = RequestMethod.POST,params={"data", "obs"})
 	@ResponseBody
 	public boolean persistirConsulta(@RequestParam(value="data") Date data, @RequestParam(value="obs") String obs, 
-									  HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+									  HttpServletRequest request) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		
-		int numUtente = Integer.parseInt((String)session.getAttribute("sessionID"));
+		String token = getSessaoToken(request);
+		Sessao session = sessaoDao.getSessao(token);
+		int numUtente = Integer.parseInt(session.getSessionID());
 		Utente curUtente = utenteDao.findUtenteById(numUtente);
 		//TODO maybe falta por lock quando medico == 0?????
 		int idMedico = curUtente.getMedico();
@@ -194,21 +208,25 @@ public class EventController {
 	}
 	
 	
-	public boolean verifyLogin(HttpSession session) {
+	public boolean verifyLogin(String sessionToken) {
+		System.out.println(sessionToken);
 		System.out.println("A VERIFICAR SE ESTA LOGADO:");
-		System.out.println("ID DE ACESSO:" + session.getAttribute("sessionID"));
-		if(session.getAttribute("sessionID") == null){
+		if(sessionToken.equals("empty")){
 			System.out.println("NAO TEM SESSAO");
 			return false;
 		}
 		else{
+			System.out.println("antes");
+			Sessao session = sessaoDao.getSessao(sessionToken);
+			System.out.println("depois");
+			System.out.println(session);
 			try {
-				System.out.println("VERFICAR SE ESTA ACTIVA A CONTA");
-				if(utenteDao.verifyActivatedUser((String)session.getAttribute("sessionID"))){System.out.println("VERFICAR SE ESTA ACTIVA A CONTA");
+				System.out.println("VERIFICAR SE ESTA ACTIVA A CONTA");
+				if(utenteDao.verifyActivatedUser(session.getSessionID())){System.out.println("VERFICAR SE ESTA ACTIVA A CONTA");
 					return true;}
 				else{
 					System.out.println("NAO ESTA ACTIVA A CONTA");
-					session.removeAttribute("sessionID");
+					sessaoDao.removerSessao(sessionToken);
 				return false;
 				}
 			} catch (InvalidKeyException e) {
@@ -237,6 +255,21 @@ public class EventController {
 		System.out.println("ERRO ESTRANHO");
 		return false;
 		
+	}
+	
+	public String getSessaoToken(HttpServletRequest request){
+		String sessionToken = "empty";
+		System.out.println("Token de sessao antes: "+sessionToken);
+		Cookie[] listaCookies = request.getCookies();
+		if(listaCookies != null){
+			for(Cookie c:listaCookies){
+				if(c.getName().equals("sessionToken")){
+					sessionToken = c.getValue();
+				}
+			}
+		}
+		System.out.println("Esta e a cookie: "+ sessionToken);
+		return sessionToken;
 	}
 
 }

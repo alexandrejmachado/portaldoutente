@@ -24,27 +24,42 @@ public class SessaoDao {
 	@Autowired
 	private EntityManager em;
 	
-	public void iniciarSessao(String token) {
-		Sessao sessao = new Sessao(token);
+	public Sessao iniciarSessao(String token, String sessionID, String sessionMode, String sessionName) {
+		Sessao sessao = new Sessao(token, sessionID, sessionMode, sessionName);
 		em.persist(sessao);
+		return sessao;
 	}
 	
-	private Sessao getSessao(String token) {
-		TypedQuery<Sessao> query = em.createNamedQuery(Sessao.FIND_BY_TOKEN, Sessao.class);
-		query.setParameter(Sessao.TOKEN, token);
-		return query.getSingleResult();
+	public Sessao getSessao(String token) {
+		try{
+			TypedQuery<Sessao> query = em.createNamedQuery(Sessao.FIND_BY_TOKEN, Sessao.class);
+			query.setParameter(Sessao.TOKEN, token);
+			return query.getSingleResult();
+		}
+		catch(Exception e){
+			return null;
+		}
 	}
 	
-	public void setAttribute(String token, String nome, Object obj) {
-		Sessao sessao = getSessao(token);
-		sessao.setAttribute(nome, obj);
-		em.persist(sessao);
+	public boolean actualiarSessao(Sessao sessao){
+		try{
+			em.merge(sessao);
+			return true;
+		}
+		catch(Exception e){
+			return false;
+		}
 	}
 	
-	public Object getAttribute(String token, String nome) {
-		Sessao sessao = getSessao(token);
-		em.persist(sessao);
-		return sessao.getAttribute(nome);
+	public boolean removerSessao(String sessionToken){
+		try{
+			Sessao session = getSessao(sessionToken);
+			em.remove(session);
+			return true;
+		}
+		catch(Exception e){
+			return false;
+		}
 	}
 	
 }

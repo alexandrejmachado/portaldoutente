@@ -10,6 +10,8 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.persistence.EntityManager;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.jboss.tools.example.springmvc.data.AlturaDao;
@@ -24,10 +26,12 @@ import org.jboss.tools.example.springmvc.data.MedicoDao;
 import org.jboss.tools.example.springmvc.data.MedicoUtenteDao;
 import org.jboss.tools.example.springmvc.data.PesoDao;
 import org.jboss.tools.example.springmvc.data.SaturacaoO2Dao;
+import org.jboss.tools.example.springmvc.data.SessaoDao;
 import org.jboss.tools.example.springmvc.data.TensaoArterialDao;
 import org.jboss.tools.example.springmvc.data.TrigliceridosDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
 import org.jboss.tools.example.springmvc.model.MedicoUtente;
+import org.jboss.tools.example.springmvc.model.Sessao;
 import org.jboss.tools.example.springmvc.sensitivedata.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,21 +58,26 @@ public class PerfilController {
 	@Autowired
 	private MedicoDao medicoDao;
 	
+	@Autowired
+	private SessaoDao sessaoDao;
+	
 	
 	
 	private AuthController as= new AuthController();
 	
 
 	@RequestMapping(value="/dados")
-    public ModelAndView goToPerfilStatic(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+    public ModelAndView goToPerfilStatic(HttpServletRequest request) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
     	ModelAndView mav = new ModelAndView();
-    	if(verifyLogin(session)){
+    	String token = getSessaoToken(request);
+    	if(verifyLogin(token)){
     	//if(true){
 
+    		Sessao session = sessaoDao.getSessao(token);
     		mav.setViewName("perfil");
     		
     		
-	    	String username = (String) session.getAttribute("sessionID");
+	    	String username = session.getSessionID();
 			Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
 	    	
 	    	mav.addObject("username", currentUser.getNome());
@@ -114,15 +123,16 @@ public class PerfilController {
     }
 	
 	@RequestMapping(value="/actualizar")
-    public ModelAndView goToPerfilChange(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+    public ModelAndView goToPerfilChange(HttpServletRequest request) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
     	ModelAndView mav = new ModelAndView();
-    	if(verifyLogin(session)){
+    	String token = getSessaoToken(request);
+    	if(verifyLogin(token)){
     	//if(true){
-
+    		Sessao session = sessaoDao.getSessao(token);
     		mav.setViewName("alterarPerfil");
     		
     		
-	    	String username = (String) session.getAttribute("sessionID");
+	    	String username = session.getSessionID();
 			Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
 	    	
 	    	mav.addObject("username", currentUser.getNome());
@@ -172,10 +182,12 @@ public class PerfilController {
 											@RequestParam(value="mail") String mail,
 												@RequestParam(value = "telemovel") String telemovel, @RequestParam(value = "emergencia") String emergencia,
 													@RequestParam(value="oldPass") String oldPass, @RequestParam(value="newPass") String newPass,
-														@RequestParam(value="confirmNewPass") String confirmNewPass, HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+														@RequestParam(value="confirmNewPass") String confirmNewPass, HttpServletRequest request) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		List<String> finalmsg= new ArrayList<String>();
-		if(verifyLogin(session)){
-			String username = (String) session.getAttribute("sessionID");
+		String token = getSessaoToken(request);
+		if(verifyLogin(token)){
+			Sessao session = sessaoDao.getSessao(token);
+			String username = session.getSessionID();
 			Utente currentUser = utenteDao.findUtenteById(Integer.parseInt(username));
 			try{
 				
@@ -255,21 +267,25 @@ public class PerfilController {
 		return finalmsg;
 	}
 	
-	public boolean verifyLogin(HttpSession session) {
+	public boolean verifyLogin(String sessionToken) {
+		System.out.println(sessionToken);
 		System.out.println("A VERIFICAR SE ESTA LOGADO:");
-		System.out.println("ID DE ACESSO:" + session.getAttribute("sessionID"));
-		if(session.getAttribute("sessionID") == null){
+		if(sessionToken.equals("empty")){
 			System.out.println("NAO TEM SESSAO");
 			return false;
 		}
 		else{
+			System.out.println("antes");
+			Sessao session = sessaoDao.getSessao(sessionToken);
+			System.out.println("depois");
+			System.out.println(session);
 			try {
-				System.out.println("VERFICAR SE ESTA ACTIVA A CONTA");
-				if(utenteDao.verifyActivatedUser((String)session.getAttribute("sessionID"))){System.out.println("VERFICAR SE ESTA ACTIVA A CONTA");
+				System.out.println("VERIFICAR SE ESTA ACTIVA A CONTA");
+				if(utenteDao.verifyActivatedUser(session.getSessionID())){System.out.println("VERFICAR SE ESTA ACTIVA A CONTA");
 					return true;}
 				else{
 					System.out.println("NAO ESTA ACTIVA A CONTA");
-					session.removeAttribute("sessionID");
+					sessaoDao.removerSessao(sessionToken);
 				return false;
 				}
 			} catch (InvalidKeyException e) {
@@ -302,9 +318,11 @@ public class PerfilController {
 	
 	@RequestMapping(value="/mudarPrivacidade", method = RequestMethod.POST, params={"tipo", "booleano"})
 	@ResponseBody
-	public boolean mudarPrivacidade(HttpSession session, @RequestParam(value="tipo") String tipo, @RequestParam(value="booleano") String booleano) {
-		if (verifyLogin(session)) {
-			MedicoUtente mu = muDao.findByUtente((String) session.getAttribute("sessionID"));
+	public boolean mudarPrivacidade(HttpServletRequest request, @RequestParam(value="tipo") String tipo, @RequestParam(value="booleano") String booleano) {
+		String token = getSessaoToken(request);
+		if (verifyLogin(token)) {
+			Sessao session = sessaoDao.getSessao(token);
+			MedicoUtente mu = muDao.findByUtente((String) session.getSessionID());
 			System.out.println("tipo= " + tipo);
 			System.out.println("booleano = " + booleano);
 		switch (tipo) {
@@ -390,6 +408,21 @@ public class PerfilController {
 		System.out.println(lista);
 		mav.addObject("mu", lista);
 		return mav;
+	}
+	
+	public String getSessaoToken(HttpServletRequest request){
+		String sessionToken = "empty";
+		System.out.println("Token de sessao antes: "+sessionToken);
+		Cookie[] listaCookies = request.getCookies();
+		if(listaCookies != null){
+			for(Cookie c:listaCookies){
+				if(c.getName().equals("sessionToken")){
+					sessionToken = c.getValue();
+				}
+			}
+		}
+		System.out.println("Esta e a cookie: "+ sessionToken);
+		return sessionToken;
 	}
 }
 

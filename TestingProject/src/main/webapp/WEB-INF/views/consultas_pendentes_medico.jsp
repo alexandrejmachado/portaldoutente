@@ -8,6 +8,8 @@
 <!-- Bootstrap Core CSS -->
     <link href=<c:url value="/resources/css/bootstrap.min.css" ></c:url> rel="stylesheet">
 
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
+
     <!-- Custom CSS -->
     <link href=<c:url value="/resources/css/main.css" ></c:url> rel="stylesheet">
 <title>Consultas Pendentes - Médico</title>

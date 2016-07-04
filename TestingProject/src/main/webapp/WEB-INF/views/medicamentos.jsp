@@ -31,9 +31,8 @@
             
             <div class="col-lg-12"> 
                 <div class= "rowMajor">
-                	<div id="divisento"></div>
-					<div class="col-md-11">Portal do Utente</div>
-					<div class="col-md-1" id="entrar">${username}</div>
+					<div class="col-md-6"><a id = "PortalDoUtente" href="/" style="text-decoration:none; color: white; font-weight:100">Portal do Utente</a></div>
+					<div class="col-md-6" id="entrar" style="text-align: right;">${username}</div>
 				</div>
             
             </div>
@@ -101,11 +100,11 @@
 			<input id="medicacao" type="submit" onclick="medicamentos()">
 			
 			
-					<p id="texto2">Consulte abaixo as suas medicações</p>
+					<p id="texto7">Consulte abaixo as suas medicações</p>
 			
-			        <table id="tabela_exames">
+			        <table id="tabela_med">
 			
-			            <tr id = "texto_tab">
+			            <tr id = "texto7">
 			                <td>NOME</td>
 			                <td>DOSE</td> 
 			                <td>INDICAÇÕES</td>
@@ -114,12 +113,12 @@
 			            </tr>
 			
 			         <c:forEach items="${lista}" var="medicacao">
-			    <tr id = "texto_tab">
+			    <tr id = "texto7">
 			    	<td> <c:out value="${medicacao.nomeMedicamento }"/> </td>
 			        <td><c:out value="${medicacao.dose}"/></td>
 			        <td><c:out value="${medicacao.indicacoes}"/></td>
-			        <td><button id = "renovar${medicacao.getId()}" value="${medicacao.getId()}" onclick="renovar(${medicacao.id})"> Pedir Renovacao </button></td>
-			        <td><button id = "apagar${medicacao.getId()}" value="${medicacao.getId() }" onclick="apagar(${medicacao.id})"> Apagar </button></td>
+			        <td><button id = "renovar" value="${medicacao.getId()}" onclick="renovar(${medicacao.id})"> Pedir Renovacao </button></td>
+			        <td><button id = "apagar" value="${medicacao.getId() }" onclick="apagar(${medicacao.id})"> Apagar </button></td>
 			        
 			    </tr>
 				</c:forEach>
