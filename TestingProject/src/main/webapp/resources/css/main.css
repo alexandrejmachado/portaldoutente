@@ -12,6 +12,7 @@
 	font-weight: 100;
 }
 
+
 #tabela_exames, #tabela_med{
  margin-left: 25.5%;
  margin-top: 30px;
@@ -80,17 +81,17 @@
  font-size: 15px;
  color: white;
 }
-#wrapper {
-    padding-left: 0;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
+/* #wrapper { */
+/*    padding-left: 0; */
+/*     -webkit-transition: all 0.5s ease; */
+/*     -moz-transition: all 0.5s ease; */
+/*     -o-transition: all 0.5s ease; */
+/*     transition: all 0.5s ease; */
+/* } */
 
-#wrapper.toggled {
-    padding-left: 250px;
-}
+/* #wrapper.toggled { */
+/*     padding-left: 250px; */
+/* } */
 
 #sidebar-wrapper {
     display:inline-block;
@@ -101,10 +102,10 @@
    /*atencao para responsive*/
     overflow-y: auto;
     background: none; /*background da barra*/
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+/*     -webkit-transition: all 0.5s ease; */
+/*     -moz-transition: all 0.5s ease; */
+/*     -o-transition: all 0.5s ease; */
+/*     transition: all 0.5s ease; */
 }
 
 
@@ -275,16 +276,16 @@ input[type="number"] {
 
 
 
-#wrapper.toggled #sidebar-wrapper {
-    width: 250px;
-}
+/* #wrapper.toggled #sidebar-wrapper { */
+/*     width: 250px; */
+/* } */
 
 
 
-#wrapper.toggled #page-content-wrapper {
-    position: absolute;
-    margin-right: -250px;
-}
+/* #wrapper.toggled #page-content-wrapper { */
+/*     position: absolute; */
+/*     margin-right: -250px; */
+/* } */
 
 
 .barra{
@@ -420,7 +421,7 @@ nav ul {
  position: relative;
  float: right;
  background: transparent;
- border-bottom: 1px solid #fff;
+
  border-radius: 3px;
 }
 

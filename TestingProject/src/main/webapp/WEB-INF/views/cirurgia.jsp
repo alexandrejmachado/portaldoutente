@@ -38,8 +38,8 @@
             <div class="col-lg-12"> 
                 <div class= "rowMajor">
                 	<div id="divisento"></div>
-					<div class="col-md-11">Portal do Utente</div>
-					<div class="col-md-1" id="entrar">${username}</div>
+					<div class="col-md-6"><a id = "PortalDoUtente" href="/" style="text-decoration:none; color: white; font-weight:100">Portal do Utente</a></div>
+					<div class="col-md-6" id="entrar" style="text-align: right;">${username}</div>
 				</div>
             
             </div>
@@ -361,10 +361,12 @@
 					 })
 				 });
 				 </script>
+			
 	</div>
 </body>
 
 
 
 </html>
->>>>>>> branch 'master' of http://130.211.78.192/melancias/portaldoutente.git
+
+ >>>>>>> branch 'master' of http://130.211.78.192/melancias/portaldoutente.git

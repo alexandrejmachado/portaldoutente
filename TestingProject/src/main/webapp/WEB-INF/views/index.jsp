@@ -12,12 +12,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Portal do Utente Mega Fixe</title>
+    <title>Portal do Utente</title>
 
     <!-- Bootstrap Core CSS -->
     <!-- Teste 5 Escondido para verificar se a imagem é actualizada-->
     
-    <!-- Two options -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'> 
    
     <!-- Custom CSS -->
     <link href= <c:url value="/resources/css/bootstrap.min.css" ></c:url> rel="stylesheet"/>
@@ -96,12 +96,7 @@
     
 
     <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
+
 
 	<script>
 	path="https://" + window.location.host + "/";
