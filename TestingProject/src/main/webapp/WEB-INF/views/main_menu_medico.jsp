@@ -93,7 +93,9 @@
 	<div id="MedicacaoMed" class="tabcontent">
 	   	   <table style="width: 100%;">
 			<tr style="width:100%; margin-top: 10px;  background-color:#ddd;">
-				<td style="width:20%; text-align: center;">Número do Utente</td>		
+				<td style="width:20%; text-align: center;">Nome</td>
+				<td style="width:20%; text-align: center;">Número do Utente</td>
+				<td style="width:20%; text-align: center;">Acção</td>		
 			</tr>
 		</table>
 	</div>
