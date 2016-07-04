@@ -17,7 +17,8 @@
 
    <!-- Bootstrap Core CSS -->
     <link href=<c:url value="/resources/css/bootstrap.min.css" ></c:url> rel="stylesheet">
-
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
+	
     <!-- Custom CSS -->
     <link href=<c:url value="/resources/css/main.css" ></c:url> rel="stylesheet">
 
@@ -37,8 +38,9 @@
 	        
 	            <div class="col-lg-12"> 
 	                <div class= "rowMajor">
-						<div class="col-md-11">Portal do Utente</div>
-						<div class="col-md-1" id="entrar">${username}</div>
+
+					<div class="col-md-6"><a id = "PortalDoUtente" href="/" style="text-decoration:none; color: white; font-weight:100">Portal do Utente</a></div>
+					<div class="col-md-6" id="entrar" style="text-align: right;">${username}</div>
 					</div>
 	            
 	            </div>
