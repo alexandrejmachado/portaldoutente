@@ -12,7 +12,7 @@
 	font-weight: 100;
 }
 
-#tabela_exames, #tabela_med{
+#tabela_exames, #tabela_med, #files{
  margin-left: 25.5%;
  margin-top: 30px;
  width: 50%;
@@ -23,7 +23,7 @@
  
 }
 
-#tabela_med{
+#tabela_med, #files{
     width: 100%;
     margin-left: 0%;
 }

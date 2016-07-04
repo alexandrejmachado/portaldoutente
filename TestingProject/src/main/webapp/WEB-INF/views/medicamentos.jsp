@@ -101,11 +101,11 @@
 			<input id="medicacao" type="submit" onclick="medicamentos()">
 			
 			
-					<p id="texto2">Consulte abaixo as suas medicações</p>
+					<p id="texto7">Consulte abaixo as suas medicações</p>
 			
-			        <table id="tabela_exames">
+			        <table id="tabela_med">
 			
-			            <tr id = "texto_tab">
+			            <tr id = "texto7">
 			                <td>NOME</td>
 			                <td>DOSE</td> 
 			                <td>INDICAÇÕES</td>
@@ -114,12 +114,12 @@
 			            </tr>
 			
 			         <c:forEach items="${lista}" var="medicacao">
-			    <tr id = "texto_tab">
+			    <tr id = "texto7">
 			    	<td> <c:out value="${medicacao.nomeMedicamento }"/> </td>
 			        <td><c:out value="${medicacao.dose}"/></td>
 			        <td><c:out value="${medicacao.indicacoes}"/></td>
-			        <td><button id = "renovar${medicacao.getId()}" value="${medicacao.getId()}" onclick="renovar(${medicacao.id})"> Pedir Renovacao </button></td>
-			        <td><button id = "apagar${medicacao.getId()}" value="${medicacao.getId() }" onclick="apagar(${medicacao.id})"> Apagar </button></td>
+			        <td><button id = "renovar" value="${medicacao.getId()}" onclick="renovar(${medicacao.id})"> Pedir Renovacao </button></td>
+			        <td><button id = "apagar" value="${medicacao.getId() }" onclick="apagar(${medicacao.id})"> Apagar </button></td>
 			        
 			    </tr>
 				</c:forEach>

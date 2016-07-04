@@ -114,11 +114,12 @@
     <!-- Menu Toggle Script -->
     <script>
     $(document).ready(function(){
-    	var textos={'consulta':'Aqui marcam -se as consultas',
-    				'medicacao2':'Texto para Medicacao',
-    				'medicao':'Texto para a Medicao',
-    				'cirurgia':'Texto para a Cirurgia',
-    				'isencao':'Texto para a Isencao'};
+    	var textos={'consulta':'Aqui marcam-se, desmarcam-se e consultam-se as consultas',
+    				'medicacao2':'Aqui regista-se e consulta-se a medicação e pede-se novas receitas',
+    				'medicao':'Aqui registam-se e consultam-se as medições',
+    				'cirurgia':'Aqui marcam-se e consultam-se as cirurgias',
+    				'isencao':'Aqui pede-se e consulta-se a isenção de taxas moderadoras',
+    				'upload':'Aqui submetem-se e consultam-se exames médicos'};
     	
     	$( "li" )
     	  .mouseenter(function() {

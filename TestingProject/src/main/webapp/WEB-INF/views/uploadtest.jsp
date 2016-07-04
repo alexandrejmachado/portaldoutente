@@ -101,22 +101,22 @@
 	<div id="page-content-wrapper">
 	<div class="container-fluid">
     <form method="POST" action="uploadFile" enctype="multipart/form-data" id="medform">
-        Ficheiro a submeter <br /> <input type="file" name="file"> <br>
-        Descrição: <input type="text" name="tipo"><br/>
+        Ficheiro a submeter <br /> <input   type="file" name="file"> <br>
+        Descrição:<br> <input type="text" name="tipo"><br/>
         <input type="submit" value="Upload"> 
     </form>
     
     <br>
     <br>
-    <table id="files">
-    	<tr>
+    <table class= "tabela_med" id="files">
+    	<tr id = "texto7">
     		<td>Nome</td>
     		<td>Data</td>
     		<td>Tipo de Exame</td>
     		<td>Download</td>
     	</tr>
     	<c:forEach items="${exames}" var="exame">
-    	<tr>
+    	<tr id= "texto7">
     		<td><c:out value="${exame.getNome()}"/></td>
     		<td><c:out value="${exame.getDate() }"/></td>
     		<td><c:out value="${exame.getTipo() }"/></td>
