@@ -3,6 +3,7 @@ package org.jboss.tools.example.springmvc.controller;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.jboss.tools.example.springmvc.data.ConsultaDao;
@@ -145,13 +146,13 @@ public class MedicoController {
 				shared.add("Peso");
 			}
 			if(mu.isSaturacao()){
-				shared.add("SaturaçãoO2");
+				shared.add("SaturacaoO2");
 			}
 			if(mu.isTensao()){
-				shared.add("Tensão Arterial");
+				shared.add("TensaoArterial");
 			}
 			if(mu.isTrigliceridos()){
-				shared.add("Triglicéridos");
+				shared.add("Trigliceridos");
 			}
 			if(shared.size() == 0){
 				shared.add("Sem Medidas Partilhadas");
@@ -160,6 +161,7 @@ public class MedicoController {
 			//-----------------------------------------
 			mav.addObject("username",username);
 			mav.addObject("medidas", shared);
+			mav.addObject("utente", utente);
 			mav.setViewName("medico_medicoes");
 		}
 		else{
@@ -184,6 +186,23 @@ public class MedicoController {
 			return true;
 		}
 			
+	}
+	
+	@RequestMapping(value="/visualizar/{tipoMedida}/{utente}", method = RequestMethod.GET)
+	public ModelAndView showMedidas(HttpServletRequest request,@PathVariable("tipoMedida") String tipoMedida,@PathVariable("utente") String utente)
+	{
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("medida", tipoMedida);
+		mav.addObject("utente", utente);
+		if(tipoMedida.equals("TensaoArterial"))
+		{
+			mav.setViewName("graficos2");
+		}
+		else{
+			mav.setViewName("graficos");
+		}
+		
+		return mav;
 	}
 	
 }

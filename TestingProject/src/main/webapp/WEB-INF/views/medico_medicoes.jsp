@@ -29,11 +29,19 @@
 			    		<option value="${slot}"><c:out value="${slot}"/></option>
 			    	</c:forEach>
 			    </select>
+			    <button id="botao_med" onClick="verMedida(${utente})">Ver gráfico</button>
+			    
+			    <div id="medidas" class="panel-body">
+				       
+				</div>
 	        </div>
+	        
 	    </div>
     	<script type="text/javascript">
-    	 function verMedida(medida2){
-			$("#"+medida2).html('<object data="https://'+window.location.host+'/visualizar/'+medida2+'" style="width:100%"/>')
+    	$('#hora').change
+    	 function verMedida(utente){
+    		var medida = $( "#hora" ).val();
+			$("#medidas").html('<object data="https://'+window.location.host+'/medico/visualizar/'+medida+'/'+utente+'" style="width:100%"/>')
 			}
     	 </script>
 </body>

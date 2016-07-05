@@ -16,7 +16,9 @@
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
     <!-- Custom CSS -->
     <link href=<c:url value="/resources/css/main.css" ></c:url> rel="stylesheet">
-
+	
+	
+	
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -184,11 +186,8 @@
  
 	
 
-<script>
-$( "#inst" ).change(function() {
-			  alert( $("#inst").val() );
-			});
-</script>
+
+<script type="text/javascript" src ="<c:url value="/resources/js/pt.js" ></c:url>"></script>
 <script>
 $(document).ready(function() {
 	$.get("https://"+ window.location.host+"/calendario/getEventos").done(function(data){
@@ -198,6 +197,7 @@ $(document).ready(function() {
 				timezone:'local',
 				timeFormat: 'HH:mm',
 					defaultDate: d,
+					lang: 'pt',
 					editable: false,
 					disableDragging:true,
 					eventLimit: true, // allow "more" link when too many events
