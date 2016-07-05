@@ -7,11 +7,27 @@
  */
 
 /* Toggle Styles */
+
+
 @font-face {
     font-family:'Roboto', Arial, sans-serif;
 	font-weight: 100;
 }
 
+
+/*-----medico_inicio---- */
+
+
+.doctor{
+	padding-top:3%;
+	background-color: none !important;
+	
+}
+.caixaMedico{
+	margin: 0.5%;
+}
+
+/*-----/medico_inicio---- */
 
 #tabela_exames, #tabela_med, #files{
  margin-left: 25.5%;
