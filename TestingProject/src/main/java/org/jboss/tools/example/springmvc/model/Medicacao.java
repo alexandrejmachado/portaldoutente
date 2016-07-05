@@ -1,8 +1,14 @@
 package org.jboss.tools.example.springmvc.model;
 
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,6 +17,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.jboss.tools.example.springmvc.controller.Cifras;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -18,7 +26,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 	@NamedQuery(name=Medicacao.FIND_ALL_BY_UTENTE, query="SELECT m FROM Medicacao m WHERE m.numUtente = :" + Medicacao.UTENTE +" ORDER BY m.cal DESC"),
 	@NamedQuery(name=Medicacao.DELETE, query="DELETE FROM Medicacao m WHERE m.id = :" + Medicacao.ID),
 	@NamedQuery(name=Medicacao.FIND_BY_ID_AND_MED, query="SELECT m FROM Medicacao m WHERE m.numUtente = :" + Medicacao.UTENTE + " AND m.idMedicamento = :"+Medicacao.MEDICAMENTO),
-	@NamedQuery(name=Medicacao.FIND_BY_ID, query="SELECT m FROM Medicacao m WHERE m.id = :" + Medicacao.ID)
+	@NamedQuery(name=Medicacao.FIND_BY_ID, query="SELECT m FROM Medicacao m WHERE m.id = :" + Medicacao.ID),
+	@NamedQuery(name=Medicacao.FIND_BY_MEDICO, query="SELECT m FROM Medicacao m WHERE m.medico = :" + Medicacao.MEDICO)
 })
 public class Medicacao {
 
@@ -30,9 +39,13 @@ public class Medicacao {
 
 	public static final String FIND_BY_ID_AND_MED = "Medicacao.findByIdAndMed";
 	
+	public static final String FIND_BY_MEDICO = "Medicacao.findByMedico";
+	
 	public static final String FIND_BY_ID = "Medicacao.findById";
 	
 	public static final String MEDICAMENTO = "medicamento";
+	
+	public static final String MEDICO = "medico";
 	
 	public static final String FIND_ALL_BY_UTENTE = "Medicacao.findAllByUtente";
 	
@@ -56,7 +69,8 @@ public class Medicacao {
 
 	private boolean estado = false; //esta a true se o medico ja confirmou que esta medicao existe, caso nao tenha confirmado manter-se-a a falso
 
-
+	private String nomeUtente;
+	
 	private EstadoRenovacao renovacao;
 	
 	private Calendar validade;
@@ -68,9 +82,11 @@ public class Medicacao {
 	
 	private int comprimidosPorCaixa;
 	
+	private int medico;
+	
 	public Medicacao(){}
 	
-	public Medicacao(String numUtente, int idMedicamento,String nomeMedicamento, double dose, String indicacoes, String renovacao, int comprimidosPorCaixa) {
+	public Medicacao(String numUtente, int idMedicamento,String nomeMedicamento, double dose, String indicacoes, String renovacao, int comprimidosPorCaixa, int medico, String nomeUtente) {
 		this.numUtente = numUtente;
 		this.idMedicamento = idMedicamento;
 		this.nomeMedicamento = nomeMedicamento;
@@ -78,6 +94,8 @@ public class Medicacao {
 		this.indicacoes = indicacoes;
 		setRenovacao(renovacao);
 		this.comprimidosPorCaixa = comprimidosPorCaixa;
+		this.medico = medico;
+		this.nomeUtente = nomeUtente;
 		
 		validade= Calendar.getInstance();
 		validade.add(Calendar.MONTH, 6);
@@ -90,13 +108,21 @@ public class Medicacao {
 	public int getId() {
 		return id;
 	}
+	
+	public String getNomeUtente(){
+		return nomeUtente;
+	}
+	
+	public int getMedico() {
+		return medico;
+	}
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getNumUtente() {
-		return numUtente;
+	public String getNumUtente() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+		return Cifras.decrypt(numUtente);
 	}
 
 	public void setNumUtente(String numUtente) {
@@ -196,11 +222,13 @@ public class Medicacao {
 	public boolean renovarMedicacao() {
 		Calendar cenas = Calendar.getInstance();
 		if (cenas.before(validade) && cenas.after(cal) && estado && renovacao==EstadoRenovacao.CADUCADO) {
-			renovacao=EstadoRenovacao.PENDENTE;
+			renovacao=EstadoRenovacao.ACEITE;
 			return true;
 		}
 		else if (renovacao == EstadoRenovacao.PENDENTE) {
-			setRenovacao("Aceite");
+			return false;
+		}
+		else if (checkMedicacao()) {
 			return true;
 		}
 		return false;
@@ -230,10 +258,11 @@ public class Medicacao {
 		else if (getRenovacao().equals("Pendente")) {
 			return true;
 		}
-		else {
+		else if (estado){
 			System.out.println(4);
 			setRenovacao("Aceite");
 			return true;
 		}
+		return false;
 	}
 }

@@ -101,7 +101,9 @@ public class MedicacaoController {
 			return false;
 		}
 		else {
-			medicacaoDao.novaMedicacao(Integer.parseInt(session.getSessionID()), med.getId(), nomeMedicamento, dosagemDiaria, indicacoes, "Pendente", med.getComprimidos());
+			Utente curUtente = utDao.findUtenteById(Integer.parseInt(session.getSessionID()));
+	
+			medicacaoDao.novaMedicacao(Integer.parseInt(session.getSessionID()), med.getId(), nomeMedicamento, dosagemDiaria, indicacoes, "Pendente", med.getComprimidos(), curUtente.getMedico(), curUtente.getNome());
 			return true;
 		}
 	}
