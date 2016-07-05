@@ -5,159 +5,52 @@
 <html lang="pt">
 ​
 <head>
-​
 	 <title>Portal do Utente</title>
-​
-​
-    
-   
-​
+	 <link href= <c:url value="/resources/css/main.css" ></c:url> rel="stylesheet"/>
 </head>
+
 <style>
 .ui-autocomplete { max-height: 200px; overflow-y: auto; overflow-x: hidden;}
 </style>
+
+<body style="background:  url('/resources/gfx/print5.jpg'); background-repeat: no-repeat; width: 915px; height: 652px; background-position: left top; margin:0px;"> 
 ​
-<body background="print5.jpg" > 
+<textarea id = "primeira" style="position:absolute; margin-top: 79px; margin-left: 43px;"> </textarea>
+​<c:out value="${utenteName}"></c:out>
+<textarea id = "segunda" style="position: absolute; margin-top: 107px;margin-left: 46px;"> </textarea>
+​<c:out value="${utenteTelemovel}"></c:out>
+<textarea id = "terceira" style="position: absolute; margin-top: 278px; margin-left: 19px;"> </textarea>
+​<c:out value="${nomeMedicamento}"></c:out>
+<textarea id = "quarta" style="position: absolute; margin-top: 278px; margin-left: 255px;"> </textarea>
+​<c:out value="${dose}"></c:out>
+<textarea id = "quinta" style="position: absolute; margin-top: 278px; margin-left: 277px;"> </textarea>
+​<c:out value="${extenso}"></c:out>
+<textarea id = "sexta" rows="2" cols="40" style="position: absolute; margin-top: 41px; margin-left: 460px;height: 122px;width: 423px;">
+Receita Médica No.: <c:out value="${medicacaoID }"></c:out>
+Local de Prescricao: <c:out value="${instituicao }"></c:out>
+Médico Prescritor: <c:out value="${nomeMedico }"></c:out>
+Contacto Telefónico da Instituição: <c:out value="${contactoInstituicao }"></c:out>
+Dados do Utente
+Nome do Utente: <c:out value="${utenteName }"></c:out>
+Entidade Responsável: CEDS/EHIC
+Nº do Beneficiário: <c:out value="${utenteID }"></c:out>            
+</textarea>
 ​
-​
-​
-​
-        <input id = "primeira" value="${utenteName }">
-​
-​
-​
-        <input id = "segunda" value="${utenteTelemovel}">
-​
-​
-​
-        <input id = "terceira" value="${nomeMedicamento}">
-​
-​
-​
-        <input id = "quarta" value="${dose}">
-​
-​
-        <input id = "quinta" value="${extenso}">
-​
-​
-​
-        <textarea id = "sexta" rows="2" cols="40">
-            Receita Médica No.: <c:out value="${medicacaoID }"></c:out>
-            Local de Prescricao: <c:out value="${instituicao }"></c:out>
-            Médico Prescritor: <c:out value="${nomeMedico }"></c:out>
-            Contacto Telefónico da Instituição: <c:out value="${contactoInstituicao }"></c:out>            
-        </textarea>
-​
-​
-​
-        <textarea id = "setima" rows="2" cols="40">
-            Dados do Utente
-            Nome do Utente: <c:out value="${utenteName }"></c:out>
-        </textarea>
-​
-​
-​
-        <textarea id = "oitava" rows="1" cols="40">
-            Entidade Responsável: CEDS/EHIC
-            Nº do Beneficiário: <c:out value="${utenteID }"></c:out>
-        </textarea>
-​
-​
-​
-        <input id = "nona" value="${nomeMedicamento}">
-​
-​
-​
-        <input id = "decima" value="${dose}">
-​
-​
-        <input id = "decima1" value="${extenso}">
-​
+<textarea id = "nona" style="position: absolute; margin-top: 184px; margin-left: 460px;">
+<c:out value="${nomeMedicamento}"></c:out>
+</textarea>
+<textarea id = "decima" style="position: absolute; margin-top: 185px; margin-left: 799px;">
+<c:out value="${dose}"></c:out>
+</textarea>
+<textarea id = "decima1" style="position: absolute; margin-top: 185px; margin-left: 825px;">
+<c:out value="${extenso}"></c:out>
+</textarea>
 </body>
-​
+
 <style>
-​
-​
-​
-body #primeira{
-    position: absolute;
-    margin-top: 50px;
-    margin-left: 37px;
-​
-​
+input,input:hover,textarea,textarea:hover
+{
+	border:0px;
+	overflow-y:hidden;
 }
-​
-body #segunda{
-    position: absolute;
-    margin-top: 72px;
-    margin-left: 37px;
-}
-​
- body #terceira{
-    position: absolute;
-    margin-top: 213px;
-    margin-left: 19px;
-}
-​
-body #quarta{
-    position: absolute;
-    margin-top: 213px;
-    margin-left: 209px;
-}
-​
-body #quinta{
-    position: absolute;
-    margin-top: 213px;
-    margin-left: 217px;
-}
-​
-body #sexta{
-    position: absolute;
-    margin-top: 28px;
-    margin-left: 376px;
-}
-​
-body #setima{
-    position: absolute;
-    margin-top: 63px;
-    margin-left: 376px;
-}
-​
-body #oitava{
-    position: absolute;
-    margin-top: 98px;
-    margin-left: 376px;
-}
-​
-body #nona{
-    position: absolute;
-    margin-top: 137px;
-    margin-left: 387px;
-}
-​
-body #decima{
-    position: absolute;
-    margin-top: 137px;
-    margin-left: 658px;
-}
-​
-body #decima1{
-    position: absolute;
-    margin-top: 137px;
-    margin-left: 684px;
-}
-​
-​
-body 
-    {
-        height: 500px;
-        width: 720px;
-        background-size: auto 100%;
-        background-repeat: no-repeat;
-        background-position: left top;
-    }
-​
-​
 </style>
-​
-​

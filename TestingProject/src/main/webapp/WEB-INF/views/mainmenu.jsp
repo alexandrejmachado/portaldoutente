@@ -146,7 +146,7 @@
 	pathWindow = window.location.href;
 	lastThing = pathWindow.split("/")[3];
 	if (lastThing=="isento") {
-		$("#divisento").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 3%;">Isencao aceite!</div>');
+		$("#divisento").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 3%;">Isencao a ser Processada</div>');
 	}
 	
 	paramOne =  '<%=(String) request.getAttribute("sessionMode")%>';

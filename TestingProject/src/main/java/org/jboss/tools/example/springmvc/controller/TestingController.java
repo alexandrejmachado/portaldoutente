@@ -848,13 +848,13 @@ public class TestingController {
 	
 	@RequestMapping(value= "/verificarIsencao")
 	@ResponseBody
-	public String verificarIsencao(HttpServletRequest request, @RequestParam(value = "segsoc") int username) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+	public String verificarIsencao(HttpServletRequest request, @RequestParam(value = "valor") double valor, @RequestParam(value = "numero") int pessoas) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		Sessao session = sessaoDao.getSessao(getSessaoToken(request));
 		String userID = (String) session.getSessionID();
-		Utente u;
+		Utente u=null;
 		try{
-			if (true){
-				u = utenteDao.findUtenteByNIF(username);
+			if (((valor/12)/pessoas)<=628.83){
+				u = utenteDao.findUtenteByNIF(Integer.parseInt(userID));
 			}	
 		}
 		catch(Exception e){
@@ -862,7 +862,7 @@ public class TestingController {
 		}
 		System.out.println(u);
 		if (u != null) {
-			utenteDao.mudarIsencao(username);
+			utenteDao.mudarIsencao(Integer.parseInt(userID));
 			return "true";
 		}
 		else {
@@ -973,7 +973,6 @@ public class TestingController {
 	{
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("medida", tipoMedida);
-		mav.addObject("utente", null);
 		if(tipoMedida.equals("TensaoArterial"))
 		{
 			mav.setViewName("graficos2");

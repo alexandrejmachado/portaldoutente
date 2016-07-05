@@ -19,7 +19,7 @@
     <!-- Bootstrap Core CSS -->
     <link href= <c:url value="/resources/css/bootstrap.min.css" ></c:url> rel="stylesheet"/>
     
-    <link href= <c:url value="/resources/css/main1.css" ></c:url> rel="stylesheet"/>
+    <link href= <c:url value="/resources/css/main1.css" ></c:url> rel="stylesheet"/> 
     	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
 	 <!-- Calendario -->
     <link href=<c:url value="/resources/css/style.css" ></c:url> rel="stylesheet">

@@ -89,7 +89,7 @@
 									<div class="row" id = "caixaReceita">
 										
 			
-											<p>Já se encontra Isento</p>
+											<p>Estamos a processar o seu pedido</p>
 											
 											
 									

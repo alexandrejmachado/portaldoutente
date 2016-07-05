@@ -15,6 +15,31 @@
 <body background=<c:url value="/resources/gfx/Final2.png"/> />
 	<div class="container">
             
+<<<<<<< HEAD
+	            <div class="col-lg-12"> 
+	                <div class= "rowMajor">
+	                    
+	                    <div class="col-md-10">Número Médico: ${username}</div>
+	                    <div class="col-md-1" id="entrar"><a style="color:white; text-decoration:none;" href="/medico/main">Voltar</a></div>
+	                    <div class="col-md-1" id="entrar"><a style="color:white; text-decoration:none;" href="/medico/logout">Sair</a></div>
+	               </div>
+	             </div>
+	             
+	      	<div id="page-content-wrapper">
+				<div class="container-fluid">
+			        <select style="padding:10px; border-radius: 5px; color: grey;" id="hora">
+				    	<c:forEach items="${medidas}" var="slot">
+				    		<option value="${slot}"><c:out value="${slot}"/></option>
+				    	</c:forEach>
+				    </select>
+		        </div>
+		    </div>
+	   </div>
+	   
+   <script type="text/javascript">
+    	 function verMedida(medida2){
+			$("#"+medida2).html('<object data="https://'+window.location.host+'/visualizar/'+medida2+'" style="width:100%"/>')
+=======
             <div class="col-lg-12"> 
                 <div class= "rowMajor">
                     <div id="divisento"></div>
@@ -42,7 +67,8 @@
     	 function verMedida(utente){
     		var medida = $( "#hora" ).val();
 			$("#medidas").html('<object data="https://'+window.location.host+'/medico/visualizar/'+medida+'/'+utente+'" style="width:100%"/>')
+>>>>>>> branch 'master' of http://130.211.78.192/melancias/portaldoutente.git
 			}
-    	 </script>
+    </script>
 </body>
 </html>
