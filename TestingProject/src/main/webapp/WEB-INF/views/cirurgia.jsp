@@ -77,9 +77,7 @@
 					<li id="medicao">
 						<a href="/medicoes">Medições</a>
 					</li>
-					<li id="cirurgia">
-						<a href="/cirurgia">Cirurgia</a>
-					</li>
+
 					<li id="isencao">
 						<a href="/isencao">Pedido de Isenção</a>
 					</li>

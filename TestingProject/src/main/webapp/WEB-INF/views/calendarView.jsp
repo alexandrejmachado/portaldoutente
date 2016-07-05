@@ -105,9 +105,6 @@
 					<li id="medicao">
 						<a href="/medicoes">Medições</a>
 					</li>
-					<li id="cirurgia">
-						<a href="/cirurgia">Cirurgia</a>
-					</li>
 					<li id="isencao">
 						<a href="/isencao">Pedido de Isenção</a>
 					</li>
@@ -196,6 +193,7 @@ $(document).ready(function() {
 			var d = new Date(pel);
 			$('#calendar').fullCalendar({
 				timezone:'local',
+				lang: 'pt',
 				timeFormat: 'HH:mm',
 					defaultDate: d,
 					editable: false,

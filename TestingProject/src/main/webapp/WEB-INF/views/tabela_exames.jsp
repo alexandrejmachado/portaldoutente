@@ -38,7 +38,7 @@
 
 
 <div  class="exame">
-		<p id="texto2">Consulte abaixo os seus Exames MÃ©dicos</p>
+		<p id="texto2">Consulte abaixo os seus Exames Médicos</p>
 
         <table id="tabela_exames">
 
