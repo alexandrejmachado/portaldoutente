@@ -165,7 +165,7 @@
 		function lolada(){
 			$.post(path + 'verificarIsencao', $("form").serialize()).done(function( data ) { 
 				if (data=="true"){window.location.replace(path + "isento");}
-				else if(warning==null){ $("#erro").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 3%;">NIF incorrecto</div>');
+				else if(warning==null){ $("#erro").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 3%;">Não elegível</div>');
 				warning=true;}
 				
 				});
