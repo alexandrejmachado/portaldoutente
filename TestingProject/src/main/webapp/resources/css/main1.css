@@ -495,7 +495,14 @@ input {
     }
 }
 
+nav ul {
+ padding: 0;
+ list-style: none;
+ position: relative;
+ float: right;
+ background: transparent;
 
+}
 /*--------Medicoes------------*/
 
 /*--------caixaMarcacoes------------*/
@@ -513,4 +520,4 @@ input {
  font-size: 20px;
  color: DarkBlue;
 }
-/*--------end caixaMarcações------------*/
+/*--------end caixaMarcaï¿½ï¿½es------------*/
