@@ -1109,11 +1109,10 @@ public class TestingController {
 	//O Puxa carrocas de isto tudo
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public @ResponseBody
-    ModelAndView uploadFileHandler(@RequestParam("name") String name,
+    ModelAndView uploadFileHandler(
             @RequestParam("file") MultipartFile file, HttpServletRequest request, @RequestParam("tipo") String tipo) throws InvalidKeyException, NumberFormatException, FileNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
     	String token = getSessaoToken(request);
 		Sessao session = sessaoDao.getSessao(token);
-    	if(name.isEmpty()){name="temporario";}
         if (!file.isEmpty() & !session.getSessionID().equals(null) ) {
             try {
                 
@@ -1139,7 +1138,7 @@ public class TestingController {
                           writer.write(ByteBuffer.wrap(buffer, 0, limit));
                         } catch (Exception ex) {
                         	System.out.println("foi aqui: " + buffer + " " + limit);
-                          ex.printStackTrace();
+                          ex.printStackTrace(); 
                         }
                       }
                     }
