@@ -43,6 +43,7 @@ import org.jboss.tools.example.springmvc.data.UtenteDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -101,7 +102,9 @@ public class MedicacaoController {
 			return false;
 		}
 		else {
-			medicacaoDao.novaMedicacao(Integer.parseInt(session.getSessionID()), med.getId(), nomeMedicamento, dosagemDiaria, indicacoes, "Pendente", med.getComprimidos());
+			Utente curUtente = utDao.findUtenteById(Integer.parseInt(session.getSessionID()));
+	
+			medicacaoDao.novaMedicacao(Integer.parseInt(session.getSessionID()), med.getId(), nomeMedicamento, dosagemDiaria, indicacoes, "Pendente", med.getComprimidos(), curUtente.getMedico(), curUtente.getNome());
 			return true;
 		}
 	}
@@ -214,6 +217,9 @@ public class MedicacaoController {
 		System.out.println("Esta e a cookie: "+ sessionToken);
 		return sessionToken;
 	}
+	
+
+	
 	
 	@RequestMapping(value="/verReceita", method = RequestMethod.POST, params={"medicacaoID"})
 	@ResponseBody

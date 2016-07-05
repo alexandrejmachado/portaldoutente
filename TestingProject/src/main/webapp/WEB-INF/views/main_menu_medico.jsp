@@ -95,8 +95,19 @@
 			<tr style="width:100%; margin-top: 10px;  background-color:#ddd;">
 				<td style="width:20%; text-align: center;">Nome</td>
 				<td style="width:20%; text-align: center;">Número do Utente</td>
+				<td style="width:20%; text-align: center;">Medicamento</td>
+				<td style="width:20%; text-align: center;">Dose</td>
 				<td style="width:20%; text-align: center;">Acção</td>		
 			</tr>
+			<c:forEach items="${medicacao}" var="md">
+				<tr id = "texto_tab" style="width:100%;">
+					<td id="texto7" style="width:16%; text-align: center;"> <c:out value="${md.getNomeUtente()}"/> </td>
+					<td id="texto7" style="width:16%; text-align: center;"> <c:out value="${md.getNumUtente()}"/> </td>
+					<td id="texto7" style="width:16%; text-align: center;"> <c:out value="${md.getNomeMedicamento()}"/> </td>
+					<td id="texto7" style="width:16%; text-align: center;"> <c:out value="${md.getDose()}"/> </td>
+					<td id="texto7" style="width:16%; text-align: center;"><button id="botao_med" onclick="aceitarMedicacao(${md.getId()})"> <c:out value="Aceitar"> </c:out> </button> <button id="botao_med" onclick="rejeitarMedicacao(${ut.getId()})"> <c:out value="Rejeitar"> </c:out> </button></td>
+				</tr>
+			</c:forEach>
 		</table>
 	</div>
 </div>
@@ -108,6 +119,26 @@
 			if (data==true){window.location.reload();}
 			
 			else {alert("Erro a confirmar consulta!")}}
+
+		);
+		}
+
+	function aceitarMedicacao(id){
+		path="https://" + window.location.host + "/medico/aceitarMedicacao";
+		$.post(path, {'idMedicacao':id}).done(function( data ) {
+			if (data==true){window.location.reload();}
+			
+			else {alert("Erro a aceitar Medicacao!")}}
+
+		);
+		}
+
+	function rejeitarMedicacao(id){
+		path="https://" + window.location.host + "/medico/rejeitarMedicacao";
+		$.post(path, {'idMedicacao':id}).done(function( data ) {
+			if (data==true){window.location.reload();}
+			
+			else {alert("Erro a rejeitar Medicacao!")}}
 
 		);
 		}

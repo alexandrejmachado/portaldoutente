@@ -9,6 +9,7 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpSession;
 
@@ -26,8 +27,8 @@ public class MedicacaoDao {
 	@Autowired
 	private EntityManager em;
 	
-	public Medicacao novaMedicacao(int numUtente, int idMedicamento, String nomeMedicamento, double dose, String indicacoes, String renovacao, int comprimidosPorCaixa) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		Medicacao Medicacao = new Medicacao(Cifras.encrypt(Integer.toString(numUtente)), idMedicamento,nomeMedicamento, dose, indicacoes, renovacao, comprimidosPorCaixa);
+	public Medicacao novaMedicacao(int numUtente, int idMedicamento, String nomeMedicamento, double dose, String indicacoes, String renovacao, int comprimidosPorCaixa, int medico, String nomeUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		Medicacao Medicacao = new Medicacao(Cifras.encrypt(Integer.toString(numUtente)), idMedicamento,nomeMedicamento, dose, indicacoes, renovacao, comprimidosPorCaixa, medico, nomeUtente);
 		em.persist(Medicacao);
 		return Medicacao;
 	}
@@ -78,6 +79,32 @@ public class MedicacaoDao {
 		if(medicacao == null) {
 			return false;
 		}
+		return true;
+	}
+
+	public List<Medicacao> findByMedico(int idMedico) {
+		TypedQuery<Medicacao> query = em.createNamedQuery(Medicacao.FIND_BY_MEDICO, Medicacao.class);
+		query.setParameter(Medicacao.MEDICO, idMedico);
+		return query.getResultList();
+	}
+	
+	public List<Medicacao> findByMedicoPendente(int idMedico) {
+		Query query = em.createNativeQuery("SELECT * FROM Medicacao WHERE Medicacao.renovacao = 0 AND Medicacao.medico = ?", Medicacao.class);
+		query.setParameter(1, idMedico);
+		return query.getResultList();
+	}
+	
+	public boolean aceitar(int id){
+		Medicacao med = findById(id);
+		med.setRenovacao("Aceite");
+		em.merge(med);
+		return true;
+	}
+	
+	public boolean rejeitar(int id){
+		Medicacao med = findById(id);
+		med.setRenovacao("Rejeitado");
+		em.merge(med);
 		return true;
 	}
 	

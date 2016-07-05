@@ -3,13 +3,16 @@ package org.jboss.tools.example.springmvc.controller;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.jboss.tools.example.springmvc.data.ConsultaDao;
+import org.jboss.tools.example.springmvc.data.MedicacaoDao;
 import org.jboss.tools.example.springmvc.data.MedicoDao;
 import org.jboss.tools.example.springmvc.data.MedicoUtenteDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
 import org.jboss.tools.example.springmvc.model.Consulta;
+import org.jboss.tools.example.springmvc.model.Medicacao;
 import org.jboss.tools.example.springmvc.model.MedicoUtente;
 import org.jboss.tools.example.springmvc.sensitivedata.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +46,9 @@ public class MedicoController {
 	
 	@Autowired
 	private ConsultaDao consultaDao;
+	
+	@Autowired
+	private MedicacaoDao medicacaoDao;
 
 	@RequestMapping(value="")
 	public ModelAndView index(){
@@ -81,11 +87,13 @@ public class MedicoController {
 			List<Utente> ut = utenteDao.findByMedico(idMedico);
 			//----------------------------
 			//Apanhar as Medicacoes para renovar
+			List<Medicacao> medicacaoRows = medicacaoDao.findByMedicoPendente(idMedico);
 			//----------------------------------
 			mav.setViewName("main_menu_medico");
 			mav.addObject("listaParaTratar", cu);
 			mav.addObject("listaUtentes",ut);
 			mav.addObject("username", username);
+			mav.addObject("medicacao", medicacaoRows);
 			mav.addObject("listaUtentes", utenteDao.findByMedico(Integer.parseInt(username)));
 			return mav;
 		}
@@ -186,4 +194,36 @@ public class MedicoController {
 			
 	}
 	
+	@RequestMapping(value="/aceitarMedicacao", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean aceitarMedicacao(@RequestParam(value="idMedicacao") String idMedicacao){
+		medicacaoDao.aceitar(Integer.parseInt(idMedicacao));
+		return true;
+		
+	}
+	
+	@RequestMapping(value="/visualizar/{tipoMedida}/{utente}", method = RequestMethod.GET)
+	public ModelAndView showMedidas(HttpServletRequest request,@PathVariable("tipoMedida") String tipoMedida,@PathVariable("utente") String utente)
+	{
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("medida", tipoMedida);
+		mav.addObject("utente", utente);
+		if(tipoMedida.equals("TensaoArterial"))
+		{
+			mav.setViewName("graficos2");
+		}
+		else{
+			mav.setViewName("graficos");
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/rejeitarMedicacao", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean rejeitarMedicacao(@RequestParam(value="idMedicacao") String idMedicacao){
+		medicacaoDao.rejeitar(Integer.parseInt(idMedicacao));
+		return true;
+		
+	}
 }
