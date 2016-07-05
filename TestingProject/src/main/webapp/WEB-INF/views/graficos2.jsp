@@ -132,16 +132,7 @@ var svg = d3.select("body").append("svg")
 var data1;
 var medida =  "TensaoArterial"
 path=window.location.host;
-var utente =  '<%=(String) request.getAttribute("utente")%>';
-path=window.location.host;
-if (utente!='null')
-{
-	temp=$.getJSON("https://"+path+"/obterMedidaMedico/" + medida +'/'+ utente,function(data){data1=data;}).done(function (){next()});
-	}
-else {
-	temp=$.getJSON("https://"+path+"/obterMedida/" + medida ,function(data){data1=data;}).done(function (){next()});
-}	
-
+temp=$.getJSON("https://"+path+"/obterMedida/" + medida ,function(data){data1=data;}).done(function (){next()});
 function next()
 {
 	temp=JSON.stringify(data1);
