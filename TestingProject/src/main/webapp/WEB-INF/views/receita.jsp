@@ -15,17 +15,18 @@
 
 <body style="background:  url('/resources/gfx/print5.jpg'); background-repeat: no-repeat; width: 915px; height: 652px; background-position: left top; margin:0px;"> 
 ​
-<textarea id = "primeira" style="position:absolute; margin-top: 79px; margin-left: 43px;"> </textarea>
-​<c:out value="${utenteName}"></c:out>
-<textarea id = "segunda" style="position: absolute; margin-top: 107px;margin-left: 46px;"> </textarea>
-​<c:out value="${utenteTelemovel}"></c:out>
-<textarea id = "terceira" style="position: absolute; margin-top: 278px; margin-left: 19px;"> </textarea>
-​<c:out value="${nomeMedicamento}"></c:out>
-<textarea id = "quarta" style="position: absolute; margin-top: 278px; margin-left: 255px;"> </textarea>
-​<c:out value="${dose}"></c:out>
-<textarea id = "quinta" style="position: absolute; margin-top: 278px; margin-left: 277px;"> </textarea>
-​<c:out value="${extenso}"></c:out>
-<textarea id = "sexta" rows="2" cols="40" style="position: absolute; margin-top: 41px; margin-left: 460px;height: 122px;width: 423px;">
+
+<textarea id = "primeira" style="position:absolute; margin-top: 79px; margin-left: 43px;">​<c:out value="${utenteName}"></c:out></textarea>
+<textarea id = "segunda" style="position: absolute; margin-top: 107px;margin-left: 46px;height:20px;">​<c:out value="${utenteTelemovel}"></c:out> </textarea>
+
+<textarea id = "terceira" style="position: absolute; margin-top: 280px; margin-left: 28px;">​<c:out value="${nomeMedicamento}"></c:out></textarea>
+
+<textarea id = "quarta" style="position: absolute; margin-top: 280px; margin-left: 271px;">​<c:out value="${dose}"></c:out></textarea>
+
+<textarea id = "quinta" style="position: absolute; margin-top: 280px; margin-left: 297px;">
+​<c:out value="${extenso}"></c:out></textarea>
+
+<textarea id = "sexta" rows="2" cols="40" style="position: absolute; margin-top: 41px; margin-left: 478px;height: 122px;width: 423px;">
 Receita Médica No.: <c:out value="${medicacaoID }"></c:out>
 Local de Prescricao: <c:out value="${instituicao }"></c:out>
 Médico Prescritor: <c:out value="${nomeMedico }"></c:out>
@@ -36,13 +37,13 @@ Entidade Responsável: CEDS/EHIC
 Nº do Beneficiário: <c:out value="${utenteID }"></c:out>            
 </textarea>
 ​
-<textarea id = "nona" style="position: absolute; margin-top: 184px; margin-left: 460px;">
+<textarea id = "nona" style="position: absolute; margin-top: 186px; margin-left: 494px;">
 <c:out value="${nomeMedicamento}"></c:out>
 </textarea>
-<textarea id = "decima" style="position: absolute; margin-top: 185px; margin-left: 799px;">
+<textarea id = "decima" style="position: absolute; margin-top: 185px; margin-left: 846px;">
 <c:out value="${dose}"></c:out>
 </textarea>
-<textarea id = "decima1" style="position: absolute; margin-top: 185px; margin-left: 825px;">
+<textarea id = "decima1" style="position: absolute; margin-top: 185px; margin-left: 874px;">
 <c:out value="${extenso}"></c:out>
 </textarea>
 </body>
@@ -53,4 +54,9 @@ input,input:hover,textarea,textarea:hover
 	border:0px;
 	overflow-y:hidden;
 }
+@media print {
+body {
+    -webkit-print-color-adjust: exact; 
+}}
+
 </style>
