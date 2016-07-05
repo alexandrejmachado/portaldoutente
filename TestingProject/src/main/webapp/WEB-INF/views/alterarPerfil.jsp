@@ -182,7 +182,7 @@
 									</div>
 											<div class='buttons'>
 											  <div class='set blue'>
-											    <a class='btn pri' type="submit" onClick="registar()" >Submeter</a>
+											    <button id="botao_med"  type="submit" onClick="registar()" >Submeter</button>
 											  </div>	
 							
 						</div>
