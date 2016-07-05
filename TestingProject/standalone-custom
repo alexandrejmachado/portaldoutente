@@ -152,13 +152,13 @@
                 </datasource>
                 <datasource jta="true" jndi-name="java:jboss/portalDoUtenteDB" pool-name="portalUtente" enabled="true" use-ccm="true">
 <!--                     <connection-url>jdbc:mysql://104.155.77.57:3306,104.155.38.109:3306/portaldoutente?failOverReadOnly=false&amp;useSSL=false</connection-url> -->
-					<connection-url>jdbc:mysql://104.155.38.109:3306,104.155.77.57:3306/portaldoutente?failOverReadOnly=false&amp;useSSL=false</connection-url>
-                    <driver-class>com.mysql.jdbc.Driver</driver-class>
-                    <driver>mysql</driver>
-                    <security>
-                        <user-name>webserver</user-name>
-                        <password>Bolachas_2</password>
-                    </security>
+					<connection-url>jdbc:mysql://130.211.107.105:3306,146.148.24.252:3306/portaldoutente?failOverReadOnly=false&amp;useSSL=false</connection-url>
+                   <driver-class>com.mysql.jdbc.Driver</driver-class>
+                   <driver>mysql</driver>
+                   <security>
+                       <user-name>webserver</user-name>
+                       <password>Bolachas_2</password>
+                   </security>
                     <validation>
                         <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker"/>
                         <background-validation>true</background-validation>

@@ -112,7 +112,16 @@ function drawGraph(data1) {
 
 var data1;
 var medida =  '<%=(String) request.getAttribute("medida")%>';
+var utente =  '<%=(String) request.getAttribute("utente")%>';
 path=window.location.host;
+if(utente!='null')
+{
+	temp=$.getJSON("https://"+path+"/obterMedidaMedico/" + medida +"/"+utente,function(data){data1=data;}).done(function (){next()});
+	}
+else
+{
+	temp=$.getJSON("https://"+path+"/obterMedida/" + medida,function(data){data1=data;}).done(function (){next()});
+	}
 temp=$.getJSON("https://"+path+"/obterMedida/" + medida ,function(data){data1=data;}).done(function (){next()});
 function next()
 {
