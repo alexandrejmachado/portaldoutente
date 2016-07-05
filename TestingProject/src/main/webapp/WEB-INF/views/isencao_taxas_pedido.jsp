@@ -112,10 +112,15 @@
 									<div class="row" id = "caixaReceita">
 										
 			
-											<p>Introduza o seu número de Identificação de Segurança Social:</p>
+											<p>Introduza o seu Rendimento Anual Bruto da Direção do Agregado:</p>
 											
 	
-											<div  class="col-md-6" id="smallBox"><form method="post" style="padding-bottom:10px;"><input id="codigo" type="text" name="segsoc">	</form>
+											<div  class="col-md-6" id="smallBox">
+											<form method="post" style="padding-bottom:10px;">
+											<input id="rendimento" type="text" name="valor">	
+											<p>Introduza o número de Pessoas na Direção do seu Agregado</p>
+											<input id="pessoas" type="text" name="numero">
+											</form>
 												<input id = "botao_conf" type="submit" onclick="lolada()"/>
 											</div>
 											
