@@ -22,9 +22,10 @@
 	                    <div class="col-md-1" id="entrar"><a style="color:white; text-decoration:none;" href="/medico/logout">Sair</a></div>
 	               </div>
 	             </div>
+	 </div>
 	             
 	      	<div id="page-content-wrapper">
-				<div class="container-fluid">
+				<div class="container-fluid" style = "height: 600px;">
 			        <select style="padding:10px; border-radius: 5px; color: grey;" id="hora">
 				    	<c:forEach items="${medidas}" var="slot">
 				    		<option value="${slot}"><c:out value="${slot}"/></option>
@@ -38,6 +39,14 @@
 		        </div>
 		    </div>
 	   </div>
+	   
+	   <style>
+	   
+	   object {
+	   	height: 500px;
+	   }
+	   
+	   </style>
 	   
    <script type="text/javascript">
     	 function verMedida(utente){
