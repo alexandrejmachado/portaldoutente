@@ -3,17 +3,22 @@ package org.jboss.tools.example.springmvc.controller;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.jboss.tools.example.springmvc.data.ConsultaDao;
 import org.jboss.tools.example.springmvc.data.MedicacaoDao;
 import org.jboss.tools.example.springmvc.data.MedicoDao;
 import org.jboss.tools.example.springmvc.data.MedicoUtenteDao;
+import org.jboss.tools.example.springmvc.data.SessaoDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
 import org.jboss.tools.example.springmvc.model.Consulta;
 import org.jboss.tools.example.springmvc.model.Medicacao;
 import org.jboss.tools.example.springmvc.model.MedicoUtente;
+import org.jboss.tools.example.springmvc.model.Sessao;
+import org.jboss.tools.example.springmvc.sensitivedata.Medico;
 import org.jboss.tools.example.springmvc.sensitivedata.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,8 +31,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,19 +56,33 @@ public class MedicoController {
 	
 	@Autowired
 	private MedicacaoDao medicacaoDao;
+	
+	@Autowired
+	private SessaoDao sessaoDao;
 
 	@RequestMapping(value="")
 	public ModelAndView index(){
-		//TODO por css na view
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("medico_inicio");
 		return mav;
 	}
 	
+	public String getToken() {
+		SecureRandom random = new SecureRandom();
+		String s = new BigInteger(130, random).toString(32);
+		return s;
+	}
+	
 	@RequestMapping(value="/entrar", method = RequestMethod.POST)
-	public ModelAndView entrar(HttpSession session, @RequestParam(value="username") String username, @RequestParam(value="pass") String pass){
+	public ModelAndView entrar(HttpServletResponse response, @RequestParam(value="username") String username, @RequestParam(value="pass") String pass){
 		if(medicoDao.findById(Integer.parseInt(username)) != null && username.equals(pass)){
-			session.setAttribute("username", username);
+			String token = getToken();
+			Cookie cookie = new Cookie("sessionToken", token);
+			cookie.setMaxAge(1800);
+			response.addCookie(cookie);
+			Medico m = medicoDao.findById(Integer.parseInt(username));
+			sessaoDao.iniciarSessao(token, username, "medico", m.getNome());
+			
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("redirect:/medico/main");
 			return mav;
@@ -74,12 +95,15 @@ public class MedicoController {
 	}
 	
 	@RequestMapping(value="/main")
-	public ModelAndView login(HttpSession session) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+	public ModelAndView login(HttpServletRequest request) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
 		ModelAndView mav = new ModelAndView();
-		if(verifyLogin(session)){
-			String username = (String) session.getAttribute("username");
-			System.out.println("MEDICO NUMERO: "+username);
-			int idMedico = Integer.parseInt(username);
+		String token = getSessaoToken(request);
+		if(verifyLogin(token)){
+			Sessao session = sessaoDao.getSessao(token);
+			String username = session.getSessionName();
+			System.out.println("MEDICO: "+username);
+			int idMedico = Integer.parseInt(session.getSessionID());
+			System.out.println(idMedico);
 			//Apanhar as Consultas
 			List<Consulta> cu = consultaDao.findWithDateMedico(idMedico);
 			//--------------------
@@ -94,7 +118,6 @@ public class MedicoController {
 			mav.addObject("listaUtentes",ut);
 			mav.addObject("username", username);
 			mav.addObject("medicacao", medicacaoRows);
-			mav.addObject("listaUtentes", utenteDao.findByMedico(Integer.parseInt(username)));
 			return mav;
 		}
 		else{
@@ -129,11 +152,13 @@ public class MedicoController {
 	}
 	
 	@RequestMapping(value="/consultarDados", method = RequestMethod.GET)
-	public ModelAndView consultarDados(HttpSession session,@ModelAttribute(value="utente") String utente){
+	public ModelAndView consultarDados(HttpServletRequest request,@ModelAttribute(value="utente") String utente){
 		ModelAndView mav = new ModelAndView();
-		if(verifyLogin(session)){
-			String username = (String) session.getAttribute("username");
-			System.out.println("MEDICO NUMERO: "+username);
+		String token = getSessaoToken(request);
+		if(verifyLogin(token)){
+			Sessao session = sessaoDao.getSessao(token);
+			String username = (String) session.getSessionName();
+			System.out.println("MEDICO: "+username);
 			//----Apanhar Medidasd Partilhadas---------
 			MedicoUtente mu = muDao.findByUtente(utente);
 			List<String> shared = new ArrayList<String>();
@@ -176,19 +201,46 @@ public class MedicoController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/logout")
-	public ModelAndView logout(HttpSession session){
-		session.removeAttribute("username");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("medico_inicio");
-		return mav;
+	public String getSessaoToken(HttpServletRequest request){
+		String sessionToken = "empty";
+		System.out.println("Token de sessao antes: "+sessionToken);
+		Cookie[] listaCookies = request.getCookies();
+		if(listaCookies != null){
+			for(Cookie c:listaCookies){
+				if(c.getName().equals("sessionToken")){
+					sessionToken = c.getValue();
+				}
+			}
+		}
+		System.out.println("Esta e a cookie: "+ sessionToken);
+		return sessionToken;
 	}
 	
-	public boolean verifyLogin(HttpSession session){
-		if(session.getAttribute("username") == null){
+	@RequestMapping(value="/logout")
+	public ModelAndView logout(HttpServletRequest request,HttpServletResponse response){
+		ModelAndView mav = new ModelAndView();
+		try{
+			Sessao session = sessaoDao.getSessao(getSessaoToken(request));
+			sessaoDao.removerSessao(getSessaoToken(request));
+			Cookie cookie = new Cookie("sessionToken", "empty");
+			response.addCookie(cookie);
+			mav.setViewName("medico_inicio");
+			return mav;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			mav.setViewName("redirect:/medico");
+			return mav;
+		}
+	}
+	
+	public boolean verifyLogin(String sessionToken){
+		if(sessionToken.equals("empty")){
+			System.out.println("NAO TEM SESSAO");
 			return false;
 		}
 		else{
+			Sessao session = sessaoDao.getSessao(sessionToken);
 			return true;
 		}
 			
