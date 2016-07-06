@@ -191,9 +191,11 @@ public class MedicacaoController {
 
 	@RequestMapping(value = "/renovar", method = RequestMethod.POST,params={"id"})
 	@ResponseBody
-	public boolean renovarMed(HttpServletRequest request, @RequestParam("id") String id) {
+	public String renovarMed(HttpServletRequest request, @RequestParam("id") String id) {
 		System.out.println("im here");
-		return medicacaoDao.renovarMed(Integer.parseInt(id));
+		String cena = medicacaoDao.renovarMed(Integer.parseInt(id));
+		System.out.println("cena = "+cena);
+		return cena;
 	}
 	
 	@RequestMapping(value = "/apagar", method = RequestMethod.POST, params={"id"})

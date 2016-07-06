@@ -58,9 +58,9 @@ public class MedicacaoDao {
 		return true;
 	}
 	
-	public boolean renovarMed(int id) {
+	public String renovarMed(int id) {
 		Medicacao medAtual = findById(id);
-		boolean estado = medAtual.renovarMedicacao();
+		String estado = medAtual.renovarMedicacao();
 		em.persist(medAtual);
 		System.out.println(medAtual.getRenovacao());
 		return estado;
