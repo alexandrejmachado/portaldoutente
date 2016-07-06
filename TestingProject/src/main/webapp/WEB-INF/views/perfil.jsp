@@ -63,9 +63,6 @@
 					<li id="medicao">
 						<a href="/medicoes">Medições</a>
 					</li>
-					<li id="cirurgia">
-						<a href="/cirurgia">Cirurgia</a>
-					</li>
 					<li id="isencao">
 						<a href="/isencao">Pedido de Isenção</a>
 					</li>
@@ -162,7 +159,7 @@
 									</div>
 											<div class='buttons'>
 											  <div class='set blue'>
-											    <a class='btn pri' type="submit" onClick="registar()" >Alterar Dados</a>
+											    <button id="botao_med" type="submit" onClick="registar()" >Alterar Dados</button>
 											  </div>	
 							
 						</div>

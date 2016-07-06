@@ -36,12 +36,26 @@
 	<div class= "container">   
 	        
 	            <div class="col-lg-12"> 
-	                <div class= "rowMajor">
-						<div class="col-md-6"><a id = "PortalDoUtente" href="/" style="text-decoration:none; color: white; font-weight:100">Portal do Utente</a></div>
-						<div class="col-md-6" id="entrar" style="text-align: right;">${username}</div>
-					</div>
-	            
-	            </div>
+                <div class= "rowMajor ">
+                	<div id="divisento"></div>
+					<div class="col-md-6"><a id = "PortalDoUtente" href="/" style="text-decoration:none; color: white; font-weight:100">Portal do Utente</a></div>
+					<div class="col-md-6" id="entrar" style="text-align: right;">${username}</div>
+				</div>
+			        <nav>
+			          <ul>
+			            <li id="login">
+			              <a id="login-trigger" href="#">
+			                Opções <span>▼</span>
+			              </a>
+			              <div id="login-content">
+			                <a button href= "/perfil/dados" id = "aaa">Ver Perfil</button></a><br>
+			                <a button href= "/perfil/verPrivacidades" id = "aaa">Privacidade das Medições</button></a><br>
+			                <a button href= "/logout" id ="aaa">Logout</button></a>
+			              </div>                       
+			            </li>
+			          </ul>
+			        </nav>
+ 			</div>
 				
 		<div class="col-lg-12" id="caixaGig">  <!--  -->
 		
@@ -60,9 +74,7 @@
 					<li id="medicao">
 						<a href="/medicoes">Medições</a>
 					</li>
-					<li id="cirurgia">
-						<a href="/cirurgia">Cirurgia</a>
-					</li>
+
 					<li id="isencao">
 						<a href="/isencao">Pedido de Isenção</a>
 					</li>
@@ -135,6 +147,16 @@
 				
 				});
 			}
+
+		$(document).ready(function(){
+			  $('#login-trigger').click(function(){
+			    $(this).next('#login-content').slideToggle();
+			    $(this).toggleClass('active');          
+			    
+			    if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
+			      else $(this).find('span').html('&#x25BC;')
+			    })
+			});
 	    </script>
 	    
 	</div>

@@ -105,9 +105,6 @@
 					<li id="medicao">
 						<a href="/medicoes">Medições</a>
 					</li>
-					<li id="cirurgia">
-						<a href="/cirurgia">Cirurgia</a>
-					</li>
 					<li id="isencao">
 						<a href="/isencao">Pedido de Isenção</a>
 					</li>
@@ -165,7 +162,6 @@
  		$("#divisento").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 3%;">Isencao aceite!</div>');
  	}
 	
-<%-- 	paramOne =  '<%=(String) request.getAttribute("sessionMode")%>'; --%>
  	console.log(paramOne);
  	if ( paramOne == "guardian") {
  		$("#guardiao").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 3%;">Modo Guardiao!</div>');
@@ -189,6 +185,8 @@ $( "#inst" ).change(function() {
 			  alert( $("#inst").val() );
 			});
 </script>
+
+<script src='<c:url value="/resources/js/pt.js"></c:url>'></script>
 <script>
 $(document).ready(function() {
 	$.get("https://"+ window.location.host+"/calendario/getEventos").done(function(data){
@@ -196,6 +194,7 @@ $(document).ready(function() {
 			var d = new Date(pel);
 			$('#calendar').fullCalendar({
 				timezone:'local',
+				lang: 'pt',
 				timeFormat: 'HH:mm',
 					defaultDate: d,
 					editable: false,

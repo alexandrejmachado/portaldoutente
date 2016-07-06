@@ -760,8 +760,10 @@ public class TestingController {
 			System.out.println(session);
 			try {
 				System.out.println("VERIFICAR SE ESTA ACTIVA A CONTA");
-				if(utenteDao.verifyActivatedUser(session.getSessionID())){System.out.println("VERFICAR SE ESTA ACTIVA A CONTA");
-					return true;}
+				if(utenteDao.verifyActivatedUser(session.getSessionID())){
+					System.out.println("ENCONTREI");
+					return true;
+					}
 				else{
 					System.out.println("NAO ESTA ACTIVA A CONTA");
 					sessaoDao.removerSessao(sessionToken);
@@ -788,6 +790,9 @@ public class TestingController {
 			} catch (IOException e) {
 				
 				e.printStackTrace();
+			}
+			catch(NullPointerException e){
+				return false;
 			}
 		}
 		System.out.println("ERRO ESTRANHO");
@@ -838,6 +843,7 @@ public class TestingController {
 				mav.setViewName("isencao_taxas_pedido");
 			}
 			else {
+				mav.addObject("username", session.getSessionName());
 				mav.setViewName("ja_isento");
 			}
 		}
@@ -883,12 +889,19 @@ public class TestingController {
 	@RequestMapping(value="/logout")
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
-		//Sessao session = sessaoDao.getSessao(getSessaoToken(request));
-		sessaoDao.removerSessao(getSessaoToken(request));
-		Cookie cookie = new Cookie("sessionToken", "empty");
-		response.addCookie(cookie);
-		mav.setViewName("index");
-		return mav;
+		try{
+			Sessao session = sessaoDao.getSessao(getSessaoToken(request));
+			sessaoDao.removerSessao(getSessaoToken(request));
+			Cookie cookie = new Cookie("sessionToken", "empty");
+			response.addCookie(cookie);
+			mav.setViewName("index");
+			return mav;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			mav.setViewName("redirect:/index");
+			return mav;
+		}
 	}
 	
 	
@@ -1103,7 +1116,8 @@ public class TestingController {
 		List<Exame> exames = listBucket(request);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("exames", exames);
-			mav.setViewName("uploadtest");
+		mav.addObject("username", session.getSessionName());
+		mav.setViewName("uploadtest");
 		return mav;
 	}
 	

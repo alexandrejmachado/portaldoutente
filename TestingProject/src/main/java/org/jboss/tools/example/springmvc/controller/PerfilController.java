@@ -309,6 +309,9 @@ public class PerfilController {
 				
 				e.printStackTrace();
 			}
+			catch(NullPointerException e){
+				return false;
+			}
 		}
 		System.out.println("ERRO ESTRANHO");
 		return false;

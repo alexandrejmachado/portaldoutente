@@ -222,7 +222,7 @@ public class EventController {
 			System.out.println(session);
 			try {
 				System.out.println("VERIFICAR SE ESTA ACTIVA A CONTA");
-				if(utenteDao.verifyActivatedUser(session.getSessionID())){System.out.println("VERFICAR SE ESTA ACTIVA A CONTA");
+				if(utenteDao.verifyActivatedUser(session.getSessionID())){System.out.println("ENCONTREI");
 					return true;}
 				else{
 					System.out.println("NAO ESTA ACTIVA A CONTA");
@@ -250,6 +250,9 @@ public class EventController {
 			} catch (IOException e) {
 				
 				e.printStackTrace();
+			}
+			catch(NullPointerException e){
+				return false;
 			}
 		}
 		System.out.println("ERRO ESTRANHO");
