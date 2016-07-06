@@ -117,14 +117,36 @@
 			    	<td> <c:out value="${medicacao.nomeMedicamento }"/> </td>
 			        <td><c:out value="${medicacao.dose}"/></td>
 			        <td><c:out value="${medicacao.indicacoes}"/></td>
-			        <td><button id = "renovar" value="${medicacao.getId()}" onclick="renovar(${medicacao.id})"> Pedir Renovacao </button></td>
+			        <td><c:choose>
+    <c:when test="${medicacao.checkMedicacao()=='aceite'}">
+        <p>Renovado</p> 
+    </c:when>    
+    <c:otherwise>
+    <c:choose>
+    <c:when test="${medicacao.checkMedicacao()=='caducado' }">
+    	<button id = "renovar" value="${medicacao.getId()}" onclick="renovar(${medicacao.id})"> Validar </button> 
+    </c:when>
+    <c:otherwise>
+    <c:if test="${medicacao.estado=='true'}">
+        <button id = "renovar" value="${medicacao.getId()}" onclick="renovar(${medicacao.id})"> Pedir Renovacao </button> 
+    </c:if>
+    <c:if test="${medicacao.estado=='false' }">
+        <p>À espera do Médico</p>
+    </c:if>
+    </c:otherwise>
+    </c:choose>
+    </c:otherwise>
+</c:choose></td>
 			        <td><button id = "apagar" value="${medicacao.getId() }" onclick="apagar(${medicacao.id})"> Apagar </button></td>
 			        <td>
-		    		<form action="verReceita" method="POST">
-		    		<input type="text" name="medicacaoID" style="display:none" value="${medicacao.id}">
-		    		<input type="submit" value="Download Ficheiro">
-		    		</form>
+		    		
+			    	<c:if test="${medicacao.checkMedicacao()=='aceite'}">
+        				<form action="verReceita" method="POST">
+			    		<input type="text" name="medicacaoID" style="display:none" value="${medicacao.id}">
+			    		<input type="submit" value="Obter Receita"></form>
+    				</c:if>
 		    		</td>
+		    		
 			        
 			        
 			    </tr>
@@ -172,9 +194,11 @@ function renovar(id)
 {
 	path="https://" + window.location.host + "/medicacao/renovar";
 	$.post(path, {'id':id}).done(function( data ) {
-		if (data==true){alert("renovacao pedida com sucesso, o seu médico entrará em contacto consigo")}
+		if (data=="True"){window.location.reload();}
+		else {
+		if (data=="Pendente") {alert("O seu médico foi notificado para renovar a sua medicacao"); window.location.reload();}
 		
-		else {alert("renovacao falhada, ainda e muito cedo para pedir")}}
+		else {alert("renovacao falhada, ainda e muito cedo para pedir")}}}
 
 	);
 	

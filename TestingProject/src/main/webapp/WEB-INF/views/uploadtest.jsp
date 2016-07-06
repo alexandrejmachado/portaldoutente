@@ -99,8 +99,8 @@
 	<div id="page-content-wrapper">
 	<div class="container-fluid">
     <form method="POST" action="uploadFile" enctype="multipart/form-data" id="medform">
-        Ficheiro a submeter <br /> <input   type="file" name="file" style="display:block; margin:auto; margin-top:2%"> <br>
-        Descrição:<br> <input type="text" name="tipo" ><br/>
+        Ficheiro a submeter <br /> <input   type="file" name="file" style="display:block; margin:auto; margin-top:2%" required> <br>
+        Descrição:<br> <input type="text" name="tipo" required><br/>
         <input type="submit" value="Upload" id="botao_med"> 
     </form>
     

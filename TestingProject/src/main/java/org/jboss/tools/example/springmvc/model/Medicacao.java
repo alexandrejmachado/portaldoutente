@@ -102,6 +102,7 @@ public class Medicacao {
 		
 		
 		cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, -1);
 	}
 	
 	
@@ -151,6 +152,16 @@ public class Medicacao {
 	
 	public void setValidade(int meses) {
 		validade.add(Calendar.MONTH, meses);
+	}
+	
+	public boolean getAceite() {
+		System.out.println("getAceite");
+		System.out.println(getRenovacao());
+		if (getRenovacao() == "Aceite") {
+			System.out.println("here");
+			return true;
+		}
+		return false;
 	}
 	
 	public String getRenovacao() {
@@ -219,50 +230,62 @@ public class Medicacao {
 		return (int) (comprimidosPorCaixa/dose);
 	}
 	
-	public boolean renovarMedicacao() {
+	public String renovarMedicacao() {
 		Calendar cenas = Calendar.getInstance();
+		System.out.println("renovar");
+		String cena = checkMedicacao();
 		if (cenas.before(validade) && cenas.after(cal) && estado && renovacao==EstadoRenovacao.CADUCADO) {
 			renovacao=EstadoRenovacao.ACEITE;
-			return true;
+			System.out.println("true");
+			return "True";
 		}
-		else if (renovacao == EstadoRenovacao.PENDENTE) {
-			return false;
+		else if (cena=="True") {
+			System.out.println("true");
+			setRenovacao("Aceite");
+			return "True";
 		}
-		else if (checkMedicacao()) {
-			return true;
+		else if (cena=="caducado") {
+			setRenovacao("Pendente");
+			setEstado(false);
+			return "Pendente";
 		}
-		return false;
+		else if(cena=="pendente") {
+			setRenovacao("Aceite");
+			return "True";
+		}
+		return "False";
 	}
 	
 	
 	
-	public boolean checkMedicacao() {
+	public String checkMedicacao() {
 		Calendar cenas = Calendar.getInstance();
 		System.out.println(cenas.getTime());
 		System.out.println(validade.getTime());
 		System.out.println(renovacao);
-		if (cenas.after(validade)) {
+		if (renovacao==EstadoRenovacao.PENDENTE) {
+			return "pendente";
+		}
+		else if (cenas.after(validade)) {
 			System.out.println("1");
-			renovacao = EstadoRenovacao.REJEITADO;
-			return false;
+			return "caducado";
 		}
 		else if (renovacao == EstadoRenovacao.CADUCADO) {
 			System.out.println(2);
-			return false;
+			return "caducado";
 		}
 		else if (cenas.before(cal)) {
 			System.out.println(3);
 			setRenovacao("Caducado");
-			return false;
+			return "False";
 		}
-		else if (getRenovacao().equals("Pendente")) {
-			return true;
+		else if (getRenovacao().equals("Aceite")) {
+			return "aceite";
 		}
 		else if (estado){
 			System.out.println(4);
-			setRenovacao("Aceite");
-			return true;
+			return "True";
 		}
-		return false;
+		return "False";
 	}
 }
