@@ -193,6 +193,7 @@ $(document).ready(function() {
 			var pel = ${data}
 			var d = new Date(pel);
 			$('#calendar').fullCalendar({
+				timezone:'local',
 				lang: 'pt',
 				timeFormat: 'HH:mm',
 					defaultDate: d,
