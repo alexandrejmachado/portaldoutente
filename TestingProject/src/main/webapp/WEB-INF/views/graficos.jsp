@@ -122,7 +122,6 @@ else
 {
 	temp=$.getJSON("https://"+path+"/obterMedida/" + medida,function(data){data1=data;}).done(function (){next()});
 	}
-temp=$.getJSON("https://"+path+"/obterMedida/" + medida ,function(data){data1=data;}).done(function (){next()});
 function next()
 {
 	temp=JSON.stringify(data1);
