@@ -842,6 +842,7 @@ public class TestingController {
 				mav.setViewName("isencao_taxas_pedido");
 			}
 			else {
+				mav.addObject("username", session.getSessionName());
 				mav.setViewName("ja_isento");
 			}
 		}
@@ -1113,7 +1114,8 @@ public class TestingController {
 		List<Exame> exames = listBucket(request);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("exames", exames);
-			mav.setViewName("uploadtest");
+		mav.addObject("username", session.getSessionName());
+		mav.setViewName("uploadtest");
 		return mav;
 	}
 	
