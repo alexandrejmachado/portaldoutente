@@ -141,39 +141,17 @@ public class MedicacaoController {
 					sessaoDao.removerSessao(sessionToken);
 				return false;
 				}
-			} catch (InvalidKeyException e) {
-				
-				e.printStackTrace();
-			} catch (NumberFormatException e) {
-				
-				e.printStackTrace();
-			} catch (NoSuchAlgorithmException e) {
-				
-				e.printStackTrace();
-			} catch (NoSuchPaddingException e) {
-				
-				e.printStackTrace();
-			} catch (IllegalBlockSizeException e) {
-				
-				e.printStackTrace();
-			} catch (BadPaddingException e) {
-				
-				e.printStackTrace();
-			} catch (IOException e) {
-				
-				e.printStackTrace();
+			}
+			catch(Exception e){
+				return false;
 			}
 		}
-		System.out.println("ERRO ESTRANHO");
-		return false;
-		
 	}		
 	
 	
 	@RequestMapping(value = "/view")
 	public ModelAndView verificar(HttpServletRequest request) throws InvalidKeyException, NumberFormatException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		ModelAndView mav = new ModelAndView();
-		
 		String token = getSessaoToken(request);
 		if(verifyLogin(token)){
 			Sessao session = sessaoDao.getSessao(token);

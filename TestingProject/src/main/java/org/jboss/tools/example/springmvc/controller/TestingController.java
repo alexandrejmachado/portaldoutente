@@ -759,8 +759,10 @@ public class TestingController {
 			System.out.println(session);
 			try {
 				System.out.println("VERIFICAR SE ESTA ACTIVA A CONTA");
-				if(utenteDao.verifyActivatedUser(session.getSessionID())){System.out.println("VERFICAR SE ESTA ACTIVA A CONTA");
-					return true;}
+				if(utenteDao.verifyActivatedUser(session.getSessionID())){
+					System.out.println("ENCONTREI");
+					return true;
+					}
 				else{
 					System.out.println("NAO ESTA ACTIVA A CONTA");
 					sessaoDao.removerSessao(sessionToken);
@@ -787,6 +789,9 @@ public class TestingController {
 			} catch (IOException e) {
 				
 				e.printStackTrace();
+			}
+			catch(NullPointerException e){
+				return false;
 			}
 		}
 		System.out.println("ERRO ESTRANHO");
@@ -882,12 +887,18 @@ public class TestingController {
 	@RequestMapping(value="/logout")
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
-		//Sessao session = sessaoDao.getSessao(getSessaoToken(request));
-		sessaoDao.removerSessao(getSessaoToken(request));
-		Cookie cookie = new Cookie("sessionToken", "empty");
-		response.addCookie(cookie);
-		mav.setViewName("index");
-		return mav;
+		try{
+			Sessao session = sessaoDao.getSessao(getSessaoToken(request));
+			sessaoDao.removerSessao(getSessaoToken(request));
+			Cookie cookie = new Cookie("sessionToken", "empty");
+			response.addCookie(cookie);
+			mav.setViewName("index");
+			return mav;
+		}
+		catch(NullPointerException e){
+			mav.setViewName("redirect:/index");
+			return mav;
+		}
 	}
 	
 	

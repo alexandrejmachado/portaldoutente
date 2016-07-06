@@ -162,7 +162,6 @@
  		$("#divisento").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 3%;">Isencao aceite!</div>');
  	}
 	
-<%-- 	paramOne =  '<%=(String) request.getAttribute("sessionMode")%>'; --%>
  	console.log(paramOne);
  	if ( paramOne == "guardian") {
  		$("#guardiao").append('<div class="alert alert-danger fade in" role="alert" style="margin-top: 3%;">Modo Guardiao!</div>');
