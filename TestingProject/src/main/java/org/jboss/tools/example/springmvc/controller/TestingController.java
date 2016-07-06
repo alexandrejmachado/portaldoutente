@@ -896,7 +896,8 @@ public class TestingController {
 			mav.setViewName("index");
 			return mav;
 		}
-		catch(NullPointerException e){
+		catch(Exception e){
+			e.printStackTrace();
 			mav.setViewName("redirect:/index");
 			return mav;
 		}
