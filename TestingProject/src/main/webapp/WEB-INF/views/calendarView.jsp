@@ -185,6 +185,8 @@ $( "#inst" ).change(function() {
 			  alert( $("#inst").val() );
 			});
 </script>
+
+<script src='<c:url value="/resources/js/pt.js"></c:url>'></script>
 <script>
 $(document).ready(function() {
 	$.get("https://"+ window.location.host+"/calendario/getEventos").done(function(data){
