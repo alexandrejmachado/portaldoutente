@@ -85,6 +85,7 @@ public class PerfilController {
 	    	mav.addObject("mail", currentUser.getEmail());
 	    	mav.addObject("nif", currentUser.getNif());
 	    	mav.addObject("centro_saude", insDao.findById(currentUser.getCentroSaude()).getNome());
+	    	mav.addObject("morada", currentUser.getMorada());
 	    	if(currentUser.getMedico() == 0){
 	    		mav.addObject("medico", "Não tem médico atribuído");
 	    	}
@@ -140,6 +141,7 @@ public class PerfilController {
 	    	mav.addObject("mail", currentUser.getEmail());
 	    	mav.addObject("nif", currentUser.getNif());
 	    	mav.addObject("centro_saude", insDao.findById(currentUser.getCentroSaude()).getNome());
+	    	mav.addObject("morada", currentUser.getMorada());
 	    	if(currentUser.getMedico() == 0){
 	    		mav.addObject("medico", "Não tem médico atribuído");
 	    	}

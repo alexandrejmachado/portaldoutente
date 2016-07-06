@@ -199,7 +199,7 @@
 			path="https://" + window.location.host + "/";
 		
 			$.post(path + 'perfil/atualizarPerfil', $("form").serialize()).done(function( data ) {
-				if (data[0]=="true"){window.location.replace(path + "index");}
+				if (data[0]=="true"){window.location.replace(path + "/perfil/dados");}
 				else {alert(data[0]);$("#theImg").remove();}}
 			);
 	

@@ -563,6 +563,7 @@ public class TestingController {
 
 
 				Utente ut = utenteDao.newUtente(username, numUtente, cc, morada, mail, hashTest, telemovel, nif, code, codeSms, emergencia, centroId, medico);
+				muDao.novo(medico, numUtente);
 				future.get();
 				finalmsg.add("true");
 				return finalmsg;
