@@ -33,7 +33,7 @@ public class GlicemiaDao {
 	}
 	
 	public List<Glicemia> findAllByUtente(int numUtente) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		TypedQuery<Glicemia> query = em.createNamedQuery(Altura.FIND_ALL_BY_UTENTE, Glicemia.class);
+		TypedQuery<Glicemia> query = em.createNamedQuery(Glicemia.FIND_ALL_BY_UTENTE, Glicemia.class);
 		query.setParameter(Glicemia.UTENTE, Cifras.encrypt(Integer.toString(numUtente)));
 		return query.getResultList();
 	}

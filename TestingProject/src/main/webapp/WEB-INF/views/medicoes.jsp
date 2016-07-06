@@ -216,6 +216,7 @@
 							  
 							  function verMedida(medida2)
 							  {
+								  console.log("OPS");
 								  $("#"+medida2).html('<object data="https://'+window.location.host+'/visualizar/'+medida2+'" style="width:100%"/>')
 							  }
 							</script>
@@ -320,8 +321,56 @@
 							      </div>
 							    </div>
 							  </div>
+
+							
+							
+							<div class="panel panel-default">
+							    <div class="panel-heading">
+							      <h4 class="panel-title">
+							        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" onclick="verMedida('SaturacaoO2')">
+							          <span class="glyphicon glyphicon-plus"></span>
+							          Saturação O2
+							        </a>
+							      </h4>
+							    </div>
+							    <div id="collapseSeven" class="panel-collapse collapse tamanho">
+							      <div id="SaturacaoO2" class="panel-body">
+							       
+							      </div>
+							    </div>
+							  </div>
+
+							
+							<div class="panel panel-default">
+							    <div class="panel-heading">
+							      <h4 class="panel-title">
+							        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" onclick="verMedida('Glicemia')">
+							          <span class="glyphicon glyphicon-plus"></span>
+							          Glicemia
+							        </a>
+							      </h4>
+							    </div>
+							    <div id="collapseEight" class="panel-collapse collapse tamanho">
+							      <div id="Glicemia" class="panel-body">
+							       
+							      </div>
+							    </div>
+							  </div>
 							</div>
 							</div>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
 							
 							
 							</div>
