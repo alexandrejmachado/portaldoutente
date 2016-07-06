@@ -102,9 +102,7 @@ public class MedicacaoDao {
 	}
 	
 	public boolean rejeitar(int id){
-		Medicacao med = findById(id);
-		med.setRenovacao("Rejeitado");
-		em.merge(med);
+		deleteMedicacao(id);
 		return true;
 	}
 	

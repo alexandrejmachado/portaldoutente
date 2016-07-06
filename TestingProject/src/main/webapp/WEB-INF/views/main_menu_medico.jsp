@@ -105,7 +105,7 @@
 					<td id="texto7" style="width:16%; text-align: center;"> <c:out value="${md.getNumUtente()}"/> </td>
 					<td id="texto7" style="width:16%; text-align: center;"> <c:out value="${md.getNomeMedicamento()}"/> </td>
 					<td id="texto7" style="width:16%; text-align: center;"> <c:out value="${md.getDose()}"/> </td>
-					<td id="texto7" style="width:16%; text-align: center;"><button id="botao_med" onclick="aceitarMedicacao(${md.getId()})"> <c:out value="Aceitar"> </c:out> </button> <button id="botao_med" onclick="rejeitarMedicacao(${ut.getId()})"> <c:out value="Rejeitar"> </c:out> </button></td>
+					<td id="texto7" style="width:16%; text-align: center;"><button id="botao_med" onclick="aceitarMedicacao(${md.getId()})"> <c:out value="Aceitar"> </c:out> </button> <button id="botao_med" onclick="rejeitarMedicacao(${md.getId()})"> <c:out value="Rejeitar"> </c:out> </button></td>
 				</tr>
 			</c:forEach>
 		</table>
