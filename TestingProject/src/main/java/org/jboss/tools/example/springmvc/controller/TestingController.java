@@ -1129,7 +1129,7 @@ public class TestingController {
     	String token = getSessaoToken(request);
 		Sessao session = sessaoDao.getSessao(token);
         if (!file.isEmpty() & !(session.getSessionID() == null) ) {
-            //try {
+            try {
                 
             	
                 // Creating the directory to store file
@@ -1161,16 +1161,16 @@ public class TestingController {
                   Utente curUtente = utenteDao.findUtenteById(Integer.parseInt(session.getSessionID()));
                   exameDao.novoExame(Integer.parseInt(session.getSessionID()), new Date(), session.getSessionID() + "/" + file.getOriginalFilename(), tipo, session.getSessionName(), curUtente.getMedico());
             }
-            /*
-             * catch (Exception e) {
+            
+             catch (Exception e) {
              
             	System.out.println(e.toString());
             	ModelAndView mav = new ModelAndView();
             	mav.setViewName("erro");
                 return mav;
             }
-            */
-       // }
+            
+        }
     else {
         	ModelAndView mav = new ModelAndView();
         	mav.setViewName("erro");

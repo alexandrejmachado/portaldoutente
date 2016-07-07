@@ -23,6 +23,10 @@ import org.jboss.tools.example.springmvc.model.Sessao;
 import org.jboss.tools.example.springmvc.sensitivedata.Medico;
 import org.jboss.tools.example.springmvc.sensitivedata.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,8 +36,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.cloud.AuthCredentials;
+import com.google.cloud.ReadChannel;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.nio.channels.Channels;
+import java.nio.channels.WritableByteChannel;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -64,6 +82,8 @@ public class MedicoController {
 	
 	@Autowired
 	private ExameDao exameDao;
+	
+	private Storage storage;
 
 	@RequestMapping(value="")
 	public ModelAndView index(){
@@ -279,6 +299,42 @@ public class MedicoController {
 		
 		return mav;
 	}
+	
+	@RequestMapping(value = "/getFile", method = RequestMethod.POST)
+    public @ResponseBody
+   Object downloadFileHandler(@RequestParam("name") String name) throws IOException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
+		String rootPath = System.getProperty("jboss.server.config.dir");
+		this.storage=StorageOptions.builder().authCredentials(AuthCredentials.createForJson(new FileInputStream(rootPath+ File.separator+ "bucketkey.json"))).projectId("composite-watch-135111").build().service();
+		HttpHeaders respHeaders = new HttpHeaders();
+    	System.out.println("nome= " + name);
+        //Tipo de Return:ResponseEntity<InputStreamResource>
+    	Blob blob = storage.get(BlobId.of("userdata-portal-exames", name));
+    	PrintStream writeTo = System.out;
+    	File temp=File.createTempFile("tempfile", ".temp");
+    	writeTo = new PrintStream(new FileOutputStream(temp));
+    	if(blob==null){return "Ficheiro não existe"; }
+        if (blob.size() < 1_000_000) {
+            // Blob is small read all its content in one request
+            byte[] content = blob.content();
+            writeTo.write(content);
+          } else {
+            // When Blob size is big or unknown use the blob's channel reader.
+            try (ReadChannel reader = blob.reader()) {
+              WritableByteChannel channel = Channels.newChannel(writeTo);
+              ByteBuffer bytes = ByteBuffer.allocate(64 * 1024);
+              while (reader.read(bytes) > 0) {
+                bytes.flip();
+                channel.write(bytes);
+                bytes.clear();
+              }
+            }
+          }
+        writeTo.close();
+        respHeaders.setContentDispositionFormData("attachment", blob.name());
+        respHeaders.setContentLength(temp.length());
+    	InputStreamResource isr = new InputStreamResource(new FileInputStream(temp));
+    	return new ResponseEntity<InputStreamResource>(isr, respHeaders, HttpStatus.OK);
+    }
 	
 	@RequestMapping(value="/rejeitarMedicacao", method = RequestMethod.POST)
 	@ResponseBody
