@@ -15,7 +15,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Exame.FIND_ALL_BY_UTENTE, query="SELECT e FROM Exame e WHERE e.numUtente = :" + Exame.UTENTE +" ORDER BY e.data DESC")
+	@NamedQuery(name=Exame.FIND_ALL_BY_UTENTE, query="SELECT e FROM Exame e WHERE e.numUtente = :" + Exame.UTENTE +" ORDER BY e.data DESC"),
+	@NamedQuery(name=Exame.FIND_ALL_BY_MEDICO, query="SELECT e FROM Exame e WHERE e.idMedico = :" + Exame.MEDICO + " ORDER BY e.data DESC")
 })
 public class Exame {
 
@@ -30,7 +31,11 @@ public class Exame {
 	
 	public static final String FIND_ALL_BY_UTENTE = "Exame.findAllByUtente";
 	
+	public static final String FIND_ALL_BY_MEDICO = "Exame.findAllByMedico";
+	
 	public static final String UTENTE = "numUtente";
+	
+	public static final String MEDICO = "idMedico";
 	
 	private boolean feito = false;
 	
@@ -54,16 +59,20 @@ public class Exame {
 	
 	private String nome;
 	
+	private String nomeUtente;
+	
 	public Exame(){}
 	
-	public Exame(String numUtente,Date date,String metalink, String tipo)
+	public Exame(String numUtente,Date date,String metalink, String tipo, String nomeUtente, int idMedico)
 	{
+		this.idMedico = idMedico;
 		this.numUtente=numUtente;
 		this.data=date;
 		this.metalink=metalink;
 		this.nome = metalink.split("/")[1];
 		System.out.println(nome);
 		this.tipo = tipo;
+		this.setNomeUtente(nomeUtente);
 		System.out.println(tipo);
 	}
 	
@@ -83,5 +92,13 @@ public class Exame {
 
 	public void setSharable(boolean sharable) {
 		this.sharable = sharable;
+	}
+
+	public String getNomeUtente() {
+		return nomeUtente;
+	}
+
+	public void setNomeUtente(String nomeUtente) {
+		this.nomeUtente = nomeUtente;
 	}
 }

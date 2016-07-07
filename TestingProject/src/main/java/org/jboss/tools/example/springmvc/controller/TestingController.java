@@ -1131,7 +1131,7 @@ public class TestingController {
         if (!file.isEmpty() & !(session.getSessionID() == null) ) {
             try {
                 
- 
+            	
                 // Creating the directory to store file
                 String rootPath = System.getProperty("jboss.server.config.dir"); 
                 System.out.println(rootPath + File.separator + "tmpFiles");
@@ -1158,7 +1158,8 @@ public class TestingController {
                       }
                     }
                   };
-                  exameDao.novoExame(Integer.parseInt((String) session.getSessionID()), new Date(), (String) session.getSessionID() + "/" + file.getOriginalFilename(), tipo);
+                  Utente curUtente = utenteDao.findUtenteById(Integer.parseInt(session.getSessionID()));
+                  exameDao.novoExame(Integer.parseInt(session.getSessionID()), new Date(), session.getSessionID() + "/" + file.getOriginalFilename(), tipo, session.getSessionName(), curUtente.getMedico());
             } catch (Exception e) {
             	System.out.println(e.toString());
             	ModelAndView mav = new ModelAndView();

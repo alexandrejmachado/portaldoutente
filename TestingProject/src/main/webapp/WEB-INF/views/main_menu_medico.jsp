@@ -32,9 +32,10 @@
     	
     	<div id = "medico" style="text-align: center; width:90%; font-family:'Roboto',Arial, sans-serif; margin-left:5%;">
 <ul class="tab">
-  <li style="width: 33%;"><a href="#" class="tablinks active" onclick="change(event, 'ConsultaMed')">Confirmação de Consultas</a></li>
-  <li style="width: 33%;"><a href="#" class="tablinks" onclick="change(event, 'DadosMed')">Consultar dados do Utente</a></li>
-  <li style="width: 33%;"><a href="#" class="tablinks" onclick="change(event, 'MedicacaoMed')">Renovação de Medicacao</a></li>
+  <li style="width: 25%;"><a href="#" class="tablinks active" onclick="change(event, 'ConsultaMed')">Confirmação de Consultas</a></li>
+  <li style="width: 25%;"><a href="#" class="tablinks" onclick="change(event, 'DadosMed')">Consultar dados do Utente</a></li>
+  <li style="width: 25%;"><a href="#" class="tablinks" onclick="change(event, 'MedicacaoMed')">Renovação de Medicacao</a></li>
+  <li style="width: 25%;"><a href="#" class="tablinks" onclick="change(event, 'ExamesMed')">Exames Partilhados</a></li>
 </ul>
 
 	<div id="ConsultaMed" class="tabcontent" style="display: block;">
@@ -108,6 +109,34 @@
 					<td id="texto7" style="width:16%; text-align: center;"><button id="botao_med" onclick="aceitarMedicacao(${md.getId()})"> <c:out value="Aceitar"> </c:out> </button> <button id="botao_med" onclick="rejeitarMedicacao(${md.getId()})"> <c:out value="Rejeitar"> </c:out> </button></td>
 				</tr>
 			</c:forEach>
+		</table>
+	</div>
+	
+	<div id ="ExamesMed" class="tabcontent">
+		<table style="width: 100%;">
+			<tr style="width:100%; margin-top: 10px;  background-color:#ddd;">
+				<td style="width:16%; text-align: center;">Exame</td>
+				<td style="width:16%; text-align: center;">Número do Utente</td>
+				<td style="width:16%; text-align: center;">Nome do Utente</td>
+				<td style="width:16%; text-align: center;">Data</td>
+				<td style="width:16%; text-align: center;">Descrição</td>	
+				<td style="width:16%; text-align: center;">Download</td>		
+			</tr>
+			<c:forEach items="${exames}" var="exame">
+				<tr>
+					<td><c:out value="${exame.getNome()}"/></td>
+					<td><c:out value="${exame.getNumUtente()}"/></td>
+					<td><c:out value="${exame.getNomeUtente()}"/></td>
+		    		<td><c:out value="${exame.getDate()}"/></td>
+		    		<td><c:out value="${exame.getTipo()}"/></td>
+		    		<td>
+			    		<form action="getFile" method="POST">
+				    		<input type="text" name="name" style="display:none" value="${exame.getMetalink()}">
+				    		<input type="submit" value="Download Ficheiro">
+			    		</form>
+		    		</td>
+	    		</tr>
+    		</c:forEach>
 		</table>
 	</div>
 </div>

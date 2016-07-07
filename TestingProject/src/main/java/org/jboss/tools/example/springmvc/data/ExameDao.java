@@ -25,8 +25,8 @@ public class ExameDao {
 	@Autowired
 	private EntityManager em;
 	
-	public Exame novoExame(int numUtente,Date data,String metalink, String tipo) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
-		Exame Exame = new Exame(Cifras.encrypt(Integer.toString(numUtente)),data,metalink, tipo);
+	public Exame novoExame(int numUtente,Date data,String metalink, String tipo, String nomeUtente, int idMedico) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException{
+		Exame Exame = new Exame(Cifras.encrypt(Integer.toString(numUtente)),data,metalink, tipo, nomeUtente, idMedico);
 		em.persist(Exame);
 		return Exame;
 	}
@@ -37,5 +37,10 @@ public class ExameDao {
 		return query.getResultList();
 	}
 	
+	public List<Exame> findAllByMedico(int idMedico){
+		TypedQuery<Exame> query = em.createNamedQuery(Exame.FIND_ALL_BY_MEDICO, Exame.class);
+		query.setParameter(Exame.MEDICO, idMedico);
+		return query.getResultList();
+	}
 	
 }

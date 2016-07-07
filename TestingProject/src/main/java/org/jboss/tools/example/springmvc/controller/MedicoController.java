@@ -9,12 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.jboss.tools.example.springmvc.data.ConsultaDao;
+import org.jboss.tools.example.springmvc.data.ExameDao;
 import org.jboss.tools.example.springmvc.data.MedicacaoDao;
 import org.jboss.tools.example.springmvc.data.MedicoDao;
 import org.jboss.tools.example.springmvc.data.MedicoUtenteDao;
 import org.jboss.tools.example.springmvc.data.SessaoDao;
 import org.jboss.tools.example.springmvc.data.UtenteDao;
 import org.jboss.tools.example.springmvc.model.Consulta;
+import org.jboss.tools.example.springmvc.model.Exame;
 import org.jboss.tools.example.springmvc.model.Medicacao;
 import org.jboss.tools.example.springmvc.model.MedicoUtente;
 import org.jboss.tools.example.springmvc.model.Sessao;
@@ -59,6 +61,9 @@ public class MedicoController {
 	
 	@Autowired
 	private SessaoDao sessaoDao;
+	
+	@Autowired
+	private ExameDao exameDao;
 
 	@RequestMapping(value="")
 	public ModelAndView index(){
@@ -113,11 +118,15 @@ public class MedicoController {
 			//Apanhar as Medicacoes para renovar
 			List<Medicacao> medicacaoRows = medicacaoDao.findByMedicoPendente(idMedico);
 			//----------------------------------
+			//Apanhar os Exames todos ordem por data
+			List<Exame> exames = exameDao.findAllByMedico(idMedico);
+			//----------------------------------
 			mav.setViewName("main_menu_medico");
 			mav.addObject("listaParaTratar", cu);
 			mav.addObject("listaUtentes",ut);
 			mav.addObject("username", username);
 			mav.addObject("medicacao", medicacaoRows);
+			mav.addObject("exames", exames);
 			return mav;
 		}
 		else{
