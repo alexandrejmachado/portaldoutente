@@ -152,4 +152,13 @@ public class UtenteDao {
 		em.merge(u);
 		return true;
 	}
+
+	public boolean checkMesmoIsento(int username) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+		Utente ut = findUtenteById(username);
+		boolean cenas = ut.getMesmoIsento();
+		System.out.println(cenas);
+		return cenas;
+		
+	}
+	
 }

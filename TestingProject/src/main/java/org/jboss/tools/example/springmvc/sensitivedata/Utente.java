@@ -79,6 +79,8 @@ public class Utente {
 	
 	private boolean isento = false;
 	
+	private boolean mesmoIsento = false;
+	
 	private String telemovel;
 	
 	@NotNull
@@ -145,6 +147,14 @@ public class Utente {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public boolean getMesmoIsento() {
+		return mesmoIsento;
+	}
+	
+	public void setMesmoIsento(boolean cena) {
+		mesmoIsento = cena;
 	}
 
 	public String getEmail() {

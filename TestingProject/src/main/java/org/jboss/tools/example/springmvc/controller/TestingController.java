@@ -843,8 +843,14 @@ public class TestingController {
 				mav.setViewName("isencao_taxas_pedido");
 			}
 			else {
-				mav.addObject("username", session.getSessionName());
-				mav.setViewName("ja_isento");
+				if (!utenteDao.checkMesmoIsento(Integer.parseInt((String) session.getSessionID()))) {
+					mav.addObject("username", session.getSessionName());
+					mav.setViewName("ja_isento");
+				}
+				else {
+					mav.addObject("username", session.getSessionName());
+					mav.setViewName("ja_mesmo_isento");
+				}
 			}
 		}
 		else{
@@ -862,6 +868,7 @@ public class TestingController {
 		try{
 			if (((valor/12)/pessoas)<=628.83){
 				u = utenteDao.findUtenteByNIF(Integer.parseInt(userID));
+				
 			}	
 		}
 		catch(Exception e){
