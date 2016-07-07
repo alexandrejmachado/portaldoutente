@@ -97,6 +97,7 @@ public class MedicacaoDao {
 	public boolean aceitar(int id){
 		Medicacao med = findById(id);
 		med.setRenovacao("Aceite");
+		med.setValidade(6);
 		em.merge(med);
 		return true;
 	}

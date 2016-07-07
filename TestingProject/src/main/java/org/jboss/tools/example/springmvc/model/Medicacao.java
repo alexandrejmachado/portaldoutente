@@ -151,6 +151,7 @@ public class Medicacao {
 	}
 	
 	public void setValidade(int meses) {
+		validade = Calendar.getInstance();
 		validade.add(Calendar.MONTH, meses);
 	}
 	
