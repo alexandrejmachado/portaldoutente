@@ -1,12 +1,1 @@
-{
-  "type": "service_account",
-  "project_id": "composite-watch-135111",
-  "private_key_id": "03f3e4f8ab380115eb8b343a7611b42445559fe6",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCKwFvABAFJfQ2j\nPdo6+NGxc3mzyKEGGqMuDo0OieR7mXW5oh0LB5AsPt1AtWI584fQPkiDb8b2YQyT\nvYQtlyN17gBllkRbcwaL+3guTzeOFTcuCD/a7S2F3is46eKkyIlfeDojoZXTdg4Q\ns09I3jH0eNMALGhvsC8mSq/3yut2yR1TyvBtYfMQSL8heCvWzbbHJyO4a/VZgNgZ\n6pRb4pFKlQfemIm15QxJGbNJ7zWEkvh/QaQJ65BdqfpsYZwP1+VylrT/lh9uZAtn\naowJHmsiHIIy606rEEHiZV9XtSEujveLOkavtwlQNSpanwEx7GoCYy1g6ATf19hf\nG65529NlAgMBAAECggEBAIDTgxywW0WRT4U+m43fkkqxTdFIOYHCX7oWlo9mJndA\nD9cwlsiz1//Myn8XKkFmRLZr7cXjlZcSmqvd7Yiq6KjJNyMbNxK1pOF5tadBs/I+\n7oHV9Pve9UJy+iyYs++Npka3CTwl/kddOEf3RGkCrN0xBbAGi10P92cVN3bZuHAL\nfa+p3OJlEYTpCUs19gA0xxiiLk7OowZz3YqEe/StOf4NAO5E+epn51RoxCG5BPxr\nfzT6Q5CPDG5Lfm08hmnmTyAh/vMhk9F7F8FLNuQAdKA1ysBtmnhTuC45oHO12+VB\nwrmb9RLoI3Eu0hVa4f6S0HJJCvNM6at56xs8ULRSt20CgYEA4PJHp4Se2yxchwxs\npDWmxTrs1Zm5nw7ZYjGmwUyYjgY45VQZ5e7OLByoGC5YucVHWWGtF828cDcNdmew\nGT0bkgFvSJKagXG+zVaISw/vDWJ7SkCEc4O0pZMuTfMOzzVFbKYAHVBfYiDzY7cr\ntJLotO7nicn3tFBenYe14sd3ZgcCgYEAnefnPFIFRrDKg80bLN0ygff1bi2nOgtm\nezxyBnUmya24HqxpusFl2meAzdKeXmi299rLUXZPvlmtjB9WX5HfBrs/4z9P7JSE\n7StltY1c87v+N6oA/156nF9uIvGkYeON/iPSge3TFsX30mAqcnMlwW6abyvkl/73\n9X2F5Xm5gDMCgYEAlKNjd6zpbzfz+ATcsPEGvuK95jLK9fBQ8lKOtsHPOGGiLN8S\nsd3HfFx/MmNFm5NhHw2s28LFlny6N5gyQ6seUa8DArhkwc4QXwyjyL3Bn12IzDqv\nisjnkFUdzsIh8gdoVW+nObeHH4dYbHZ3ub0taYlHk8PSGuLUclFffXeCTPcCgYBO\nlUVvsIXtqzftpdpbVm23XpYm0dOCQIAs3mUEr7Kw9aJGqZkoluzAZ3gjdijYZRaB\nfMJodQ+0dF64+DN89lRevjtKNYzp+PO6MDm6w3I53hniy9kZPYSZY6ik/UrIaH2W\nt28guCGwGK9/Y9pcANAOVqPGpbpqpjnyUxianhxiHwKBgEmxiO86yhgCbyo4syQ/\n7j4vuea0zUG/QMEIeETijokfE9Wje3DjFaSVUdiwDAFFEDuye2QjPsefjTs2UVTY\n5Lo+zJMHLw0YFVfesIPlfjwEPZZM9xfj5B/CId2enYqWEtZ65hAMiY0xpsxwaTHw\nJ6mmFhwSDy2y7v+vS30+BtCl\n-----END PRIVATE KEY-----\n",
-  "client_email": "uploadwow@composite-watch-135111.iam.gserviceaccount.com",
-  "client_id": "102663569360018395376",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://accounts.google.com/o/oauth2/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/uploadwow%40composite-watch-135111.iam.gserviceaccount.com"
-}
+REDACTED
