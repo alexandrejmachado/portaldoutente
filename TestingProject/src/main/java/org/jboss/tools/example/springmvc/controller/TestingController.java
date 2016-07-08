@@ -867,7 +867,7 @@ public class TestingController {
 		Utente u=null;
 		try{
 			if (((valor/12)/pessoas)<=628.83){
-				u = utenteDao.findUtenteByNIF(Integer.parseInt(userID));
+				u = utenteDao.findUtenteById(Integer.parseInt(userID));
 				
 			}	
 		}
