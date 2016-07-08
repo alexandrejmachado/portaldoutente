@@ -42,7 +42,7 @@ deploy_job:
   #- kubectl expose rc portal-utente --type=LoadBalancer --port 80 --target-port 8080
   - kubectl rolling-update portal-utente --image=gcr.io/composite-watch-135111/portaldoutente:$DOCKER_TAG
   - cp TestingProject/src/main/resources/import_new.sql import.sql
-#  - mysql -h 104.155.38.109 -uwebserver -pBolachas_2 portaldoutente < import.sql
+#  - mysql -h 104.155.38.109 -uwebserver -pREDACTED portaldoutente < import.sql
 #ipbot_job:
 #  stage: ipbot
 #  script:
