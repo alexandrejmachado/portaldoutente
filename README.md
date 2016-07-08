@@ -1,4 +1,4 @@
-Portal do Utente Mega Fixe
+Portal do Utente Projecto Final de Curso
 ==============================================================
-Technologies: JSP, JPA, JSON, Spring.
-* Já estou farto de não ter readme, por isso meti um readme
+Technologies: JSP, JPA, JSON, Spring, Java, Hibernate, Docker, Kubernetes.
+
